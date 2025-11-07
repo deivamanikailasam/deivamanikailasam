@@ -52,8 +52,8 @@ export class ContentService {
         // Extract portfolio data if loaded from static file
         const portfolioData = data.portfolio || data;
         
-        this.portfolioContent.set(data);
-        this.contentVersion.set(data.version);
+        this.portfolioContent.set(portfolioData);
+        this.contentVersion.set(portfolioData.version);
         this.isLoading.set(false);
       },
       error: (err) => {
