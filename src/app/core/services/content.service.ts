@@ -46,8 +46,12 @@ export class ContentService {
     this.isLoading.set(true);
     this.error.set(null);
 
-    this.http.get<PortfolioContent>(this.contentUrl).subscribe({
+    this.http.get<any>(this.contentUrl).subscribe({
       next: (data) => {
+
+        // Extract portfolio data if loaded from static file
+        const portfolioData = data.portfolio || data;
+        
         this.portfolioContent.set(data);
         this.contentVersion.set(data.version);
         this.isLoading.set(false);
