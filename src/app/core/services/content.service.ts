@@ -10,7 +10,11 @@ import { environment } from '../../../environments/environment';
 export class ContentService {
   // Update this to check if apiUrl is empty
   private get contentUrl(): string {
-    return environment.apiUrl ? `${environment.apiUrl}/portfolio` : '/assets/data/db.json';
+    if (environment.apiUrl) {
+      return `${environment.apiUrl}/portfolio`;
+    }
+    // Use relative path - Angular will handle base-href automatically
+    return 'assets/data/db.json';  // Remove leading slash
   }  
   // Signals for state management
   portfolioContent = ngSignal<PortfolioContent | null>(null);
