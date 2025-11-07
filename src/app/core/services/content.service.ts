@@ -44,6 +44,8 @@ export class ContentService {
     this.isLoading.set(true);
     this.error.set(null);
 
+    const url = this.contentUrl || '/assets/data/db.json';
+
     this.http.get<PortfolioContent>(this.contentUrl).subscribe({
       next: (data) => {
         this.portfolioContent.set(data);
