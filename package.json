@@ -5,12 +5,12 @@
     "ng": "ng",
     "start": "ng serve",
     "watch": "ng build --watch --configuration development",
-    "build": "ng build --configuration production --base-href=\"/portfolio/\"",
+    "build": "ng build --configuration production --base-href=\"/deivamanikailasam/\"",
     "json-server": "json-server --watch db.json --port 3000",
     "dev": "concurrently \"npm run start\" \"npm run json-server\"",
     "test": "ng test",
     "lint": "ng lint",
-    "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/portfolio/browser"
+    "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/deivamanikailasam/browser"
   },
   "prettier": {
     "printWidth": 100,
