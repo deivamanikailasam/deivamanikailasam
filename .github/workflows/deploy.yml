@@ -33,7 +33,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v3
         with:
-          path: dist/deivamanikailasam/browser
+          path: dist/portfolio/browser
       
       - name: Deploy to GitHub Pages
         id: deployment
