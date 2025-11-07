@@ -8,8 +8,10 @@ import { environment } from '../../../environments/environment';
   providedIn: 'root'
 })
 export class ContentService {
-  private contentUrl = `${environment.apiUrl}/portfolio`;
-  
+  // Update this to check if apiUrl is empty
+  private get contentUrl(): string {
+    return environment.apiUrl ? `${environment.apiUrl}/portfolio` : '/assets/data/db.json';
+  }  
   // Signals for state management
   portfolioContent = ngSignal<PortfolioContent | null>(null);
   isLoading = ngSignal(false);
@@ -43,8 +45,6 @@ export class ContentService {
   loadPortfolioContent(): void {
     this.isLoading.set(true);
     this.error.set(null);
-
-    const url = this.contentUrl || '/assets/data/db.json';
 
     this.http.get<PortfolioContent>(this.contentUrl).subscribe({
       next: (data) => {
