@@ -239,7 +239,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       font-size: 3.5rem;
       font-weight: 900;
       margin-bottom: 1rem;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, rgba(255, 255, 255, 0.95), rgba(255, 255, 255, 0.7));
       -webkit-background-clip: text;
       -webkit-text-fill-color: transparent;
       background-clip: text;
@@ -251,8 +251,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     
     .section-icon {
       font-size: 3rem;
-      color: #667eea;
-      filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+      color: rgba(255, 255, 255, 0.8);
+      filter: drop-shadow(0 0 10px rgba(255, 255, 255, 0.2));
     }
     
     .section-subtitle {
@@ -288,8 +288,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     
     .contact-info-card,
     .contact-form-card {
-      background: rgba(255, 255, 255, 0.05) !important;
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      background: rgba(255, 255, 255, 0.03) !important;
+      border: 1px solid rgba(255, 255, 255, 0.08) !important;
       border-radius: 1.5rem !important;
       overflow: hidden !important;
       backdrop-filter: blur(10px) !important;
@@ -298,16 +298,18 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       
       &:hover {
         transform: translateY(-5px) scale(1.01) !important;
-        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
-        border-color: rgba(102, 126, 234, 0.5) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.5) !important;
+        border-color: rgba(255, 255, 255, 0.15) !important;
+        background: rgba(255, 255, 255, 0.05) !important;
       }
     }
     
     .card-header-gradient {
       padding: 2rem;
-      background: linear-gradient(135deg, #667eea, #764ba2);
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.15), rgba(118, 75, 162, 0.15));
       position: relative;
       overflow: hidden;
+      border-bottom: 1px solid rgba(255, 255, 255, 0.08);
       
       &::before {
         content: '';
@@ -316,8 +318,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         left: 0;
         right: 0;
         bottom: 0;
-        background: inherit;
-        opacity: 0.8;
+        background: linear-gradient(135deg, rgba(102, 126, 234, 0.1), rgba(118, 75, 162, 0.1));
+        opacity: 0.5;
         filter: blur(20px);
       }
     }
@@ -330,14 +332,14 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     .card-title {
       font-size: 1.75rem;
       font-weight: 700;
-      color: white;
+      color: rgba(255, 255, 255, 0.95);
       margin: 0 0 0.5rem 0;
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
     
     .card-subtitle {
       font-size: 1rem;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.7);
       margin: 0;
     }
     
@@ -377,13 +379,13 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       gap: 0.75rem;
       font-size: 1.25rem;
       font-weight: 600;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.85);
       margin-bottom: 1.5rem;
       padding-bottom: 1rem;
-      border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+      border-bottom: 2px solid rgba(255, 255, 255, 0.1);
       
       i {
-        color: #667eea;
+        color: rgba(255, 255, 255, 0.7);
         font-size: 1.5rem;
       }
     }
@@ -393,15 +395,15 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       align-items: flex-start;
       gap: 1.5rem;
       padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.03);
+      background: rgba(255, 255, 255, 0.02);
       border-radius: 0.75rem;
       margin-bottom: 1rem;
       transition: all 0.3s ease;
       border-left: 3px solid transparent;
       
       &:hover {
-        background: rgba(255, 255, 255, 0.05);
-        border-left-color: #667eea;
+        background: rgba(255, 255, 255, 0.04);
+        border-left-color: rgba(255, 255, 255, 0.3);
         transform: translateX(5px);
       }
       
@@ -417,14 +419,14 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       display: flex;
       align-items: center;
       justify-content: center;
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+      background: rgba(255, 255, 255, 0.05);
       border-radius: 50%;
-      border: 2px solid rgba(102, 126, 234, 0.3);
+      border: 2px solid rgba(255, 255, 255, 0.1);
     }
     
     .info-icon {
       font-size: 1.5rem;
-      color: #667eea;
+      color: rgba(255, 255, 255, 0.7);
     }
     
     .info-content {
@@ -444,12 +446,12 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     .info-value {
       display: block;
       font-size: 1.1rem;
-      color: rgba(255, 255, 255, 0.9);
+      color: rgba(255, 255, 255, 0.85);
       text-decoration: none;
       transition: color 0.3s ease;
       
       &:hover {
-        color: #667eea;
+        color: rgba(255, 255, 255, 0.95);
       }
     }
     
@@ -469,18 +471,19 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     }
     
     ::ng-deep .social-chip {
-      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
-      color: inherit !important;
-      border: 1px solid rgba(102, 126, 234, 0.3) !important;
+      background: rgba(255, 255, 255, 0.05) !important;
+      color: rgba(255, 255, 255, 0.85) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
       font-weight: 500 !important;
       padding: 0.75rem 1.25rem !important;
       transition: all 0.3s ease !important;
       
       &:hover {
-        background: linear-gradient(135deg, #667eea, #764ba2) !important;
-        color: white !important;
+        background: rgba(255, 255, 255, 0.1) !important;
+        color: rgba(255, 255, 255, 0.95) !important;
+        border-color: rgba(255, 255, 255, 0.2) !important;
         transform: translateY(-3px) !important;
-        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.3) !important;
       }
     }
     
@@ -511,8 +514,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     .form-control {
       width: 100%;
       padding: 0.75rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.2);
+      background: rgba(255, 255, 255, 0.03);
+      border: 1px solid rgba(255, 255, 255, 0.1);
       border-radius: 0.5rem;
       color: rgba(255, 255, 255, 0.9);
       font-size: 1rem;
@@ -520,9 +523,9 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       
       &:focus {
         outline: none;
-        border-color: #667eea;
-        background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
+        border-color: rgba(255, 255, 255, 0.2);
+        background: rgba(255, 255, 255, 0.05);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
       }
       
       &::placeholder {
@@ -539,9 +542,9 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     }
     
     ::ng-deep .send-button {
-      background: linear-gradient(135deg, #667eea, #764ba2) !important;
-      color: white !important;
-      border: none !important;
+      background: rgba(255, 255, 255, 0.1) !important;
+      color: rgba(255, 255, 255, 0.95) !important;
+      border: 1px solid rgba(255, 255, 255, 0.15) !important;
       padding: 0.75rem 2rem !important;
       font-size: 1rem !important;
       font-weight: 600 !important;
@@ -549,13 +552,14 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       transition: all 0.3s ease !important;
       
       &:hover:not(:disabled) {
-        background: linear-gradient(135deg, #764ba2, #667eea) !important;
+        background: rgba(255, 255, 255, 0.15) !important;
+        border-color: rgba(255, 255, 255, 0.25) !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
+        box-shadow: 0 8px 20px rgba(0, 0, 0, 0.3) !important;
       }
       
       &:disabled {
-        opacity: 0.6;
+        opacity: 0.5;
         cursor: not-allowed;
       }
     }
