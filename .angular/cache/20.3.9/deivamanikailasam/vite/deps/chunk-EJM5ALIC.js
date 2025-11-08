@@ -1,15 +1,15 @@
 import {
+  Fluid
+} from "./chunk-EOZZCUJM.js";
+import {
   DomHandler
 } from "./chunk-RL2EU4KX.js";
-import {
-  Fluid
-} from "./chunk-AHVDJTBB.js";
 import {
   Ripple
 } from "./chunk-TSNIEPLZ.js";
 import {
   SpinnerIcon
-} from "./chunk-GBTKCPKM.js";
+} from "./chunk-76B2XKA3.js";
 import {
   BaseComponent,
   PARENT_INSTANCE
@@ -17,6 +17,10 @@ import {
 import {
   BaseStyle
 } from "./chunk-YVHTVS74.js";
+import {
+  Bind,
+  BindModule
+} from "./chunk-3QIWPVBQ.js";
 import {
   PrimeTemplate,
   SharedModule
@@ -28,10 +32,6 @@ import {
   NgTemplateOutlet,
   isPlatformBrowser
 } from "./chunk-OCTVBAP2.js";
-import {
-  Bind,
-  BindModule
-} from "./chunk-3QIWPVBQ.js";
 import {
   P,
   R,
@@ -2667,4 +2667,4 @@ export {
   Button,
   ButtonModule
 };
-//# sourceMappingURL=chunk-QT5XBBDP.js.map
+//# sourceMappingURL=chunk-EJM5ALIC.js.map

@@ -35,7 +35,12 @@
         "startDate": "2021-08-01",
         "endDate": null,
         "current": true,
-        "description": "Led development of customer-facing dashboard using Angular and PrimeNG. Implemented responsive design patterns and optimized application performance. Mentored junior developers and established coding standards.",
+        "description": [
+          "Led development of customer-facing dashboard using Angular and PrimeNG",
+          "Implemented responsive design patterns and optimized application performance",
+          "Mentored junior developers and established coding standards",
+          "Collaborated with cross-functional teams to deliver high-quality features"
+        ],
         "technologies": ["Angular", "TypeScript", "RxJS", "PrimeNG", "SCSS"]
       },
       {
@@ -45,7 +50,12 @@
         "startDate": "2020-12-01",
         "endDate": "2021-07-31",
         "current": false,
-        "description": "Developed and maintained web applications using Angular and Node.js. Built RESTful APIs and integrated third-party services. Collaborated with cross-functional teams to deliver features on time.",
+        "description": [
+          "Developed and maintained web applications using Angular and Node.js",
+          "Built RESTful APIs and integrated third-party services",
+          "Collaborated with cross-functional teams to deliver features on time",
+          "Optimized database queries and improved application performance"
+        ],
         "technologies": ["Angular", "Node.js", "Express", "MongoDB", "TypeScript"]
       },
       {
@@ -55,7 +65,12 @@
         "startDate": "2016-01-01",
         "endDate": "20219-05-31",
         "current": false,
-        "description": "Created responsive web applications for various clients. Worked with React and Vue.js frameworks. Implemented modern UI/UX designs and ensured cross-browser compatibility.",
+        "description": [
+          "Created responsive web applications for various clients",
+          "Worked with React and Vue.js frameworks",
+          "Implemented modern UI/UX designs and ensured cross-browser compatibility",
+          "Participated in code reviews and maintained high code quality standards"
+        ],
         "technologies": ["React", "Vue.js", "JavaScript", "CSS3", "HTML5"]
       }
     ],
@@ -67,7 +82,7 @@
         "startDate": "2019-07-01",
         "endDate": "2021-05-31",
         "current": false,
-        "description": "Focused on software engineering and web technologies. Graduated with honors. Relevant coursework included Data Structures, Algorithms, Web Development, and Database Systems.",
+        "description": "Comprehensive postgraduate program focusing on advanced software engineering, enterprise systems, and emerging technologies. Key coursework included: Software Engineering Methodologies, Database Design and Implementation, Web Application Development, Network Security and Cryptography, Cloud Computing, Project Management, Research Methods, and IT Strategy. Completed capstone project on scalable web application architecture. Graduated with distinction, demonstrating expertise in modern software development practices and enterprise-level system design.",
         "technologies": []
       },
       {
@@ -77,7 +92,7 @@
         "startDate": "2011-08-01",
         "endDate": "2015-05-31",
         "current": false,
-        "description": "Focused on software engineering and web technologies. Graduated with honors. Relevant coursework included Data Structures, Algorithms, Web Development, and Database Systems.",
+        "description": "Four-year undergraduate program in Information Technology covering fundamental and advanced computing concepts. Core subjects included: Programming Languages (C, C++, Java), Data Structures and Algorithms, Database Management Systems, Computer Networks, Operating Systems, Software Engineering, Web Technologies, Object-Oriented Programming, Computer Architecture, and Software Testing. Completed final year project on web-based application development. Graduated with honors, establishing strong foundation in computer science principles and software development methodologies.",
         "technologies": []
       }
     ],

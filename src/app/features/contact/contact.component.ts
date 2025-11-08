@@ -6,6 +6,11 @@ import { InputTextModule } from 'primeng/inputtext';
 import { TextareaModule } from 'primeng/textarea';
 import { ButtonModule } from 'primeng/button';
 import { MessageModule } from 'primeng/message';
+import { CardModule } from 'primeng/card';
+import { FieldsetModule } from 'primeng/fieldset';
+import { DividerModule } from 'primeng/divider';
+import { ChipModule } from 'primeng/chip';
+import { FadeInDirective } from '../../shared/directives/fade-in.directive';
 
 @Component({
   selector: 'app-contact',
@@ -15,199 +20,350 @@ import { MessageModule } from 'primeng/message';
     InputTextModule, 
     TextareaModule,
     ButtonModule,
-    MessageModule
+    MessageModule,
+    CardModule,
+    FieldsetModule,
+    DividerModule,
+    ChipModule,
+    FadeInDirective
   ],
   template: `
-    <section id="contact" class="contact-section">
+    <div class="contact-container">
+      <div class="section-header" appFadeIn>
+        <h2 class="section-title">
+          <i class="pi pi-envelope section-icon"></i>
+          Get In Touch
+        </h2>
+        <p class="section-subtitle">Let's connect and discuss opportunities</p>
+      </div>
+      
       @if (contentService.isLoading()) {
-        <div class="text-center py-5">
-          <i class="pi pi-spin pi-spinner" style="font-size: 3rem;"></i>
+        <div class="loading-state">
+          <i class="pi pi-spin pi-spinner"></i>
+          <p>Loading contact information...</p>
         </div>
       } @else if (contentService.error()) {
-        <div class="alert alert-danger" role="alert">
-          {{ contentService.error() }}
-        </div>
+        <p-message severity="error" [text]="contentService.error() || 'An error occurred'"></p-message>
       } @else {
-        <h2 class="section-title-main mb-5">Contact</h2>
-        
-        <div class="contact-wrapper">
-          @if (contact(); as contactData) {
-            <div class="contact-info-sidebar">
-              @if (contactData.email) {
-                <div class="contact-info-item">
-                  <i class="pi pi-envelope contact-icon"></i>
-                  <div>
-                    <strong>Email</strong>
-                    <p class="mb-0">
-                      <a [href]="'mailto:' + contactData.email">{{ contactData.email }}</a>
-                    </p>
+        <div class="contact-content" appFadeIn>
+          <div class="contact-info-section">
+            <p-card class="contact-info-card">
+              <ng-template pTemplate="header">
+                <div class="card-header-gradient">
+                  <div class="card-header-content">
+                    <h3 class="card-title">Contact Information</h3>
+                    <p class="card-subtitle">Feel free to reach out</p>
                   </div>
                 </div>
-              }
+              </ng-template>
               
-              @if (contactData.phone) {
-                <div class="contact-info-item">
-                  <i class="pi pi-phone contact-icon"></i>
-                  <div>
-                    <strong>Phone</strong>
-                    <p class="mb-0">
-                      <a [href]="'tel:' + contactData.phone">{{ contactData.phone }}</a>
-                    </p>
-                  </div>
-                </div>
-              }
-              
-              @if (contactData.location) {
-                <div class="contact-info-item">
-                  <i class="pi pi-map-marker contact-icon"></i>
-                  <div>
-                    <strong>Location</strong>
-                    <p class="mb-0">{{ contactData.location }}</p>
-                  </div>
-                </div>
-              }
-              
-              @if (contactData.socials && contactData.socials.length > 0) {
-                <div class="social-links-section">
-                  <strong class="d-block mb-3">Connect with me:</strong>
-                  <div class="social-buttons">
-                    @for (social of contactData.socials; track social.platform) {
-                      <a 
-                        [href]="social.url" 
-                        target="_blank" 
-                        rel="noopener noreferrer"
-                        class="social-button"
-                        [attr.aria-label]="social.platform"
-                      >
-                        <i [class]="social.icon"></i>
-                        <span>{{ social.platform }}</span>
-                      </a>
+              <div class="contact-info-body">
+                @if (contactData(); as data) {
+                  <div class="contact-details-section">
+                    <h4 class="section-heading">
+                      <i class="pi pi-info-circle"></i>
+                      Contact Details
+                    </h4>
+                    @if (data.email) {
+                      <div class="contact-info-item">
+                        <div class="info-icon-wrapper">
+                          <i class="pi pi-envelope info-icon"></i>
+                        </div>
+                        <div class="info-content">
+                          <label class="info-label">Email</label>
+                          <a [href]="'mailto:' + data.email" class="info-value">
+                            {{ data.email }}
+                          </a>
+                        </div>
+                      </div>
+                    }
+                    
+                    @if (data.phone) {
+                      <div class="contact-info-item">
+                        <div class="info-icon-wrapper">
+                          <i class="pi pi-phone info-icon"></i>
+                        </div>
+                        <div class="info-content">
+                          <label class="info-label">Phone</label>
+                          <a [href]="'tel:' + data.phone" class="info-value">
+                            {{ data.phone }}
+                          </a>
+                        </div>
+                      </div>
+                    }
+                    
+                    @if (data.location) {
+                      <div class="contact-info-item">
+                        <div class="info-icon-wrapper">
+                          <i class="pi pi-map-marker info-icon"></i>
+                        </div>
+                        <div class="info-content">
+                          <label class="info-label">Location</label>
+                          <span class="info-value">{{ data.location }}</span>
+                        </div>
+                      </div>
                     }
                   </div>
-                </div>
-              }
-            </div>
-          }
+                  
+                  @if (data.socials && data.socials.length > 0) {
+                    <p-divider></p-divider>
+                    <div class="social-media-section">
+                      <h4 class="section-heading">
+                        <i class="pi pi-share-alt"></i>
+                        Social Media
+                      </h4>
+                      <div class="social-links">
+                        @for (social of data.socials; track social.platform) {
+                          <a 
+                            [href]="social.url" 
+                            target="_blank" 
+                            rel="noopener noreferrer"
+                            class="social-link"
+                            [attr.aria-label]="social.platform"
+                          >
+                            <p-chip [label]="social.platform" [icon]="social.icon" styleClass="social-chip"></p-chip>
+                          </a>
+                        }
+                      </div>
+                    </div>
+                  }
+                } @else {
+                  <div class="no-data-message">
+                    <i class="pi pi-info-circle"></i>
+                    <p>Contact information is being loaded...</p>
+                  </div>
+                }
+              </div>
+            </p-card>
+          </div>
           
-          <div class="contact-form-container">
-            <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
-              <div class="form-group">
-                <label for="name" class="form-label">
-                  Name <span class="required">*</span>
-                </label>
-                <input 
-                  type="text" 
-                  pInputText
-                  id="name"
-                  [(ngModel)]="formData.name"
-                  name="name"
-                  class="form-control-custom"
-                  required
-                  placeholder="Your name"
-                />
-              </div>
+          <div class="contact-form-section">
+            <p-card class="contact-form-card">
+              <ng-template pTemplate="header">
+                <div class="card-header-gradient">
+                  <div class="card-header-content">
+                    <h3 class="card-title">Send a Message</h3>
+                    <p class="card-subtitle">I'll get back to you soon</p>
+                  </div>
+                </div>
+              </ng-template>
               
-              <div class="form-group">
-                <label for="email" class="form-label">
-                  Email <span class="required">*</span>
-                </label>
-                <input 
-                  type="email" 
-                  pInputText
-                  id="email"
-                  [(ngModel)]="formData.email"
-                  name="email"
-                  class="form-control-custom"
-                  required
-                  placeholder="your.email@example.com"
-                />
-              </div>
-              
-              <div class="form-group">
-                <label for="message" class="form-label">
-                  Message <span class="required">*</span>
-                </label>
-                <textarea 
-                  pTextarea
-                  id="message"
-                  rows="6"
-                  [(ngModel)]="formData.message"
-                  name="message"
-                  class="form-control-custom"
-                  required
-                  placeholder="Your message here..."
-                ></textarea>
-              </div>
-              
-              @if (submitMessage()) {
-                <p-message 
-                  [severity]="submitSuccess() ? 'success' : 'error'"
-                  class="mb-3"
-                >
-                  {{ submitMessage() }}
-                </p-message>
-              }
-              
-              <div class="form-actions">
-                <p-button
-                  type="submit"
-                  label="Send"
-                  icon="pi pi-send"
-                  [disabled]="!contactForm.valid || isSubmitting()"
-                  [loading]="isSubmitting()"
-                  styleClass="send-button"
-                ></p-button>
-              </div>
-            </form>
+              <form (ngSubmit)="onSubmit()" #contactForm="ngForm" class="contact-form">
+                <div class="form-group">
+                  <label for="name" class="form-label">
+                    Name <span class="required">*</span>
+                  </label>
+                  <input 
+                    type="text" 
+                    pInputText
+                    id="name"
+                    [(ngModel)]="formData.name"
+                    name="name"
+                    class="form-control"
+                    required
+                    placeholder="Your name"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="email" class="form-label">
+                    Email <span class="required">*</span>
+                  </label>
+                  <input 
+                    type="email" 
+                    pInputText
+                    id="email"
+                    [(ngModel)]="formData.email"
+                    name="email"
+                    class="form-control"
+                    required
+                    placeholder="your.email@example.com"
+                  />
+                </div>
+                
+                <div class="form-group">
+                  <label for="message" class="form-label">
+                    Message <span class="required">*</span>
+                  </label>
+                  <textarea 
+                    pTextarea
+                    id="message"
+                    rows="6"
+                    [(ngModel)]="formData.message"
+                    name="message"
+                    class="form-control"
+                    required
+                    placeholder="Your message here..."
+                  ></textarea>
+                </div>
+                
+                @if (submitMessage()) {
+                  <p-message 
+                    [severity]="submitSuccess() ? 'success' : 'error'"
+                    class="form-message"
+                  >
+                    {{ submitMessage() }}
+                  </p-message>
+                }
+                
+                <div class="form-actions">
+                  <p-button
+                    type="submit"
+                    label="Send Message"
+                    icon="pi pi-send"
+                    [disabled]="!contactForm.valid || isSubmitting()"
+                    [loading]="isSubmitting()"
+                    styleClass="send-button"
+                  ></p-button>
+                </div>
+              </form>
+            </p-card>
           </div>
         </div>
       }
-    </section>
+    </div>
   `,
   styles: [`
-    .contact-section {
-      padding: 0;
-      animation: fadeInUp 0.6s ease-out;
+    .contact-container {
+      position: relative;
+      width: 100%;
+      padding: 4rem 2rem;
     }
     
-    @keyframes fadeInUp {
-      from {
-        opacity: 0;
-        transform: translateY(30px);
-      }
-      to {
-        opacity: 1;
-        transform: translateY(0);
-      }
+    .section-header {
+      text-align: center;
+      margin-bottom: 4rem;
     }
     
-    .section-title-main {
-      font-size: 2rem;
-      font-weight: 700;
-      color: inherit;
-      margin-bottom: 2rem;
-      padding-bottom: 1rem;
-      border-bottom: 3px solid var(--accent-color, #ffc107);
-    }
-    
-    .contact-wrapper {
-      display: grid;
-      grid-template-columns: 1fr 2fr;
-      gap: 3rem;
-      align-items: start;
-    }
-    
-    .contact-info-sidebar {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 2rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
-    }
-    
-    .contact-info-item {
+    .section-title {
+      font-size: 3.5rem;
+      font-weight: 900;
+      margin-bottom: 1rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
       display: flex;
-      align-items: flex-start;
+      align-items: center;
+      justify-content: center;
       gap: 1rem;
+    }
+    
+    .section-icon {
+      font-size: 3rem;
+      color: #667eea;
+      filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.5));
+    }
+    
+    .section-subtitle {
+      font-size: 1.25rem;
+      color: rgba(255, 255, 255, 0.7);
+      margin: 0;
+    }
+    
+    .loading-state {
+      text-align: center;
+      padding: 4rem 2rem;
+      color: rgba(255, 255, 255, 0.6);
+      
+      i {
+        font-size: 4rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.3);
+      }
+      
+      p {
+        font-size: 1.25rem;
+        margin: 0;
+      }
+    }
+    
+    .contact-content {
+      display: grid;
+      grid-template-columns: 1fr 1.5fr;
+      gap: 2rem;
+      max-width: 1400px;
+      margin: 0 auto;
+    }
+    
+    .contact-info-card,
+    .contact-form-card {
+      background: rgba(255, 255, 255, 0.05) !important;
+      border: 1px solid rgba(255, 255, 255, 0.1) !important;
+      border-radius: 1.5rem !important;
+      overflow: hidden !important;
+      backdrop-filter: blur(10px) !important;
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
+      height: 100%;
+      
+      &:hover {
+        transform: translateY(-5px) scale(1.01) !important;
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4) !important;
+        border-color: rgba(102, 126, 234, 0.5) !important;
+      }
+    }
+    
+    .card-header-gradient {
+      padding: 2rem;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      position: relative;
+      overflow: hidden;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        opacity: 0.8;
+        filter: blur(20px);
+      }
+    }
+    
+    .card-header-content {
+      position: relative;
+      z-index: 1;
+    }
+    
+    .card-title {
+      font-size: 1.75rem;
+      font-weight: 700;
+      color: white;
+      margin: 0 0 0.5rem 0;
+      text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
+    }
+    
+    .card-subtitle {
+      font-size: 1rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin: 0;
+    }
+    
+    .contact-info-body {
+      padding: 2rem;
+    }
+    
+    .no-data-message {
+      text-align: center;
+      padding: 2rem;
+      color: rgba(255, 255, 255, 0.6);
+      
+      i {
+        font-size: 2rem;
+        margin-bottom: 1rem;
+        color: rgba(255, 255, 255, 0.4);
+      }
+      
+      p {
+        font-size: 1rem;
+        margin: 0;
+      }
+    }
+    
+    .contact-details-section,
+    .social-media-section {
       margin-bottom: 2rem;
       
       &:last-child {
@@ -215,77 +371,121 @@ import { MessageModule } from 'primeng/message';
       }
     }
     
-    .contact-icon {
+    .section-heading {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.25rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 1.5rem;
+      padding-bottom: 1rem;
+      border-bottom: 2px solid rgba(102, 126, 234, 0.3);
+      
+      i {
+        color: #667eea;
+        font-size: 1.5rem;
+      }
+    }
+    
+    .contact-info-item {
+      display: flex;
+      align-items: flex-start;
+      gap: 1.5rem;
+      padding: 1.5rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.75rem;
+      margin-bottom: 1rem;
+      transition: all 0.3s ease;
+      border-left: 3px solid transparent;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+        border-left-color: #667eea;
+        transform: translateX(5px);
+      }
+      
+      &:last-child {
+        margin-bottom: 0;
+      }
+    }
+    
+    .info-icon-wrapper {
+      flex-shrink: 0;
+      width: 50px;
+      height: 50px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2));
+      border-radius: 50%;
+      border: 2px solid rgba(102, 126, 234, 0.3);
+    }
+    
+    .info-icon {
       font-size: 1.5rem;
-      color: var(--accent-color, #ffc107);
-      margin-top: 0.25rem;
+      color: #667eea;
     }
     
-    .contact-info-item strong {
+    .info-content {
+      flex: 1;
+    }
+    
+    .info-label {
       display: block;
-      color: var(--accent-color, #ffc107);
+      font-size: 0.9rem;
+      font-weight: 600;
+      color: rgba(255, 255, 255, 0.7);
       margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
     }
     
-    .contact-info-item p {
-      color: rgba(255, 255, 255, 0.8);
-      margin: 0;
-    }
-    
-    .contact-info-item a {
-      color: inherit;
+    .info-value {
+      display: block;
+      font-size: 1.1rem;
+      color: rgba(255, 255, 255, 0.9);
       text-decoration: none;
       transition: color 0.3s ease;
       
       &:hover {
-        color: var(--accent-color, #ffc107);
+        color: #667eea;
       }
     }
     
-    .social-links-section {
-      margin-top: 2rem;
-      padding-top: 2rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    .social-links {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 1rem;
     }
     
-    .social-buttons {
-      display: flex;
-      flex-direction: column;
-      gap: 0.75rem;
-    }
-    
-    .social-button {
-      display: flex;
-      align-items: center;
-      gap: 0.75rem;
-      padding: 0.75rem 1rem;
-      background: rgba(255, 255, 255, 0.05);
-      border: 1px solid rgba(255, 255, 255, 0.1);
-      border-radius: 0.5rem;
-      color: inherit;
+    .social-link {
       text-decoration: none;
-      transition: all 0.3s ease;
+      transition: transform 0.3s ease;
       
       &:hover {
-        background: rgba(255, 255, 255, 0.1);
-        border-color: var(--accent-color, #ffc107);
-        transform: translateX(5px);
-        color: var(--accent-color, #ffc107);
-      }
-      
-      i {
-        font-size: 1.25rem;
+        transform: translateY(-3px);
       }
     }
     
-    .contact-form-container {
-      background: rgba(255, 255, 255, 0.03);
-      padding: 2rem;
-      border-radius: 0.75rem;
-      border: 1px solid rgba(255, 255, 255, 0.1);
+    ::ng-deep .social-chip {
+      background: linear-gradient(135deg, rgba(102, 126, 234, 0.2), rgba(118, 75, 162, 0.2)) !important;
+      color: inherit !important;
+      border: 1px solid rgba(102, 126, 234, 0.3) !important;
+      font-weight: 500 !important;
+      padding: 0.75rem 1.25rem !important;
+      transition: all 0.3s ease !important;
+      
+      &:hover {
+        background: linear-gradient(135deg, #667eea, #764ba2) !important;
+        color: white !important;
+        transform: translateY(-3px) !important;
+        box-shadow: 0 5px 15px rgba(102, 126, 234, 0.4) !important;
+      }
     }
     
     .contact-form {
+      padding: 2rem;
       display: flex;
       flex-direction: column;
       gap: 1.5rem;
@@ -298,30 +498,31 @@ import { MessageModule } from 'primeng/message';
     
     .form-label {
       font-weight: 600;
-      color: inherit;
-      margin-bottom: 0.5rem;
+      color: rgba(255, 255, 255, 0.9);
+      margin-bottom: 0.75rem;
       font-size: 1rem;
     }
     
     .required {
-      color: var(--accent-color, #ffc107);
+      color: #f5576c;
+      margin-left: 0.25rem;
     }
     
-    .form-control-custom {
+    .form-control {
       width: 100%;
       padding: 0.75rem 1rem;
       background: rgba(255, 255, 255, 0.05);
       border: 1px solid rgba(255, 255, 255, 0.2);
       border-radius: 0.5rem;
-      color: inherit;
+      color: rgba(255, 255, 255, 0.9);
       font-size: 1rem;
       transition: all 0.3s ease;
       
       &:focus {
         outline: none;
-        border-color: var(--accent-color, #ffc107);
+        border-color: #667eea;
         background: rgba(255, 255, 255, 0.08);
-        box-shadow: 0 0 0 3px rgba(255, 193, 7, 0.1);
+        box-shadow: 0 0 0 3px rgba(102, 126, 234, 0.2);
       }
       
       &::placeholder {
@@ -329,13 +530,17 @@ import { MessageModule } from 'primeng/message';
       }
     }
     
+    .form-message {
+      margin-top: 0.5rem;
+    }
+    
     .form-actions {
       margin-top: 1rem;
     }
     
     ::ng-deep .send-button {
-      background: var(--accent-color, #ffc107) !important;
-      color: #1a1a1a !important;
+      background: linear-gradient(135deg, #667eea, #764ba2) !important;
+      color: white !important;
       border: none !important;
       padding: 0.75rem 2rem !important;
       font-size: 1rem !important;
@@ -344,9 +549,9 @@ import { MessageModule } from 'primeng/message';
       transition: all 0.3s ease !important;
       
       &:hover:not(:disabled) {
-        background: rgba(255, 193, 7, 0.8) !important;
+        background: linear-gradient(135deg, #764ba2, #667eea) !important;
         transform: translateY(-2px) !important;
-        box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3) !important;
+        box-shadow: 0 8px 20px rgba(102, 126, 234, 0.4) !important;
       }
       
       &:disabled {
@@ -356,9 +561,18 @@ import { MessageModule } from 'primeng/message';
     }
     
     @media (max-width: 991.98px) {
-      .contact-wrapper {
+      .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
+      }
+      
+      .section-title {
+        font-size: 2.5rem;
+        flex-direction: column;
+      }
+      
+      .section-icon {
+        font-size: 2.5rem;
       }
     }
   `]
@@ -367,6 +581,27 @@ export class ContactComponent implements OnInit {
   contact = computed(() => {
     const content = this.contentService.portfolioContent();
     return content?.contact || null;
+  });
+
+  profile = computed(() => {
+    const content = this.contentService.portfolioContent();
+    return content?.profile || null;
+  });
+
+  contactData = computed(() => {
+    const contactData = this.contact();
+    
+    // Use contact data from db.json
+    if (contactData) {
+      return {
+        email: contactData.email,
+        phone: contactData.phone,
+        location: contactData.location,
+        socials: contactData.socials || []
+      };
+    }
+    
+    return null;
   });
 
   formData = {
@@ -409,3 +644,4 @@ export class ContactComponent implements OnInit {
     }, 1000);
   }
 }
+

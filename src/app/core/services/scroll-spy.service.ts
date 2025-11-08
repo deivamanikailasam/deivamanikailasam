@@ -112,12 +112,9 @@ export class ScrollSpyService {
     
     if (element) {
       if (scrollContainer) {
-        // Scroll within the container
-        const offset = 100;
-        const containerRect = scrollContainer.getBoundingClientRect();
-        const elementRect = element.getBoundingClientRect();
-        const scrollTop = scrollContainer.scrollTop;
-        const elementTop = elementRect.top - containerRect.top + scrollTop;
+        // Scroll within the container - use offsetTop for more accurate positioning
+        const offset = 20; // Reduced offset for better positioning from top
+        const elementTop = element.offsetTop;
         
         scrollContainer.scrollTo({
           top: elementTop - offset,
@@ -125,7 +122,7 @@ export class ScrollSpyService {
         });
       } else {
         // Fallback to window scroll
-        const offset = 100;
+        const offset = 20; // Reduced offset for better positioning from top
         const elementPosition = element.getBoundingClientRect().top;
         const offsetPosition = elementPosition + window.pageYOffset - offset;
 

@@ -60,7 +60,7 @@ export interface ISection {
     startDate: string;
     endDate?: string;
     current: boolean;
-    description: string;
+    description: string | string[];
     technologies?: string[];
     companyLogo?: string;
     backgroundImage?: string;

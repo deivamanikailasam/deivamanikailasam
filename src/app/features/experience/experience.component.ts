@@ -2,13 +2,12 @@ import { Component, OnInit, computed } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
-import { ChipModule } from 'primeng/chip';
 import { TimelineModule } from 'primeng/timeline';
 import { FadeInDirective } from '../../shared/directives/fade-in.directive';
 
 @Component({
   selector: 'app-experience',
-  imports: [CommonModule, CardModule, ChipModule, TimelineModule, FadeInDirective],
+  imports: [CommonModule, CardModule, TimelineModule, FadeInDirective],
   template: `
     <div class="experience-container">
       <div class="section-header" appFadeIn>
@@ -44,19 +43,17 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
                       }
                     </span>
                   </div>
-                  <p class="description">{{ event.description }}</p>
-                  @if (event.technologies && event.technologies.length > 0) {
-                    <div class="technologies">
-                      <div class="tech-label">
-                        <i class="pi pi-code"></i>
-                        Technologies:
-                      </div>
-                      <div class="tech-chips">
-                        @for (tech of event.technologies; track tech) {
-                          <p-chip [label]="tech" styleClass="tech-chip"></p-chip>
-                        }
-                      </div>
+                  @if (isArray(event.description)) {
+                    <div class="description-list">
+                      @for (desc of event.description; track $index) {
+                        <div class="description-item">
+                          <i class="pi pi-check-circle description-icon"></i>
+                          <span class="description-text">{{ desc }}</span>
+                        </div>
+                      }
                     </div>
+                  } @else {
+                    <p class="description">{{ event.description }}</p>
                   }
                 </div>
               </p-card>
@@ -116,7 +113,6 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     
     .timeline-wrapper {
       position: relative;
-      max-width: 1200px;
       margin: 0 auto;
     }
     
@@ -132,7 +128,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       .p-timeline-event:nth-child(even) .p-timeline-event-content {
         text-align: left;
 
-        .date-range, .tech-label, .description, .card-header-content {
+        .date-range, .description, .card-header-content, .description-text {
           justify-content: flex-start;
           text-align: left;
         }
@@ -231,47 +227,68 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       font-size: 1.05rem;
     }
     
-    .technologies {
-      margin-top: 1.5rem;
-      padding-top: 1.5rem;
-      border-top: 1px solid rgba(255, 255, 255, 0.1);
+    .description-list {
+      margin-bottom: 1.5rem;
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
     }
     
-    .tech-label {
+    .description-item {
       display: flex;
-      align-items: center;
-      gap: 0.5rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 1rem;
-      font-size: 0.95rem;
-      font-weight: 600;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem;
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 0.75rem;
+      border-left: 3px solid transparent;
+      transition: all 0.3s ease;
+      position: relative;
+      overflow: hidden;
       
-      i {
-        color: #4facfe;
+      &::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0;
+        bottom: 0;
+        width: 3px;
+        background: linear-gradient(135deg, #4facfe, #00f2fe);
+        opacity: 0;
+        transition: opacity 0.3s ease;
       }
-    }
-    
-    .tech-chips {
-      display: flex;
-      flex-wrap: wrap;
-      gap: 0.75rem;
-    }
-    
-    ::ng-deep .tech-chip {
-      background: linear-gradient(135deg, rgba(79, 172, 254, 0.2), rgba(0, 242, 254, 0.2)) !important;
-      color: inherit !important;
-      border: 1px solid rgba(79, 172, 254, 0.3) !important;
-      font-weight: 500 !important;
-      padding: 0.5rem 1rem !important;
-      transition: all 0.3s ease !important;
       
       &:hover {
-        background: linear-gradient(135deg, #4facfe, #00f2fe) !important;
-        color: white !important;
-        transform: translateY(-3px) !important;
-        box-shadow: 0 5px 15px rgba(79, 172, 254, 0.4) !important;
+        background: rgba(255, 255, 255, 0.05);
+        transform: translateX(5px);
+        border-left-color: #4facfe;
+        
+        &::before {
+          opacity: 1;
+        }
+        
+        .description-icon {
+          color: #4facfe;
+          transform: scale(1.2);
+        }
       }
     }
+    
+    .description-icon {
+      color: rgba(79, 172, 254, 0.7);
+      font-size: 1.25rem;
+      margin-top: 0.35rem;
+      flex-shrink: 0;
+      transition: all 0.3s ease;
+    }
+    
+    .description-text {
+      color: rgba(255, 255, 255, 0.85);
+      line-height: 1.7;
+      font-size: 1rem;
+      flex: 1;
+    }
+    
     
     .timeline-marker {
       width: 60px;
@@ -346,7 +363,8 @@ export class ExperienceComponent implements OnInit {
   timelineEvents = computed(() => {
     return this.experience().map((exp, index) => ({
       ...exp,
-      index
+      index,
+      description: exp.description // Ensure description is properly typed
     }));
   });
 
@@ -373,5 +391,9 @@ export class ExperienceComponent implements OnInit {
       'linear-gradient(135deg, #ffc107, #ff9800)'
     ];
     return gradients[index % gradients.length];
+  }
+
+  isArray(value: any): boolean {
+    return Array.isArray(value);
   }
 }

@@ -41,6 +41,9 @@ function sequence(steps, options = null) {
 function style(tokens) {
   return { type: AnimationMetadataType.Style, styles: tokens, offset: null };
 }
+function state(name, styles, options) {
+  return { type: AnimationMetadataType.State, name, styles, options };
+}
 function transition(stateChangeExpr, steps, options = null) {
   return { type: AnimationMetadataType.Transition, expr: stateChangeExpr, animation: steps, options };
 }
@@ -220,6 +223,7 @@ export {
   trigger,
   animate,
   style,
+  state,
   transition,
   animation,
   useAnimation
@@ -234,4 +238,4 @@ export {
    * License: MIT
    *)
 */
-//# sourceMappingURL=chunk-V3R4GT7S.js.map
+//# sourceMappingURL=chunk-HG4ZVL53.js.map

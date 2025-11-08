@@ -147,8 +147,10 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       backdrop-filter: blur(10px) !important;
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
       animation: card-float 6s ease-in-out infinite;
+      position: relative;
       
       &:hover {
+        animation-play-state: paused !important;
         transform: translateY(-15px) scale(1.02) !important;
         box-shadow: 0 30px 60px rgba(0, 0, 0, 0.5) !important;
         border-color: var(--category-color, #fa709a) !important;
@@ -235,6 +237,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     
     .skill-item {
       animation: slideInUp 0.6s ease-out both;
+      position: relative;
+      z-index: 1;
     }
     
     @keyframes slideInUp {
@@ -257,11 +261,19 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       border-radius: 0.75rem;
       border: 1px solid rgba(255, 255, 255, 0.05);
       transition: all 0.3s ease;
+      cursor: pointer;
+      position: relative;
+      z-index: 2;
       
       &:hover {
         background: rgba(255, 255, 255, 0.06);
         border-color: var(--category-color, #fa709a);
         transform: translateX(5px);
+        z-index: 10;
+      }
+      
+      &:active {
+        transform: translateX(3px) scale(0.98);
       }
     }
     

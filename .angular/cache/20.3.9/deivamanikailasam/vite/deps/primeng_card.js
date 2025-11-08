@@ -6,6 +6,10 @@ import {
   BaseStyle
 } from "./chunk-YVHTVS74.js";
 import {
+  Bind,
+  BindModule
+} from "./chunk-3QIWPVBQ.js";
+import {
   Footer,
   Header,
   PrimeTemplate,
@@ -17,10 +21,6 @@ import {
   NgTemplateOutlet
 } from "./chunk-OCTVBAP2.js";
 import "./chunk-RDHXSB74.js";
-import {
-  Bind,
-  BindModule
-} from "./chunk-3QIWPVBQ.js";
 import {
   k2 as k
 } from "./chunk-47D2QLSA.js";

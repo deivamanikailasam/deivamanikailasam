@@ -6,11 +6,11 @@ import {
   BaseStyle
 } from "./chunk-YVHTVS74.js";
 import {
-  CommonModule
-} from "./chunk-OCTVBAP2.js";
-import {
   Bind
 } from "./chunk-3QIWPVBQ.js";
+import {
+  CommonModule
+} from "./chunk-OCTVBAP2.js";
 import {
   ChangeDetectionStrategy,
   Component,
@@ -160,4 +160,4 @@ var FluidModule = class _FluidModule {
 export {
   Fluid
 };
-//# sourceMappingURL=chunk-AHVDJTBB.js.map
+//# sourceMappingURL=chunk-EOZZCUJM.js.map

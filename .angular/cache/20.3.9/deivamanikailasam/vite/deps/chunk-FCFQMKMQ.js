@@ -12,11 +12,11 @@ import {
   BaseStyle
 } from "./chunk-YVHTVS74.js";
 import {
-  isPlatformBrowser
-} from "./chunk-OCTVBAP2.js";
-import {
   BindModule
 } from "./chunk-3QIWPVBQ.js";
+import {
+  isPlatformBrowser
+} from "./chunk-OCTVBAP2.js";
 import {
   $,
   C,
@@ -922,4 +922,4 @@ export {
   Tooltip,
   TooltipModule
 };
-//# sourceMappingURL=chunk-XPEZEYPT.js.map
+//# sourceMappingURL=chunk-FCFQMKMQ.js.map

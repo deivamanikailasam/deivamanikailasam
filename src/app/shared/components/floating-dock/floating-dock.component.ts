@@ -289,11 +289,6 @@ export class FloatingDockComponent implements OnInit {
         label: 'Contact',
         icon: 'pi pi-envelope',
         command: () => this.scrollToSection('contact')
-      },
-      {
-        label: isDark ? 'Light Mode' : 'Dark Mode',
-        icon: isDark ? 'pi pi-sun' : 'pi pi-moon',
-        command: () => this.toggleTheme()
       }
     ]);
   }

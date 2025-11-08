@@ -1,4 +1,4 @@
 export const environment = {
     production: false,
-    apiUrl: 'http://localhost:3000' // Adjust this to match your API URL
+    apiUrl: '' // Use src/assets for localhost
   };

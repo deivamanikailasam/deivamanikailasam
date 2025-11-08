@@ -6,6 +6,9 @@ import {
   BaseStyle
 } from "./chunk-YVHTVS74.js";
 import {
+  Bind
+} from "./chunk-3QIWPVBQ.js";
+import {
   PrimeTemplate,
   SharedModule
 } from "./chunk-GBGWG5S2.js";
@@ -16,9 +19,6 @@ import {
   NgTemplateOutlet
 } from "./chunk-OCTVBAP2.js";
 import "./chunk-RDHXSB74.js";
-import {
-  Bind
-} from "./chunk-3QIWPVBQ.js";
 import "./chunk-47D2QLSA.js";
 import {
   ChangeDetectionStrategy,
