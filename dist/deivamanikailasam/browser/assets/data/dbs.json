@@ -35,18 +35,8 @@
         "startDate": "2021-08-01",
         "endDate": null,
         "current": true,
-        "description": [
-          "Led frontend and backend development for multiple marketing products, delivering scalable, high-quality software solutions that aligned with business goals.",
-          "Independently managed full project lifecycles, from requirement analysis and solution design to deployment, continually improving code quality and system performance by addressing technical debt and refactoring legacy modules.",
-          "Served as a trusted problem solver and escalation point for complex technical issues, providing timely and effective resolutions to ensure minimal disruption.",
-          "Mentored junior developers and fostered a collaborative Agile team environment, enhancing team productivity and knowledge sharing.",
-          "Architected and implemented generic, reusable, and feature-rich components and modules, enabling faster development cycles and consistent user experiences across products.",
-          "Collaborated closely with Product and Business teams to design innovative features and improvements, contributing creative ideas that elevated user satisfaction and business value.",
-          "Integrated AI-driven features within products to enhance end-user experiences and improve automation, while also embedding AI capabilities into developer workflows to increase team efficiency.",
-          "Championed initiatives focused on reducing technical debt, boosting code maintainability, and optimizing application performance across projects.",
-          "Actively participated in solution design discussions, evaluating business requirements and translating them into effective technical architectures.",
-          "Recognized as a go-to resource for technical innovation, consistently delivering solutions that drive product excellence and operational efficiency."
-        ]
+        "description": "Led development of customer-facing dashboard using Angular and PrimeNG. Implemented responsive design patterns and optimized application performance. Mentored junior developers and established coding standards.",
+        "technologies": ["Angular", "TypeScript", "RxJS", "PrimeNG", "SCSS"]
       },
       {
         "id": "2",
@@ -55,23 +45,8 @@
         "startDate": "2020-12-01",
         "endDate": "2021-07-31",
         "current": false,
-        "description": [
-          "Researched, designed, implemented, integrated, and managed software programs tailored to meet diverse business and user requirements.",
-          "Developed clean, efficient application code and modular solutions aligned with specifications and project goals.",
-          "Set up robust authentication and authorization systems, ensuring secure application access and data protection.",
-          "Established smooth and secure communication protocols between client and server, enhancing application reliability and user experience.",
-          "Resolved complex, critical issues through advanced troubleshooting and debugging processes, consistently minimizing project downtime.",
-          "Built and optimized database structures, including crafting efficient SQL queries and procedures to support scalable data management.",
-          "Utilized UML diagrams and effective algorithms to architect clear application flow and design processes.",
-          "Authored comprehensive technical documentation and user manuals, facilitating seamless knowledge transfer and user onboarding.",
-          "Analysed end-user needs to design and deliver solutions that optimize usability and business value.",
-          "Deployed web applications, conducted proactive issue monitoring, and performed performance tuning for optimal operation.",
-          "Enabled scalable deployments by running applications within containers and leveraging cloud SaaS platforms for greater flexibility.",
-          "Recommended and integrated best practices in every aspect of application design and development, elevating solution quality.",
-          "Seamlessly integrated software components and third-party programs to extend system functionality.",
-          "Developed intuitive, user-friendly interfaces, prototypes, and interactive application elements to improve usability.",
-          "Investigated and identified the root cause of reported defects and issues, implementing effective patches and fixes for long-term stability."
-        ]
+        "description": "Developed and maintained web applications using Angular and Node.js. Built RESTful APIs and integrated third-party services. Collaborated with cross-functional teams to deliver features on time.",
+        "technologies": ["Angular", "Node.js", "Express", "MongoDB", "TypeScript"]
       },
       {
         "id": "3",
@@ -80,17 +55,8 @@
         "startDate": "2016-01-01",
         "endDate": "20219-05-31",
         "current": false,
-        "description": [
-          "Architected and designed full stack solutions for business process teams, ensuring scalable and maintainable software architecture.",
-          "Owned end-to-end project lifecycle responsibilities including analysis, design, development, implementation, support, and enhancement of applications.",
-          "Developed clean, tested code; monitored logs; fixed bugs; configured deployment scripts; and managed deployments across development, testing, and production environments.",
-          "Resolved complex programming challenges and implemented robust business logic, driving adherence to coding standards that enhanced application quality and maintainability.",
-          "Created and maintained service dashboards to monitor system health and performance.",
-          "Developed and exposed services using REST APIs and SOAP, as well as consumed external web services for seamless integration.",
-          "Managed high-priority production tickets and provided reliable support during critical release phases.",
-          "Participated actively in Agile ceremonies including daily stand-ups, sprint planning, and retrospectives, collaborating with cross-functional onsite and remote teams.",
-          "Coordinated code deployments across multiple environments such as dev, test, end-to-end, and production to ensure smooth release cycles and minimize downtime."
-        ]
+        "description": "Created responsive web applications for various clients. Worked with React and Vue.js frameworks. Implemented modern UI/UX designs and ensured cross-browser compatibility.",
+        "technologies": ["React", "Vue.js", "JavaScript", "CSS3", "HTML5"]
       }
     ],
     "education": [
@@ -101,7 +67,7 @@
         "startDate": "2019-07-01",
         "endDate": "2021-05-31",
         "current": false,
-        "description": "Comprehensive postgraduate program focusing on advanced software engineering, enterprise systems, and emerging technologies. Key coursework included: Software Engineering Methodologies, Database Design and Implementation, Web Application Development, Network Security and Cryptography, Cloud Computing, Project Management, Research Methods, and IT Strategy. Completed capstone project on scalable web application architecture. Graduated with distinction, demonstrating expertise in modern software development practices and enterprise-level system design.",
+        "description": "Focused on software engineering and web technologies. Graduated with honors. Relevant coursework included Data Structures, Algorithms, Web Development, and Database Systems.",
         "technologies": []
       },
       {
@@ -111,7 +77,7 @@
         "startDate": "2011-08-01",
         "endDate": "2015-05-31",
         "current": false,
-        "description": "Four-year undergraduate program in Information Technology covering fundamental and advanced computing concepts. Core subjects included: Programming Languages (C, C++, Java), Data Structures and Algorithms, Database Management Systems, Computer Networks, Operating Systems, Software Engineering, Web Technologies, Object-Oriented Programming, Computer Architecture, and Software Testing. Completed final year project on web-based application development. Graduated with honors, establishing strong foundation in computer science principles and software development methodologies.",
+        "description": "Focused on software engineering and web technologies. Graduated with honors. Relevant coursework included Data Structures, Algorithms, Web Development, and Database Systems.",
         "technologies": []
       }
     ],
@@ -396,13 +362,84 @@
         ]
       }
     ],
-    "projects": [],
-    "achievements": [],
-    "testimonials": [],
+    "projects": [
+      {
+        "id": "1",
+        "title": "E-commerce Platform",
+        "description": "Full-stack e-commerce application with real-time inventory management, payment processing, and admin dashboard. Features include user authentication, product catalog, shopping cart, and order tracking.",
+        "technologies": ["Angular", "Node.js", "PostgreSQL", "Stripe API", "Redis"],
+        "image": "assets/images/project-1.jpg",
+        "link": "https://example.com",
+        "github": "https://github.com/example/project",
+        "featured": true
+      },
+      {
+        "id": "2",
+        "title": "Task Management App",
+        "description": "Collaborative task management application with real-time updates, drag-and-drop functionality, and team collaboration features. Built with Angular and Firebase.",
+        "technologies": ["Angular", "Firebase", "TypeScript", "RxJS"],
+        "image": "assets/images/project-2.jpg",
+        "link": "https://example.com/tasks",
+        "github": "https://github.com/example/tasks",
+        "featured": true
+      },
+      {
+        "id": "3",
+        "title": "Portfolio Website",
+        "description": "Personal portfolio website showcasing projects, skills, and experience. Built with Angular and PrimeNG, featuring responsive design and dark mode support.",
+        "technologies": ["Angular", "PrimeNG", "TypeScript", "SCSS"],
+        "image": "assets/images/project-3.jpg",
+        "link": "https://example.com/portfolio",
+        "github": "https://github.com/example/portfolio",
+        "featured": false
+      },
+      {
+        "id": "4",
+        "title": "Weather Dashboard",
+        "description": "Real-time weather dashboard with location-based forecasts, interactive maps, and weather alerts. Integrates with multiple weather APIs.",
+        "technologies": ["Angular", "OpenWeather API", "Leaflet", "TypeScript"],
+        "image": "assets/images/project-4.jpg",
+        "link": "https://example.com/weather",
+        "github": "https://github.com/example/weather",
+        "featured": false
+      }
+    ],
+    "achievements": [
+      {
+        "id": "1",
+        "title": "Best Project Award",
+        "description": "Awarded for outstanding contribution to the E-commerce Platform project",
+        "date": "2023-06-15",
+        "icon": "pi pi-trophy"
+      },
+      {
+        "id": "2",
+        "title": "Tech Innovation Recognition",
+        "description": "Recognized for innovative use of Angular signals in portfolio application",
+        "date": "2024-01-20",
+        "icon": "pi pi-star"
+      }
+    ],
+    "testimonials": [
+      {
+        "id": "1",
+        "author": "John Smith",
+        "role": "CTO, Tech Corp",
+        "content": "Jane is an exceptional developer who consistently delivers high-quality work. Her expertise in Angular and attention to detail make her a valuable team member.",
+        "image": "assets/images/testimonial-1.jpg"
+      },
+      {
+        "id": "2",
+        "author": "Sarah Johnson",
+        "role": "Product Manager, StartupXYZ",
+        "content": "Working with Jane was a pleasure. She's proactive, communicates well, and always finds creative solutions to complex problems.",
+        "image": "assets/images/testimonial-2.jpg"
+      }
+    ],
     "contact": {
-      "email": "deivamanikailasam@gmail.com",
-      "phone": "+61 0411181052",
-      "location": "Melbourne, Australia",
+      "email": "jane@example.com",
+      "phone": "+1 (555) 123-4567",
+      "location": "San Francisco, CA",
       "socials": [
         {
           "platform": "github",

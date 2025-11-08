@@ -7,7 +7,7 @@
       "email": "jane@example.com",
       "phone": "+1 (555) 123-4567",
       "location": "San Francisco, CA",
-      "avatar": "/assets/images/avatar.jpg",
+      "avatar": "assets/images/avatar.png",
       "socials": [
         { "platform": "github", "url": "https://github.com", "icon": "pi pi-github" },
         { "platform": "linkedin", "url": "https://linkedin.com", "icon": "pi pi-linkedin" }
@@ -55,7 +55,7 @@
         "title": "E-commerce Platform",
         "description": "Full-stack e-commerce application with real-time inventory management...",
         "technologies": ["Angular", "Node.js", "PostgreSQL"],
-        "image": "/assets/images/project-1.jpg",
+        "image": "assets/images/project-1.jpg",
         "link": "https://example.com",
         "github": "https://github.com/example/project",
         "featured": true
