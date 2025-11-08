@@ -98,6 +98,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       position: relative;
       width: 100%;
       padding: 4rem 2rem;
+      box-sizing: border-box;
+      overflow-x: hidden;
     }
     
     .section-header {
@@ -137,6 +139,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       gap: 2.5rem;
       max-width: 1400px;
       margin: 0 auto;
+      width: 100%;
+      box-sizing: border-box;
     }
     
     .skill-category-card {
@@ -459,8 +463,20 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         padding: 1.5rem 0.75rem;
       }
       
+      // Ensure section header is visible even if fade-in doesn't work
       .section-header {
         margin-bottom: 2rem;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        display: block !important;
+      }
+      
+      // Ensure all content inside section header is visible
+      .section-header * {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
       }
       
       .section-title {
@@ -476,11 +492,17 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       }
       
       .skills-grid {
+        grid-template-columns: 1fr !important;
         gap: 2rem;
+        width: 100%;
+        max-width: 100%;
       }
       
       .skill-category-card {
         margin: 0 0 1.25rem 0;
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
         
         &:hover,
         &:active,
@@ -521,10 +543,129 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       .skill-content {
         padding: 0.625rem 0.875rem;
         gap: 0.625rem;
+        flex-wrap: wrap;
       }
       
       .skill-name {
         font-size: clamp(0.875rem, 3vw, 0.95rem);
+      }
+    }
+    
+    // Very small devices - Ensure visibility
+    @media (max-width: 375px) {
+      .skills-container {
+        padding: 1.5rem 0.5rem;
+        width: 100%;
+        overflow-x: hidden;
+      }
+      
+      // Ensure section header is visible even if fade-in doesn't work
+      .section-header {
+        margin-bottom: 1.5rem;
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+        display: block !important;
+      }
+      
+      // Ensure all content inside section header is visible
+      .section-header * {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: translateY(0) !important;
+      }
+      
+      .section-title {
+        font-size: clamp(1.25rem, 8vw, 1.75rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.25rem, 7vw, 1.75rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(0.85rem, 3.5vw, 1rem);
+      }
+      
+      .skills-grid {
+        grid-template-columns: 1fr !important;
+        gap: 1.5rem;
+        width: 100%;
+        max-width: 100%;
+        padding: 0;
+        margin: 0;
+        display: grid !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      .skill-category-card {
+        width: 100% !important;
+        max-width: 100% !important;
+        min-width: 0 !important;
+        margin: 0 0 1rem 0;
+        box-sizing: border-box;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      .card-header {
+        padding: 0.875rem;
+      }
+      
+      .card-body {
+        padding: 1rem;
+      }
+      
+      .header-content {
+        gap: 0.625rem;
+        flex-wrap: wrap;
+      }
+      
+      .category-icon {
+        font-size: clamp(1.25rem, 6vw, 1.75rem);
+      }
+      
+      .category-title {
+        font-size: clamp(1rem, 5vw, 1.25rem);
+      }
+      
+      .subdivision-title {
+        font-size: clamp(0.8rem, 3vw, 0.95rem);
+      }
+      
+      .skills-list {
+        gap: 0.625rem;
+      }
+      
+      .skill-content {
+        padding: 0.5rem 0.75rem;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        min-width: 0;
+      }
+      
+      .skill-icon,
+      .skill-icon-class {
+        font-size: clamp(1.1rem, 4vw, 1.3rem);
+      }
+      
+      .skill-image {
+        width: clamp(1.1rem, 4vw, 1.3rem);
+        height: clamp(1.1rem, 4vw, 1.3rem);
+      }
+      
+      .skill-name {
+        font-size: clamp(0.8rem, 3.5vw, 0.9rem);
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+      
+      ::ng-deep .skill-level-tag {
+        font-size: clamp(0.6rem, 2vw, 0.7rem) !important;
+        padding: clamp(0.2rem, 1vw, 0.3rem) clamp(0.4rem, 2vw, 0.6rem) !important;
+        white-space: nowrap;
       }
     }
     
