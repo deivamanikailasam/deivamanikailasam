@@ -19,7 +19,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       </div>
       
       @if (skills().length > 0) {
-        <div class="skills-grid" appFadeIn>
+        <div class="skills-grid">
           @for (skillGroup of skills(); track skillGroup.id) {
             <p-card class="skill-category-card" [style.--category-color]="getCategoryColor(skillGroup.color)">
               <ng-template pTemplate="header">
@@ -148,6 +148,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275) !important;
       animation: card-float 6s ease-in-out infinite;
       position: relative;
+      margin-bottom: 1rem;
       
       &:hover {
         animation-play-state: paused !important;
@@ -331,19 +332,210 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       }
     }
     
-    @media (max-width: 768px) {
+    // Responsive Design
+    @media (max-width: 1199.98px) {
+      .skills-container {
+        padding: 3rem 1.5rem;
+      }
+      
+      .skills-grid {
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 991.98px) {
       .section-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3.5rem);
         flex-direction: column;
+        gap: 0.75rem;
       }
       
       .section-icon {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+      }
+      
+      .skills-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .card-header {
+        padding: 1.5rem;
+      }
+      
+      .category-icon {
+        font-size: clamp(2rem, 4vw, 2.5rem);
+      }
+      
+      .category-title {
+        font-size: clamp(1.5rem, 3vw, 1.75rem);
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .skills-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 3rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
       }
       
       .skills-grid {
         grid-template-columns: 1fr;
+        gap: 2.5rem;
+      }
+      
+      .skill-category-card {
+        margin: 0 0 1.5rem 0;
+        
+        &:hover,
+        &:active,
+        &:focus {
+          transform: translateY(-10px) scale(1.01) !important;
+          z-index: 10;
+        }
+      }
+      
+      .card-header {
+        padding: 1.25rem;
+      }
+      
+      .card-body {
+        padding: 1.5rem;
+      }
+      
+      .category-icon {
+        font-size: clamp(1.75rem, 4.5vw, 2.25rem);
+      }
+      
+      .category-title {
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      }
+      
+      .subdivision-title {
+        font-size: clamp(0.875rem, 2.5vw, 1rem);
+      }
+      
+      .skill-content {
+        padding: clamp(0.5rem, 1.5vw, 0.75rem) clamp(0.75rem, 2vw, 1rem);
+        gap: 0.75rem;
+      }
+      
+      .skill-icon,
+      .skill-icon-class {
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+      }
+      
+      .skill-image {
+        width: clamp(1.25rem, 3vw, 1.5rem);
+        height: clamp(1.25rem, 3vw, 1.5rem);
+      }
+      
+      .skill-name {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+      
+      ::ng-deep .skill-level-tag {
+        font-size: clamp(0.65rem, 1.8vw, 0.75rem) !important;
+        padding: clamp(0.25rem, 0.8vw, 0.35rem) clamp(0.5rem, 1.5vw, 0.75rem) !important;
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .skills-container {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(0.9rem, 3vw, 1.1rem);
+      }
+      
+      .skills-grid {
         gap: 2rem;
+      }
+      
+      .skill-category-card {
+        margin: 0 0 1.25rem 0;
+        
+        &:hover,
+        &:active,
+        &:focus {
+          transform: translateY(-8px) scale(1.01) !important;
+          z-index: 10;
+        }
+      }
+      
+      .card-header {
+        padding: 1rem;
+      }
+      
+      .card-body {
+        padding: 1.25rem;
+      }
+      
+      .header-content {
+        gap: 0.75rem;
+      }
+      
+      .category-icon {
+        font-size: clamp(1.5rem, 5vw, 2rem);
+      }
+      
+      .category-title {
+        font-size: clamp(1.1rem, 4vw, 1.35rem);
+      }
+      
+      .subdivision-section {
+        margin-bottom: 1.5rem;
+      }
+      
+      .skills-list {
+        gap: 0.75rem;
+      }
+      
+      .skill-content {
+        padding: 0.625rem 0.875rem;
+        gap: 0.625rem;
+      }
+      
+      .skill-name {
+        font-size: clamp(0.875rem, 3vw, 0.95rem);
+      }
+    }
+    
+    // Landscape orientation for mobile
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .skills-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
       }
     }
   `]

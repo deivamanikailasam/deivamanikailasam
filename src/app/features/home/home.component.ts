@@ -356,20 +356,80 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
     }
     
-    @media (max-width: 768px) {
+    // Responsive Design
+    @media (max-width: 1199.98px) {
       .parallax-section {
-        min-height: 100vh;
-        padding: 4rem 1rem;
-      }
-      
-      .hero-section {
-        min-height: 100vh;
+        min-height: auto;
+        padding: 3rem 1.5rem;
       }
     }
     
-    @media (max-width: 480px) {
+    @media (max-width: 991.98px) {
       .parallax-section {
-        padding: 3rem 1rem;
+        min-height: auto;
+        padding: 2.5rem 1rem;
+      }
+      
+      .section-content {
+        width: 100%;
+        padding: 0 0.5rem;
+      }
+      
+      .parallax-bg {
+        top: -15%;
+        left: -15%;
+        width: 130%;
+        height: 130%;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .parallax-section {
+        min-height: auto;
+        padding: 2rem 1rem;
+      }
+      
+      .hero-section {
+        min-height: auto;
+        padding: 2rem 0;
+      }
+      
+      .section-content {
+        padding: 0;
+      }
+      
+      .parallax-bg {
+        top: -10%;
+        left: -10%;
+        width: 120%;
+        height: 120%;
+        filter: blur(40px);
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .parallax-section {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .hero-section {
+        padding: 1.5rem 0;
+      }
+      
+      .parallax-bg {
+        filter: blur(30px);
+      }
+    }
+    
+    // Landscape orientation
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .parallax-section {
+        min-height: auto;
+        padding: 2rem 1rem;
+      }
+      
+      .hero-section {
+        min-height: auto;
       }
     }
   `]

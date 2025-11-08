@@ -1,22 +1,22 @@
 import {
   BaseComponent,
   PARENT_INSTANCE
-} from "./chunk-TOWIVA3R.js";
-import {
-  BaseStyle
-} from "./chunk-YVHTVS74.js";
+} from "./chunk-KA2V4F6N.js";
 import {
   Bind,
   BindModule
 } from "./chunk-3QIWPVBQ.js";
 import {
+  BaseStyle
+} from "./chunk-F5OBB2HP.js";
+import {
   SharedModule
-} from "./chunk-GBGWG5S2.js";
+} from "./chunk-QGXEBC2F.js";
+import "./chunk-47D2QLSA.js";
 import {
   CommonModule
 } from "./chunk-OCTVBAP2.js";
 import "./chunk-RDHXSB74.js";
-import "./chunk-47D2QLSA.js";
 import {
   ChangeDetectionStrategy,
   Component,

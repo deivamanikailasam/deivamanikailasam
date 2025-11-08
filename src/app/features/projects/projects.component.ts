@@ -491,19 +491,200 @@ import { Project } from '../../core/models/portfolio.interface';
       font-weight: 600 !important;
     }
     
-    @media (max-width: 768px) {
+    // Responsive Design
+    @media (max-width: 1199.98px) {
+      .projects-container {
+        padding: 3rem 1.5rem;
+      }
+      
+      .projects-grid {
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 991.98px) {
       .section-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3.5rem);
         flex-direction: column;
+        gap: 0.75rem;
       }
       
       .section-icon {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+      }
+      
+      .projects-grid {
+        grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .project-image-container {
+        height: clamp(200px, 30vw, 250px);
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .projects-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 3rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
       }
       
       .projects-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+      }
+      
+      .project-image-container {
+        height: clamp(180px, 40vw, 220px);
+      }
+      
+      .card-body {
+        padding: 1.5rem;
+      }
+      
+      .project-title {
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      }
+      
+      .project-description {
+        font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+        line-height: 1.7;
+      }
+      
+      .project-tech {
+        gap: 0.625rem;
+      }
+      
+      .project-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+      }
+      
+      ::ng-deep .action-btn {
+        width: 100% !important;
+        padding: 0.75rem 1.25rem !important;
+        font-size: 0.95rem !important;
+      }
+      
+      ::ng-deep .project-modal {
+        .p-dialog {
+          width: 95vw !important;
+          max-width: 100% !important;
+        }
+      }
+      
+      .modal-content {
+        padding: 1.5rem;
+      }
+      
+      .modal-image {
+        height: clamp(200px, 50vw, 300px);
+      }
+      
+      .modal-title {
+        font-size: clamp(1.5rem, 4vw, 2rem);
+      }
+      
+      .modal-description {
+        font-size: clamp(1rem, 2.8vw, 1.1rem);
+      }
+      
+      .modal-actions {
+        flex-direction: column;
+        width: 100%;
+        gap: 0.75rem;
+      }
+      
+      ::ng-deep .modal-action-btn {
+        width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 1rem !important;
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .projects-container {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      
+      .projects-grid {
+        gap: 1.25rem;
+      }
+      
+      .project-image-container {
+        height: clamp(160px, 45vw, 200px);
+      }
+      
+      .card-body {
+        padding: 1.25rem;
+      }
+      
+      .project-title {
+        font-size: clamp(1.1rem, 4vw, 1.35rem);
+      }
+      
+      .project-description {
+        font-size: clamp(0.875rem, 3vw, 0.95rem);
+      }
+      
+      .modal-content {
+        padding: 1.25rem;
+      }
+      
+      .modal-image {
+        height: clamp(180px, 55vw, 250px);
+        margin-bottom: 1.5rem;
+      }
+      
+      .modal-title {
+        font-size: clamp(1.25rem, 4.5vw, 1.75rem);
+      }
+      
+      .modal-description {
+        font-size: clamp(0.95rem, 3vw, 1.05rem);
+      }
+    }
+    
+    // Landscape orientation
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .projects-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      
+      .project-image-container {
+        height: clamp(150px, 30vh, 200px);
       }
     }
   `]

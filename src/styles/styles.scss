@@ -1,5 +1,6 @@
 // 1. Override Bootstrap variables before import
 @import './variables';
+@import './responsive';
 
 // 2. Bootstrap 5 functions and variables
 @import '../node_modules/bootstrap/scss/functions';

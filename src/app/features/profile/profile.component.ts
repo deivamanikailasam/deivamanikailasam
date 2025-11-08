@@ -559,7 +559,22 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       text-transform: uppercase;
     }
     
-    @media (max-width: 968px) {
+    // Responsive Design
+    @media (max-width: 1199.98px) {
+      .hero-main-content {
+        gap: 3rem;
+      }
+      
+      .profile-name {
+        font-size: clamp(2.5rem, 5vw, 4.5rem);
+      }
+      
+      .profile-title {
+        font-size: clamp(1.5rem, 3vw, 2rem);
+      }
+    }
+    
+    @media (max-width: 991.98px) {
       .hero-main-content {
         grid-template-columns: 1fr;
         gap: 3rem;
@@ -567,49 +582,176 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       }
       
       .avatar-wrapper {
-        width: 240px;
-        height: 240px;
+        width: clamp(200px, 30vw, 280px);
+        height: clamp(200px, 30vw, 280px);
+      }
+      
+      .ring-1 {
+        width: clamp(240px, 35vw, 320px);
+        height: clamp(240px, 35vw, 320px);
+      }
+      
+      .ring-2 {
+        width: clamp(280px, 40vw, 360px);
+        height: clamp(280px, 40vw, 360px);
+      }
+      
+      .ring-3 {
+        width: clamp(320px, 45vw, 400px);
+        height: clamp(320px, 45vw, 400px);
       }
       
       .profile-name {
-        font-size: 3.5rem;
+        font-size: clamp(2rem, 6vw, 3.5rem);
       }
       
       .profile-title {
-        font-size: 1.75rem;
+        font-size: clamp(1.25rem, 3.5vw, 1.75rem);
       }
       
       .profile-bio {
-        font-size: 1.1rem;
+        font-size: clamp(1rem, 2.5vw, 1.2rem);
+        width: 100%;
+      }
+      
+      .social-links {
+        justify-content: center;
+        margin-right: 0;
+      }
+      
+      .profile-meta {
+        justify-content: center;
+        gap: 1.5rem;
       }
     }
     
-    @media (max-width: 640px) {
+    @media (max-width: 767.98px) {
       .profile-hero-container {
-        padding: 3rem 1rem;
+        padding: 2rem 1rem;
+        min-height: auto;
+      }
+      
+      .hero-content-wrapper {
+        padding: 1rem 0;
+      }
+      
+      .hero-main-content {
+        gap: 2rem;
       }
       
       .avatar-wrapper {
-        width: 200px;
-        height: 200px;
+        width: clamp(180px, 40vw, 240px);
+        height: clamp(180px, 40vw, 240px);
       }
       
       .profile-name {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 7vw, 2.5rem);
+        line-height: 1.2;
       }
       
       .profile-title {
-        font-size: 1.5rem;
+        font-size: clamp(1.1rem, 4vw, 1.5rem);
+      }
+      
+      .profile-bio {
+        font-size: clamp(0.95rem, 3vw, 1.1rem);
+        line-height: 1.6;
+      }
+      
+      .greeting-text {
+        font-size: clamp(0.9rem, 2.5vw, 1.25rem);
+      }
+      
+      .profile-meta {
+        flex-direction: column;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+      }
+      
+      .meta-item {
+        font-size: clamp(0.9rem, 2.5vw, 1rem);
+      }
+      
+      .social-btn {
+        width: clamp(48px, 12vw, 56px);
+        height: clamp(48px, 12vw, 56px);
+        font-size: clamp(1.25rem, 3vw, 1.5rem);
+      }
+      
+      .bg-circle {
+        filter: blur(60px);
+      }
+      
+      .circle-1, .circle-2, .circle-3, .circle-4 {
+        width: clamp(250px, 60vw, 400px);
+        height: clamp(250px, 60vw, 400px);
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .profile-hero-container {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .hero-main-content {
+        gap: 1.5rem;
+      }
+      
+      .avatar-wrapper {
+        width: clamp(150px, 45vw, 200px);
+        height: clamp(150px, 45vw, 200px);
+      }
+      
+      .profile-name {
+        font-size: clamp(1.5rem, 8vw, 2rem);
+      }
+      
+      .profile-title {
+        font-size: clamp(1rem, 4.5vw, 1.25rem);
+      }
+      
+      .profile-bio {
+        font-size: clamp(0.875rem, 3.5vw, 1rem);
+      }
+      
+      .social-links {
+        gap: 0.75rem;
+      }
+      
+      .social-btn {
+        width: clamp(44px, 14vw, 52px);
+        height: clamp(44px, 14vw, 52px);
       }
       
       .cta-buttons {
         flex-direction: column;
         width: 100%;
+        gap: 1rem;
       }
       
       ::ng-deep .cta-primary,
       ::ng-deep .cta-secondary {
         width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 0.95rem !important;
+      }
+    }
+    
+    // Landscape orientation for mobile
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .profile-hero-container {
+        min-height: auto;
+        padding: 2rem 1rem;
+      }
+      
+      .hero-main-content {
+        gap: 2rem;
+      }
+      
+      .avatar-wrapper {
+        width: clamp(150px, 25vh, 200px);
+        height: clamp(150px, 25vh, 200px);
       }
     }
   `]

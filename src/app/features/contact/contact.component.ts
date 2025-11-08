@@ -564,19 +564,183 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       }
     }
     
+    // Responsive Design
+    @media (max-width: 1199.98px) {
+      .contact-container {
+        padding: 3rem 1.5rem;
+      }
+      
+      .contact-content {
+        gap: 2rem;
+      }
+    }
+    
     @media (max-width: 991.98px) {
+      .contact-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-title {
+        font-size: clamp(2rem, 5vw, 3.5rem);
+        flex-direction: column;
+        gap: 0.75rem;
+      }
+      
+      .section-icon {
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+      }
+      
       .contact-content {
         grid-template-columns: 1fr;
         gap: 2rem;
       }
       
+      .card-header-gradient {
+        padding: 1.5rem;
+      }
+      
+      .card-title {
+        font-size: clamp(1.5rem, 3vw, 1.75rem);
+      }
+      
+      .card-subtitle {
+        font-size: clamp(0.9rem, 2.2vw, 1rem);
+      }
+      
+      .contact-info-body {
+        padding: 1.5rem;
+      }
+      
+      .contact-form {
+        padding: 1.5rem;
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .contact-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 3rem;
+      }
+      
       .section-title {
-        font-size: 2.5rem;
-        flex-direction: column;
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
       }
       
       .section-icon {
-        font-size: 2.5rem;
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
+      }
+      
+      .card-header-gradient {
+        padding: 1.25rem;
+      }
+      
+      .contact-info-body {
+        padding: 1.25rem;
+      }
+      
+      .contact-form {
+        padding: 1.25rem;
+        gap: 1.25rem;
+      }
+      
+      .contact-info-item {
+        padding: 1.25rem;
+        gap: 1rem;
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      
+      .info-icon-wrapper {
+        width: clamp(45px, 12vw, 50px);
+        height: clamp(45px, 12vw, 50px);
+      }
+      
+      .info-icon {
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      }
+      
+      .info-label {
+        font-size: clamp(0.85rem, 2.2vw, 0.9rem);
+      }
+      
+      .info-value {
+        font-size: clamp(1rem, 2.8vw, 1.1rem);
+      }
+      
+      .form-label {
+        font-size: clamp(0.95rem, 2.5vw, 1rem);
+      }
+      
+      .form-control {
+        font-size: clamp(0.95rem, 2.5vw, 1rem);
+        padding: clamp(0.625rem, 1.8vw, 0.75rem) clamp(0.875rem, 2.2vw, 1rem);
+      }
+      
+      .social-links {
+        gap: 0.75rem;
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .contact-container {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      
+      .card-header-gradient {
+        padding: 1rem;
+      }
+      
+      .contact-info-body {
+        padding: 1rem;
+      }
+      
+      .contact-form {
+        padding: 1rem;
+        gap: 1rem;
+      }
+      
+      .contact-info-item {
+        padding: 1rem;
+      }
+      
+      .section-heading {
+        font-size: clamp(1.1rem, 3.5vw, 1.25rem);
+      }
+      
+      ::ng-deep .send-button {
+        width: 100% !important;
+        padding: 0.875rem 1.5rem !important;
+        font-size: 0.95rem !important;
+      }
+    }
+    
+    // Landscape orientation
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .contact-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
       }
     }
   `]

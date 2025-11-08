@@ -231,19 +231,158 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       }
     }
     
-    @media (max-width: 768px) {
+    // Responsive Design
+    @media (max-width: 1199.98px) {
+      .certifications-container {
+        padding: 3rem 1.5rem;
+      }
+      
+      .certifications-grid {
+        gap: 2rem;
+      }
+    }
+    
+    @media (max-width: 991.98px) {
       .section-title {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3.5rem);
         flex-direction: column;
+        gap: 0.75rem;
       }
       
       .section-icon {
-        font-size: 2.5rem;
+        font-size: clamp(2rem, 5vw, 3rem);
+      }
+      
+      .section-subtitle {
+        font-size: clamp(1rem, 2.5vw, 1.25rem);
+      }
+      
+      .certifications-grid {
+        grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+        gap: 2rem;
+      }
+      
+      .card-header-gradient {
+        padding: 1.5rem;
+      }
+      
+      .cert-icon-wrapper {
+        width: clamp(60px, 10vw, 70px);
+        height: clamp(60px, 10vw, 70px);
+        font-size: clamp(1.75rem, 4vw, 2rem);
+      }
+      
+      .cert-title {
+        font-size: clamp(1.5rem, 3vw, 1.75rem);
+      }
+    }
+    
+    @media (max-width: 767.98px) {
+      .certifications-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 3rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.75rem, 6vw, 2.5rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.75rem, 5vw, 2.5rem);
       }
       
       .certifications-grid {
         grid-template-columns: 1fr;
-        gap: 2rem;
+        gap: 1.5rem;
+      }
+      
+      .card-header-gradient {
+        padding: 1.25rem;
+      }
+      
+      .card-body {
+        padding: 1.5rem;
+      }
+      
+      .cert-icon-wrapper {
+        width: clamp(50px, 12vw, 60px);
+        height: clamp(50px, 12vw, 60px);
+        font-size: clamp(1.5rem, 4.5vw, 1.75rem);
+      }
+      
+      .cert-title {
+        font-size: clamp(1.25rem, 3.5vw, 1.5rem);
+      }
+      
+      .cert-description {
+        font-size: clamp(0.95rem, 2.8vw, 1.05rem);
+        line-height: 1.7;
+      }
+      
+      .cert-date {
+        font-size: clamp(0.9rem, 2.5vw, 0.95rem);
+      }
+    }
+    
+    @media (max-width: 575.98px) {
+      .certifications-container {
+        padding: 1.5rem 0.75rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
+      }
+      
+      .section-title {
+        font-size: clamp(1.5rem, 7vw, 2rem);
+      }
+      
+      .section-icon {
+        font-size: clamp(1.5rem, 6vw, 2rem);
+      }
+      
+      .certifications-grid {
+        gap: 1.25rem;
+      }
+      
+      .card-header-gradient {
+        padding: 1rem;
+      }
+      
+      .card-body {
+        padding: 1.25rem;
+      }
+      
+      .header-content {
+        gap: 1rem;
+      }
+      
+      .cert-icon-wrapper {
+        width: clamp(45px, 14vw, 55px);
+        height: clamp(45px, 14vw, 55px);
+        font-size: clamp(1.25rem, 5vw, 1.5rem);
+      }
+      
+      .cert-title {
+        font-size: clamp(1.1rem, 4vw, 1.35rem);
+      }
+      
+      .cert-description {
+        font-size: clamp(0.875rem, 3vw, 0.95rem);
+      }
+    }
+    
+    // Landscape orientation
+    @media (max-width: 991.98px) and (orientation: landscape) {
+      .certifications-container {
+        padding: 2rem 1rem;
+      }
+      
+      .section-header {
+        margin-bottom: 2rem;
       }
     }
   `]

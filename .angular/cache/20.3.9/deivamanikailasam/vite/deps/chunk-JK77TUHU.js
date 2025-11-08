@@ -35,8 +35,12 @@ function ZIndexUtils() {
   };
 }
 var zindexutils = ZIndexUtils();
+var transformToBoolean = (value) => {
+  return !!value;
+};
 
 export {
-  zindexutils
+  zindexutils,
+  transformToBoolean
 };
-//# sourceMappingURL=chunk-TNWZTUEL.js.map
+//# sourceMappingURL=chunk-JK77TUHU.js.map
