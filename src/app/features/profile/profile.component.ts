@@ -3,15 +3,13 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { ButtonModule } from 'primeng/button';
 import { CardModule } from 'primeng/card';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-profile',
-  imports: [CommonModule, ButtonModule, CardModule, FadeInDirective],
+  imports: [CommonModule, ButtonModule, CardModule],
   template: `
     <div class="profile-hero-container">
       @if (profile(); as profileData) {
-        <div class="hero-content-wrapper" appFadeIn>
+        <div class="hero-content-wrapper">
           <!-- Animated Background Elements -->
           <div class="hero-bg-elements">
             <div class="bg-circle circle-1"></div>
@@ -23,7 +21,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
           <!-- Main Hero Content -->
           <div class="hero-main-content">
             <!-- Avatar Section -->
-            <div class="avatar-section" appFadeIn>
+            <div class="avatar-section">
               <div class="avatar-wrapper">
                 @if (profileData.avatar) {
                   <img 
@@ -44,7 +42,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
             </div>
             
             <!-- Profile Info -->
-            <div class="profile-info-section" appFadeIn>
+            <div class="profile-info-section">
               <div class="greeting-text">Hello, I'm</div>
               <h1 class="profile-name">
                 <span class="name-text gradient-text">{{ profileData.name }}</span>

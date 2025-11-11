@@ -141,6 +141,12 @@
             ]
           },
           {
+            "title": "Desktop Application development",
+            "items": [
+              { "key": "electron", "name": "Electron", "image": "assets/images/skills/electronjs.png", "icon": "pi pi-desktop", "level": "Intermediate" }
+            ]
+          },
+          {
             "title": "Libraries",
             "items": [
               { "key": "rxjs", "name": "RxJS", "image": "assets/images/skills/rxjs.png", "icon": "pi pi-bolt", "level": "Advanced" },

@@ -10,8 +10,6 @@ import { CardModule } from 'primeng/card';
 import { FieldsetModule } from 'primeng/fieldset';
 import { DividerModule } from 'primeng/divider';
 import { ChipModule } from 'primeng/chip';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-contact',
   imports: [
@@ -24,12 +22,11 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     CardModule,
     FieldsetModule,
     DividerModule,
-    ChipModule,
-    FadeInDirective
+    ChipModule
   ],
   template: `
     <div class="contact-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-envelope section-icon"></i>
           Get In Touch
@@ -45,7 +42,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       } @else if (contentService.error()) {
         <p-message severity="error" [text]="contentService.error() || 'An error occurred'"></p-message>
       } @else {
-        <div class="contact-content" appFadeIn>
+        <div class="contact-content">
           <div class="contact-info-section">
             <p-card class="contact-info-card">
               <ng-template pTemplate="header">

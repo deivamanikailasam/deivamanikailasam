@@ -11,8 +11,6 @@ import { AchievementsComponent } from '../achievements/achievements.component';
 import { CertificationsComponent } from '../certifications/certifications.component';
 import { ContactComponent} from '../contact/contact.component';
 import { ParallaxDirective } from '../../shared/directives/parallax.directive';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-home',
   standalone: true,
@@ -26,15 +24,14 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     AchievementsComponent,
     CertificationsComponent,
     ContactComponent,
-    ParallaxDirective,
-    FadeInDirective
+    ParallaxDirective
   ],
   template: `
     <!-- Invisible Scroll Container -->
     <div class="infinite-scroll-wrapper" #scrollWrapper>
       <div class="infinite-scroll-container" #scrollContainer>
         <!-- Profile/Hero Section -->
-        <section id="profile" class="parallax-section hero-section" appFadeIn>
+        <section id="profile" class="parallax-section hero-section">
           <div class="parallax-bg layer-1" appParallax [parallaxSpeed]="0.3"></div>
           <div class="parallax-bg layer-2" appParallax [parallaxSpeed]="0.5"></div>
           <div class="parallax-bg layer-3" appParallax [parallaxSpeed]="0.7"></div>
@@ -44,7 +41,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Education Section -->
-        <section id="education" class="parallax-section education-bg" appFadeIn>
+        <section id="education" class="parallax-section education-bg">
           <div class="parallax-bg layer-4" appParallax [parallaxSpeed]="0.4"></div>
           <div class="parallax-bg layer-5" appParallax [parallaxSpeed]="0.6"></div>
           <div class="section-content">
@@ -53,7 +50,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Experience Section -->
-        <section id="experience" class="parallax-section experience-bg" appFadeIn>
+        <section id="experience" class="parallax-section experience-bg">
           <div class="parallax-bg layer-6" appParallax [parallaxSpeed]="0.35"></div>
           <div class="parallax-bg layer-7" appParallax [parallaxSpeed]="0.55"></div>
           <div class="section-content">
@@ -62,7 +59,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Skills Section -->
-        <section id="skills" class="parallax-section skills-bg" appFadeIn>
+        <section id="skills" class="parallax-section skills-bg">
           <div class="parallax-bg layer-8" appParallax [parallaxSpeed]="0.45"></div>
           <div class="parallax-bg layer-9" appParallax [parallaxSpeed]="0.65"></div>
           <div class="section-content">
@@ -71,7 +68,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Projects Section -->
-        <section id="projects" class="parallax-section projects-bg" appFadeIn>
+        <section id="projects" class="parallax-section projects-bg">
           <div class="parallax-bg layer-10" appParallax [parallaxSpeed]="0.4"></div>
           <div class="parallax-bg layer-11" appParallax [parallaxSpeed]="0.6"></div>
           <div class="section-content">
@@ -80,7 +77,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Achievements Section -->
-        <section id="achievements" class="parallax-section achievements-bg" appFadeIn>
+        <section id="achievements" class="parallax-section achievements-bg">
           <div class="parallax-bg layer-12" appParallax [parallaxSpeed]="0.5"></div>
           <div class="parallax-bg layer-13" appParallax [parallaxSpeed]="0.7"></div>
           <div class="section-content">
@@ -89,7 +86,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Certifications Section -->
-        <section id="certifications" class="parallax-section certifications-bg" appFadeIn>
+        <section id="certifications" class="parallax-section certifications-bg">
           <div class="parallax-bg layer-14" appParallax [parallaxSpeed]="0.4"></div>
           <div class="parallax-bg layer-15" appParallax [parallaxSpeed]="0.6"></div>
           <div class="section-content">
@@ -98,7 +95,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         </section>
         
         <!-- Contact Section -->
-        <section id="contact" class="parallax-section contact-bg" appFadeIn>
+        <section id="contact" class="parallax-section contact-bg">
           <div class="parallax-bg layer-16" appParallax [parallaxSpeed]="0.35"></div>
           <div class="parallax-bg layer-17" appParallax [parallaxSpeed]="0.55"></div>
           <div class="section-content">

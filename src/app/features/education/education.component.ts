@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { ChipModule } from 'primeng/chip';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-education',
-  imports: [CommonModule, CardModule, ChipModule, FadeInDirective],
+  imports: [CommonModule, CardModule, ChipModule],
   template: `
     <div class="education-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-book section-icon"></i>
           Education
@@ -19,7 +17,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       </div>
       
       @if (education().length > 0) {
-        <div class="education-grid" appFadeIn>
+        <div class="education-grid">
           @for (edu of education(); track edu.id; let i = $index) {
             <p-card class="education-card" [style.--card-color]="getCardColor(i)">
               <ng-template pTemplate="header">

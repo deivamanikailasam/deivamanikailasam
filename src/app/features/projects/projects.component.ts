@@ -7,7 +7,6 @@ import { ChipModule } from 'primeng/chip';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { TagModule } from 'primeng/tag';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
 import { Project } from '../../core/models/portfolio.interface';
 
 @Component({
@@ -19,12 +18,11 @@ import { Project } from '../../core/models/portfolio.interface';
     ChipModule, 
     ButtonModule, 
     DialogModule,
-    TagModule,
-    FadeInDirective
+    TagModule
   ],
   template: `
     <div class="projects-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-folder section-icon"></i>
           Featured Projects
@@ -33,7 +31,7 @@ import { Project } from '../../core/models/portfolio.interface';
       </div>
       
       @if (projects().length > 0) {
-        <div class="projects-grid" appFadeIn>
+        <div class="projects-grid">
           @for (project of projects(); track project.id) {
             <p-card class="project-card" [style.--project-color]="getProjectColor($index)">
               <ng-template pTemplate="header">

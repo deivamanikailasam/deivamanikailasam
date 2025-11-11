@@ -4,15 +4,13 @@ import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TimelineModule } from 'primeng/timeline';
 import { AccordionModule } from 'primeng/accordion';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-experience',
-  imports: [CommonModule, CardModule, TimelineModule, AccordionModule, FadeInDirective],
+  imports: [CommonModule, CardModule, TimelineModule, AccordionModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="experience-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-briefcase section-icon"></i>
           Professional Experience
@@ -479,60 +477,139 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     
     // Tablet styles - single-sided timeline
     @media (min-width: 768px) and (max-width: 991.98px) {
+      .experience-container {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
+      }
+      
+      .section-header {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      .section-header * {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
       .section-title {
         font-size: clamp(2rem, 5vw, 3.5rem);
         flex-direction: column;
         gap: 0.75rem;
+        display: flex !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .section-icon {
         font-size: clamp(2rem, 5vw, 3rem);
+        display: inline-block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .section-subtitle {
         font-size: clamp(1rem, 2.5vw, 1.25rem);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .desktop-view {
-        display: block;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .mobile-view {
-        display: none;
+        display: none !important;
       }
       
       .timeline-wrapper {
         max-width: 100%;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       ::ng-deep .custom-timeline {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        
+        .p-timeline {
+          display: block !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+        
+        .p-timeline-event {
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+        
         .p-timeline-event-opposite {
           display: none;
         }
         
         .p-timeline-event-content {
           padding: 0 0 0 1.5rem;
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+        
+        .p-timeline-event-marker {
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
+        }
+        
+        .p-timeline-event-separator {
+          display: flex !important;
+          visibility: visible !important;
+          opacity: 1 !important;
         }
       }
       
       .timeline-card {
         width: 100%;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .card-header-gradient {
         padding: 1.5rem;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .card-body {
         padding: 1.5rem;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .position-title {
         font-size: clamp(1.5rem, 3vw, 1.75rem);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
       
       .company-name {
         font-size: clamp(1.1rem, 2.5vw, 1.25rem);
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
     }
     
@@ -899,10 +976,33 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
     @media (max-width: 991.98px) and (orientation: landscape) {
       .experience-container {
         padding: 2rem 1rem;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        width: 100% !important;
       }
       
       .section-header {
         margin-bottom: 2rem;
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      .desktop-view {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+      }
+      
+      .mobile-view {
+        display: none !important;
+      }
+      
+      .timeline-wrapper {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
       }
     }
   `]

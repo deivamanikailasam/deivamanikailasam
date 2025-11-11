@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-achievements',
-  imports: [CommonModule, CardModule, TagModule, FadeInDirective],
+  imports: [CommonModule, CardModule, TagModule],
   template: `
     <div class="achievements-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-trophy section-icon"></i>
           Achievements
@@ -19,7 +17,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       </div>
       
       @if (achievements().length > 0) {
-        <div class="achievements-grid" appFadeIn>
+        <div class="achievements-grid">
           @for (achievement of achievements(); track achievement.id; let i = $index) {
             <p-card class="achievement-card" [style.--achievement-color]="getAchievementColor(i)">
               <div class="card-content">

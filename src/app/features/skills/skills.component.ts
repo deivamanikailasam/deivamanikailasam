@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-skills',
-  imports: [CommonModule, CardModule, TagModule, FadeInDirective],
+  imports: [CommonModule, CardModule, TagModule],
   template: `
     <div class="skills-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-star section-icon"></i>
           Skills & Expertise
@@ -463,20 +461,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         padding: 1.5rem 0.75rem;
       }
       
-      // Ensure section header is visible even if fade-in doesn't work
       .section-header {
         margin-bottom: 2rem;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        display: block !important;
-      }
-      
-      // Ensure all content inside section header is visible
-      .section-header * {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
       }
       
       .section-title {
@@ -559,20 +545,8 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
         overflow-x: hidden;
       }
       
-      // Ensure section header is visible even if fade-in doesn't work
       .section-header {
         margin-bottom: 1.5rem;
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
-        display: block !important;
-      }
-      
-      // Ensure all content inside section header is visible
-      .section-header * {
-        opacity: 1 !important;
-        visibility: visible !important;
-        transform: translateY(0) !important;
       }
       
       .section-title {

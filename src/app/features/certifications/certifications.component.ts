@@ -3,14 +3,12 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
-import { FadeInDirective } from '../../shared/directives/fade-in.directive';
-
 @Component({
   selector: 'app-certifications',
-  imports: [CommonModule, CardModule, TagModule, FadeInDirective],
+  imports: [CommonModule, CardModule, TagModule],
   template: `
     <div class="certifications-container">
-      <div class="section-header" appFadeIn>
+      <div class="section-header">
         <h2 class="section-title">
           <i class="pi pi-certificate section-icon"></i>
           Certifications
@@ -19,7 +17,7 @@ import { FadeInDirective } from '../../shared/directives/fade-in.directive';
       </div>
       
       @if (certifications().length > 0) {
-        <div class="certifications-grid" appFadeIn>
+        <div class="certifications-grid">
           @for (cert of certifications(); track cert.id; let i = $index) {
             <p-card class="certification-card" [style.--cert-color]="getCertColor(i)">
               <ng-template pTemplate="header">
