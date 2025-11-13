@@ -1,12 +1,11 @@
-import { Component, OnInit, OnDestroy, computed, signal, PLATFORM_ID, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
+import { Component, OnInit, OnDestroy, computed, signal, effect, PLATFORM_ID, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TimelineModule } from 'primeng/timeline';
-import { AccordionModule } from 'primeng/accordion';
 @Component({
   selector: 'app-experience',
-  imports: [CommonModule, CardModule, TimelineModule, AccordionModule],
+  imports: [CommonModule, CardModule, TimelineModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
   template: `
     <div class="experience-container">
@@ -23,40 +22,67 @@ import { AccordionModule } from 'primeng/accordion';
         <div class="timeline-wrapper desktop-view">
           <p-timeline [value]="timelineEvents()" [align]="timelineAlign()" layout="vertical" styleClass="custom-timeline">
             <ng-template pTemplate="content" let-event>
-              <p-card class="timeline-card">
+              <p-card 
+                class="timeline-card"
+                [class.collapsed-card]="isCardCollapsed(event.id)">
                 <ng-template pTemplate="header">
                   <div class="card-header-gradient" [style.background]="getGradientForIndex(event.index)">
                     <div class="card-header-content">
-                      <h3 class="position-title">{{ event.position }}</h3>
-                      <span class="company-name">{{ event.company }}</span>
+                      <div class="card-header-main">
+                        <div class="card-header-text">
+                          <h3 class="position-title">{{ event.position }}</h3>
+                          <span class="company-name">{{ event.company }}</span>
+                        </div>
+                        <button 
+                          type="button"
+                          class="collapse-toggle"
+                          (click)="toggleCard(event.id)"
+                          [attr.aria-expanded]="!isCardCollapsed(event.id)"
+                          [attr.title]="isCardCollapsed(event.id) ? 'Show Details' : 'Hide Details'"
+                          [attr.aria-label]="isCardCollapsed(event.id) ? 'Show Details' : 'Hide Details'">
+                          <div class="double-arrow" [class.collapsed]="isCardCollapsed(event.id)">
+                            @if (isCardCollapsed(event.id)) {
+                              <i class="pi pi-chevron-down arrow-icon arrow-1"></i>
+                              <i class="pi pi-chevron-down arrow-icon arrow-2"></i>
+                            } @else {
+                              <i class="pi pi-chevron-up arrow-icon arrow-1"></i>
+                              <i class="pi pi-chevron-up arrow-icon arrow-2"></i>
+                            }
+                          </div>
+                        </button>
+                      </div>
+                      <div class="date-range-header">
+                        <i class="pi pi-calendar date-icon"></i>
+                        <span>
+                          {{ formatDate(event.startDate) }} - 
+                          @if (event.current) {
+                            <span class="badge-current">Present</span>
+                          } @else if (event.endDate) {
+                            {{ formatDate(event.endDate) }}
+                          }
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </ng-template>
-                <div class="card-body">
-                  <div class="date-range">
-                    <i class="pi pi-calendar" [style.color]="getGradientColorForIcon(event.index)"></i>
-                    <span>
-                      {{ formatDate(event.startDate) }} - 
-                      @if (event.current) {
-                        <span class="badge-current">Present</span>
-                      } @else if (event.endDate) {
-                        {{ formatDate(event.endDate) }}
-                      }
-                    </span>
+                @if (isArray(event.description)) {
+                  <div class="description-list">
+                    @for (desc of event.description; track $index) {
+                      <div class="description-item">
+                        <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
+                        <span class="description-text">{{ desc }}</span>
+                      </div>
+                    }
                   </div>
-                  @if (isArray(event.description)) {
-                    <div class="description-list">
-                      @for (desc of event.description; track $index) {
-                        <div class="description-item">
-                          <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
-                          <span class="description-text">{{ desc }}</span>
-                        </div>
-                      }
-                    </div>
-                  } @else {
-                    <p class="description">{{ event.description }}</p>
-                  }
-                </div>
+                } @else {
+                  <p class="description">{{ event.description }}</p>
+                }
+                <ng-template pTemplate="footer">
+                  <div 
+                    class="card-footer" 
+                    [style.background]="getGradientForIndex(event.index)"
+                    [class.hidden]="!isCardCollapsed(event.id)"></div>
+                </ng-template>
               </p-card>
             </ng-template>
             <ng-template pTemplate="marker" let-event>
@@ -67,28 +93,40 @@ import { AccordionModule } from 'primeng/accordion';
           </p-timeline>
         </div>
         
-        <!-- Mobile Accordion View -->
-        <div class="mobile-accordion-wrapper mobile-view">
-          <p-accordion [multiple]="false" styleClass="experience-accordion">
-            @for (event of timelineEvents(); track event.id) {
-              <p-accordionPanel>
-                <p-accordionHeader>
-                  <div class="accordion-header-wrapper">
-                    <div class="accordion-header">
-                      <div class="accordion-icon" [style.background]="getGradientForIndex(event.index)">
-                        <i class="pi pi-briefcase"></i>
+        <!-- Mobile Card View -->
+        <div class="mobile-cards-wrapper mobile-view">
+          @for (event of timelineEvents(); track event.id) {
+            <p-card 
+              class="mobile-timeline-card"
+              [class.collapsed-card]="isCardCollapsed(event.id)">
+              <ng-template pTemplate="header">
+                <div class="card-header-gradient" [style.background]="getGradientForIndex(event.index)">
+                  <div class="card-header-content">
+                    <div class="card-header-main">
+                      <div class="card-header-text">
+                        <h3 class="position-title">{{ event.position }}</h3>
+                        <span class="company-name">{{ event.company }}</span>
                       </div>
-                      <div class="accordion-header-content">
-                        <h3 class="accordion-position-title">{{ event.position }}</h3>
-                        <span class="accordion-company-name">{{ event.company }}</span>
-                      </div>
+                      <button 
+                        type="button"
+                        class="collapse-toggle"
+                        (click)="toggleCard(event.id)"
+                        [attr.aria-expanded]="!isCardCollapsed(event.id)"
+                        [attr.title]="isCardCollapsed(event.id) ? 'Show Details' : 'Hide Details'"
+                        [attr.aria-label]="isCardCollapsed(event.id) ? 'Show Details' : 'Hide Details'">
+                        <div class="double-arrow" [class.collapsed]="isCardCollapsed(event.id)">
+                          @if (isCardCollapsed(event.id)) {
+                            <i class="pi pi-chevron-down arrow-icon arrow-1"></i>
+                            <i class="pi pi-chevron-down arrow-icon arrow-2"></i>
+                          } @else {
+                            <i class="pi pi-chevron-up arrow-icon arrow-1"></i>
+                            <i class="pi pi-chevron-up arrow-icon arrow-2"></i>
+                          }
+                        </div>
+                      </button>
                     </div>
-                  </div>
-                </p-accordionHeader>
-                <p-accordionContent>
-                  <div class="accordion-content">
-                    <div class="date-range">
-                      <i class="pi pi-calendar" [style.color]="getGradientColorForIcon(event.index)"></i>
+                    <div class="date-range-header">
+                      <i class="pi pi-calendar date-icon"></i>
                       <span>
                         {{ formatDate(event.startDate) }} - 
                         @if (event.current) {
@@ -98,23 +136,29 @@ import { AccordionModule } from 'primeng/accordion';
                         }
                       </span>
                     </div>
-                    @if (isArray(event.description)) {
-                      <div class="description-list">
-                        @for (desc of event.description; track $index) {
-                          <div class="description-item">
-                            <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
-                            <span class="description-text">{{ desc }}</span>
-                          </div>
-                        }
-                      </div>
-                    } @else {
-                      <p class="description">{{ event.description }}</p>
-                    }
                   </div>
-                </p-accordionContent>
-              </p-accordionPanel>
-            }
-          </p-accordion>
+                </div>
+              </ng-template>
+              @if (isArray(event.description)) {
+                <div class="description-list">
+                  @for (desc of event.description; track $index) {
+                    <div class="description-item">
+                      <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
+                      <span class="description-text">{{ desc }}</span>
+                    </div>
+                  }
+                </div>
+              } @else {
+                <p class="description">{{ event.description }}</p>
+              }
+              <ng-template pTemplate="footer">
+                <div 
+                  class="card-footer" 
+                  [style.background]="getGradientForIndex(event.index)"
+                  [class.hidden]="!isCardCollapsed(event.id)"></div>
+              </ng-template>
+            </p-card>
+          }
         </div>
       } @else {
         <div class="empty-state">
@@ -271,6 +315,19 @@ import { AccordionModule } from 'primeng/accordion';
       z-index: 1;
       text-align: left;
     }
+
+    .card-header-main {
+      display: flex;
+      justify-content: space-between;
+      align-items: flex-start;
+      gap: 1rem;
+      margin-bottom: 1rem;
+    }
+
+    .card-header-text {
+      flex: 1;
+      min-width: 0;
+    }
     
     .position-title {
       font-size: 1.75rem;
@@ -285,34 +342,177 @@ import { AccordionModule } from 'primeng/accordion';
       color: rgba(255, 255, 255, 0.9);
       font-weight: 500;
     }
-    
-    .card-body {
-      padding: 2rem;
+
+    .collapse-toggle {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
     }
-    
-    .date-range {
+
+    .double-arrow {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .arrow-icon {
+      color: white;
+      font-size: 1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .double-arrow:not(.collapsed) .arrow-icon {
+      animation: arrow-bounce 2s ease-in-out infinite;
+
+      &.arrow-1 {
+        animation-delay: 0s;
+      }
+
+      &.arrow-2 {
+        animation-delay: 0.15s;
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes arrow-bounce {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(4px);
+        opacity: 0.85;
+      }
+    }
+
+    .date-range-header {
       display: flex;
       align-items: center;
       gap: 0.75rem;
-      color: rgba(255, 255, 255, 0.7);
-      margin-bottom: 1.5rem;
+      color: rgba(255, 255, 255, 0.9);
       font-size: 1rem;
+      padding-top: 0.75rem;
+      border-top: 1px solid rgba(255, 255, 255, 0.2);
       
-      i {
+      .date-icon {
         font-size: 1.25rem;
         flex-shrink: 0;
+        color: white;
+        text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      }
+    }
+    
+    ::ng-deep .timeline-card,
+    ::ng-deep .mobile-timeline-card {
+      &.collapsed-card .p-card-body {
+        max-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 0;
+        overflow: hidden;
+        animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:not(.collapsed-card) .p-card-body {
+        padding: 2rem !important;
+        max-height: 5000px;
+        opacity: 1;
+        overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    .card-footer {
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+      max-height: 100px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        opacity: 0.8;
+        filter: blur(20px);
+      }
+
+      &.hidden {
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
       }
     }
     
     .badge-current {
-      background: linear-gradient(135deg, #43e97b, #38f9d7);
-      color: #1a1a1a;
+      background: rgba(255, 255, 255, 0.2);
+      color: white;
       padding: 0.35rem 1rem;
       border-radius: 1rem;
       font-weight: 700;
       font-size: 0.9rem;
       margin-left: 0.5rem;
-      box-shadow: 0 4px 15px rgba(67, 233, 123, 0.4);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+      backdrop-filter: blur(10px);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
     
     .description {
@@ -590,12 +790,30 @@ import { AccordionModule } from 'primeng/accordion';
         visibility: visible !important;
         opacity: 1 !important;
       }
+
+      .card-header-main {
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .collapse-toggle {
+        width: 42px;
+        height: 42px;
+      }
+
+      .double-arrow {
+        width: 20px;
+        height: 20px;
+      }
+
+      .arrow-icon {
+        font-size: 0.9rem;
+      }
       
-      .card-body {
-        padding: 1.5rem;
-        display: block !important;
-        visibility: visible !important;
-        opacity: 1 !important;
+      ::ng-deep .timeline-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.5rem !important;
+        }
       }
       
       .position-title {
@@ -613,211 +831,33 @@ import { AccordionModule } from 'primeng/accordion';
       }
     }
     
-    // Mobile Accordion Styles
-    .mobile-accordion-wrapper {
+    // Mobile Card Styles
+    .mobile-cards-wrapper {
+      display: flex;
+      flex-direction: column;
+      gap: 1.5rem;
       width: 100%;
       max-width: 100%;
       padding: 0.5rem 0;
     }
-    
-    ::ng-deep .experience-accordion {
-      .p-accordion-panel {
-        margin-bottom: 1.5rem;
-        border-radius: 1.25rem;
-        overflow: hidden;
-        background: rgba(255, 255, 255, 0.03);
-        border: 1px solid rgba(255, 255, 255, 0.1);
-        backdrop-filter: blur(10px);
-        transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
-        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
-        
-        &:hover {
-          border-color: rgba(79, 172, 254, 0.4);
-          box-shadow: 0 8px 30px rgba(79, 172, 254, 0.2);
-          transform: translateY(-2px);
-        }
-        
-        &[data-p-active="true"] {
-          border-color: rgba(79, 172, 254, 0.6);
-          box-shadow: 0 8px 35px rgba(79, 172, 254, 0.3);
-        }
-      }
-      
-      p-accordion-header,
-      .p-accordion-header {
-        padding: 0;
-        cursor: pointer;
-        background: linear-gradient(135deg, rgba(79, 172, 254, 0.1), rgba(0, 242, 254, 0.1));
-        border-bottom: 2px solid rgba(79, 172, 254, 0.2);
-        transition: all 0.3s ease;
-        position: relative;
-        overflow: hidden;
-        
-        &::before {
-          content: '';
-          position: absolute;
-          top: 0;
-          left: -100%;
-          width: 100%;
-          height: 100%;
-          background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.1), transparent);
-          transition: left 0.5s ease;
-        }
-        
-        &:hover {
-          background: linear-gradient(135deg, rgba(79, 172, 254, 0.15), rgba(0, 242, 254, 0.15));
-          border-bottom-color: rgba(79, 172, 254, 0.4);
-          
-          &::before {
-            left: 100%;
-          }
-        }
-        
-        &[data-p-active="true"] {
-          background: linear-gradient(135deg, rgba(79, 172, 254, 0.2), rgba(0, 242, 254, 0.2));
-          border-bottom-color: rgba(79, 172, 254, 0.5);
-        }
-        
-        // Ensure all content inside header is visible
-        .accordion-header-wrapper {
-          display: block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          width: 100%;
-          padding: 1.5rem;
-          position: relative;
-          z-index: 1;
-        }
-        
-        .accordion-header {
-          display: flex !important;
-          align-items: center;
-          gap: 1.25rem;
-          width: 100%;
-          flex: 1;
-          visibility: visible !important;
-          opacity: 1 !important;
-        }
-        
-        .accordion-header-content {
-          display: flex !important;
-          flex-direction: column;
-          flex: 1;
-          min-width: 0;
-          visibility: visible !important;
-          opacity: 1 !important;
-          gap: 0.5rem;
-        }
-        
-        .accordion-position-title {
-          display: block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          color: white !important;
-          font-size: 1.25rem !important;
-          font-weight: 700 !important;
-          margin: 0 !important;
-          line-height: 1.4;
-          text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-        }
-        
-        .accordion-company-name {
-          display: block !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-          color: rgba(255, 255, 255, 0.85) !important;
-          font-size: 1rem !important;
-          font-weight: 500 !important;
-          margin: 0 !important;
-        }
-        
-        .accordion-icon {
-          display: flex !important;
-          visibility: visible !important;
-          opacity: 1 !important;
-        }
-      }
-      
-      p-accordion-content,
-      .p-accordion-content {
-        padding: 0;
-        background: transparent;
-        border: none;
-      }
-    }
-    
-    .accordion-header {
-      display: flex !important;
-      align-items: center;
-      gap: 1.25rem;
+
+    .mobile-timeline-card {
+      background: rgba(255, 255, 255, 0.05);
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      border-radius: 1.5rem;
+      overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.4s cubic-bezier(0.175, 0.885, 0.32, 1.275);
       width: 100%;
-      flex: 1;
-      visibility: visible !important;
-      opacity: 1 !important;
-    }
-    
-    .accordion-icon {
-      width: 56px;
-      height: 56px;
-      border-radius: 50%;
-      display: flex !important;
-      align-items: center;
-      justify-content: center;
-      color: white;
-      font-size: 1.5rem;
-      box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3), inset 0 2px 10px rgba(255, 255, 255, 0.1);
-      border: 3px solid rgba(255, 255, 255, 0.25);
-      flex-shrink: 0;
-      visibility: visible !important;
-      opacity: 1 !important;
-      transition: all 0.3s ease;
       
       &:hover {
-        transform: scale(1.05);
-        box-shadow: 0 6px 20px rgba(79, 172, 254, 0.4), inset 0 2px 10px rgba(255, 255, 255, 0.15);
+        transform: translateY(-5px) scale(1.01);
+        box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
+        border-color: rgba(79, 172, 254, 0.5);
       }
     }
     
-    .accordion-header-content {
-      flex: 1;
-      min-width: 0;
-      display: flex !important;
-      flex-direction: column;
-      visibility: visible !important;
-      opacity: 1 !important;
-      gap: 0.5rem;
-    }
-    
-    .accordion-position-title {
-      font-size: 1.25rem;
-      font-weight: 700;
-      color: white !important;
-      margin: 0 !important;
-      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
-      line-height: 1.4;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      letter-spacing: 0.02em;
-    }
-    
-    .accordion-company-name {
-      font-size: 1rem;
-      color: rgba(255, 255, 255, 0.85) !important;
-      font-weight: 500;
-      display: block !important;
-      visibility: visible !important;
-      opacity: 1 !important;
-      margin: 0 !important;
-      letter-spacing: 0.01em;
-    }
-    
-    .accordion-content {
-      padding: 1.5rem;
-      background: rgba(255, 255, 255, 0.02);
-    }
-    
-    // Show mobile accordion on mobile devices
+    // Show mobile cards on mobile devices
     @media (max-width: 767.98px) {
       .experience-container {
         display: block;
@@ -850,87 +890,80 @@ import { AccordionModule } from 'primeng/accordion';
         display: block !important;
       }
       
-      // Ensure accordion header is visible on mobile
-      ::ng-deep .experience-accordion {
-        p-accordion-header,
-        .p-accordion-header {
-          .accordion-header-wrapper,
-          .accordion-header,
-          .accordion-header-content,
-          .accordion-position-title,
-          .accordion-company-name,
-          .accordion-icon {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-          }
-          
-          .accordion-header-wrapper {
-            display: block !important;
-            width: 100%;
-          }
-          
-          .accordion-header {
-            display: flex !important;
-            align-items: center;
-            gap: 1rem;
-            width: 100%;
-          }
-          
-          .accordion-header-content {
-            display: flex !important;
-            flex-direction: column;
-            flex: 1;
-          }
-          
-          .accordion-position-title {
-            display: block !important;
-            color: white !important;
-            font-size: 1.25rem !important;
-            font-weight: 700 !important;
-            margin: 0 0 0.25rem 0 !important;
-          }
-          
-          .accordion-company-name {
-            display: block !important;
-            color: rgba(255, 255, 255, 0.8) !important;
-            font-size: 1rem !important;
-            font-weight: 500 !important;
-          }
+      .mobile-cards-wrapper {
+        gap: 1.5rem;
+        margin-bottom: 1.5rem;
+      }
+
+      .mobile-timeline-card {
+        border-radius: 1.25rem;
+        margin-bottom: 1.5rem;
+        
+        &:last-child {
+          margin-bottom: 0;
+        }
+      }
+
+      .card-header-gradient {
+        padding: 1.5rem !important;
+      }
+
+      .card-header-main {
+        gap: 0.75rem;
+        margin-bottom: 0.75rem;
+      }
+
+      .position-title {
+        font-size: clamp(1.25rem, 4vw, 1.5rem) !important;
+      }
+
+      .company-name {
+        font-size: clamp(1rem, 3vw, 1.15rem) !important;
+      }
+
+      .collapse-toggle {
+        width: 40px;
+        height: 40px;
+      }
+
+      .double-arrow {
+        width: 20px;
+        height: 20px;
+      }
+
+      .arrow-icon {
+        font-size: 0.9rem;
+      }
+
+      .date-range-header {
+        font-size: 0.9rem;
+        padding-top: 0.75rem;
+      }
+
+      ::ng-deep .mobile-timeline-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.5rem !important;
+        }
+      }
+
+      .description-text {
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+      
+      .description-item {
+        padding: 0.875rem;
+        gap: 0.875rem;
+        margin-bottom: 0.75rem;
+        border-radius: 0.5rem;
+        
+        &:last-child {
+          margin-bottom: 0;
         }
       }
       
-      .accordion-content {
-        padding: 1.25rem !important;
-        
-        .date-range {
-          font-size: 0.9rem;
-          margin-bottom: 1.25rem;
-          padding: 0.75rem;
-          background: rgba(255, 255, 255, 0.03);
-          border-radius: 0.5rem;
-          border-left: 3px solid rgba(79, 172, 254, 0.5);
-        }
-        
-        .description-text {
-          font-size: 0.9rem;
-          line-height: 1.7;
-        }
-        
-        .description-item {
-          padding: 0.875rem;
-          gap: 0.875rem;
-          margin-bottom: 0.75rem;
-          border-radius: 0.5rem;
-          
-          &:last-child {
-            margin-bottom: 0;
-          }
-        }
-        
-        .description-list {
-          gap: 0.75rem;
-        }
+      .description-list {
+        gap: 0.75rem;
       }
     }
     
@@ -1012,6 +1045,7 @@ export class ExperienceComponent implements OnInit, OnDestroy {
   private isMobile = signal(false);
   private isTablet = signal(false);
   private resizeListener?: () => void;
+  collapsedCards = signal<Set<string>>(new Set());
   
   experience = computed(() => {
     const content = this.contentService.portfolioContent();
@@ -1040,6 +1074,14 @@ export class ExperienceComponent implements OnInit, OnDestroy {
       this.resizeListener = () => this.checkDeviceSize();
       window.addEventListener('resize', this.resizeListener);
     }
+    
+    // Initialize all cards as collapsed by default when experience data is available
+    effect(() => {
+      const experience = this.experience();
+      if (experience.length > 0 && this.collapsedCards().size === 0) {
+        this.collapsedCards.set(new Set(experience.map(exp => exp.id)));
+      }
+    });
   }
   
   private checkDeviceSize(): void {
@@ -1093,5 +1135,20 @@ export class ExperienceComponent implements OnInit, OnDestroy {
 
   isArray(value: any): boolean {
     return Array.isArray(value);
+  }
+
+  toggleCard(cardId: string): void {
+    const collapsed = this.collapsedCards();
+    const newCollapsed = new Set(collapsed);
+    if (newCollapsed.has(cardId)) {
+      newCollapsed.delete(cardId);
+    } else {
+      newCollapsed.add(cardId);
+    }
+    this.collapsedCards.set(newCollapsed);
+  }
+
+  isCardCollapsed(cardId: string): boolean {
+    return this.collapsedCards().has(cardId);
   }
 }

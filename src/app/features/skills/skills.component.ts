@@ -1,4 +1,4 @@
-import { Component, OnInit, computed } from '@angular/core';
+import { Component, OnInit, computed, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
@@ -19,67 +19,94 @@ import { TagModule } from 'primeng/tag';
       @if (skills().length > 0) {
         <div class="skills-grid">
           @for (skillGroup of skills(); track skillGroup.id) {
-            <p-card class="skill-category-card" [style.--category-color]="getCategoryColor(skillGroup.color)">
+            <p-card 
+              class="skill-category-card" 
+              [class.collapsed-card]="isCardCollapsed(skillGroup.id)"
+              [style.--category-color]="getCategoryColor(skillGroup.color)"
+              [attr.data-card-id]="skillGroup.id">
               <ng-template pTemplate="header">
                 <div class="card-header" [style.background]="getCategoryGradient(skillGroup.color)">
                   <div class="header-content">
-                    <i [class]="skillGroup.icon || 'pi pi-tag'" class="category-icon"></i>
-                    <h3 class="category-title">{{ skillGroup.category }}</h3>
+                    <div class="header-text">
+                      <i [class]="skillGroup.icon || 'pi pi-tag'" class="category-icon"></i>
+                      <h3 class="category-title">{{ skillGroup.category }}</h3>
+                    </div>
+                    <button 
+                      type="button"
+                      class="collapse-toggle"
+                      (click)="toggleCard(skillGroup.id)"
+                      [attr.aria-expanded]="!isCardCollapsed(skillGroup.id)"
+                      [attr.title]="isCardCollapsed(skillGroup.id) ? 'Show skills' : 'Hide skills'"
+                      [attr.aria-label]="isCardCollapsed(skillGroup.id) ? 'Show skills' : 'Hide skills'">
+                      <div class="double-arrow" [class.collapsed]="isCardCollapsed(skillGroup.id)">
+                        @if (isCardCollapsed(skillGroup.id)) {
+                          <i class="pi pi-chevron-down arrow-icon arrow-1"></i>
+                          <i class="pi pi-chevron-down arrow-icon arrow-2"></i>
+                        } @else {
+                          <i class="pi pi-chevron-up arrow-icon arrow-1"></i>
+                          <i class="pi pi-chevron-up arrow-icon arrow-2"></i>
+                        }
+                      </div>
+                    </button>
                   </div>
                 </div>
               </ng-template>
-              <div class="card-body">
-                @if (skillGroup.subdivisions && skillGroup.subdivisions.length > 0) {
-                  @for (subdivision of skillGroup.subdivisions; track subdivision.title) {
-                    <div class="subdivision-section">
-                      <h4 class="subdivision-title">{{ subdivision.title }}</h4>
-                      <div class="skills-list">
-                        @for (skill of subdivision.items; track skill.key; let i = $index) {
-                          <div class="skill-item" [style.animation-delay]="(i * 0.05) + 's'">
-                            <div class="skill-content">
-                              @if (skill.image) {
-                                <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
-                              } @else if (skill.icon) {
-                                <i [class]="skill.icon" class="skill-icon-class"></i>
-                              } @else {
-                                <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
-                              }
-                              <span class="skill-name">{{ skill.name }}</span>
-                              <p-tag 
-                                [value]="skill.level" 
-                                [severity]="getLevelSeverity(skill.level)"
-                                [styleClass]="'skill-level-tag'"
-                              ></p-tag>
-                            </div>
+              @if (skillGroup.subdivisions && skillGroup.subdivisions.length > 0) {
+                @for (subdivision of skillGroup.subdivisions; track subdivision.title) {
+                  <div class="subdivision-section">
+                    <h4 class="subdivision-title">{{ subdivision.title }}</h4>
+                    <div class="skills-list">
+                      @for (skill of subdivision.items; track skill.key; let i = $index) {
+                        <div class="skill-item" [style.animation-delay]="(i * 0.05) + 's'">
+                          <div class="skill-content">
+                            @if (skill.image) {
+                              <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
+                            } @else if (skill.icon) {
+                              <i [class]="skill.icon" class="skill-icon-class"></i>
+                            } @else {
+                              <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
+                            }
+                            <span class="skill-name">{{ skill.name }}</span>
+                            <p-tag 
+                              [value]="skill.level" 
+                              [severity]="getLevelSeverity(skill.level)"
+                              [styleClass]="'skill-level-tag'"
+                            ></p-tag>
                           </div>
+                        </div>
+                      }
+                    </div>
+                  </div>
+                }
+              } @else if (skillGroup.items && skillGroup.items.length > 0) {
+                <div class="skills-list">
+                  @for (skill of skillGroup.items; track skill.key; let i = $index) {
+                    <div class="skill-item" [style.animation-delay]="(i * 0.05) + 's'">
+                      <div class="skill-content">
+                        @if (skill.image) {
+                          <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
+                        } @else if (skill.icon) {
+                          <i [class]="skill.icon" class="skill-icon-class"></i>
+                        } @else {
+                          <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
                         }
+                        <span class="skill-name">{{ skill.name }}</span>
+                        <p-tag 
+                          [value]="skill.level" 
+                          [severity]="getLevelSeverity(skill.level)"
+                          [styleClass]="'skill-level-tag'"
+                        ></p-tag>
                       </div>
                     </div>
                   }
-                } @else if (skillGroup.items && skillGroup.items.length > 0) {
-                  <div class="skills-list">
-                    @for (skill of skillGroup.items; track skill.key; let i = $index) {
-                      <div class="skill-item" [style.animation-delay]="(i * 0.05) + 's'">
-                        <div class="skill-content">
-                          @if (skill.image) {
-                            <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
-                          } @else if (skill.icon) {
-                            <i [class]="skill.icon" class="skill-icon-class"></i>
-                          } @else {
-                            <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
-                          }
-                          <span class="skill-name">{{ skill.name }}</span>
-                          <p-tag 
-                            [value]="skill.level" 
-                            [severity]="getLevelSeverity(skill.level)"
-                            [styleClass]="'skill-level-tag'"
-                          ></p-tag>
-                        </div>
-                      </div>
-                    }
-                  </div>
-                }
-              </div>
+                </div>
+              }
+              <ng-template pTemplate="footer">
+                <div 
+                  class="card-footer" 
+                  [style.background]="getCategoryGradient(skillGroup.color)"
+                  [class.hidden]="!isCardCollapsed(skillGroup.id)"></div>
+              </ng-template>
             </p-card>
           }
         </div>
@@ -139,6 +166,7 @@ import { TagModule } from 'primeng/tag';
       margin: 0 auto;
       width: 100%;
       box-sizing: border-box;
+      align-items: start;
     }
     
     .skill-category-card {
@@ -192,7 +220,16 @@ import { TagModule } from 'primeng/tag';
       z-index: 1;
       display: flex;
       align-items: center;
+      justify-content: space-between;
       gap: 1rem;
+    }
+
+    .header-text {
+      display: flex;
+      align-items: center;
+      gap: 1rem;
+      flex: 1;
+      min-width: 0;
     }
     
     .category-icon {
@@ -209,8 +246,145 @@ import { TagModule } from 'primeng/tag';
       text-shadow: 0 2px 10px rgba(0, 0, 0, 0.3);
     }
     
-    .card-body {
-      padding: 2rem;
+    .collapse-toggle {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .double-arrow {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .arrow-icon {
+      color: white;
+      font-size: 1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .double-arrow:not(.collapsed) .arrow-icon {
+      animation: arrow-bounce 2s ease-in-out infinite;
+
+      &.arrow-1 {
+        animation-delay: 0s;
+      }
+
+      &.arrow-2 {
+        animation-delay: 0.15s;
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes arrow-bounce {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(4px);
+        opacity: 0.85;
+      }
+    }
+
+    ::ng-deep .skill-category-card {
+      &.collapsed-card .p-card-body {
+        max-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 0;
+        overflow: hidden;
+        animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:not(.collapsed-card) .p-card-body {
+        padding: 2rem !important;
+        max-height: 5000px;
+        opacity: 1;
+        overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
+    }
+
+    .card-footer {
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+      max-height: 100px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        opacity: 0.8;
+        filter: blur(20px);
+      }
+
+      &.hidden {
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
     }
     
     .subdivision-section {
@@ -368,6 +542,24 @@ import { TagModule } from 'primeng/tag';
       .card-header {
         padding: 1.5rem;
       }
+
+      .header-content {
+        gap: 0.75rem;
+      }
+
+      .collapse-toggle {
+        width: 42px;
+        height: 42px;
+      }
+
+      .double-arrow {
+        width: 20px;
+        height: 20px;
+      }
+
+      .arrow-icon {
+        font-size: 0.9rem;
+      }
       
       .category-icon {
         font-size: clamp(2rem, 4vw, 2.5rem);
@@ -375,6 +567,12 @@ import { TagModule } from 'primeng/tag';
       
       .category-title {
         font-size: clamp(1.5rem, 3vw, 1.75rem);
+      }
+
+      ::ng-deep .skill-category-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.5rem !important;
+        }
       }
     }
     
@@ -414,9 +612,29 @@ import { TagModule } from 'primeng/tag';
       .card-header {
         padding: 1.25rem;
       }
+
+      .header-content {
+        gap: 0.75rem;
+      }
+
+      .collapse-toggle {
+        width: 40px;
+        height: 40px;
+      }
+
+      .double-arrow {
+        width: 18px;
+        height: 18px;
+      }
+
+      .arrow-icon {
+        font-size: 0.85rem;
+      }
       
-      .card-body {
-        padding: 1.5rem;
+      ::ng-deep .skill-category-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.5rem !important;
+        }
       }
       
       .category-icon {
@@ -502,8 +720,10 @@ import { TagModule } from 'primeng/tag';
         padding: 1rem;
       }
       
-      .card-body {
-        padding: 1.25rem;
+      ::ng-deep .skill-category-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.25rem !important;
+        }
       }
       
       .header-content {
@@ -588,8 +808,10 @@ import { TagModule } from 'primeng/tag';
         padding: 0.875rem;
       }
       
-      .card-body {
-        padding: 1rem;
+      ::ng-deep .skill-category-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1rem !important;
+        }
       }
       
       .header-content {
@@ -656,17 +878,43 @@ import { TagModule } from 'primeng/tag';
   `]
 })
 export class SkillsComponent implements OnInit {
+  collapsedCards = signal<Set<string>>(new Set());
+
   skills = computed(() => {
     const content = this.contentService.portfolioContent();
     return content?.skills || [];
   });
 
-  constructor(public contentService: ContentService) {}
+  constructor(public contentService: ContentService) {
+    // Initialize all cards as collapsed by default when skills data is available
+    effect(() => {
+      const skills = this.skills();
+      if (skills.length > 0 && this.collapsedCards().size === 0) {
+        this.collapsedCards.set(new Set(skills.map(skill => String(skill.id))));
+      }
+    });
+  }
 
   ngOnInit(): void {
     if (!this.contentService.portfolioContent()) {
       this.contentService.loadPortfolioContent();
     }
+  }
+
+  toggleCard(cardId: string | number): void {
+    const id = String(cardId);
+    const collapsed = this.collapsedCards();
+    const newCollapsed = new Set(collapsed);
+    if (newCollapsed.has(id)) {
+      newCollapsed.delete(id);
+    } else {
+      newCollapsed.add(id);
+    }
+    this.collapsedCards.set(newCollapsed);
+  }
+
+  isCardCollapsed(cardId: string | number): boolean {
+    return this.collapsedCards().has(String(cardId));
   }
 
   getSkillIcon(skill: string): string {

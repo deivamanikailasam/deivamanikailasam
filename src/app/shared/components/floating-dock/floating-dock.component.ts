@@ -1,4 +1,4 @@
-import { Component, inject, OnInit, signal, effect } from '@angular/core';
+import { Component, inject, OnInit, OnDestroy, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { DockModule } from 'primeng/dock';
 import { TooltipModule } from 'primeng/tooltip';
@@ -59,6 +59,7 @@ import { ThemeService } from '../../../core/services/theme.service';
         overflow: visible !important;
         clip-path: none !important;
         position: relative;
+        gap: 0.5rem;
       }
       
       .p-dock-item {
@@ -69,6 +70,7 @@ import { ThemeService } from '../../../core/services/theme.service';
         pointer-events: auto;
         contain: none !important;
         isolation: auto !important;
+        cursor: pointer;
       }
       
       .p-dock-item i {
@@ -79,120 +81,68 @@ import { ThemeService } from '../../../core/services/theme.service';
         z-index: 1;
         pointer-events: auto;
         font-size: 2rem;
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 8px rgba(102, 126, 234, 0.6));
+        color: white !important;
+        filter: drop-shadow(0 0 8px rgba(255, 255, 255, 0.5));
       }
 
-      /* Home icon - Blue to Cyan gradient */
-      .p-dock-item i[data-label="Home"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.8));
+      /* Home - Blue to Cyan gradient background */
+      .p-dock-item:has(i[data-label="Home"]) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
       }
 
-      /* Education icon - Green to Teal gradient */
-      .p-dock-item i[data-label="Education"] {
-        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(17, 153, 142, 0.8));
+      /* Education - Green to Teal gradient background */
+      .p-dock-item:has(i[data-label="Education"]) {
+        background: linear-gradient(135deg, #11998e 0%, #38ef7d 100%) !important;
       }
 
-      /* Experience icon - Orange to Red gradient */
-      .p-dock-item i[data-label="Experience"] {
-        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(245, 87, 108, 0.8));
+      /* Experience - Orange to Red gradient background */
+      .p-dock-item:has(i[data-label="Experience"]) {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%) !important;
       }
 
-      /* Skills icon - Yellow to Orange gradient */
-      .p-dock-item i[data-label="Skills"] {
-        background: linear-gradient(135deg, #fad961 0%, #f76b1c 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(247, 107, 28, 0.8));
+      /* Skills - Yellow to Orange gradient background */
+      .p-dock-item:has(i[data-label="Skills"]) {
+        background: linear-gradient(135deg, #fad961 0%, #f76b1c 100%) !important;
       }
 
-      /* Projects icon - Purple to Pink gradient */
-      .p-dock-item i[data-label="Projects"] {
-        background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(250, 112, 154, 0.8));
+      /* Projects - Purple to Blue gradient background (matching featured project section) */
+      .p-dock-item:has(i[data-label="Projects"]) {
+        background: linear-gradient(135deg, #764ba2 0%, #667eea 100%) !important;
       }
 
-      /* Achievements icon - Gold to Yellow gradient */
-      .p-dock-item i[data-label="Achievements"] {
-        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(246, 211, 101, 0.8));
+      /* Achievements - Gold to Yellow gradient background */
+      .p-dock-item:has(i[data-label="Achievements"]) {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%) !important;
       }
 
-      /* Certifications icon - Cyan to Blue gradient */
-      .p-dock-item i[data-label="Certifications"] {
-        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(79, 172, 254, 0.8));
-      }
-
-      /* Contact icon - Indigo to Purple gradient */
-      .p-dock-item i[data-label="Contact"] {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(118, 75, 162, 0.8));
+      /* Certifications - Cyan to Blue gradient background */
+      .p-dock-item:has(i[data-label="Certifications"]) {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%) !important;
       }
 
       /* Theme toggle icons - Dynamic gradient */
-      .p-dock-item i.pi-sun {
-        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(246, 211, 101, 0.8));
+      .p-dock-item:has(i.pi-sun) {
+        background: linear-gradient(135deg, #f6d365 0%, #fda085 100%) !important;
       }
 
-      .p-dock-item i.pi-moon {
-        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
-        background-clip: text;
-        filter: drop-shadow(0 0 10px rgba(102, 126, 234, 0.8));
+      .p-dock-item:has(i.pi-moon) {
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%) !important;
       }
       
       .p-dock-item:hover {
         z-index: 10000 !important;
         overflow: visible !important;
         clip-path: none !important;
-        // transform: translateY(0) !important;
         position: relative !important;
         contain: none !important;
         isolation: auto !important;
+        transform: translateY(-20px) !important;
       }
       
       .p-dock-item:hover i {
-        position: absolute !important;
-        left: 10px !important;
-        bottom: 50% !important;
-        transform: scale(2) !important;
-        z-index: 10001 !important;
-        pointer-events: auto !important;
-        filter: drop-shadow(0 0 20px currentColor) !important;
+        position: relative !important;
+        color: white !important;
+        filter: drop-shadow(0 0 20px rgba(255, 255, 255, 0.8)) !important;
       }
       
       /* Ensure all parent containers don't clip */
@@ -269,8 +219,11 @@ import { ThemeService } from '../../../core/services/theme.service';
           transition: all 0.3s ease;
         }
         
-        .p-dock-item:active i {
+        .p-dock-item:active {
           transform: scale(0.9);
+        }
+        
+        .p-dock-item:active i {
           background: rgba(255, 255, 255, 0.1);
         }
       }
@@ -345,15 +298,22 @@ import { ThemeService } from '../../../core/services/theme.service';
           justify-content: center;
         }
         
+        .p-dock-item:hover {
+          transform: scale(1.2) !important;
+        }
+        
         .p-dock-item:hover i,
         .p-dock-item:focus i {
-          transform: scale(1.2) !important;
+          color: white !important;
           background: rgba(255, 255, 255, 0.15);
           border-radius: 50%;
         }
         
-        .p-dock-item:active i {
+        .p-dock-item:active {
           transform: scale(0.95) !important;
+        }
+        
+        .p-dock-item:active i {
           background: rgba(255, 255, 255, 0.2);
         }
       }
@@ -401,12 +361,15 @@ import { ThemeService } from '../../../core/services/theme.service';
     // Touch device optimizations
     @media (hover: none) and (pointer: coarse) {
       :host ::ng-deep {
-        .p-dock-item:hover i {
+        .p-dock-item:hover {
           transform: none !important;
         }
         
-        .p-dock-item:active i {
+        .p-dock-item:active {
           transform: scale(0.9) !important;
+        }
+        
+        .p-dock-item:active i {
           background: rgba(255, 255, 255, 0.2);
         }
       }
@@ -416,22 +379,21 @@ import { ThemeService } from '../../../core/services/theme.service';
     @media (-webkit-min-device-pixel-ratio: 2), (min-resolution: 192dpi) {
       :host ::ng-deep {
         .p-dock-item i {
-          filter: drop-shadow(0 0 4px rgba(102, 126, 234, 0.6));
+          filter: drop-shadow(0 0 4px rgba(255, 255, 255, 0.5));
         }
       }
     }
   `]
 })
-export class FloatingDockComponent implements OnInit {
+export class FloatingDockComponent implements OnInit, OnDestroy {
   private scrollSpyService = inject(ScrollSpyService);
   private themeService = inject(ThemeService);
   
   items = signal<MenuItem[]>([]);
   
   constructor() {
-    // Update items when active section or theme changes
+    // Update items when theme changes
     effect(() => {
-      this.scrollSpyService.activeSection();
       this.themeService.themeMode();
       this.updateItems();
     });
@@ -441,11 +403,12 @@ export class FloatingDockComponent implements OnInit {
     this.updateItems();
   }
   
+  ngOnDestroy(): void {
+    // Cleanup if needed
+  }
+  
   private updateItems(): void {
-    const activeSection = this.scrollSpyService.activeSection();
-    const isDark = this.themeService.themeMode() === 'dark';
-    
-    this.items.set([
+    const newItems: MenuItem[] = [
       {
         label: 'Home',
         icon: 'pi pi-home',
@@ -480,13 +443,10 @@ export class FloatingDockComponent implements OnInit {
         label: 'Certifications',
         icon: 'pi pi-id-card',
         command: () => this.scrollToSection('certifications')
-      },
-      {
-        label: 'Contact',
-        icon: 'pi pi-envelope',
-        command: () => this.scrollToSection('contact')
       }
-    ]);
+    ];
+    
+    this.items.set([...newItems]);
   }
 
   handleItemClick(item: MenuItem): void {

@@ -9,7 +9,6 @@ import { SkillsComponent } from '../skills/skills.component';
 import { ProjectsComponent } from '../projects/projects.component';
 import { AchievementsComponent } from '../achievements/achievements.component';
 import { CertificationsComponent } from '../certifications/certifications.component';
-import { ContactComponent} from '../contact/contact.component';
 import { ParallaxDirective } from '../../shared/directives/parallax.directive';
 @Component({
   selector: 'app-home',
@@ -23,7 +22,6 @@ import { ParallaxDirective } from '../../shared/directives/parallax.directive';
     ProjectsComponent,
     AchievementsComponent,
     CertificationsComponent,
-    ContactComponent,
     ParallaxDirective
   ],
   template: `
@@ -91,15 +89,6 @@ import { ParallaxDirective } from '../../shared/directives/parallax.directive';
           <div class="parallax-bg layer-15" appParallax [parallaxSpeed]="0.6"></div>
           <div class="section-content">
             <app-certifications></app-certifications>
-          </div>
-        </section>
-        
-        <!-- Contact Section -->
-        <section id="contact" class="parallax-section contact-bg">
-          <div class="parallax-bg layer-16" appParallax [parallaxSpeed]="0.35"></div>
-          <div class="parallax-bg layer-17" appParallax [parallaxSpeed]="0.55"></div>
-          <div class="section-content">
-            <app-contact></app-contact>
           </div>
         </section>
       </div>
@@ -347,10 +336,6 @@ import { ParallaxDirective } from '../../shared/directives/parallax.directive';
     
     .certifications-bg {
       background: linear-gradient(180deg, #0a0a0a 0%, #0a1a1a 50%, #0a0a0a 100%);
-    }
-    
-    .contact-bg {
-      background: linear-gradient(180deg, #0a0a0a 0%, #1a0a0a 50%, #0a0a0a 100%);
     }
     
     // Responsive Design

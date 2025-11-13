@@ -1,4 +1,4 @@
-import { Component, OnInit, computed } from '@angular/core';
+import { Component, OnInit, computed, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
@@ -19,7 +19,10 @@ import { ChipModule } from 'primeng/chip';
       @if (education().length > 0) {
         <div class="education-grid">
           @for (edu of education(); track edu.id; let i = $index) {
-            <p-card class="education-card" [style.--card-color]="getCardColor(i)">
+            <p-card 
+              class="education-card" 
+              [style.--card-color]="getCardColor(i)"
+              [class.collapsed-card]="isCardCollapsed(edu.id)">
               <ng-template pTemplate="header">
                 <div class="card-header-gradient" [style.background]="getCardGradient(i)">
                   <div class="header-content">
@@ -30,38 +33,59 @@ import { ChipModule } from 'primeng/chip';
                       <h3 class="degree-title">{{ edu.position }}</h3>
                       <p class="institution-name">{{ edu.company }}</p>
                     </div>
+                    <button 
+                      type="button"
+                      class="collapse-toggle"
+                      (click)="toggleCard(edu.id)"
+                      [attr.aria-expanded]="!isCardCollapsed(edu.id)"
+                      [attr.title]="isCardCollapsed(edu.id) ? 'Show Details' : 'Hide Details'"
+                      [attr.aria-label]="isCardCollapsed(edu.id) ? 'Show Details' : 'Hide Details'">
+                      <div class="double-arrow" [class.collapsed]="isCardCollapsed(edu.id)">
+                        @if (isCardCollapsed(edu.id)) {
+                          <i class="pi pi-chevron-down arrow-icon arrow-1"></i>
+                          <i class="pi pi-chevron-down arrow-icon arrow-2"></i>
+                        } @else {
+                          <i class="pi pi-chevron-up arrow-icon arrow-1"></i>
+                          <i class="pi pi-chevron-up arrow-icon arrow-2"></i>
+                        }
+                      </div>
+                    </button>
                   </div>
                 </div>
               </ng-template>
-              <div class="card-body">
-                <div class="education-period">
-                  <i class="pi pi-calendar"></i>
-                  <span>
-                    {{ formatDate(edu.startDate) }} - 
-                    @if (edu.endDate) {
-                      {{ formatDate(edu.endDate) }}
-                    } @else {
-                      <span class="badge-ongoing">Ongoing</span>
-                    }
-                  </span>
-                </div>
-                @if (edu.description) {
-                  <p class="education-description">{{ edu.description }}</p>
-                }
-                @if (edu.technologies && edu.technologies.length > 0) {
-                  <div class="education-tech">
-                    <div class="tech-label">
-                      <i class="pi pi-code"></i>
-                      Related Technologies:
-                    </div>
-                    <div class="tech-chips">
-                      @for (tech of edu.technologies; track tech) {
-                        <p-chip [label]="tech" styleClass="tech-chip"></p-chip>
-                      }
-                    </div>
-                  </div>
-                }
+              <div class="education-period">
+                <i class="pi pi-calendar"></i>
+                <span>
+                  {{ formatDate(edu.startDate) }} - 
+                  @if (edu.endDate) {
+                    {{ formatDate(edu.endDate) }}
+                  } @else {
+                    <span class="badge-ongoing">Ongoing</span>
+                  }
+                </span>
               </div>
+              @if (edu.description) {
+                <p class="education-description">{{ edu.description }}</p>
+              }
+              @if (edu.technologies && edu.technologies.length > 0) {
+                <div class="education-tech">
+                  <div class="tech-label">
+                    <i class="pi pi-code"></i>
+                    Related Technologies:
+                  </div>
+                  <div class="tech-chips">
+                    @for (tech of edu.technologies; track tech) {
+                      <p-chip [label]="tech" styleClass="tech-chip"></p-chip>
+                    }
+                  </div>
+                </div>
+              }
+              <ng-template pTemplate="footer">
+                <div 
+                  class="card-footer" 
+                  [style.background]="getCardGradient(i)"
+                  [class.hidden]="!isCardCollapsed(edu.id)"></div>
+              </ng-template>
             </p-card>
           }
         </div>
@@ -116,6 +140,7 @@ import { ChipModule } from 'primeng/chip';
       gap: 2.5rem;
       max-width: 1400px;
       margin: 0 auto;
+      align-items: start;
     }
     
     .education-card {
@@ -167,6 +192,7 @@ import { ChipModule } from 'primeng/chip';
       display: flex;
       align-items: center;
       gap: 1.5rem;
+      justify-content: space-between;
     }
     
     .education-icon-wrapper {
@@ -206,8 +232,145 @@ import { ChipModule } from 'primeng/chip';
       font-weight: 500;
     }
     
-    .card-body {
-      padding: 2rem;
+    .collapse-toggle {
+      background: rgba(255, 255, 255, 0.15);
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      width: 48px;
+      height: 48px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      cursor: pointer;
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+      flex-shrink: 0;
+      backdrop-filter: blur(10px);
+      position: relative;
+      overflow: hidden;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.25);
+        border-color: rgba(255, 255, 255, 0.5);
+        transform: scale(1.1);
+        box-shadow: 0 4px 15px rgba(255, 255, 255, 0.2);
+      }
+
+      &:active {
+        transform: scale(0.95);
+      }
+    }
+
+    .double-arrow {
+      position: relative;
+      width: 24px;
+      height: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 2px;
+      transition: transform 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+
+    .arrow-icon {
+      color: white;
+      font-size: 1rem;
+      transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .double-arrow:not(.collapsed) .arrow-icon {
+      animation: arrow-bounce 2s ease-in-out infinite;
+
+      &.arrow-1 {
+        animation-delay: 0s;
+      }
+
+      &.arrow-2 {
+        animation-delay: 0.15s;
+        opacity: 0.75;
+      }
+    }
+
+    @keyframes arrow-bounce {
+      0%, 100% {
+        transform: translateY(0);
+        opacity: 1;
+      }
+      50% {
+        transform: translateY(4px);
+        opacity: 0.85;
+      }
+    }
+
+    ::ng-deep .education-card {
+      &.collapsed-card .p-card-body {
+        max-height: 0 !important;
+        padding: 0 !important;
+        margin: 0 !important;
+        opacity: 0;
+        overflow: hidden;
+        animation: slideUp 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+
+      &:not(.collapsed-card) .p-card-body {
+        padding: 2rem !important;
+        max-height: 5000px;
+        opacity: 1;
+        overflow: hidden;
+        transition: max-height 0.6s cubic-bezier(0.4, 0, 0.2, 1), padding 0.6s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.5s ease, margin 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+        animation: slideDown 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+      }
+    }
+
+    .card-footer {
+      padding: 1rem;
+      position: relative;
+      overflow: hidden;
+      transition: opacity 0.4s ease, max-height 0.4s ease, padding 0.4s ease, margin 0.4s ease;
+      max-height: 100px;
+      
+      &::before {
+        content: '';
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: inherit;
+        opacity: 0.8;
+        filter: blur(20px);
+      }
+
+      &.hidden {
+        max-height: 0;
+        padding: 0;
+        margin: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+    }
+
+    @keyframes slideDown {
+      from {
+        opacity: 0;
+        transform: translateY(-15px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    @keyframes slideUp {
+      from {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      to {
+        opacity: 0;
+        transform: translateY(-10px);
+      }
     }
     
     .education-period {
@@ -379,8 +542,10 @@ import { ChipModule } from 'primeng/chip';
         padding: 1.25rem;
       }
       
-      .card-body {
-        padding: 1.5rem;
+      ::ng-deep .education-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.5rem !important;
+        }
       }
       
       .education-icon-wrapper {
@@ -440,8 +605,10 @@ import { ChipModule } from 'primeng/chip';
         padding: 1rem;
       }
       
-      .card-body {
-        padding: 1.25rem;
+      ::ng-deep .education-card {
+        &:not(.collapsed-card) .p-card-body {
+          padding: 1.25rem !important;
+        }
       }
       
       .header-content {
@@ -483,17 +650,42 @@ import { ChipModule } from 'primeng/chip';
   `]
 })
 export class EducationComponent implements OnInit {
+  collapsedCards = signal<Set<string>>(new Set());
+
   education = computed(() => {
     const content = this.contentService.portfolioContent();
     return content?.education || [];
   });
 
-  constructor(public contentService: ContentService) {}
+  constructor(public contentService: ContentService) {
+    // Initialize all cards as collapsed by default when education data is available
+    effect(() => {
+      const education = this.education();
+      if (education.length > 0 && this.collapsedCards().size === 0) {
+        this.collapsedCards.set(new Set(education.map(edu => edu.id)));
+      }
+    });
+  }
 
   ngOnInit(): void {
     if (!this.contentService.portfolioContent()) {
       this.contentService.loadPortfolioContent();
     }
+  }
+
+  toggleCard(cardId: string): void {
+    const collapsed = this.collapsedCards();
+    const newCollapsed = new Set(collapsed);
+    if (newCollapsed.has(cardId)) {
+      newCollapsed.delete(cardId);
+    } else {
+      newCollapsed.add(cardId);
+    }
+    this.collapsedCards.set(newCollapsed);
+  }
+
+  isCardCollapsed(cardId: string): boolean {
+    return this.collapsedCards().has(cardId);
   }
 
   formatDate(dateString: string): string {
