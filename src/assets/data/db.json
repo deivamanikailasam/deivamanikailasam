@@ -17,13 +17,13 @@
         },
         {
           "platform": "linkedin",
-          "url": "https://linkedin.com",
+          "url": "https://www.linkedin.com/in/deivamani-k/",
           "icon": "pi pi-linkedin"
         },
         {
-          "platform": "twitter",
-          "url": "https://twitter.com",
-          "icon": "pi pi-twitter"
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@learnwithdeiva",
+          "icon": "pi pi-youtube"
         }
       ]
     },
@@ -352,7 +352,7 @@
       },
       {
         "id": "5",
-        "category": "Architecture and Design",
+        "category": "Arch & Design",
         "icon": "pi pi-sitemap",
         "color": "#fad961",
         "subdivisions": [
