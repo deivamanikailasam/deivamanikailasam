@@ -1,6 +1,8 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal, effect, inject } from '@angular/core';
 import { fromEvent } from 'rxjs';
 import { throttleTime } from 'rxjs/operators';
+import { Router, NavigationEnd } from '@angular/router';
+import { filter } from 'rxjs/operators';
 
 @Injectable({
   providedIn: 'root'
@@ -9,17 +11,71 @@ export class ScrollSpyService {
   activeSection = signal<string>('profile');
   private sections: string[] = ['profile', 'education', 'experience', 'skills', 'projects', 'achievements', 'certifications', 'contact'];
   private scrollSubscription?: any;
+  private isOnHomePage = signal<boolean>(false);
+  private router = inject(Router);
+  private routerSubscription?: any;
+  private canUpdateHash = signal<boolean>(false); // Flag to control hash updates
 
   constructor() {
-    this.setupScrollListener();
+    // Check route FIRST before setting up anything else
+    this.checkRoute();
+    
+    // Subscribe to route changes
+    this.routerSubscription = this.router.events
+      .pipe(filter(event => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.checkRoute();
+        // Reinitialize scroll listener based on route
+        this.teardownScrollListener();
+        if (this.isOnHomePage()) {
+          this.canUpdateHash.set(true);
+          this.setupScrollListener();
+        } else {
+          this.canUpdateHash.set(false);
+        }
+      });
+    
+    // Initial setup if on home page
+    if (this.isOnHomePage()) {
+      this.canUpdateHash.set(true);
+      this.setupScrollListener();
+    }
     
     effect(() => {
       const active = this.activeSection();
-      // Update URL without navigation
-      if (typeof window !== 'undefined' && window.history) {
-        window.history.replaceState(null, '', `#${active}`);
+      const isHome = this.isOnHomePage();
+      const canUpdate = this.canUpdateHash();
+      
+      // Only update URL with hash if ALL conditions are met
+      if (!canUpdate || !isHome || typeof window === 'undefined' || !window.history) {
+        return;
+      }
+      
+      const currentUrl = this.router.url;
+      const currentPath = window.location.pathname;
+      
+      // Triple check: router URL, isHome signal, and pathname must all indicate home
+      const isRouterHome = currentUrl === '/' || currentUrl === '/home' || currentUrl.startsWith('/home#') || currentUrl.startsWith('/#');
+      const isPathnameHome = currentPath === '/' || currentPath === '/home';
+      
+      if (isRouterHome && isPathnameHome) {
+        window.history.replaceState(null, '', `${currentPath}#${active}`);
       }
     });
+  }
+
+  private checkRoute(): void {
+    const url = this.router.url;
+    // Consider home page if URL is '/', '/home', or '/home#...'
+    const isHome = url === '/' || url === '/home' || url.startsWith('/home#') || url.startsWith('/#');
+    this.isOnHomePage.set(isHome);
+  }
+
+  private teardownScrollListener(): void {
+    if (this.scrollSubscription) {
+      this.scrollSubscription.unsubscribe();
+      this.scrollSubscription = undefined;
+    }
   }
 
   private setupScrollListener(): void {
@@ -55,6 +111,11 @@ export class ScrollSpyService {
   }
 
   private updateActiveSection(scrollContainer?: HTMLElement): void {
+    // Only update active section if we're on the home page
+    if (!this.isOnHomePage()) {
+      return;
+    }
+
     const scrollPosition = scrollContainer 
       ? scrollContainer.scrollTop + 200
       : window.scrollY + 200; // Offset for better detection
@@ -107,6 +168,20 @@ export class ScrollSpyService {
   }
 
   scrollToSection(section: string): void {
+    // First, navigate to home if not already there
+    if (!this.isOnHomePage()) {
+      this.router.navigate(['/home'], { fragment: section }).then(() => {
+        // After navigation, scroll to the section
+        setTimeout(() => this.scrollToElement(section), 500);
+      });
+      return;
+    }
+    
+    // If already on home page, just scroll
+    this.scrollToElement(section);
+  }
+
+  private scrollToElement(section: string): void {
     const element = document.getElementById(section);
     const scrollContainer = document.querySelector('.infinite-scroll-container') as HTMLElement;
     
@@ -135,8 +210,9 @@ export class ScrollSpyService {
   }
 
   ngOnDestroy(): void {
-    if (this.scrollSubscription) {
-      this.scrollSubscription.unsubscribe();
+    this.teardownScrollListener();
+    if (this.routerSubscription) {
+      this.routerSubscription.unsubscribe();
     }
   }
 }

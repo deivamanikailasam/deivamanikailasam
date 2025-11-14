@@ -119,11 +119,13 @@
       {
         "id": "1",
         "category": "Frontend",
+        "key": "frontend",
         "icon": "pi pi-desktop",
         "color": "#667eea",
         "subdivisions": [
           {
             "title": "Core",
+            "key": "core",
             "items": [
               { "key": "html5", "name": "HTML5", "image": "assets/images/skills/html5.png", "icon": "pi pi-code", "level": "Advanced" },
               { "key": "css3", "name": "CSS3", "image": "assets/images/skills/css3.png", "icon": "pi pi-palette", "level": "Advanced" },
@@ -133,6 +135,7 @@
           },
           {
             "title": "Frameworks",
+            "key": "frameworks",
             "items": [
               { "key": "angular", "name": "Angular (Latest)", "image": "assets/images/skills/angular.png", "icon": "pi pi-angular", "level": "Advanced" },
               { "key": "react", "name": "React JS", "image": "assets/images/skills/reactjs.png", "icon": "pi pi-atom", "level": "Intermediate" },
@@ -142,12 +145,14 @@
           },
           {
             "title": "Desktop Application development",
+            "key": "desktop-application-development",
             "items": [
               { "key": "electron", "name": "Electron", "image": "assets/images/skills/electronjs.png", "icon": "pi pi-desktop", "level": "Intermediate" }
             ]
           },
           {
             "title": "Libraries",
+            "key": "libraries",
             "items": [
               { "key": "rxjs", "name": "RxJS", "image": "assets/images/skills/rxjs.png", "icon": "pi pi-bolt", "level": "Advanced" },
               { "key": "bootstrap", "name": "Bootstrap", "image": "assets/images/skills/bootstrap.png", "icon": "pi pi-palette", "level": "Advanced" },
@@ -158,6 +163,7 @@
           },
           {
             "title": "Testing",
+            "key": "testing",
             "items": [
               { "key": "karma", "name": "Karma", "image": "assets/images/skills/karma.png", "icon": "pi pi-check-circle", "level": "Advanced" },
               { "key": "jasmine", "name": "Jasmine", "image": "assets/images/skills/jasmine.png", "icon": "pi pi-check-circle", "level": "Advanced" },
@@ -170,6 +176,7 @@
           },
           {
             "title": "Tools",
+            "key": "tools",
             "items": [
               { "key": "vscode", "name": "VS Code", "image": "assets/images/skills/vscode.png", "icon": "pi pi-code", "level": "Advanced" },
               { "key": "cursorai", "name": "CursorAI", "image": "assets/images/skills/cursorai.png", "icon": "pi pi-sparkles", "level": "Advanced" }
@@ -177,6 +184,7 @@
           },
           {
             "title": "Showcase",
+            "key": "showcase",
             "items": [
               { "key": "storybook", "name": "Storybook", "image": "assets/images/skills/storybook.png", "icon": "pi pi-book", "level": "Intermediate" }
             ]
@@ -186,11 +194,13 @@
       {
         "id": "2",
         "category": "Backend",
+        "key": "backend",
         "icon": "pi pi-server",
         "color": "#f5576c",
         "subdivisions": [
           {
             "title": "Languages",
+            "key": "languages",
             "items": [
               { "key": "java", "name": "Java", "image": "assets/images/skills/java.png", "icon": "pi pi-code", "level": "Advanced" },
               { "key": "python", "name": "Python", "image": "assets/images/skills/python.png", "icon": "pi pi-code", "level": "Intermediate" },
@@ -200,6 +210,7 @@
           },
           {
             "title": "Frameworks",
+            "key": "frameworks",
             "items": [
               { "key": "spring", "name": "Spring", "image": "assets/images/skills/spring.png", "icon": "pi pi-cog", "level": "Advanced" },
               { "key": "springboot", "name": "Spring Boot", "image": "assets/images/skills/springboot.png", "icon": "pi pi-cog", "level": "Advanced" },
@@ -208,6 +219,7 @@
           },
           {
             "title": "APIs",
+            "key": "apis",
             "items": [
               { "key": "restful", "name": "RESTful APIs", "icon": "pi pi-link", "image": "assets/images/skills/restapi.png", "level": "Advanced" },
               { "key": "soap", "name": "SOAP", "icon": "pi pi-link", "image": "assets/images/skills/soap-api.png", "level": "Intermediate" },
@@ -217,6 +229,7 @@
           },
           {
             "title": "DB",
+            "key": "db",
             "items": [
               { "key": "mysql", "name": "MySQL", "image": "assets/images/skills/mysql.png", "icon": "pi pi-database", "level": "Advanced" },
               { "key": "postgresql", "name": "PostgreSQL", "image": "assets/images/skills/postgre-sql.png", "icon": "pi pi-database", "level": "Advanced" },
@@ -226,6 +239,7 @@
           },
           {
             "title": "Integrations",
+            "key": "integrations",
             "items": [
               { "key": "oauth", "name": "OAuth", "image": "assets/images/skills/oauth.png", "icon": "pi pi-lock", "level": "Advanced" },
               { "key": "googleapis", "name": "Google APIs", "image": "assets/images/skills/google-api.png", "icon": "pi pi-globe", "level": "Advanced" },
@@ -234,6 +248,7 @@
           },
           {
             "title": "Testing",
+            "key": "testing",
             "items": [
               { "key": "junit", "name": "JUnit", "image": "assets/images/skills/junit.png", "icon": "pi pi-check-circle", "level": "Advanced" },
               { "key": "mockito", "name": "Mockito", "image": "assets/images/skills/mockito.png", "icon": "pi pi-check-circle", "level": "Intermediate" }
@@ -241,6 +256,7 @@
           },
           {
             "title": "Build",
+            "key": "build",
             "items": [
               { "key": "maven", "name": "Maven", "image": "assets/images/skills/maven.png", "icon": "pi pi-wrench", "level": "Advanced" },
               { "key": "gradle", "name": "Gradle", "image": "assets/images/skills/gradle.png", "icon": "pi pi-wrench", "level": "Intermediate" }
@@ -248,6 +264,7 @@
           },
           {
             "title": "Cache",
+            "key": "cache",
             "items": [
               { "key": "redis", "name": "Redis", "image": "assets/images/skills/redis.png", "icon": "pi pi-bolt", "level": "Advanced" },
               { "key": "memcached", "name": "Memcached", "image": "assets/images/skills/memcached.png", "icon": "pi pi-bolt", "level": "Intermediate" },
@@ -256,6 +273,7 @@
           },
           {
             "title": "Logging",
+            "key": "logging",
             "items": [
               { "key": "log4j", "name": "Log4j", "image": "assets/images/skills/log4j.png", "icon": "pi pi-file", "level": "Advanced" },
               { "key": "logback", "name": "Logback", "image": "assets/images/skills/logback.png", "icon": "pi pi-file", "level": "Advanced" }
@@ -263,12 +281,14 @@
           },
           {
             "title": "Message Brokers",
+            "key": "message-brokers",
             "items": [
               { "key": "kafka", "name": "Kafka", "image": "assets/images/skills/kafka.png", "icon": "pi pi-send", "level": "Intermediate" }
             ]
           },
           {
             "title": "Tools",
+            "key": "tools",
             "items": [
               { "key": "intellij", "name": "IntelliJ", "image": "assets/images/skills/intellij.png", "icon": "pi pi-code", "level": "Advanced" },
               { "key": "eclipse", "name": "Eclipse", "image": "assets/images/skills/eclipse.png", "icon": "pi pi-code", "level": "Intermediate" }
@@ -279,11 +299,13 @@
       {
         "id": "3",
         "category": "AI",
+        "key": "ai",
         "icon": "pi pi-sparkles",
         "color": "#4facfe",
         "subdivisions": [
           {
             "title": "Core",
+            "key": "core",
             "items": [
               { "key": "nlp", "name": "NLP", "image": "assets/images/skills/nlp.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "computervision", "name": "Computer Vision basics", "image": "assets/images/skills/computervision.png", "icon": "pi pi-eye", "level": "Beginner" },
@@ -294,12 +316,14 @@
           },
           {
             "title": "AI Automation",
+            "key": "ai-automation",
             "items": [
               { "key": "aiautomation", "name": "AI Automation (CoPilot, CursorAI)", "image": "assets/images/skills/copilot.png", "icon": "pi pi-sparkles", "level": "Advanced" }
             ]
           },
           {
             "title": "Use of Pre-built APIs",
+            "key": "use-of-pre-built-apis",
             "items": [
               { "key": "openai", "name": "OpenAI API", "image": "assets/images/skills/openai.png", "icon": "pi pi-globe", "level": "Advanced" }
             ]
@@ -309,11 +333,13 @@
       {
         "id": "4",
         "category": "DevOps and Cloud",
+        "key": "devops-and-cloud",
         "icon": "pi pi-cloud",
         "color": "#11998e",
         "subdivisions": [
           {
             "title": "Version control",
+            "key": "version-control",
             "items": [
               { "key": "git", "name": "Git (GitLab, GitHub, Bitbucket)", "image": "assets/images/skills/git.png", "icon": "pi pi-github", "level": "Advanced" },
               { "key": "gitbash", "name": "Gitbash", "image": "assets/images/skills/gitbash.png", "icon": "pi pi-terminal", "level": "Advanced" }
@@ -321,6 +347,7 @@
           },
           {
             "title": "CI/CD",
+            "key": "ci-cd",
             "items": [
               { "key": "jenkins", "name": "Jenkins", "image": "assets/images/skills/jenkins.png", "icon": "pi pi-cog", "level": "Advanced" },
               { "key": "gitlabci", "name": "GitLab CI", "image": "assets/images/skills/gitlab.png", "icon": "pi pi-github", "level": "Advanced" },
@@ -329,6 +356,7 @@
           },
           {
             "title": "Containerization and Orchestration",
+            "key": "containerization-and-orchestration",
             "items": [
               { "key": "docker", "name": "Docker", "image": "assets/images/skills/docker.png", "icon": "pi pi-box", "level": "Advanced" },
               { "key": "kubernetes", "name": "Kubernetes", "image": "assets/images/skills/kubernetes.png", "icon": "pi pi-server", "level": "Intermediate" }
@@ -336,6 +364,7 @@
           },
           {
             "title": "Cloud platforms",
+            "key": "cloud-platforms",
             "items": [
               { "key": "aws", "name": "AWS", "image": "assets/images/skills/aws.png", "icon": "pi pi-cloud", "level": "Advanced" },
               { "key": "azure", "name": "Azure", "image": "assets/images/skills/azure.png", "icon": "pi pi-cloud", "level": "Intermediate" }
@@ -343,6 +372,7 @@
           },
           {
             "title": "Code quality",
+            "key": "code-quality",
             "items": [
               { "key": "sonarqube", "name": "SonarQube", "image": "assets/images/skills/sonarqube.png", "icon": "pi pi-check-circle", "level": "Advanced" },
               { "key": "copilot", "name": "CoPilot", "image": "assets/images/skills/copilot.png", "icon": "pi pi-sparkles", "level": "Advanced" }
@@ -353,11 +383,13 @@
       {
         "id": "5",
         "category": "Arch & Design",
+        "key": "arch-design",
         "icon": "pi pi-sitemap",
         "color": "#fad961",
         "subdivisions": [
           {
             "title": "Architecture Patterns",
+            "key": "architecture-patterns",
             "items": [
               { "key": "soa", "name": "SOA (Service-Oriented Architecture)", "icon": "pi pi-sitemap", "level": "Advanced" },
               { "key": "microservices", "name": "Microservices Architecture", "icon": "pi pi-sitemap", "level": "Advanced" }
@@ -365,6 +397,7 @@
           },
           {
             "title": "Design Patterns",
+            "key": "design-patterns",
             "items": [
               { "key": "mvvm", "name": "MVVM design pattern", "icon": "pi pi-th-large", "level": "Advanced" },
               { "key": "mvc", "name": "MVC pattern", "icon": "pi pi-th-large", "level": "Advanced" }
@@ -372,6 +405,7 @@
           },
           {
             "title": "Principles",
+            "key": "principles",
             "items": [
               { "key": "solid", "name": "SOLID Principles", "icon": "pi pi-star", "level": "Advanced" },
               { "key": "reactive", "name": "Reactive Programming", "icon": "pi pi-bolt", "level": "Advanced" }
@@ -382,17 +416,20 @@
       {
         "id": "6",
         "category": "Others",
+        "key": "others",
         "icon": "pi pi-th-large",
         "color": "#fa709a",
         "subdivisions": [
           {
             "title": "Methodology",
+            "key": "methodology",
             "items": [
               { "key": "agile", "name": "Agile methodology", "image": "assets/images/skills/agile.png", "icon": "pi pi-calendar", "level": "Advanced" }
             ]
           },
           {
             "title": "Tools & Design",
+            "key": "tools-design",
             "items": [
               { "key": "wordpress", "name": "Wordpress", "image": "assets/images/skills/wordpress.png", "icon": "pi pi-globe", "level": "Intermediate" },
               { "key": "photoshop", "name": "Photoshop", "image": "assets/images/skills/photoshop.png", "icon": "pi pi-image", "level": "Intermediate" },

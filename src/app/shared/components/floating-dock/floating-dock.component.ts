@@ -5,12 +5,14 @@ import { TooltipModule } from 'primeng/tooltip';
 import { MenuItem } from 'primeng/api';
 import { ScrollSpyService } from '../../../core/services/scroll-spy.service';
 import { ThemeService } from '../../../core/services/theme.service';
+import { NavigationEnd, Router } from '@angular/router';
+import { filter, Subject, takeUntil } from 'rxjs';
 
 @Component({
   selector: 'app-floating-dock',
-  standalone: true,
   imports: [CommonModule, DockModule, TooltipModule],
   template: `
+    @if (isHome()) {
     <div class="dock-window">
       <p-dock [model]="items()" [position]="'bottom'">
         <ng-template pTemplate="item" let-item>
@@ -24,6 +26,7 @@ import { ThemeService } from '../../../core/services/theme.service';
         </ng-template>
       </p-dock>
     </div>
+    }
   `,
   styles: [`
     :host {
@@ -388,7 +391,9 @@ import { ThemeService } from '../../../core/services/theme.service';
 export class FloatingDockComponent implements OnInit, OnDestroy {
   private scrollSpyService = inject(ScrollSpyService);
   private themeService = inject(ThemeService);
-  
+  private router = inject(Router);
+  protected isHome = signal<boolean>(true);
+  private destroy$ = new Subject<void>();
   items = signal<MenuItem[]>([]);
   
   constructor() {
@@ -401,10 +406,25 @@ export class FloatingDockComponent implements OnInit, OnDestroy {
   
   ngOnInit(): void {
     this.updateItems();
+    this.checkIsHome();
+
+    this.router
+    .events
+    .pipe(filter((event: any) => event instanceof NavigationEnd), takeUntil(this.destroy$))
+    .subscribe(() => {
+      this.checkIsHome();
+    });
   }
   
   ngOnDestroy(): void {
-    // Cleanup if needed
+    this.destroy$.next();
+    this.destroy$.complete();
+  }
+
+  private checkIsHome(): void {
+    const url = this.router.url;
+    const isHome = url === '/' || url === '/home' || url.startsWith('/home#') || url.startsWith('/#');
+    this.isHome.set(isHome);
   }
   
   private updateItems(): void {

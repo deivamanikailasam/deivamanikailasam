@@ -99,12 +99,14 @@ export interface ISection {
 
   export interface SkillSubdivision {
     title: string;
+    key: string;
     items: SkillItem[];
   }
 
   export interface Skill {
     id: string;
     category: string;
+    key: string;
     subdivisions?: SkillSubdivision[];
     items?: SkillItem[]; // Keep for backward compatibility
     icon?: string;

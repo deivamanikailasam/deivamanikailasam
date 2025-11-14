@@ -18,6 +18,8 @@ export class ContentService {
   }  
   // Signals for state management
   portfolioContent = ngSignal<PortfolioContent | null>(null);
+  skillDetails = ngSignal<any>(null);
+  experienceDetails = ngSignal<any>(null);
   isLoading = ngSignal(false);
   error = ngSignal<string | null>(null);
   contentVersion = ngSignal<string>('1.0.0');
@@ -64,6 +66,28 @@ export class ContentService {
         this.error.set('Failed to load portfolio content');
         this.isLoading.set(false);
         console.error('Content loading error:', err);
+      }
+    });
+  }
+
+  loadSkillDetails(): void {
+    this.http.get<any>('assets/data/skill-details.json').subscribe({
+      next: (data) => {
+        this.skillDetails.set(data);
+      },
+      error: (err) => {
+        console.error('Skill details loading error:', err);
+      }
+    });
+  }
+
+  loadExperienceDetails(): void {
+    this.http.get<any>('assets/data/experience-details.json').subscribe({
+      next: (data) => {
+        this.experienceDetails.set(data);
+      },
+      error: (err) => {
+        console.error('Experience details loading error:', err);
       }
     });
   }

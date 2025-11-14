@@ -650,7 +650,7 @@ import { ChipModule } from 'primeng/chip';
   `]
 })
 export class EducationComponent implements OnInit {
-  collapsedCards = signal<Set<string>>(new Set());
+  collapsedCards = signal<Record<string, boolean>>({});
 
   education = computed(() => {
     const content = this.contentService.portfolioContent();
@@ -661,8 +661,12 @@ export class EducationComponent implements OnInit {
     // Initialize all cards as collapsed by default when education data is available
     effect(() => {
       const education = this.education();
-      if (education.length > 0 && this.collapsedCards().size === 0) {
-        this.collapsedCards.set(new Set(education.map(edu => edu.id)));
+      if (education.length > 0 && Object.keys(this.collapsedCards()).length === 0) {
+        const initialState: Record<string, boolean> = {};
+        education.forEach(edu => {
+          initialState[edu.id] = true; // true = collapsed
+        });
+        this.collapsedCards.set(initialState);
       }
     });
   }
@@ -674,18 +678,14 @@ export class EducationComponent implements OnInit {
   }
 
   toggleCard(cardId: string): void {
-    const collapsed = this.collapsedCards();
-    const newCollapsed = new Set(collapsed);
-    if (newCollapsed.has(cardId)) {
-      newCollapsed.delete(cardId);
-    } else {
-      newCollapsed.add(cardId);
-    }
-    this.collapsedCards.set(newCollapsed);
+    this.collapsedCards.update(collapsed => ({
+      ...collapsed,
+      [cardId]: !collapsed[cardId]
+    }));
   }
 
   isCardCollapsed(cardId: string): boolean {
-    return this.collapsedCards().has(cardId);
+    return this.collapsedCards()[cardId] ?? true; // Default to collapsed if not found
   }
 
   formatDate(dateString: string): string {

@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TagModule } from 'primeng/tag';
+import { Router } from '@angular/router';
 @Component({
   selector: 'app-skills',
   imports: [CommonModule, CardModule, TagModule],
@@ -52,13 +53,13 @@ import { TagModule } from 'primeng/tag';
                 </div>
               </ng-template>
               @if (skillGroup.subdivisions && skillGroup.subdivisions.length > 0) {
-                @for (subdivision of skillGroup.subdivisions; track subdivision.title) {
+                @for (subdivision of skillGroup.subdivisions; track subdivision.title; let j = $index) {
                   <div class="subdivision-section">
                     <h4 class="subdivision-title">{{ subdivision.title }}</h4>
                     <div class="skills-list">
                       @for (skill of subdivision.items; track skill.key; let i = $index) {
                         <div class="skill-item" [style.animation-delay]="(i * 0.05) + 's'">
-                          <div class="skill-content">
+                          <div class="skill-content" (click)="openSkillDetail(skillGroup.key , subdivision.key, skill.key)">
                             @if (skill.image) {
                               <img [src]="skill.image" [alt]="skill.name" class="skill-image" />
                             } @else if (skill.icon) {
@@ -885,7 +886,7 @@ export class SkillsComponent implements OnInit {
     return content?.skills || [];
   });
 
-  constructor(public contentService: ContentService) {
+  constructor(public contentService: ContentService, private router: Router) {
     // Initialize all cards as collapsed by default when skills data is available
     effect(() => {
       const skills = this.skills();
@@ -984,5 +985,9 @@ export class SkillsComponent implements OnInit {
     };
     
     return gradients[color || '#fa709a'] || 'linear-gradient(135deg, #fa709a, #fee140)';
+  }
+
+  openSkillDetail(category: string, division: string, key: string): void {
+    this.router.navigate(['/skills', category, division, key]);
   }
 }

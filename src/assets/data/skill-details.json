@@ -1,0 +1,30 @@
+{
+    "js": [
+        "Core <strong>JavaScript ES6+</strong> features including arrow functions, destructuring, and async/await",
+        "Deep understanding of <strong>closures</strong>, prototypal inheritance, and the event loop",
+        "Experience with modern <strong>DOM manipulation</strong> and browser APIs",
+        "Proficient in <strong>asynchronous programming</strong> patterns and Promises",
+        "Strong knowledge of <strong>functional programming</strong> concepts in JavaScript"
+    ],
+    "angular": [
+        "Expertise in <strong>Angular (Latest)</strong> with standalone components and signals",
+        "Advanced knowledge of <strong>RxJS</strong> and reactive programming patterns",
+        "Experience with <strong>Angular routing</strong>, lazy loading, and state management",
+        "Proficient in <strong>Angular testing</strong> with Jasmine and Karma",
+        "Strong understanding of <strong>dependency injection</strong> and modular architecture"
+    ],
+    "react": [
+        "Proficient in <strong>React hooks</strong> and functional components",
+        "Experience with <strong>React Router</strong> and client-side navigation",
+        "Knowledge of <strong>state management</strong> with Context API and Redux",
+        "Understanding of <strong>React lifecycle</strong> and performance optimization",
+        "Experience with <strong>React testing</strong> using Jest and React Testing Library"
+    ],
+    "nextjs": [
+        "Expertise in <strong>Next.js</strong> server-side rendering and static generation",
+        "Experience with <strong>API routes</strong> and serverless functions",
+        "Knowledge of <strong>Next.js routing</strong> and dynamic routes",
+        "Proficient in <strong>image optimization</strong> and performance tuning",
+        "Understanding of <strong>deployment</strong> strategies on Vercel and other platforms"
+    ]
+}
