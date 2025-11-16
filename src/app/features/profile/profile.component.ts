@@ -406,11 +406,14 @@ import { CardModule } from 'primeng/card';
       gap: 1.25rem;
       margin-bottom: 2.5rem;
       margin-right: 2.5rem;
+      flex-shrink: 0;
     }
     
     .social-btn {
       width: 56px;
       height: 56px;
+      min-width: 56px;
+      min-height: 56px;
       border-radius: 50%;
       background: rgba(255, 255, 255, 0.05);
       backdrop-filter: blur(10px);
@@ -420,10 +423,12 @@ import { CardModule } from 'primeng/card';
       justify-content: center;
       color: rgba(255, 255, 255, 0.8);
       text-decoration: none;
-      transition: all 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
       font-size: 1.5rem;
       position: relative;
       overflow: hidden;
+      flex-shrink: 0;
+      transform: translateZ(0);
+      will-change: border-color, box-shadow;
       
       &::before {
         content: '';
@@ -435,18 +440,20 @@ import { CardModule } from 'primeng/card';
         height: 100%;
         background: linear-gradient(135deg, #667eea, #764ba2);
         border-radius: 50%;
-        transition: transform 0.4s ease;
+        transition: transform 0.3s ease;
         z-index: 0;
       }
       
       i {
         position: relative;
         z-index: 1;
-        transition: transform 0.4s ease;
+        transition: transform 0.3s ease, color 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
       }
       
       &:hover {
-        transform: translateY(-8px) scale(1.1);
         border-color: rgba(102, 126, 234, 0.5);
         box-shadow: 0 15px 40px rgba(102, 126, 234, 0.4);
         
@@ -456,7 +463,7 @@ import { CardModule } from 'primeng/card';
         
         i {
           color: white;
-          transform: rotate(360deg);
+          transform: scale(1.2) rotate(360deg);
         }
       }
     }

@@ -1,30 +1,90 @@
 {
     "js": [
-        "Built <strong>complex single-page applications</strong> using vanilla JavaScript",
-        "Developed <strong>reusable libraries</strong> and utility functions for enterprise applications",
-        "Implemented <strong>performance optimization</strong> techniques reducing load times by 40%",
-        "Created <strong>interactive dashboards</strong> with real-time data visualization",
-        "Mentored junior developers on <strong>JavaScript best practices</strong> and design patterns"
+        {
+            "text": "Built <strong>complex single-page applications</strong> using vanilla JavaScript",
+            "level": "Advanced"
+        },
+        {
+            "text": "Developed <strong>reusable libraries</strong> and utility functions for enterprise applications",
+            "level": "Advanced"
+        },
+        {
+            "text": "Implemented <strong>performance optimization</strong> techniques reducing load times by 40%",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Created <strong>interactive dashboards</strong> with real-time data visualization",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Mentored junior developers on <strong>JavaScript best practices</strong> and design patterns",
+            "level": "Intermediate"
+        }
     ],
     "angular": [
-        "Led development of <strong>enterprise-scale applications</strong> serving 100K+ users",
-        "Architected <strong>modular Angular applications</strong> with clean code principles",
-        "Implemented <strong>state management solutions</strong> using NgRx and RxJS",
-        "Optimized application <strong>performance</strong> achieving 90+ Lighthouse scores",
-        "Conducted <strong>code reviews</strong> and established Angular coding standards"
+        {
+            "text": "Led development of <strong>enterprise-scale applications</strong> serving 100K+ users",
+            "level": "Advanced"
+        },
+        {
+            "text": "Architected <strong>modular Angular applications</strong> with clean code principles",
+            "level": "Advanced"
+        },
+        {
+            "text": "Implemented <strong>state management solutions</strong> using NgRx and RxJS",
+            "level": "Advanced"
+        },
+        {
+            "text": "Optimized application <strong>performance</strong> achieving 90+ Lighthouse scores",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Conducted <strong>code reviews</strong> and established Angular coding standards",
+            "level": "Intermediate"
+        }
     ],
     "react": [
-        "Developed <strong>responsive web applications</strong> with React and Material-UI",
-        "Implemented <strong>complex state management</strong> using Redux and Context API",
-        "Built <strong>reusable component libraries</strong> following atomic design principles",
-        "Integrated <strong>RESTful APIs</strong> and GraphQL endpoints",
-        "Optimized <strong>render performance</strong> using React.memo and useMemo"
+        {
+            "text": "Developed <strong>responsive web applications</strong> with React and Material-UI",
+            "level": "Advanced"
+        },
+        {
+            "text": "Implemented <strong>complex state management</strong> using Redux and Context API",
+            "level": "Advanced"
+        },
+        {
+            "text": "Built <strong>reusable component libraries</strong> following atomic design principles",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Integrated <strong>RESTful APIs</strong> and GraphQL endpoints",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Optimized <strong>render performance</strong> using React.memo and useMemo",
+            "level": "Beginner"
+        }
     ],
     "nextjs": [
-        "Built <strong>SEO-optimized websites</strong> using Next.js SSR and SSG",
-        "Developed <strong>full-stack applications</strong> with Next.js API routes",
-        "Implemented <strong>authentication flows</strong> with NextAuth.js",
-        "Created <strong>dynamic content pages</strong> with incremental static regeneration",
-        "Deployed <strong>production applications</strong> on Vercel with CI/CD pipelines"
+        {
+            "text": "Built <strong>SEO-optimized websites</strong> using Next.js SSR and SSG",
+            "level": "Advanced"
+        },
+        {
+            "text": "Developed <strong>full-stack applications</strong> with Next.js API routes",
+            "level": "Advanced"
+        },
+        {
+            "text": "Implemented <strong>authentication flows</strong> with NextAuth.js",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Created <strong>dynamic content pages</strong> with incremental static regeneration",
+            "level": "Intermediate"
+        },
+        {
+            "text": "Deployed <strong>production applications</strong> on Vercel with CI/CD pipelines",
+            "level": "Beginner"
+        }
     ]
 }

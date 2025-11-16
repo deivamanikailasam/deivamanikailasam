@@ -6,13 +6,21 @@ import { FormsModule } from "@angular/forms";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { SafeHtmlPipe } from "../../../core/pipes/safe-html.pipe";
 import { InputTextModule } from "primeng/inputtext";
+import { TooltipModule } from 'primeng/tooltip';
+
+export interface SkillDetail {
+    text: string;
+    level: 'Beginner' | 'Intermediate' | 'Advanced';
+}
+
+export type LevelFilter = 'Beginner' | 'Intermediate' | 'Advanced' | null;
 
 @Component({
     selector: 'app-skill-details',
     standalone: true,
     templateUrl: './skill-details.component.html',
     styleUrls: ['./skill-details.component.scss'],
-    imports: [CommonModule, FormsModule, SelectButtonModule, SafeHtmlPipe, InputTextModule]
+    imports: [CommonModule, FormsModule, SelectButtonModule, SafeHtmlPipe, InputTextModule, TooltipModule]
 })
 export class SkillDetailsComponent implements OnInit {
     skillKey = signal<string>('');
@@ -25,6 +33,7 @@ export class SkillDetailsComponent implements OnInit {
 
     selectedOption = signal<string>('skills');
     searchValue = signal<string>('');
+    selectedLevelFilters = signal<Set<LevelFilter>>(new Set());
 
     protected readonly contentService = inject(ContentService);
     protected readonly route = inject(ActivatedRoute);
@@ -68,44 +77,80 @@ export class SkillDetailsComponent implements OnInit {
 
     skillDetails = computed(() => {
         if (this.contentService.skillDetails()) {
-            return this.contentService.skillDetails()[this.skillKey()];
+            const data = this.contentService.skillDetails()[this.skillKey()];
+            // Convert old format (string[]) to new format (SkillDetail[])
+            if (data && data.length > 0) {
+                if (typeof data[0] === 'string') {
+                    return (data as string[]).map(text => ({ text, level: 'Intermediate' as const }));
+                }
+            }
+            return data as SkillDetail[] || [];
         }
         return [];
     });
 
     experienceDetails = computed(() => {
         if (this.contentService.experienceDetails()) {
-            return this.contentService.experienceDetails()[this.skillKey()];
+            const data = this.contentService.experienceDetails()[this.skillKey()];
+            // Convert old format (string[]) to new format (SkillDetail[])
+            if (data && data.length > 0) {
+                if (typeof data[0] === 'string') {
+                    return (data as string[]).map(text => ({ text, level: 'Intermediate' as const }));
+                }
+            }
+            return data as SkillDetail[] || [];
         }
         return [];
     });
 
-    // Filtered skill details based on search value
+    // Filtered skill details based on search value and level filters
     filteredSkillDetails = computed(() => {
         const details = this.skillDetails();
         const search = this.searchValue().toLowerCase().trim();
+        const levelFilters = this.selectedLevelFilters();
         
-        if (!search) {
-            return details;
+        let filtered = details;
+        
+        // Apply level filters
+        if (levelFilters.size > 0) {
+            filtered = filtered.filter((detail: SkillDetail) => 
+                levelFilters.has(detail.level)
+            );
         }
         
-        return details.filter((detail: string) => 
-            detail.toLowerCase().includes(search)
-        );
+        // Apply search filter
+        if (search) {
+            filtered = filtered.filter((detail: SkillDetail) => 
+                detail.text.toLowerCase().includes(search)
+            );
+        }
+        
+        return filtered;
     });
 
-    // Filtered experience details based on search value
+    // Filtered experience details based on search value and level filters
     filteredExperienceDetails = computed(() => {
         const details = this.experienceDetails();
         const search = this.searchValue().toLowerCase().trim();
+        const levelFilters = this.selectedLevelFilters();
         
-        if (!search) {
-            return details;
+        let filtered = details;
+        
+        // Apply level filters
+        if (levelFilters.size > 0) {
+            filtered = filtered.filter((detail: SkillDetail) => 
+                levelFilters.has(detail.level)
+            );
         }
         
-        return details.filter((detail: string) => 
-            detail.toLowerCase().includes(search)
-        );
+        // Apply search filter
+        if (search) {
+            filtered = filtered.filter((detail: SkillDetail) => 
+                detail.text.toLowerCase().includes(search)
+            );
+        }
+        
+        return filtered;
     });
 
     constructor() {
@@ -135,6 +180,34 @@ export class SkillDetailsComponent implements OnInit {
 
     onToggleChange(): void {
         this.searchValue.set('');
+        this.selectedLevelFilters.set(new Set());
+    }
+
+    toggleLevelFilter(level: LevelFilter): void {
+        const currentFilters = new Set(this.selectedLevelFilters());
+        if (currentFilters.has(level)) {
+            currentFilters.delete(level);
+        } else {
+            currentFilters.add(level);
+        }
+        this.selectedLevelFilters.set(currentFilters);
+    }
+
+    isLevelFilterActive(level: LevelFilter): boolean {
+        return this.selectedLevelFilters().has(level);
+    }
+
+    getLevelBadge(level: string): { short: string; full: string; class: string } {
+        switch (level) {
+            case 'Beginner':
+                return { short: 'B', full: 'Beginner', class: 'level-beginner' };
+            case 'Intermediate':
+                return { short: 'I', full: 'Intermediate', class: 'level-intermediate' };
+            case 'Advanced':
+                return { short: 'A', full: 'Advanced', class: 'level-advanced' };
+            default:
+                return { short: 'I', full: 'Intermediate', class: 'level-intermediate' };
+        }
     }
 
     goBack(): void {

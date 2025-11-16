@@ -4,10 +4,11 @@
   "scripts": {
     "ng": "ng",
     "start": "ng serve",
+    "file-server": "node file-server.js",
+    "dev": "concurrently \"npm run start\" \"npm run file-server\"",
     "watch": "ng build --watch --configuration development",
     "build": "ng build --configuration production --base-href=\"/deivamanikailasam/\"",
     "json-server": "json-server --watch db.json --port 3000",
-    "dev": "concurrently \"npm run start\" \"npm run json-server\"",
     "test": "ng test",
     "lint": "ng lint",
     "deploy": "npm run build && npx angular-cli-ghpages --dir=dist/deivamanikailasam/browser"
@@ -36,6 +37,7 @@
     "bootstrap": "^5.3.8",
     "primeicons": "^7.0.0",
     "primeng": "^20.3.0",
+    "quill": "^2.0.3",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0"
   },
@@ -45,6 +47,8 @@
     "@angular/compiler-cli": "^20.3.0",
     "@types/jasmine": "~5.1.0",
     "concurrently": "^9.2.1",
+    "cors": "^2.8.5",
+    "express": "^4.21.2",
     "jasmine-core": "~5.9.0",
     "json-server": "^1.0.0-beta.3",
     "karma": "~6.4.0",

@@ -1,30 +1,110 @@
 {
-    "js": [
-        "Core <strong>JavaScript ES6+</strong> features including arrow functions, destructuring, and async/await",
-        "Deep understanding of <strong>closures</strong>, prototypal inheritance, and the event loop",
-        "Experience with modern <strong>DOM manipulation</strong> and browser APIs",
-        "Proficient in <strong>asynchronous programming</strong> patterns and Promises",
-        "Strong knowledge of <strong>functional programming</strong> concepts in JavaScript"
-    ],
-    "angular": [
-        "Expertise in <strong>Angular (Latest)</strong> with standalone components and signals",
-        "Advanced knowledge of <strong>RxJS</strong> and reactive programming patterns",
-        "Experience with <strong>Angular routing</strong>, lazy loading, and state management",
-        "Proficient in <strong>Angular testing</strong> with Jasmine and Karma",
-        "Strong understanding of <strong>dependency injection</strong> and modular architecture"
-    ],
-    "react": [
-        "Proficient in <strong>React hooks</strong> and functional components",
-        "Experience with <strong>React Router</strong> and client-side navigation",
-        "Knowledge of <strong>state management</strong> with Context API and Redux",
-        "Understanding of <strong>React lifecycle</strong> and performance optimization",
-        "Experience with <strong>React testing</strong> using Jest and React Testing Library"
-    ],
-    "nextjs": [
-        "Expertise in <strong>Next.js</strong> server-side rendering and static generation",
-        "Experience with <strong>API routes</strong> and serverless functions",
-        "Knowledge of <strong>Next.js routing</strong> and dynamic routes",
-        "Proficient in <strong>image optimization</strong> and performance tuning",
-        "Understanding of <strong>deployment</strong> strategies on Vercel and other platforms"
-    ]
+  "js": [
+    {
+      "text": "Proficiency with the <strong>this</strong> context binding in different execution contexts—<strong>arrow functions</strong>, explicit binding via <strong>call</strong>, <strong>apply</strong>, and <strong>bind</strong>, and the implications for method references in event handlers",
+      "level": "Advanced"
+    },
+    {
+      "text": "Expert-level understanding of <strong>Promises</strong>, <strong>async/await</strong> syntax, and their relationship to the JavaScript concurrency model",
+      "level": "Advanced"
+    },
+    {
+      "text": "Ability to identify and prevent <strong>memory leaks</strong> related to <strong>promise retention</strong>, understanding how resolved promises can hold references to large objects that prevent garbage collection in certain Node.js scenarios.",
+      "level": "Advanced"
+    },
+    {
+      "text": "Recognition of the performance tradeoffs between <strong>async/await</strong> and <strong>Promise chains</strong> when handling HTTP requests or I/O operations, and optimization strategies for each approach",
+      "level": "Advanced"
+    },
+    {
+      "text": "Implementation of proper error propagation through <strong>promise chains</strong> and <strong>async contexts</strong> using <strong>try-catch blocks</strong> and <strong>error boundaries</strong>.",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Advanced <strong>DOM</strong> querying techniques using <strong>querySelector</strong>, <strong>querySelectorAll</strong>, and performance implications of different selection strategies.",
+      "level": "Intermediate"
+    },
+    {
+      "text": "<strong>Event delegation</strong> patterns for efficient handling of dynamic <strong>element creation and removal</strong>, reducing <strong>memory overhead</strong> and improving <strong>application scalability</strong>.",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Understanding of <strong>event bubbling</strong>, <strong>event capturing</strong>, and proper use of <strong>stopPropagation</strong> and <strong>preventDefault</strong> without inadvertently blocking critical browser functionality.",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Manipulation of document structure with <strong>performance considerations for batch operations</strong> using document fragments.",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Mastery of array transformation methods—<strong>map</strong>, <strong>reduce</strong>, and <strong>filter</strong>—and composition patterns for building complex data pipelines from reusable functions.",
+      "level": "Beginner"
+    }
+  ],
+  "angular": [
+    {
+      "text": "<p>Expertise&nbsp;in&nbsp;<strong>Angular&nbsp;(Latest)</strong>&nbsp;with&nbsp;<strong>standalone&nbsp;components&nbsp;and&nbsp;signals</strong></p>",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Advanced knowledge of <strong>RxJS</strong> and reactive programming patterns",
+      "level": "Advanced"
+    },
+    {
+      "text": "Experience with <strong>Angular routing</strong>, lazy loading, and state management",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Proficient in <strong>Angular testing</strong> with Jasmine and Karma",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Strong understanding of <strong>dependency injection</strong> and modular architecture",
+      "level": "Intermediate"
+    }
+  ],
+  "react": [
+    {
+      "text": "Proficient in <strong>React hooks</strong> and functional components",
+      "level": "Advanced"
+    },
+    {
+      "text": "Experience with <strong>React Router</strong> and client-side navigation",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Knowledge of <strong>state management</strong> with Context API and Redux",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Understanding of <strong>React lifecycle</strong> and performance optimization",
+      "level": "Advanced"
+    },
+    {
+      "text": "Experience with <strong>React testing</strong> using Jest and React Testing Library",
+      "level": "Beginner"
+    }
+  ],
+  "nextjs": [
+    {
+      "text": "Expertise in <strong>Next.js</strong> server-side rendering and static generation",
+      "level": "Advanced"
+    },
+    {
+      "text": "Experience with <strong>API routes</strong> and serverless functions",
+      "level": "Advanced"
+    },
+    {
+      "text": "Knowledge of <strong>Next.js routing</strong> and dynamic routes",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Proficient in <strong>image optimization</strong> and performance tuning",
+      "level": "Intermediate"
+    },
+    {
+      "text": "Understanding of <strong>deployment</strong> strategies on Vercel and other platforms",
+      "level": "Beginner"
+    }
+  ]
 }

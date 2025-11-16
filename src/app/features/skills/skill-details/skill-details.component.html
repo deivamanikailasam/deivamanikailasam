@@ -50,29 +50,55 @@
             }
         </div>
 
-        <!-- Fixed Section Label -->
-        <div class="section-label-container">
-            @if (selectedOption() === 'skills') {
-                <div class="section-label">
-                    <i class="pi pi-star"></i>
-                    <span>Technical Skills</span>
-                </div>
-            } @else if (selectedOption() === 'experience') {
-                <div class="section-label">
-                    <i class="pi pi-briefcase"></i>
-                    <span>Technical Experience</span>
-                </div>
-            }
+        <!-- Level Filter Badges -->
+        <div class="filter-badges-container">
+            <span class="filter-label">Filter by Level:</span>
+            <div class="filter-badges">
+                <button 
+                    class="filter-badge beginner-badge" 
+                    [class.active]="isLevelFilterActive('Beginner')"
+                    (click)="toggleLevelFilter('Beginner')"
+                    pTooltip="Filter by Beginner level"
+                    tooltipPosition="top">
+                    <i class="pi pi-circle-fill"></i>
+                    <span>Beginner</span>
+                </button>
+                <button 
+                    class="filter-badge intermediate-badge" 
+                    [class.active]="isLevelFilterActive('Intermediate')"
+                    (click)="toggleLevelFilter('Intermediate')"
+                    pTooltip="Filter by Intermediate level"
+                    tooltipPosition="top">
+                    <i class="pi pi-circle-fill"></i>
+                    <span>Intermediate</span>
+                </button>
+                <button 
+                    class="filter-badge advanced-badge" 
+                    [class.active]="isLevelFilterActive('Advanced')"
+                    (click)="toggleLevelFilter('Advanced')"
+                    pTooltip="Filter by Advanced level"
+                    tooltipPosition="top">
+                    <i class="pi pi-circle-fill"></i>
+                    <span>Advanced</span>
+                </button>
+            </div>
         </div>
 
         <!-- Scrollable Content Cards -->
         <div class="skill-details-content-container">
             @if (selectedOption() === 'skills') {
-                @for (detail of filteredSkillDetails(); track detail; let idx = $index) {
+                @for (detail of filteredSkillDetails(); track detail.text; let idx = $index) {
                 <div class="skill-detail-card" [style.animation-delay]="(idx * 0.1) + 's'">
                     <div class="card-number">{{ idx + 1 }}</div>
+                    <div 
+                        class="level-badge" 
+                        [ngClass]="getLevelBadge(detail.level).class"
+                        [pTooltip]="getLevelBadge(detail.level).full"
+                        tooltipPosition="top">
+                        {{ getLevelBadge(detail.level).short }}
+                    </div>
                     <div class="card-content">
-                        <p [innerHTML]="detail | safeHtml"></p>
+                        <div [innerHTML]="detail.text | safeHtml"></div>
                     </div>
                     <div class="card-decoration"></div>
                 </div>
@@ -84,11 +110,18 @@
                 </div>
                 }
             } @else if (selectedOption() === 'experience') {
-                @for (detail of filteredExperienceDetails(); track detail; let idx = $index) {
+                @for (detail of filteredExperienceDetails(); track detail.text; let idx = $index) {
                 <div class="skill-detail-card" [style.animation-delay]="(idx * 0.1) + 's'">
                     <div class="card-number">{{ idx + 1 }}</div>
+                    <div 
+                        class="level-badge" 
+                        [ngClass]="getLevelBadge(detail.level).class"
+                        [pTooltip]="getLevelBadge(detail.level).full"
+                        tooltipPosition="top">
+                        {{ getLevelBadge(detail.level).short }}
+                    </div>
                     <div class="card-content">
-                        <p [innerHTML]="detail | safeHtml"></p>
+                        <div [innerHTML]="detail.text | safeHtml"></div>
                     </div>
                     <div class="card-decoration"></div>
                 </div>
