@@ -15,53 +15,21 @@ export class SkillDataService {
   constructor(private http: HttpClient) {}
 
   /**
-   * Save skill details to local storage and file system
+   * Save skill details to file system
    * @param skillDetails The skill details object to save
    */
   async saveSkillDetails(skillDetails: any): Promise<void> {
-    // Save to localStorage for local persistence
-    this.saveToLocalStorage(skillDetails, this.skillDetailsLocalStorageKey);
-
     // Save to file system
     await this.saveToFileSystem(skillDetails, this.skillDetailsPath);
   }
 
   /**
-   * Save experience details to local storage and file system
+   * Save experience details to file system
    * @param experienceDetails The experience details object to save
    */
   async saveExperienceDetails(experienceDetails: any): Promise<void> {
-    // Save to localStorage for local persistence
-    this.saveToLocalStorage(experienceDetails, this.experienceDetailsLocalStorageKey);
-
     // Save to file system
     await this.saveToFileSystem(experienceDetails, this.experienceDetailsPath);
-  }
-
-  /**
-   * Save to localStorage
-   */
-  private saveToLocalStorage(data: any, key: string): void {
-    try {
-      localStorage.setItem(key, JSON.stringify(data));
-      console.log(`✅ Data saved to localStorage (${key})`);
-    } catch (error) {
-      console.error('❌ Error saving to localStorage:', error);
-      throw error;
-    }
-  }
-
-  /**
-   * Load from localStorage
-   */
-  loadFromLocalStorage(key: string): any | null {
-    try {
-      const data = localStorage.getItem(key);
-      return data ? JSON.parse(data) : null;
-    } catch (error) {
-      console.error('❌ Error loading from localStorage:', error);
-      return null;
-    }
   }
 
   /**

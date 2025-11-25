@@ -20,6 +20,7 @@ export class ContentService {
   portfolioContent = ngSignal<PortfolioContent | null>(null);
   skillDetails = ngSignal<any>(null);
   experienceDetails = ngSignal<any>(null);
+  certificates = ngSignal<any>(null);
   isLoading = ngSignal(false);
   error = ngSignal<string | null>(null);
   contentVersion = ngSignal<string>('1.0.0');
@@ -88,6 +89,17 @@ export class ContentService {
       },
       error: (err) => {
         console.error('Experience details loading error:', err);
+      }
+    });
+  }
+
+  loadCertificates(): void {
+    this.http.get<any>('assets/data/certificates.json').subscribe({
+      next: (data) => {
+        this.certificates.set(data);
+      },
+      error: (err) => {
+        console.error('Certificates loading error:', err);
       }
     });
   }

@@ -308,7 +308,14 @@
             "key": "core",
             "items": [
               { "key": "nlp", "name": "NLP", "image": "assets/images/skills/nlp.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
-              { "key": "computervision", "name": "Computer Vision basics", "image": "assets/images/skills/computervision.png", "icon": "pi pi-eye", "level": "Beginner" },
+              { "key": "computervision", "name": "Computer Vision basics", "image": "assets/images/skills/computervision.png", "icon": "pi pi-eye", "level": "Beginner" }
+            ]
+          },
+          {
+            "title": "Generative AI",
+            "key": "genai",
+            "items": [
+              { "key": "genai", "name": "Gen AI Concepts", "image": "assets/images/skills/genai.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "llm", "name": "LLM", "image": "assets/images/skills/llm.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "agents", "name": "Agents", "image": "assets/images/skills/agents.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "langchain", "name": "LangChain", "image": "assets/images/skills/langchain.png", "icon": "pi pi-link", "level": "Intermediate" }

@@ -65,23 +65,7 @@
   ],
   "react": [
     {
-      "text": "Proficient in <strong>React hooks</strong> and functional components",
-      "level": "Advanced"
-    },
-    {
-      "text": "Experience with <strong>React Router</strong> and client-side navigation",
-      "level": "Intermediate"
-    },
-    {
-      "text": "Knowledge of <strong>state management</strong> with Context API and Redux",
-      "level": "Intermediate"
-    },
-    {
-      "text": "Understanding of <strong>React lifecycle</strong> and performance optimization",
-      "level": "Advanced"
-    },
-    {
-      "text": "Experience with <strong>React testing</strong> using Jest and React Testing Library",
+      "text": "<p><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Able&nbsp;to</span><strong style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">&nbsp;build&nbsp;static&nbsp;and&nbsp;interactive&nbsp;UI&nbsp;components</strong><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">&nbsp;using&nbsp;basic&nbsp;React&nbsp;fundamentals</span></p><ul><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">React&nbsp;basics&nbsp;and&nbsp;how&nbsp;React&nbsp;works</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">JSX/TSX&nbsp;syntax&nbsp;and&nbsp;how&nbsp;to&nbsp;write&nbsp;them&nbsp;properly</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Creating&nbsp;functional&nbsp;components</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Rendering&nbsp;elements&nbsp;to&nbsp;the&nbsp;DOM</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Event&nbsp;handling&nbsp;basics&nbsp;(onClick,&nbsp;onChange)</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Component&nbsp;structure&nbsp;and&nbsp;best&nbsp;practices</span></li><li><span style=\"color: oklch(0.9296 0.007 106.53); background-color: oklch(0.2167 0.002 197.04);\">Understanding&nbsp;the&nbsp;component&nbsp;lifecycle&nbsp;concept</span></li></ul>",
       "level": "Beginner"
     }
   ],
@@ -104,6 +88,24 @@
     },
     {
       "text": "Understanding of <strong>deployment</strong> strategies on Vercel and other platforms",
+      "level": "Beginner"
+    }
+  ],
+  "genai": [
+    {
+      "text": "Understanding how <strong>generative AI transforms organizations</strong> across different business functions and industries",
+      "level": "Beginner"
+    },
+    {
+      "text": "Knowledge of how generative AI uses <strong>foundation models</strong> and <strong>prompt engineering</strong> to create business value",
+      "level": "Beginner"
+    },
+    {
+      "text": "Familiarity with <strong>Google Cloud's unique strengths</strong> in the field of generative AI",
+      "level": "Beginner"
+    },
+    {
+      "text": "Understanding of <strong>Google Cloud-recommended steps</strong> to successfully implement transformational generative AI solutions",
       "level": "Beginner"
     }
   ]
