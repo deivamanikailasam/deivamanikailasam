@@ -318,7 +318,8 @@
               { "key": "genai", "name": "Gen AI Concepts", "image": "assets/images/skills/genai.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "llm", "name": "LLM", "image": "assets/images/skills/llm.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "agents", "name": "Agents", "image": "assets/images/skills/agents.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
-              { "key": "langchain", "name": "LangChain", "image": "assets/images/skills/langchain.png", "icon": "pi pi-link", "level": "Intermediate" }
+              { "key": "langchain", "name": "LangChain", "image": "assets/images/skills/langchain.png", "icon": "pi pi-link", "level": "Intermediate" },
+              { "key": "prompt-engineering", "name": "Prompt Engineering", "image": "assets/images/skills/prompt-engineering.png", "icon": "pi pi-sparkles", "level": "Intermediate" }
             ]
           },
           {
