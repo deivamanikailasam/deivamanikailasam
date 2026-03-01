@@ -21,6 +21,11 @@ export interface Social {
   icon: string;
 }
 
+export interface ExperienceSection {
+  header: string;
+  points: string[];
+}
+
 export interface Experience {
   id: string;
   company: string;
@@ -28,7 +33,8 @@ export interface Experience {
   startDate: string;
   endDate?: string;
   current: boolean;
-  description: string | string[];
+  description?: string | string[];
+  sections?: ExperienceSection[];
   technologies?: string[];
   companyLogo?: string;
   backgroundImage?: string;
@@ -43,6 +49,12 @@ export interface Project {
   link?: string;
   github?: string;
   featured: boolean;
+  category?: string;
+  subcategory?: string;
+  highlights?: string[];
+  status?: 'Active' | 'Completed' | 'In Development';
+  version?: string;
+  icon?: string;
 }
 
 export interface SkillItem {
@@ -50,7 +62,6 @@ export interface SkillItem {
   name: string;
   image?: string;
   icon?: string;
-  level: 'Beginner' | 'Intermediate' | 'Advanced';
 }
 
 export interface SkillSubdivision {
@@ -75,6 +86,10 @@ export interface Achievement {
   description: string;
   date: string;
   icon?: string;
+  category?: 'award' | 'milestone' | 'impact';
+  organization?: string;
+  metric?: string;
+  highlight?: boolean;
 }
 
 export interface Testimonial {

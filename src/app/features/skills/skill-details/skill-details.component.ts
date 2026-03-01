@@ -2,6 +2,7 @@ import { Component, computed, effect, inject, OnInit, signal } from "@angular/co
 import { ActivatedRoute, Router, Params } from "@angular/router";
 import { CommonModule } from "@angular/common";
 import { ContentService } from "../../../core/services/content.service";
+import { Skill, SkillSubdivision, SkillItem } from "../../../core/models/portfolio.interface";
 import { FormsModule } from "@angular/forms";
 import { SelectButtonModule } from "primeng/selectbutton";
 import { SafeHtmlPipe } from "../../../core/pipes/safe-html.pipe";
@@ -39,16 +40,15 @@ export class SkillDetailsComponent implements OnInit {
     protected readonly route = inject(ActivatedRoute);
     protected readonly router = inject(Router);
 
-     // Make category a computed signal
-     category = computed(() => {
-        const content = this.contentService.portfolioContent();
+    category = computed(() => {
+        const skills = this.contentService.skillsData();
         const catKey = this.categoryKey();
         
-        if (!content || !catKey) {
+        if (!skills?.length || !catKey) {
             return null;
         }
         
-        return content.skills.find(skill => skill.key === catKey) ?? null;
+        return skills.find((skill: Skill) => skill.key === catKey) ?? null;
     });
 
     // Make division a computed signal
@@ -60,7 +60,7 @@ export class SkillDetailsComponent implements OnInit {
             return null;
         }
         
-        return category.subdivisions?.find(subdivision => subdivision.key === divKey) ?? null;
+        return category.subdivisions?.find((subdivision: SkillSubdivision) => subdivision.key === divKey) ?? null;
     });
 
     // Now skill computed can use the other computed signals
@@ -72,7 +72,7 @@ export class SkillDetailsComponent implements OnInit {
             return null;
         }
 
-        return division.items?.find(item => item.key === skKey) ?? null;
+        return division.items?.find((item: SkillItem) => item.key === skKey) ?? null;
     });
 
     skillDetails = computed(() => {
@@ -155,14 +155,17 @@ export class SkillDetailsComponent implements OnInit {
 
     constructor() {
         effect(() => {
-            if (!this.contentService.skillDetails()) {
+            const key = this.skillKey();
+            if (!this.contentService.skillDetails() && key) {
                 this.getDetails();
             }
         });
     }
     
     ngOnInit(): void {
-        // Subscribe to route params
+        if (this.contentService.skillsData().length === 0) {
+            this.contentService.loadSkillsData();
+        }
         this.route.params.subscribe(params => {
             this.categoryKey.set(params['category'] || '');
             this.divisionKey.set(params['division'] || '');
@@ -171,8 +174,7 @@ export class SkillDetailsComponent implements OnInit {
     }
 
     getDetails(): void {
-        const skill = this.skill();
-        if (skill) {
+        if (this.skillKey()) {
             this.contentService.loadSkillDetails();
             this.contentService.loadExperienceDetails();
         }

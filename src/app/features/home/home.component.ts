@@ -1,6 +1,5 @@
 import { Component, OnInit, AfterViewInit, ElementRef, ViewChild, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { ContentService } from '../../core/services/content.service';
 import { ScrollSpyService } from '../../core/services/scroll-spy.service';
 import { ProfileComponent } from '../profile/profile.component';
 import { EducationComponent } from '../education/education.component';
@@ -421,14 +420,10 @@ export class HomeComponent implements OnInit, AfterViewInit {
   @ViewChild('scrollWrapper', { static: false }) scrollWrapper!: ElementRef<HTMLDivElement>;
 
   constructor(
-    public contentService: ContentService,
     private scrollSpyService: ScrollSpyService
   ) {}
 
   ngOnInit(): void {
-    if (!this.contentService.portfolioContent()) {
-      this.contentService.loadPortfolioContent();
-    }
   }
 
   ngAfterViewInit(): void {

@@ -763,8 +763,7 @@ import { CardModule } from 'primeng/card';
 })
 export class ProfileComponent implements OnInit {
   profile = computed(() => {
-    const content = this.contentService.portfolioContent();
-    return content?.profile || null;
+    return this.contentService.profileData() || null;
   });
 
   constructor(
@@ -772,8 +771,8 @@ export class ProfileComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    if (!this.contentService.portfolioContent()) {
-      this.contentService.loadPortfolioContent();
+    if (!this.contentService.profileData()) {
+      this.contentService.loadProfileData();
     }
   }
 

@@ -1,18 +1,11 @@
 import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { firstValueFrom } from 'rxjs';
-import { environment } from '../../../environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class SkillDataService {
-  private readonly skillDetailsLocalStorageKey = 'skill-details-data';
-  private readonly experienceDetailsLocalStorageKey = 'experience-details-data';
   private readonly skillDetailsPath = 'src/assets/data/skill-details.json';
   private readonly experienceDetailsPath = 'src/assets/data/experience-details.json';
-
-  constructor(private http: HttpClient) {}
 
   /**
    * Save skill details to file system
@@ -71,13 +64,5 @@ export class SkillDataService {
     }
   }
 
-  /**
-   * Clear local storage
-   */
-  clearLocalStorage(): void {
-    localStorage.removeItem(this.skillDetailsLocalStorageKey);
-    localStorage.removeItem(this.experienceDetailsLocalStorageKey);
-    console.log('🗑️ Local storage cleared');
-  }
 }
 

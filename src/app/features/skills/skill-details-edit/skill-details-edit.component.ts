@@ -65,50 +65,29 @@ export class SkillDetailsEditComponent implements OnInit {
     });
 
     ngOnInit(): void {
-        // Ensure portfolio content is loaded
-        if (!this.contentService.portfolioContent()) {
-            this.contentService.loadPortfolioContent();
+        if (this.contentService.skillsData().length === 0) {
+            this.contentService.loadSkillsData();
         }
-        this.loadSkillDetails();
+        this.contentService.loadSkillDetails();
+        this.buildTechnologyList();
     }
 
-    loadSkillDetails(): void {
+    private buildTechnologyList(): void {
         this.isLoading.set(true);
-        
-        // Load both portfolio content and skill details
-        const portfolioContent = this.contentService.portfolioContent();
-        
-        if (!portfolioContent) {
-            // Wait for portfolio content to load
-            setTimeout(() => this.loadSkillDetails(), 100);
+        const skillsData = this.contentService.skillsData();
+
+        if (!skillsData || skillsData.length === 0) {
+            setTimeout(() => this.buildTechnologyList(), 100);
             return;
         }
 
-        this.contentService.loadSkillDetails();
-        
-        // Wait a bit for the data to load
-        setTimeout(() => {
-            // Extract all technologies from portfolio skills
-            const techMap = new Map<string, string>();
-            
-            // Go through all skills, subdivisions, and items in the portfolio
-            if (portfolioContent.skills) {
-                portfolioContent.skills.forEach(skill => {
-                    // Check subdivisions
-                    if (skill.subdivisions) {
-                        skill.subdivisions.forEach(subdivision => {
-                            if (subdivision.items) {
-                                subdivision.items.forEach(item => {
-                                    if (item.key && item.name) {
-                                        techMap.set(item.key, item.name);
-                                    }
-                                });
-                            }
-                        });
-                    }
-                    // Check direct items (backward compatibility)
-                    if (skill.items) {
-                        skill.items.forEach(item => {
+        const techMap = new Map<string, string>();
+
+        skillsData.forEach((skill: any) => {
+            if (skill.subdivisions) {
+                skill.subdivisions.forEach((subdivision: any) => {
+                    if (subdivision.items) {
+                        subdivision.items.forEach((item: any) => {
                             if (item.key && item.name) {
                                 techMap.set(item.key, item.name);
                             }
@@ -116,18 +95,24 @@ export class SkillDetailsEditComponent implements OnInit {
                     }
                 });
             }
+            if (skill.items) {
+                skill.items.forEach((item: any) => {
+                    if (item.key && item.name) {
+                        techMap.set(item.key, item.name);
+                    }
+                });
+            }
+        });
 
-            // Convert to Technology array and sort alphabetically
-            const techs: Technology[] = Array.from(techMap.entries())
-                .map(([key, name]) => ({
-                    label: name,
-                    value: key
-                }))
-                .sort((a, b) => a.label.localeCompare(b.label));
-            
-            this.technologies.set(techs);
-            this.isLoading.set(false);
-        }, 500);
+        const techs: Technology[] = Array.from(techMap.entries())
+            .map(([key, name]) => ({
+                label: name,
+                value: key
+            }))
+            .sort((a, b) => a.label.localeCompare(b.label));
+
+        this.technologies.set(techs);
+        this.isLoading.set(false);
     }
 
     /**

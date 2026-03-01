@@ -30,67 +30,185 @@
     "experience": [
       {
         "id": "1",
-        "company": "Kinesso",
-        "position": "Senior Full Stack Engineer",
+        "company": "Kinesso – IPG",
+        "position": "Senior Software Engineer",
         "startDate": "2021-08-01",
         "endDate": null,
         "current": true,
-        "description": [
-          "Led frontend and backend development for multiple marketing products, delivering scalable, high-quality software solutions that aligned with business goals.",
-          "Independently managed full project lifecycles, from requirement analysis and solution design to deployment, continually improving code quality and system performance by addressing technical debt and refactoring legacy modules.",
-          "Served as a trusted problem solver and escalation point for complex technical issues, providing timely and effective resolutions to ensure minimal disruption.",
-          "Mentored junior developers and fostered a collaborative Agile team environment, enhancing team productivity and knowledge sharing.",
-          "Architected and implemented generic, reusable, and feature-rich components and modules, enabling faster development cycles and consistent user experiences across products.",
-          "Collaborated closely with Product and Business teams to design innovative features and improvements, contributing creative ideas that elevated user satisfaction and business value.",
-          "Integrated AI-driven features within products to enhance end-user experiences and improve automation, while also embedding AI capabilities into developer workflows to increase team efficiency.",
-          "Championed initiatives focused on reducing technical debt, boosting code maintainability, and optimizing application performance across projects.",
-          "Actively participated in solution design discussions, evaluating business requirements and translating them into effective technical architectures.",
-          "Recognized as a go-to resource for technical innovation, consistently delivering solutions that drive product excellence and operational efficiency."
-        ]
+        "sections": [
+          {
+            "header": "Architecture & System Design",
+            "points": [
+              "Architected and led delivery of a multi-module Spring Boot 3.x microservices platform with JWT/OAuth2 security, multi-tenant data access, and OpenAPI/Swagger documentation. Integrated Angular, React.js, Next.js frontends with Python data pipelines and MongoDB analytics stores. Platform served 50,000+ daily API requests across hybrid SQL/NoSQL architectures",
+              "Designed scalable hybrid data access layer supporting PostgreSQL, SQL Server, Snowflake, MongoDB with Liquibase-managed SQL migrations and MongoDB schema versioning, enabling seamless cross-database support, real-time Gen AI embeddings, and query complexity reduction",
+              "Owned full-stack system architecture from database design (SQL + MongoDB) through REST/gRPC API specification to Angular/React.js/Next.js frontend implementation with GitOps workflows, ensuring architectural consistency across 12+ feature modules and multi-framework frontend ecosystem",
+              "Implemented gRPC-based plugin architecture for client module integration with Python microservices and customizable React dashboard plugins, improving system extensibility and enabling faster service onboarding",
+              "API performance optimization and reduced database load by designing a hybrid caching layer with Caffeine, Redis, and MongoDB"
+            ]
+          },
+          {
+            "header": "Frontend Engineering & Design Systems",
+            "points": [
+              "Built and maintained production-grade design system with 40+ reusable UI components across Angular, React.js, Next.js (data tables, charts, forms, modals) distributed via private Nexus npm registry and Git submodules, supporting 6 internal products with framework-agnostic design tokens",
+              "Implemented advanced table capabilities with AG Grid Enterprise across Angular/React.js/Next.js: multi-column filtering, sorting, selection, pagination, row expansion, custom cell rendering, CSV/Excel export via ExcelJS, and Gen AI-powered data insights, enabling non-technical users to analyze data independently",
+              "Designed and shipped white-label theming system supporting 5+ brand variants with dynamic stylesheet injection across Angular SCSS + React.js/Next.js Tailwind, Storybook preview switching, reducing theme configuration effort",
+              "Authored comprehensive Storybook documentation (Angular + React.js/Next.js + MDX + Compodoc) with 150+ component stories, custom preview themes, Gen AI component suggestions, and a11y testing addons, increasing discoverability by 85%",
+              "Created 15+ custom form validators (Angular ReactiveForms + React Hook Form) with reusable validation service and Python backend validation, eliminating 90% manual form error handling across frameworks",
+              "Built cross-framework directive/hooks library (Angular directives + React custom hooks + Next.js HOCs), Gen AI autocomplete, reducing code duplication across Angular/React.js/Next.js"
+            ]
+          },
+          {
+            "header": "Backend Services & Data Integration",
+            "points": [
+              "Implemented multi-tenant data access patterns with database-per-tenant (PostgreSQL/SQL Server) + MongoDB collection-per-tenant, row-level security, supporting 12 concurrent environments with zero cross-tenant leakage and Gen AI tenant embeddings",
+              "Built comprehensive REST/gRPC API surface (75+ Spring Boot endpoints, 50+ Python FastAPI endpoints) for onboarding, data backfill, quality monitoring, Gen AI analytics, MongoDB aggregation pipelines; OpenAPI contracts with 100% coverage",
+              "Integrated external platforms (Google Ads, Meta/Facebook, Bing Ads, Adverity, Snowflake, Power BI) + MongoDB Atlas Search with OAuth2/OIDC, Python data connectors, Gen AI RAG pipelines, enabling real-time advertising analytics",
+              "Developed data quality scoring engine with Python ML models, MongoDB aggregation, business KPIs, Gen AI anomaly detection, flagging issues in real-time, reducing undetected data quality issues by 75%",
+              "Implemented large payload handling with Spring WebClient + Python asyncio, MongoDB GridFS, virtual threads, parallel query execution, improving 99th percentile latency by 55%"
+            ]
+          },
+          {
+            "header": "Testing, Quality & Observability",
+            "points": [
+              "Established test infrastructure spanning 1000+ unit tests (Jest + Vitest + Pytest), 100+ integration tests (Cypress + Playwright), controller-level tests (MockMvc + Python pytest), MongoDB test containers, Allure reporting, achieving 80+% coverage across Java/Python/UI",
+              "Configured CI/CD pipelines in Jenkins (Groovy) with GitHub Actions for React.js/Next.js, PR validation, Docker multi-stage builds (Java + Python + Node), SonarQube gates, reducing merge-to-deploy by 40%",
+              "Implemented structured logging via Logback (Java) + structlog (Python), Datadog aggregation, MongoDB performance dashboards, correlation-based debugging across microservices + serverless functions",
+              "Enforced code quality with ESLint (Angular/React.js/Next.js), Stylelint, Pylint/Black, custom SonarQube rules, maintaining A-grade scores across multi-language codebase"
+            ]
+          },
+          {
+            "header": "DevOps, Infrastructure & Deployment",
+            "points": [
+              "Designed Kubernetes infrastructure with Deployment manifests for Spring Boot + Python FastAPI + Next.js, Service discovery, ConfigMaps, Vault + Git credentials, MongoDB StatefulSets, reducing config burden by 80%",
+              "Built multi-stage Docker builds for Java backend (OpenJDK 21 + Elastic APM), Python services, Angular/React.js/Next.js (Node 22 + Nginx), MongoDB backup sidecars, 45% image size reduction",
+              "Developed Terraform IaC for AWS ECS/Fargate + MongoDB Atlas, GitOps with ArgoCD, infrastructure versioning, one-command deployments, 100% manual change elimination",
+              "Automated Docker publishing to Nexus (npm + Docker + PyPI), Jenkins, GitHub Actions, Git tags, blue-green + canary deployments for zero-downtime across Java/Python/JS stacks",
+              "Configured K8s probes (liveness/readiness/startup) + MongoDB health checks, Python service readiness, reducing MTTR by 65%"
+            ]
+          },
+          {
+            "header": "Team Leadership & Mentorship",
+            "points": [
+              "Led technical design reviews for 8+ feature modules across Spring Boot + Python + React.js/Next.js, establishing patterns (abstract service layer, saga pattern, CQRS, Gen AI service mesh), 500K+ daily users",
+              "Mentored 5+ junior engineers in Angular/React.js/Next.js best practices, Spring Boot + Python patterns, MongoDB optimization, Git workflows, Gen AI integration, 3 promoted to mid-level within 18 months",
+              "Defined/enforced coding standards through multi-language code review (Java/Python/JS), automated linting (ESLint + Pylint), Git hooks, PR templates, production bug reduction",
+              "Conducted brown-bag sessions on caching strategies, microservices, Kubernetes, MongoDB aggregation, React.js/Next.js SSR, Gen AI prompt engineering, GitOps best practices",
+              "Collaborated with product/design to translate requirements into specs for 6 major features (multi-framework frontend + Gen AI backend) with full test coverage, zero critical issues"
+            ]
+          }
+        ],
+        "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL"]
       },
       {
         "id": "2",
-        "company": "ACE Contractors PTY LTD",
-        "position": "Full Stack Developer",
+        "company": "ACE Contractors Pvt Ltd",
+        "position": "Software Developer",
         "startDate": "2020-12-01",
         "endDate": "2021-07-31",
         "current": false,
-        "description": [
-          "Researched, designed, implemented, integrated, and managed software programs tailored to meet diverse business and user requirements.",
-          "Developed clean, efficient application code and modular solutions aligned with specifications and project goals.",
-          "Set up robust authentication and authorization systems, ensuring secure application access and data protection.",
-          "Established smooth and secure communication protocols between client and server, enhancing application reliability and user experience.",
-          "Resolved complex, critical issues through advanced troubleshooting and debugging processes, consistently minimizing project downtime.",
-          "Built and optimized database structures, including crafting efficient SQL queries and procedures to support scalable data management.",
-          "Utilized UML diagrams and effective algorithms to architect clear application flow and design processes.",
-          "Authored comprehensive technical documentation and user manuals, facilitating seamless knowledge transfer and user onboarding.",
-          "Analysed end-user needs to design and deliver solutions that optimize usability and business value.",
-          "Deployed web applications, conducted proactive issue monitoring, and performed performance tuning for optimal operation.",
-          "Enabled scalable deployments by running applications within containers and leveraging cloud SaaS platforms for greater flexibility.",
-          "Recommended and integrated best practices in every aspect of application design and development, elevating solution quality.",
-          "Seamlessly integrated software components and third-party programs to extend system functionality.",
-          "Developed intuitive, user-friendly interfaces, prototypes, and interactive application elements to improve usability.",
-          "Investigated and identified the root cause of reported defects and issues, implementing effective patches and fixes for long-term stability."
-        ]
+        "sections": [
+          {
+            "header": "Full-Stack Architecture & Platform Ownership",
+            "points": [
+              "Architected and owned end-to-end delivery of a Progressive Web App (PWA) for construction company operations, serving internal field teams, office staff, and executives with 100% mobile-responsive design supporting offline-first capabilities across attendance tracking, contract management, employee lifecycle, and operational workflows",
+              "Designed scalable full-stack architecture using Angular frontend, Node.js/Express backend, gRPC microservices, PostgreSQL with complex relational schemas, and Azure cloud infrastructure, handling 200+ daily active users across 10+ construction sites with 99.9% uptime",
+              "Led direct technical discussions with company owner and other executives, translating business requirements into technical roadmaps and ROI-focused solutions, delivering 3 major feature releases"
+            ]
+          },
+          {
+            "header": "Frontend Excellence & PWA Implementation",
+            "points": [
+              "Built production-grade Angular application with PWA capabilities (Service Workers, App Manifest, Cache API) enabling full offline functionality for field workers, reducing data connectivity dependency by 85% and improving daily task completion rates by 40%",
+              "Implemented responsive design system supporting mobile-first workflows for construction site supervisors (tablets/phones) and desktop dashboards for office management, using Angular Material, PrimeNG, CSS Grid/Flexbox, and mobile-first SCSS architecture with 100% viewport coverage across devices",
+              "Developed complex Angular feature modules for Employee Management (onboarding, timesheets, certifications), Contract Tracking (milestones, payments, change orders), Attendance & Scheduling (GPS check-ins, shift rostering), and Document Management (RFIs, submittals, safety forms), serving 200+ employees across multiple project sites"
+            ]
+          },
+          {
+            "header": "Backend Engineering & gRPC Microservices",
+            "points": [
+              "Architected Node.js/Express backend with gRPC microservices for high performance data operations, implementing stream processing for real-time timesheet validation, contract milestone updates, and employee availability syncing, achieving sub-100ms response times for 95th percentile requests",
+              "Designed sophisticated PostgreSQL schemas supporting complex relationships between Employees, Projects, Contracts, Timesheets, Certifications, Safety Incidents, with JSONB fields for flexible document storage and full text search for rapid document retrieval",
+              "Implemented robust business logic including timesheet approval workflows, contract payment schedules, employee certification expiry tracking, overtime calculation, and project cost-to-complete forecasting"
+            ]
+          },
+          {
+            "header": "Azure Cloud Infrastructure & DevOps",
+            "points": [
+              "Deployed full platform to Azure using Azure App Service, Azure PostgreSQL Flexible Server, Azure Functions for scheduled jobs, Azure Blob Storage for construction documents, and Azure AD B2C for employee authentication, achieving zero-downtime deployments and auto-scaling during peak payroll periods",
+              "Built complete CI/CD pipeline with Azure DevOps (YAML pipelines), multi-stage Docker builds, Azure Container Registry, and infrastructure-as-code via ARM templates and Bicep, reducing deployment time from 2 hours to 12 minutes (94% improvement)",
+              "Implemented Azure monitoring stack with Application Insights, Log Analytics, Azure Monitor alerts, and custom dashboards tracking API performance, database query latency, PWA cache hit rates, and user session analytics, enabling proactive issue resolution with reduction in MTTR"
+            ]
+          },
+          {
+            "header": "Business Impact & Stakeholder Alignment",
+            "points": [
+              "Directly influenced product roadmap through weekly executive syncs with company owner, proposing and implementing high ROI features that improved operational efficiency and reduced payroll disputes",
+              "Delivered measurable ROI including annual savings from payroll automation, business savings from timesheet digitization (paperless), reduction in overtime overpayments, and 3x faster compliance reporting for WorkSafe Victoria audits",
+              "Achieved 100% user adoption across construction, admin, and executive teams through collaborative UX design, field testing with site supervisors, and progressive feature rollouts, eliminating resistance to digital transformation in traditionally paper-based industry"
+            ]
+          },
+          {
+            "header": "Process Excellence",
+            "points": [
+              "Established engineering standards for TypeScript, Angular architecture, Node.js patterns, gRPC protobuf contracts, and PostgreSQL optimization, creating reusable patterns that accelerated feature development by 45% for subsequent hires",
+              "Implemented comprehensive testing strategy with Jest (95% unit test coverage), Cypress E2E tests, Postman API collections for gRPC endpoints, and Azure Load Testing, ensuring zero critical bugs",
+              "Architected data migration strategy converting years of legacy data into PostgreSQL with data validation, duplicate detection, and incremental migration"
+            ]
+          }
+        ],
+        "technologies": ["Angular", "Node.js", "TypeScript", "PostgreSQL", "gRPC", "Docker", "Azure", "PWA"]
       },
       {
         "id": "3",
         "company": "Tata Consultancy Services",
-        "position": "Full Stack Engineer",
+        "position": "Developer",
         "startDate": "2016-01-01",
         "endDate": "2019-05-31",
         "current": false,
-        "description": [
-          "Architected and designed full stack solutions for business process teams, ensuring scalable and maintainable software architecture.",
-          "Owned end-to-end project lifecycle responsibilities including analysis, design, development, implementation, support, and enhancement of applications.",
-          "Developed clean, tested code; monitored logs; fixed bugs; configured deployment scripts; and managed deployments across development, testing, and production environments.",
-          "Resolved complex programming challenges and implemented robust business logic, driving adherence to coding standards that enhanced application quality and maintainability.",
-          "Created and maintained service dashboards to monitor system health and performance.",
-          "Developed and exposed services using REST APIs and SOAP, as well as consumed external web services for seamless integration.",
-          "Managed high-priority production tickets and provided reliable support during critical release phases.",
-          "Participated actively in Agile ceremonies including daily stand-ups, sprint planning, and retrospectives, collaborating with cross-functional onsite and remote teams.",
-          "Coordinated code deployments across multiple environments such as dev, test, end-to-end, and production to ensure smooth release cycles and minimize downtime."
-        ]
+        "sections": [
+          {
+            "header": "Legacy System Modernization (Spring → Spring Boot)",
+            "points": [
+              "Led migration of legacy Spring MVC monolith to Spring MVC + Spring Boot architecture, reducing technical debt by 70% and eliminating 15+ critical security vulnerabilities from unsupported Spring",
+              "Refactored 50K+ lines of legacy Spring code into Spring Boot layered architecture (Repository → Service → REST Controller) using Spring Data JPA, Hibernate, and Thymeleaf templates, improving maintainability and reducing bug fix time",
+              "Implemented Spring design patterns including @Service, @Repository, @RestController, and DTO patterns, establishing maintainable RESTful foundation that supported 3x faster feature development for subsequent team members"
+            ]
+          },
+          {
+            "header": "Full-Stack Development (Java + Angular Modernization)",
+            "points": [
+              "Migrated from AngularJS 1.5 to Angular 5 gradually and developed responsive Angular frontend integrated with Spring Boot REST endpoints, delivering employee dashboard, project tracking, and reporting modules with mobile responsiveness across tablets and desktops, eliminating AngularJS security vulnerabilities and improving bundle size by 65%",
+              "Migrated 20+ AngularJS controllers/directives to Angular 5 components/services, implementing RxJS Observables, Angular Router, Angular Material, and lazy loading, achieving 3x faster initial page loads and 85% reduction in memory leaks",
+              "Created RESTful APIs in Spring Boot using Spring Web MVC with Jackson JSON serialization, CORS handling, and Spring Security OAuth2, supporting Angular HTTP Client calls with token validation"
+            ]
+          },
+          {
+            "header": "Database & Data Layer Modernization",
+            "points": [
+              "Designed PostgreSQL schemas replacing legacy Oracle, implementing normalized models for projects, employees, timesheets, billing with stored procedures, triggers, and indexes, reducing query execution time by 65%",
+              "Migrated 100K+ legacy records using custom ETL scripts, data validation rules, achieving data accuracy and zero downtime",
+              "Optimized database performance through query refactoring, composite indexing, pagination, reducing page load times"
+            ]
+          },
+          {
+            "header": "Testing & Quality Assurance",
+            "points": [
+              "Implemented test-first development with JUnit, Mockito, TestNG, Spring for 85% unit test coverage across Spring Boot services and repositories",
+              "Developed Selenium WebDriver tests for Angular E2E workflows, achieving 100% automation for critical journeys catching 25+ regressions",
+              "Integrated SonarQube into Maven, enforcing quality gates, maintaining A-grade score"
+            ]
+          },
+          {
+            "header": "DevOps & Deployment",
+            "points": [
+              "Containerized Spring Boot app using Docker, multi-stage builds (Maven + OpenJDK 8 + embedded Tomcat), reducing package size",
+              "Delivered 8+ major releases, eliminating complex workflows and manual work, consolidating all systems",
+              "Real-time Angular 5 developer-only dashboards for testing status of APIs",
+              "Delivered company-wide town hall presentation (2018) on telecom domain modernization, educating 150+ employees on our project"
+            ]
+          }
+        ],
+        "technologies": ["Java", "Spring", "Spring Boot", "Angular", "TypeScript", "PostgreSQL", "Oracle", "REST APIs", "Docker", "JUnit", "Mockito"]
       }
     ],
     "education": [
@@ -308,10 +426,18 @@
             "key": "core",
             "items": [
               { "key": "nlp", "name": "NLP", "image": "assets/images/skills/nlp.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
-              { "key": "computervision", "name": "Computer Vision basics", "image": "assets/images/skills/computervision.png", "icon": "pi pi-eye", "level": "Beginner" },
+              { "key": "computervision", "name": "Computer Vision basics", "image": "assets/images/skills/computervision.png", "icon": "pi pi-eye", "level": "Beginner" }
+            ]
+          },
+          {
+            "title": "Generative AI",
+            "key": "genai",
+            "items": [
+              { "key": "genai", "name": "Gen AI Concepts", "image": "assets/images/skills/genai.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "llm", "name": "LLM", "image": "assets/images/skills/llm.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
               { "key": "agents", "name": "Agents", "image": "assets/images/skills/agents.png", "icon": "pi pi-sparkles", "level": "Intermediate" },
-              { "key": "langchain", "name": "LangChain", "image": "assets/images/skills/langchain.png", "icon": "pi pi-link", "level": "Intermediate" }
+              { "key": "langchain", "name": "LangChain", "image": "assets/images/skills/langchain.png", "icon": "pi pi-link", "level": "Intermediate" },
+              { "key": "prompt-engineering", "name": "Prompt Engineering", "image": "assets/images/skills/prompt-engineering.png", "icon": "pi pi-sparkles", "level": "Intermediate" }
             ]
           },
           {
@@ -439,8 +565,238 @@
         ]
       }
     ],
-    "projects": [],
-    "achievements": [],
+    "projects": [
+      {
+        "id": "ats-resume-optimizer",
+        "title": "ATS Resume Optimizer",
+        "description": "An AI-powered resume optimization tool that intelligently adapts resumes to specific job descriptions for maximum ATS compatibility. Uses OpenAI GPT-4o-mini with 14 distinct ATS strategies, programmatic keyword verification, iterative refinement, and 40 premium themes with live preview and PDF export.",
+        "technologies": ["Python", "OpenAI API", "Streamlit", "Playwright", "BeautifulSoup4", "pypdf"],
+        "category": "AI & Machine Learning",
+        "subcategory": "LLM Applications",
+        "highlights": [
+          "14 ATS optimization strategies including keyword frequency, semantic skill clustering, and STAR-style bullets",
+          "Programmatic keyword verification with computed match % separate from LLM scoring",
+          "40 premium resume themes with configurable accent colors and live preview",
+          "Job URL scraping supporting Greenhouse, Lever, Workday, LinkedIn, and Indeed",
+          "Iterative refinement with up to N optimization passes tracking missing keywords and scores",
+          "PDF export via headless Chromium with A4 formatting"
+        ],
+        "status": "Active",
+        "version": "1.3.1",
+        "icon": "pi pi-sparkles",
+        "github": "https://github.com/deivamanikailasam/ATSResumeOptimizer",
+        "link": "https://atsresumeoptimizer.streamlit.app",
+        "featured": true
+      },
+      {
+        "id": "dynamic-task-scheduler",
+        "title": "Dynamic Task Scheduler",
+        "description": "An AI task-scheduling agent that accepts natural-language task descriptions with deadlines, durations, meetings, and energy constraints, then uses OpenAI GPT-4o to produce prioritized, time-blocked schedules with markdown table exports.",
+        "technologies": ["Python", "OpenAI API", "GPT-4o"],
+        "category": "AI & Machine Learning",
+        "subcategory": "Task Automation",
+        "highlights": [
+          "Natural language input for tasks, deadlines, durations, and energy constraints",
+          "GPT-4o powered scheduling with urgency, importance, and constraint awareness",
+          "Markdown table export with smart section grouping for identical schedules",
+          "CLI and programmatic usage with rate limit and quota handling"
+        ],
+        "status": "Active",
+        "icon": "pi pi-calendar-clock",
+        "github": "https://github.com/deivamanikailasam/DynamicTaskScheduler",
+        "featured": false
+      },
+      {
+        "id": "helio-supervisor",
+        "title": "Helio Supervisor",
+        "description": "A hierarchical supervisor agent for goal-oriented workflows supporting multiple LLM providers, RAG over local documents, and six built-in tools. Features both a Streamlit web UI and a Rich CLI with optional human-in-the-loop approval and persistent conversation memory.",
+        "technologies": ["Python", "LangChain", "LangGraph", "OpenAI API", "FAISS", "Streamlit", "Ollama", "Google Gemini"],
+        "category": "AI & Machine Learning",
+        "subcategory": "Agent Systems",
+        "highlights": [
+          "Multi-provider LLM support — OpenAI, Ollama (local), Google Gemini, Perplexity",
+          "Six built-in tools: plan_tasks, web_fetch, code_exec, write_note, summarize_text, rag_search",
+          "RAG over local documents using FAISS + BGE embeddings with optional offline mode",
+          "Human-in-the-loop approval for code execution, web fetch, and note writing",
+          "Dual interfaces — Streamlit web UI and Rich CLI with shared supervisor logic",
+          "Persistent JSONL conversation log and agent-written notes"
+        ],
+        "status": "Active",
+        "version": "1.1.0",
+        "icon": "pi pi-sitemap",
+        "github": "https://github.com/deivamanikailasam/HelioSupervisor",
+        "featured": true
+      },
+      {
+        "id": "legal-researcher-pro",
+        "title": "Legal Researcher Pro",
+        "description": "A Streamlit-based legal research and summarization tool where users paste clauses or legal questions, choose a jurisdiction (Australia, USA, or India), and receive structured analysis with confidence scoring and recommended next steps powered by GPT-4o.",
+        "technologies": ["Python", "OpenAI API", "GPT-4o", "Streamlit"],
+        "category": "AI & Machine Learning",
+        "subcategory": "Legal Tech",
+        "highlights": [
+          "Jurisdiction-aware research supporting Australian, USA, and Indian law",
+          "Structured JSON output with legal analysis, confidence score, and recommended next steps",
+          "Citation integrity enforcement — no fabricated cases or statutes",
+          "Neutral multi-perspective analysis with explicit uncertainty handling",
+          "Color-coded confidence badges (high/medium/low) in a legal-themed dark UI"
+        ],
+        "status": "Active",
+        "version": "1.0.0",
+        "icon": "pi pi-book",
+        "github": "https://github.com/deivamanikailasam/LegalResearcherPro",
+        "featured": false
+      },
+      {
+        "id": "self-critiquing-planner",
+        "title": "Self-Critiquing Planner",
+        "description": "A Streamlit app that converts high-level goals into structured plans using GPT-4o, runs a second GPT-4o pass to critique them, and supports human review and simulated execution through a Planner-Critic-Human-Executor pipeline with adaptive session memory.",
+        "technologies": ["Python", "OpenAI API", "GPT-4o", "Streamlit"],
+        "category": "AI & Machine Learning",
+        "subcategory": "Planning & Reasoning",
+        "highlights": [
+          "Goal-to-plan decomposition with structured JSON steps including type and risk assessment",
+          "Second-pass GPT-4o critique for gaps, ambiguity, risk, and safety analysis",
+          "Human-in-the-loop plan editing and step-level approval before execution",
+          "Simulated execution engine for shell, code, manual, and plan-type steps",
+          "Session memory with adaptive context for improved future planning",
+          "Domain presets — Code Refactor, Learning Plan, Workflow Design, Generic"
+        ],
+        "status": "Active",
+        "icon": "pi pi-lightbulb",
+        "github": "https://github.com/deivamanikailasam/SelfCritiquingPlanner",
+        "featured": false
+      }
+    ],
+    "achievements": [
+      {
+        "id": "award-1",
+        "title": "Star Award",
+        "description": "Recognized as the best employee during the training period, demonstrating exceptional learning ability, technical aptitude, and commitment to excellence from day one.",
+        "date": "2016-06-01",
+        "icon": "pi pi-star-fill",
+        "category": "award",
+        "organization": "Tata Consultancy Services",
+        "highlight": true
+      },
+      {
+        "id": "award-2",
+        "title": "Cornerstone Award",
+        "description": "Awarded for best performance in the project, delivering critical features ahead of schedule while maintaining the highest code quality standards across the team.",
+        "date": "2017-12-01",
+        "icon": "pi pi-trophy",
+        "category": "award",
+        "organization": "Tata Consultancy Services",
+        "highlight": true
+      },
+      {
+        "id": "award-3",
+        "title": "Pursuit of Knowledge Award",
+        "description": "Honored for outstanding knowledge sharing initiatives, including conducting technical sessions, creating documentation, and mentoring peers on modern development practices.",
+        "date": "2018-06-01",
+        "icon": "pi pi-book",
+        "category": "award",
+        "organization": "Tata Consultancy Services",
+        "highlight": false
+      },
+      {
+        "id": "award-4",
+        "title": "On the Spot Award",
+        "description": "Recognized for exceptional project delivery under tight deadlines, successfully shipping a company-wide town hall presentation on telecom domain modernization to 150+ employees.",
+        "date": "2018-11-01",
+        "icon": "pi pi-bolt",
+        "category": "award",
+        "organization": "Tata Consultancy Services",
+        "highlight": false
+      },
+      {
+        "id": "award-5",
+        "title": "Best IT Project Award",
+        "description": "Won the best university project award for outstanding capstone work on scalable web application architecture, demonstrating innovation and technical excellence.",
+        "date": "2020-10-01",
+        "icon": "pi pi-graduation-cap",
+        "category": "award",
+        "organization": "La Trobe University",
+        "highlight": true
+      },
+      {
+        "id": "milestone-1",
+        "title": "50,000+ Daily API Requests",
+        "description": "Architected and led delivery of a multi-module Spring Boot microservices platform serving 50,000+ daily API requests across hybrid SQL/NoSQL architectures at Kinesso – IPG.",
+        "date": "2023-06-01",
+        "icon": "pi pi-server",
+        "category": "milestone",
+        "organization": "Kinesso – IPG",
+        "metric": "50K+",
+        "highlight": true
+      },
+      {
+        "id": "milestone-2",
+        "title": "40+ Reusable UI Components",
+        "description": "Built and maintained a production-grade design system with 40+ reusable UI components across Angular, React.js, and Next.js, supporting 6 internal products with framework-agnostic design tokens.",
+        "date": "2023-01-01",
+        "icon": "pi pi-objects-column",
+        "category": "milestone",
+        "organization": "Kinesso – IPG",
+        "metric": "40+",
+        "highlight": false
+      },
+      {
+        "id": "milestone-3",
+        "title": "1,000+ Tests & 80%+ Coverage",
+        "description": "Established comprehensive test infrastructure spanning 1,000+ unit tests, 100+ integration tests, and controller-level tests, achieving 80+% code coverage across Java, Python, and UI codebases.",
+        "date": "2024-03-01",
+        "icon": "pi pi-check-circle",
+        "category": "milestone",
+        "organization": "Kinesso – IPG",
+        "metric": "1K+",
+        "highlight": false
+      },
+      {
+        "id": "impact-1",
+        "title": "94% Deployment Time Reduction",
+        "description": "Built a complete CI/CD pipeline with Azure DevOps, multi-stage Docker builds, and infrastructure-as-code, reducing deployment time from 2 hours to 12 minutes — a 94% improvement.",
+        "date": "2021-05-01",
+        "icon": "pi pi-gauge",
+        "category": "impact",
+        "organization": "ACE Contractors",
+        "metric": "94%",
+        "highlight": true
+      },
+      {
+        "id": "impact-2",
+        "title": "5+ Engineers Mentored",
+        "description": "Mentored 5+ junior engineers in Angular, React.js, Next.js, Spring Boot, Python patterns, and Gen AI integration. 3 were promoted to mid-level within 18 months.",
+        "date": "2024-01-01",
+        "icon": "pi pi-users",
+        "category": "impact",
+        "organization": "Kinesso – IPG",
+        "metric": "5+",
+        "highlight": false
+      },
+      {
+        "id": "impact-3",
+        "title": "100% User Adoption",
+        "description": "Achieved 100% user adoption across construction, admin, and executive teams through collaborative UX design and progressive feature rollouts, eliminating resistance to digital transformation.",
+        "date": "2021-06-01",
+        "icon": "pi pi-chart-line",
+        "category": "impact",
+        "organization": "ACE Contractors",
+        "metric": "100%",
+        "highlight": false
+      },
+      {
+        "id": "impact-4",
+        "title": "500K+ Daily Users Platform",
+        "description": "Led technical design reviews for 8+ feature modules establishing architectural patterns including abstract service layer, saga pattern, CQRS, and Gen AI service mesh for a platform serving 500K+ daily users.",
+        "date": "2024-06-01",
+        "icon": "pi pi-globe",
+        "category": "impact",
+        "organization": "Kinesso – IPG",
+        "metric": "500K+",
+        "highlight": true
+      }
+    ],
     "testimonials": [],
     "contact": {
       "email": "deivamanikailasam@gmail.com",
@@ -454,13 +810,13 @@
         },
         {
           "platform": "linkedin",
-          "url": "https://linkedin.com",
+          "url": "https://www.linkedin.com/in/deivamani-k/",
           "icon": "pi pi-linkedin"
         },
         {
-          "platform": "twitter",
-          "url": "https://twitter.com",
-          "icon": "pi pi-twitter"
+          "platform": "youtube",
+          "url": "https://www.youtube.com/@learnwithdeiva",
+          "icon": "pi pi-youtube"
         }
       ]
     }

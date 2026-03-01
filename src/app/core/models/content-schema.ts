@@ -53,6 +53,11 @@ export interface ISection {
     icon: string;
   }
   
+  export interface ExperienceSection {
+    header: string;
+    points: string[];
+  }
+
   export interface Experience {
     id: string;
     company: string;
@@ -60,7 +65,8 @@ export interface ISection {
     startDate: string;
     endDate?: string;
     current: boolean;
-    description: string | string[];
+    description?: string | string[];
+    sections?: ExperienceSection[];
     technologies?: string[];
     companyLogo?: string;
     backgroundImage?: string;
@@ -75,6 +81,12 @@ export interface ISection {
     link?: string;
     github?: string;
     featured: boolean;
+    category?: string;
+    subcategory?: string;
+    highlights?: string[];
+    status?: 'Active' | 'Completed' | 'In Development';
+    version?: string;
+    icon?: string;
   }
   
   export interface PortfolioContent {
@@ -94,7 +106,6 @@ export interface ISection {
     name: string;
     image?: string;
     icon?: string;
-    level: 'Beginner' | 'Intermediate' | 'Advanced';
   }
 
   export interface SkillSubdivision {
@@ -119,6 +130,10 @@ export interface ISection {
     description: string;
     date: string;
     icon?: string;
+    category?: 'award' | 'milestone' | 'impact';
+    organization?: string;
+    metric?: string;
+    highlight?: boolean;
   }
   
   export interface Testimonial {

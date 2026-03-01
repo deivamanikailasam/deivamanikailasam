@@ -2,11 +2,10 @@ import { Component, OnInit, computed, signal, effect } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
-import { TagModule } from 'primeng/tag';
 import { Router } from '@angular/router';
 @Component({
   selector: 'app-skills',
-  imports: [CommonModule, CardModule, TagModule],
+  imports: [CommonModule, CardModule],
   template: `
     <div class="skills-container">
       <div class="section-header">
@@ -68,11 +67,6 @@ import { Router } from '@angular/router';
                               <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
                             }
                             <span class="skill-name">{{ skill.name }}</span>
-                            <p-tag 
-                              [value]="skill.level" 
-                              [severity]="getLevelSeverity(skill.level)"
-                              [styleClass]="'skill-level-tag'"
-                            ></p-tag>
                           </div>
                         </div>
                       }
@@ -92,11 +86,6 @@ import { Router } from '@angular/router';
                           <span class="skill-icon">{{ getSkillIcon(skill.name) }}</span>
                         }
                         <span class="skill-name">{{ skill.name }}</span>
-                        <p-tag 
-                          [value]="skill.level" 
-                          [severity]="getLevelSeverity(skill.level)"
-                          [styleClass]="'skill-level-tag'"
-                        ></p-tag>
                       </div>
                     </div>
                   }
@@ -482,16 +471,6 @@ import { Router } from '@angular/router';
       flex: 1;
     }
     
-    ::ng-deep .skill-level-tag {
-      font-weight: 600 !important;
-      font-size: 0.75rem !important;
-      padding: 0.35rem 0.75rem !important;
-      border-radius: 1rem !important;
-      text-transform: uppercase !important;
-      letter-spacing: 0.5px !important;
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2) !important;
-    }
-    
     .empty-state {
       text-align: center;
       padding: 4rem 2rem;
@@ -667,11 +646,6 @@ import { Router } from '@angular/router';
       
       .skill-name {
         font-size: clamp(0.9rem, 2.5vw, 1rem);
-      }
-      
-      ::ng-deep .skill-level-tag {
-        font-size: clamp(0.65rem, 1.8vw, 0.75rem) !important;
-        padding: clamp(0.25rem, 0.8vw, 0.35rem) clamp(0.5rem, 1.5vw, 0.75rem) !important;
       }
     }
     
@@ -858,12 +832,6 @@ import { Router } from '@angular/router';
         word-break: break-word;
         overflow-wrap: break-word;
       }
-      
-      ::ng-deep .skill-level-tag {
-        font-size: clamp(0.6rem, 2vw, 0.7rem) !important;
-        padding: clamp(0.2rem, 1vw, 0.3rem) clamp(0.4rem, 2vw, 0.6rem) !important;
-        white-space: nowrap;
-      }
     }
     
     // Landscape orientation for mobile
@@ -882,8 +850,7 @@ export class SkillsComponent implements OnInit {
   collapsedCards = signal<Set<string>>(new Set());
 
   skills = computed(() => {
-    const content = this.contentService.portfolioContent();
-    return content?.skills || [];
+    return this.contentService.skillsData() || [];
   });
 
   constructor(public contentService: ContentService, private router: Router) {
@@ -897,8 +864,8 @@ export class SkillsComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.contentService.portfolioContent()) {
-      this.contentService.loadPortfolioContent();
+    if (this.contentService.skillsData().length === 0) {
+      this.contentService.loadSkillsData();
     }
   }
 
@@ -946,19 +913,6 @@ export class SkillsComponent implements OnInit {
     };
     
     return skillIcons[skill] || '💼';
-  }
-
-  getLevelSeverity(level: string): "success" | "secondary" | "info" | "warn" | "danger" | "contrast" | null | undefined {
-    switch (level) {
-      case 'Advanced':
-        return 'success';
-      case 'Intermediate':
-        return 'warn';
-      case 'Beginner':
-        return 'info';
-      default:
-        return 'secondary';
-    }
   }
 
   getCategoryColor(color?: string): string {

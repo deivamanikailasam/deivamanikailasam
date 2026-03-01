@@ -653,18 +653,16 @@ export class EducationComponent implements OnInit {
   collapsedCards = signal<Record<string, boolean>>({});
 
   education = computed(() => {
-    const content = this.contentService.portfolioContent();
-    return content?.education || [];
+    return this.contentService.educationData();
   });
 
   constructor(public contentService: ContentService) {
-    // Initialize all cards as collapsed by default when education data is available
     effect(() => {
       const education = this.education();
       if (education.length > 0 && Object.keys(this.collapsedCards()).length === 0) {
         const initialState: Record<string, boolean> = {};
         education.forEach(edu => {
-          initialState[edu.id] = true; // true = collapsed
+          initialState[edu.id] = true;
         });
         this.collapsedCards.set(initialState);
       }
@@ -672,8 +670,8 @@ export class EducationComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    if (!this.contentService.portfolioContent()) {
-      this.contentService.loadPortfolioContent();
+    if (this.contentService.educationData().length === 0) {
+      this.contentService.loadEducationData();
     }
   }
 

@@ -29,10 +29,6 @@ export class ThemeService {
     this.themeMode.set(mode);
   }
 
-  setAccentColor(color: AccentColor): void {
-    this.accentColor.set(color);
-  }
-
   private applyTheme(mode: ThemeMode, accent: AccentColor): void {
     const root = document.documentElement;
     const appContainer = document.querySelector('.app-container');

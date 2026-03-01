@@ -1,39 +1,70 @@
 {
     "version": "1.0.0",
     "profile": {
-      "name": "Jane Developer",
+      "name": "Deiva mani Kailasam",
       "title": "Senior Full Stack Engineer",
-      "bio": "Passionate about building scalable web applications with modern technologies...",
-      "email": "jane@example.com",
-      "phone": "+1 (555) 123-4567",
-      "location": "San Francisco, CA",
+      "bio": "Passionate and detail-oriented Senior Full Stack Developer with 8+ years of experience designing, developing, and deploying robust web applications and end-to-end solutions. Expert in modern technologies and cloud platforms, committed to clean code, best practices, and delivering tangible business value. Proven leader in independently managing projects, mentoring junior developers, resolving complex technical challenges, and contributing effectively within Agile teams. Strong expertise in AI innovation, integrating intelligent features and automation using cutting-edge AI technologies.",
+      "email": "deivamanikailasam@gmail.com",
+      "phone": "+61 0411181052",
+      "location": "Melbourne, Australia",
       "avatar": "assets/images/avatar.png",
       "socials": [
         { "platform": "github", "url": "https://github.com", "icon": "pi pi-github" },
-        { "platform": "linkedin", "url": "https://linkedin.com", "icon": "pi pi-linkedin" }
+        { "platform": "linkedin", "url": "https://www.linkedin.com/in/deivamani-k/", "icon": "pi pi-linkedin" },
+        { "platform": "youtube", "url": "https://www.youtube.com/@learnwithdeiva", "icon": "pi pi-youtube" }
       ]
     },
     "experience": [
       {
         "id": "1",
-        "company": "Tech Corp",
-        "position": "Senior Frontend Engineer",
-        "startDate": "2022-01-01",
+        "company": "Kinesso",
+        "position": "Senior Full Stack Engineer",
+        "startDate": "2021-08-01",
         "endDate": null,
         "current": true,
-        "description": "Led development of customer-facing dashboard using Angular and PrimeNG...",
-        "technologies": ["Angular", "TypeScript", "RxJS", "PrimeNG"]
+        "description": "Led frontend and backend development for multiple marketing products, delivering scalable, high-quality software solutions. Mentored junior developers, architected reusable components, and integrated AI-driven features.",
+        "technologies": ["Angular", "TypeScript", "RxJS", "Java", "Spring Boot", "PostgreSQL", "AWS"]
+      },
+      {
+        "id": "2",
+        "company": "ACE Contractors PTY LTD",
+        "position": "Full Stack Developer",
+        "startDate": "2020-12-01",
+        "endDate": "2021-07-31",
+        "current": false,
+        "description": "Researched, designed, and implemented software solutions. Set up authentication systems, developed database structures, and deployed containerized applications on cloud platforms.",
+        "technologies": ["Angular", "Node.js", "TypeScript", "PostgreSQL", "Docker", "AWS"]
+      },
+      {
+        "id": "3",
+        "company": "Tata Consultancy Services",
+        "position": "Full Stack Engineer",
+        "startDate": "2016-01-01",
+        "endDate": "2019-05-31",
+        "current": false,
+        "description": "Architected and designed full stack solutions for business process teams. Owned end-to-end project lifecycle, developed REST APIs and SOAP services, and participated in Agile ceremonies.",
+        "technologies": ["Java", "Spring", "Angular", "JavaScript", "Oracle", "REST APIs"]
       }
     ],
     "education": [
       {
         "id": "1",
-        "company": "University Name",
-        "position": "Bachelor of Science in Computer Science",
-        "startDate": "2016-09-01",
-        "endDate": "2020-05-31",
+        "company": "La Trobe University",
+        "position": "Masters in Information Technology",
+        "startDate": "2019-07-01",
+        "endDate": "2021-05-31",
         "current": false,
-        "description": "Focused on software engineering and web technologies",
+        "description": "Comprehensive postgraduate program focusing on advanced software engineering, enterprise systems, and emerging technologies. Graduated with distinction.",
+        "technologies": []
+      },
+      {
+        "id": "2",
+        "company": "Valliammai Engineering College",
+        "position": "Bachelors in Information Technology",
+        "startDate": "2011-08-01",
+        "endDate": "2015-05-31",
+        "current": false,
+        "description": "Four-year undergraduate program covering fundamental and advanced computing concepts. Graduated with honors.",
         "technologies": []
       }
     ],
@@ -41,33 +72,36 @@
       {
         "id": "1",
         "category": "Frontend",
-        "items": ["Angular", "React", "TypeScript", "RxJS", "SCSS"]
+        "items": ["Angular", "React", "TypeScript", "RxJS", "HTML5", "CSS3", "Tailwind CSS", "PrimeNG"]
       },
       {
         "id": "2",
         "category": "Backend",
-        "items": ["Node.js", "Java", "Python", "PostgreSQL"]
-      }
-    ],
-    "projects": [
+        "items": ["Java", "Spring Boot", "Node.js", "Python", "PostgreSQL", "MongoDB", "Redis"]
+      },
       {
-        "id": "1",
-        "title": "E-commerce Platform",
-        "description": "Full-stack e-commerce application with real-time inventory management...",
-        "technologies": ["Angular", "Node.js", "PostgreSQL"],
-        "image": "assets/images/project-1.jpg",
-        "link": "https://example.com",
-        "github": "https://github.com/example/project",
-        "featured": true
+        "id": "3",
+        "category": "DevOps & Cloud",
+        "items": ["AWS", "Docker", "Kubernetes", "Jenkins", "GitLab CI", "Git"]
+      },
+      {
+        "id": "4",
+        "category": "AI",
+        "items": ["Gen AI", "LLM", "LangChain", "OpenAI API", "Prompt Engineering"]
       }
     ],
+    "projects": [],
     "achievements": [],
     "testimonials": [],
     "contact": {
-      "email": "jane@example.com",
-      "phone": "+1 (555) 123-4567",
-      "location": "San Francisco, CA",
-      "socials": []
+      "email": "deivamanikailasam@gmail.com",
+      "phone": "+61 0411181052",
+      "location": "Melbourne, Australia",
+      "socials": [
+        { "platform": "github", "url": "https://github.com", "icon": "pi pi-github" },
+        { "platform": "linkedin", "url": "https://www.linkedin.com/in/deivamani-k/", "icon": "pi pi-linkedin" },
+        { "platform": "youtube", "url": "https://www.youtube.com/@learnwithdeiva", "icon": "pi pi-youtube" }
+      ]
     }
   }
   

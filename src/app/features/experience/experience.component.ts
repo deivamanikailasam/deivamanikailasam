@@ -1,12 +1,26 @@
 import { Component, OnInit, OnDestroy, computed, signal, effect, PLATFORM_ID, inject, CUSTOM_ELEMENTS_SCHEMA } from '@angular/core';
 import { CommonModule, isPlatformBrowser } from '@angular/common';
+import { trigger, style, transition, animate } from '@angular/animations';
 import { ContentService } from '../../core/services/content.service';
 import { CardModule } from 'primeng/card';
 import { TimelineModule } from 'primeng/timeline';
+
 @Component({
   selector: 'app-experience',
   imports: [CommonModule, CardModule, TimelineModule],
   schemas: [CUSTOM_ELEMENTS_SCHEMA],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ opacity: 0, height: 0, overflow: 'hidden' }),
+        animate('300ms ease-out', style({ opacity: 1, height: '*' }))
+      ]),
+      transition(':leave', [
+        style({ opacity: 1, height: '*', overflow: 'hidden' }),
+        animate('200ms ease-in', style({ opacity: 0, height: 0 }))
+      ])
+    ])
+  ],
   template: `
     <div class="experience-container">
       <div class="section-header">
@@ -65,7 +79,37 @@ import { TimelineModule } from 'primeng/timeline';
                     </div>
                   </div>
                 </ng-template>
-                @if (isArray(event.description)) {
+                @if (event.sections && event.sections.length > 0) {
+                  <div class="sections-container">
+                    @for (section of event.sections; track $index) {
+                      <div class="section-block">
+                        <button 
+                          type="button"
+                          class="section-header-btn"
+                          (click)="toggleSection(event.id, $index)"
+                          [attr.aria-expanded]="!isSectionCollapsed(event.id, $index)">
+                          <h4 class="section-header-title" [style.color]="getGradientColorForIcon(event.index)">
+                            <i class="pi pi-folder-open section-folder-icon"></i>
+                            {{ section.header }}
+                          </h4>
+                          <i class="pi section-chevron" 
+                             [class.pi-chevron-down]="isSectionCollapsed(event.id, $index)"
+                             [class.pi-chevron-up]="!isSectionCollapsed(event.id, $index)"></i>
+                        </button>
+                        @if (!isSectionCollapsed(event.id, $index)) {
+                          <div class="section-points" [@slideInOut]>
+                            @for (point of section.points; track $index) {
+                              <div class="description-item">
+                                <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
+                                <span class="description-text">{{ point }}</span>
+                              </div>
+                            }
+                          </div>
+                        }
+                      </div>
+                    }
+                  </div>
+                } @else if (isArray(event.description)) {
                   <div class="description-list">
                     @for (desc of event.description; track $index) {
                       <div class="description-item">
@@ -74,7 +118,7 @@ import { TimelineModule } from 'primeng/timeline';
                       </div>
                     }
                   </div>
-                } @else {
+                } @else if (event.description) {
                   <p class="description">{{ event.description }}</p>
                 }
                 <ng-template pTemplate="footer">
@@ -139,7 +183,37 @@ import { TimelineModule } from 'primeng/timeline';
                   </div>
                 </div>
               </ng-template>
-              @if (isArray(event.description)) {
+              @if (event.sections && event.sections.length > 0) {
+                <div class="sections-container">
+                  @for (section of event.sections; track $index) {
+                    <div class="section-block">
+                      <button 
+                        type="button"
+                        class="section-header-btn"
+                        (click)="toggleSection(event.id, $index)"
+                        [attr.aria-expanded]="!isSectionCollapsed(event.id, $index)">
+                        <h4 class="section-header-title" [style.color]="getGradientColorForIcon(event.index)">
+                          <i class="pi pi-folder-open section-folder-icon"></i>
+                          {{ section.header }}
+                        </h4>
+                        <i class="pi section-chevron" 
+                           [class.pi-chevron-down]="isSectionCollapsed(event.id, $index)"
+                           [class.pi-chevron-up]="!isSectionCollapsed(event.id, $index)"></i>
+                      </button>
+                      @if (!isSectionCollapsed(event.id, $index)) {
+                        <div class="section-points" [@slideInOut]>
+                          @for (point of section.points; track $index) {
+                            <div class="description-item">
+                              <i class="pi pi-check-circle description-icon" [style.color]="getGradientColorForIcon(event.index)"></i>
+                              <span class="description-text">{{ point }}</span>
+                            </div>
+                          }
+                        </div>
+                      }
+                    </div>
+                  }
+                </div>
+              } @else if (isArray(event.description)) {
                 <div class="description-list">
                   @for (desc of event.description; track $index) {
                     <div class="description-item">
@@ -148,7 +222,7 @@ import { TimelineModule } from 'primeng/timeline';
                     </div>
                   }
                 </div>
-              } @else {
+              } @else if (event.description) {
                 <p class="description">{{ event.description }}</p>
               }
               <ng-template pTemplate="footer">
@@ -527,6 +601,70 @@ import { TimelineModule } from 'primeng/timeline';
       display: flex;
       flex-direction: column;
       gap: 1rem;
+    }
+    
+    .sections-container {
+      display: flex;
+      flex-direction: column;
+      gap: 1rem;
+    }
+    
+    .section-block {
+      background: rgba(255, 255, 255, 0.03);
+      border-radius: 1rem;
+      overflow: hidden;
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s ease;
+      
+      &:hover {
+        border-color: rgba(255, 255, 255, 0.15);
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+    
+    .section-header-btn {
+      width: 100%;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      padding: 1rem 1.25rem;
+      background: transparent;
+      border: none;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      
+      &:hover {
+        background: rgba(255, 255, 255, 0.05);
+      }
+    }
+    
+    .section-header-title {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 1.1rem;
+      font-weight: 600;
+      margin: 0;
+      text-align: left;
+    }
+    
+    .section-folder-icon {
+      font-size: 1.25rem;
+      flex-shrink: 0;
+    }
+    
+    .section-chevron {
+      color: rgba(255, 255, 255, 0.6);
+      font-size: 1rem;
+      flex-shrink: 0;
+      transition: transform 0.3s ease;
+    }
+    
+    .section-points {
+      padding: 0 1.25rem 1.25rem 1.25rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
     }
     
     .description-item {
@@ -1046,10 +1184,10 @@ export class ExperienceComponent implements OnInit, OnDestroy {
   private isTablet = signal(false);
   private resizeListener?: () => void;
   collapsedCards = signal<Set<string>>(new Set());
+  collapsedSections = signal<Set<string>>(new Set());
   
   experience = computed(() => {
-    const content = this.contentService.portfolioContent();
-    return content?.experience || [];
+    return this.contentService.experienceData();
   });
 
   timelineEvents = computed(() => {
@@ -1099,8 +1237,9 @@ export class ExperienceComponent implements OnInit, OnDestroy {
   }
 
   ngOnInit(): void {
-    if (!this.contentService.portfolioContent()) {
-      this.contentService.loadPortfolioContent();
+    // Load experience data from experience.json
+    if (this.contentService.experienceData().length === 0) {
+      this.contentService.loadExperienceData();
     }
   }
 
@@ -1150,5 +1289,22 @@ export class ExperienceComponent implements OnInit, OnDestroy {
 
   isCardCollapsed(cardId: string): boolean {
     return this.collapsedCards().has(cardId);
+  }
+
+  toggleSection(cardId: string, sectionIndex: number): void {
+    const sectionKey = `${cardId}-${sectionIndex}`;
+    const collapsed = this.collapsedSections();
+    const newCollapsed = new Set(collapsed);
+    if (newCollapsed.has(sectionKey)) {
+      newCollapsed.delete(sectionKey);
+    } else {
+      newCollapsed.add(sectionKey);
+    }
+    this.collapsedSections.set(newCollapsed);
+  }
+
+  isSectionCollapsed(cardId: string, sectionIndex: number): boolean {
+    const sectionKey = `${cardId}-${sectionIndex}`;
+    return this.collapsedSections().has(sectionKey);
   }
 }

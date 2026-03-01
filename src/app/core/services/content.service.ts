@@ -1,72 +1,41 @@
-import { Injectable, signal, effect } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { signal as ngSignal, computed } from '@angular/core';
-import { PortfolioContent } from '../models/content-schema';
-import { environment } from '../../../environments/environment';
+import { Experience, Project, Achievement } from '../models/content-schema';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ContentService {
-  // Update this to check if apiUrl is empty
-  private get contentUrl(): string {
-    if (environment.apiUrl) {
-      return `${environment.apiUrl}/portfolio`;
-    }
-    // Use relative path - Angular will handle base-href automatically
-    return 'assets/data/db.json';  // Remove leading slash
-  }  
-  // Signals for state management
-  portfolioContent = ngSignal<PortfolioContent | null>(null);
-  skillDetails = ngSignal<any>(null);
-  experienceDetails = ngSignal<any>(null);
-  certificates = ngSignal<any>(null);
-  isLoading = ngSignal(false);
-  error = ngSignal<string | null>(null);
-  contentVersion = ngSignal<string>('1.0.0');
+  profileData = signal<any>(null);
+  experienceData = signal<Experience[]>([]);
+  educationData = signal<Experience[]>([]);
+  skillsData = signal<any[]>([]);
+  skillDetails = signal<any>(null);
+  projectsData = signal<Project[]>([]);
+  experienceDetails = signal<any>(null);
+  certificates = signal<any>(null);
+  achievementsData = signal<Achievement[]>([]);
 
-  // Computed signals for derived state
-  hasContent = computed(() => this.portfolioContent() !== null);
-  sections = computed(() => {
-    const content = this.portfolioContent();
-    return content ? {
-      profile: content.profile,
-      experience: content.experience,
-      education: content.education,
-      skills: content.skills,
-      projects: content.projects,
-      achievements: content.achievements,
-      testimonials: content.testimonials,
-      contact: content.contact
-    } : null;
-  });
+  constructor(private http: HttpClient) {}
 
-  constructor(private http: HttpClient) {
-    // Automatically update when content version changes
-    effect(() => {
-      const version = this.contentVersion();
-      console.log(`Content version updated to: ${version}`);
+  loadProfileData(): void {
+    this.http.get<any>('assets/data/profile.json').subscribe({
+      next: (data) => {
+        this.profileData.set(data);
+      },
+      error: (err) => {
+        console.error('Profile data loading error:', err);
+      }
     });
   }
 
-  loadPortfolioContent(): void {
-    this.isLoading.set(true);
-    this.error.set(null);
-
-    this.http.get<any>(this.contentUrl).subscribe({
+  loadSkillsData(): void {
+    this.http.get<any[]>('assets/data/skills.json').subscribe({
       next: (data) => {
-
-        // Extract portfolio data if loaded from static file
-        const portfolioData = data.portfolio || data;
-        
-        this.portfolioContent.set(portfolioData);
-        this.contentVersion.set(portfolioData.version);
-        this.isLoading.set(false);
+        this.skillsData.set(data);
       },
       error: (err) => {
-        this.error.set('Failed to load portfolio content');
-        this.isLoading.set(false);
-        console.error('Content loading error:', err);
+        console.error('Skills data loading error:', err);
       }
     });
   }
@@ -82,6 +51,17 @@ export class ContentService {
     });
   }
 
+  loadProjectsData(): void {
+    this.http.get<Project[]>('assets/data/projects.json').subscribe({
+      next: (data) => {
+        this.projectsData.set(data);
+      },
+      error: (err) => {
+        console.error('Projects data loading error:', err);
+      }
+    });
+  }
+
   loadExperienceDetails(): void {
     this.http.get<any>('assets/data/experience-details.json').subscribe({
       next: (data) => {
@@ -89,6 +69,39 @@ export class ContentService {
       },
       error: (err) => {
         console.error('Experience details loading error:', err);
+      }
+    });
+  }
+
+  loadExperienceData(): void {
+    this.http.get<Experience[]>('assets/data/experience.json').subscribe({
+      next: (data) => {
+        this.experienceData.set(data);
+      },
+      error: (err) => {
+        console.error('Experience data loading error:', err);
+      }
+    });
+  }
+
+  loadEducationData(): void {
+    this.http.get<Experience[]>('assets/data/education.json').subscribe({
+      next: (data) => {
+        this.educationData.set(data);
+      },
+      error: (err) => {
+        console.error('Education data loading error:', err);
+      }
+    });
+  }
+
+  loadAchievementsData(): void {
+    this.http.get<Achievement[]>('assets/data/achievements.json').subscribe({
+      next: (data) => {
+        this.achievementsData.set(data);
+      },
+      error: (err) => {
+        console.error('Achievements data loading error:', err);
       }
     });
   }
@@ -102,23 +115,5 @@ export class ContentService {
         console.error('Certificates loading error:', err);
       }
     });
-  }
-
-  updateSection<K extends keyof PortfolioContent>(
-    sectionKey: K,
-    newData: PortfolioContent[K]
-  ): void {
-    const current = this.portfolioContent();
-    if (current) {
-      this.portfolioContent.set({
-        ...current,
-        [sectionKey]: newData
-      });
-    }
-  }
-
-  getSection<K extends keyof PortfolioContent>(sectionKey: K): PortfolioContent[K] | null {
-    const content = this.portfolioContent();
-    return content ? content[sectionKey] : null;
   }
 }
