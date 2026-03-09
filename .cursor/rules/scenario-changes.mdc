@@ -1,0 +1,772 @@
+---
+description: Generate deterministic end-user scenario changes for the current branch, full project, or deep page scan, and maintain active-only page-level scenarios documents
+alwaysApply: false
+---
+
+# Scenario Changes Command
+
+When the user asks for scenario-related tasks, follow the `scenario-changes` skill at `.cursor/skills/scenario-changes/SKILL.md`. The skill has three modes — detect which one to use from the trigger phrase.
+
+## Trigger Phrases
+
+### Branch Mode (default)
+
+- "scenario changes"
+- "generate scenario changes"
+- "use-case changes"
+- "what scenarios changed"
+- "branch scenario summary"
+- "PR summary"
+
+### Full Project Mode
+
+- "check whole project"
+- "scan whole project"
+- "full project scenarios"
+- "scenario changes check whole project"
+- "generate scenarios for whole project"
+
+### Deep Page Scan Mode
+
+- "deep scan {page}"
+- "scan {page} deeply"
+- "deep dive {page}"
+- "analyze {page} sub-components"
+- "drill into {page}"
+
+## Mode Detection
+
+- If the user's message contains "whole project", "full project", or "scan project" → use **Full Project Workflow** from the skill
+- If the user's message contains "deep scan", "deep dive", "scan deeply", or "sub-components" with a page name → use **Deep Page Scan Workflow** from the skill
+- Otherwise → use **Branch Workflow** from the skill
+
+---
+
+## Determinism Enforcement
+
+The scenario generation process MUST produce **identical output** when run against **identical source code**. The following mechanisms enforce this guarantee. Violations of any mechanism are treated as bugs.
+
+### Diff-First Workflow (All Modes)
+
+Before generating any scenarios, always determine which source files have changed:
+
+1. **Read the existing JSON** — Load `docs/scenarios/{page-name}.scenarios.json` if it exists.
+2. **Compute the change set:**
+   - **Branch Mode**: Run `git diff --name-only origin/develop...HEAD` to get changed files. Also compute current `git hash-object` for each source file referenced in the existing JSON.
+   - **Full Project Mode (first run)**: All files are "changed" (no existing JSON exists). On re-runs, compare each scenario's `sourceHash` against the current file content hash.
+   - **Deep Page Scan Mode**: Compare each scenario's `sourceHash` against the current file content hash.
+3. **Classify each existing scenario** as `unchanged` or `affected`:
+   - A scenario is `unchanged` if **ALL** of its `sourceFiles` have matching `sourceHash` values (file content has not been modified).
+   - A scenario is `affected` if **ANY** of its `sourceFiles` has a different hash, is in the git diff change set, has been deleted, or is newly created.
+4. **Preserve unchanged scenarios verbatim** — copy them into the output JSON exactly as-is (same ID, same title, same wording, same everything). Do NOT re-read, re-analyze, or re-word them.
+5. **Regenerate only affected scenarios** — re-read the changed source files, re-analyze their code paths, and generate updated scenarios.
+6. **Add new scenarios** for newly discovered code paths in changed files.
+7. **Remove stale scenarios** whose code paths have been deleted from the changed files.
+
+### Source File Hashing
+
+Every scenario includes a `sourceHash` field that fingerprints the content of its source files at generation time. This enables change detection without re-reading code.
+
+**Hash computation:**
+- For each file in a scenario's `sourceFiles` array, compute `git hash-object <file>` (the SHA-1 that git uses for blob content).
+- Concatenate the hashes in `sourceFiles` array order, separated by `:`, to produce the `sourceHash` value.
+- Example: if `sourceFiles` is `["app/home.component.ts", "app/home.component.html"]` and their git hashes are `a1b2c3d` and `e4f5g6h`, then `sourceHash` = `"a1b2c3d:e4f5g6h"`.
+
+**Hash comparison:**
+- Before generating, compute the current hash for each existing scenario's source files using `git hash-object`.
+- If the current hash matches the stored `sourceHash`, the scenario is `unchanged` — preserve it verbatim.
+- If the hash differs, a file is missing, or a file is new, the scenario is `affected` — regenerate it.
+
+### Preserve Unchanged Rule
+
+When an existing scenario's `sourceHash` matches the current state of its source files:
+- **DO NOT** re-read the source files for that scenario.
+- **DO NOT** re-word the title, userAction, expectedOutcome, or any other field.
+- **DO NOT** change the scenario's ID.
+- **DO** copy the entire scenario object verbatim into the output JSON.
+- This applies to **ALL** modes (Branch, Full Project re-run, Deep Page Scan).
+
+The only exception is if the user explicitly requests a full regeneration (e.g., "regenerate all scenarios from scratch" or "force regenerate").
+
+### Migration from Legacy Format
+
+Existing JSON files may use the old sequential `SCN-NNN` ID format and lack `sourceHash` fields. When encountering legacy-format scenarios:
+
+1. **Detect legacy format**: If any scenario in the existing JSON has an ID matching `SCN-\d+` or is missing the `sourceHash` field, the file is in legacy format.
+2. **Treat all legacy scenarios as `affected`**: Since there is no `sourceHash` to compare, all scenarios must be regenerated.
+3. **Assign new stable IDs**: Replace all `SCN-NNN` IDs with the `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format.
+4. **Compute sourceHash**: Calculate and store `git hash-object` hashes for every scenario.
+5. **Preserve content where possible**: When regenerating, read the existing scenario's `title`, `userAction`, `expectedOutcome`, and other fields as reference. If the source code has not changed since the `lastUpdated` date, keep the wording identical — only update the ID format and add the hash.
+6. **Restructure sections if needed**: Move scenarios to their canonical section (e.g., Race scenarios in a standalone "Race Conditions" section should be moved into the section where the action occurs: Page Entry, Page Interactions, Sub-Component, etc.).
+7. **One-time operation**: After migration, subsequent runs will use the Diff-First Workflow normally since `sourceHash` values will be present.
+
+### Stable Scenario IDs
+
+Scenario IDs are derived from the scenario's structural position, not from sequential numbering. This ensures the same code path always gets the same ID, regardless of discovery order.
+
+**ID format:** `{SECTION_CODE}-{TYPE_CODE}-{NNN}`
+
+**Section codes (fixed):**
+
+| Section | Code | Example |
+|---|---|---|
+| Page Entry | `PE` | `PE-POS-001` |
+| Page Interactions | `PI` | `PI-NEG-002` |
+| Sub-Component: {Name} | `SC-{name}` | `SC-profile-card-POS-001` |
+| Modal: {Name} | `MO-{name}` | `MO-confirm-delete-NEG-001` |
+| Page Exit | `PX` | `PX-EDG-001` |
+| Cross-Page | `CP` | `CP-POS-001` |
+
+**Type codes (fixed):**
+
+| Type | Code |
+|---|---|
+| Positive | `POS` |
+| Negative | `NEG` |
+| Race | `RAC` |
+| Concurrent | `CON` |
+| Edge | `EDG` |
+| Boundary | `BND` |
+
+**`{name}` derivation for Sub-Components and Modals:** Use the component's selector without the app prefix, in kebab-case. For example, `app-profile-card` → `profile-card`. If no selector prefix exists, use the full selector.
+
+**`{NNN}` assignment:** Three-digit ordinal within a section+type group, assigned according to canonical ordering (see below). Leading zeros ensure lexicographic sort (`001`, `002`, …, `010`, …, `100`).
+
+**ID stability rule:** Once a scenario ID is assigned and written to JSON, it MUST NOT change unless the scenario is removed (code path deleted) and later re-added (code path re-created). Renumbering existing IDs is forbidden — if a scenario is removed, its number is retired and not reused. New scenarios get the next available number in sequence.
+
+**Examples:**
+- First Positive scenario in Page Entry → `PE-POS-001`
+- Second Negative scenario in Sub-Component profile-card → `SC-profile-card-NEG-002`
+- First Race scenario in Page Interactions → `PI-RAC-001`
+- First Edge scenario in Modal confirm-delete → `MO-confirm-delete-EDG-001`
+
+### Canonical Ordering
+
+To ensure identical ordering across runs, sections and scenarios follow a fixed sort order.
+
+**Section order (fixed):**
+1. Page Entry
+2. Page Interactions
+3. Sub-Component sections — sorted alphabetically by component selector (kebab-case)
+4. Modal sections — sorted alphabetically by component selector (kebab-case)
+5. Page Exit
+6. Cross-Page
+
+**Scenario order within each section:**
+1. Group by type in this fixed order: Positive → Negative → Race → Concurrent → Edge → Boundary
+2. Within each type group, sort by primary source file path (alphabetical, using the first entry in `sourceFiles`)
+3. Within the same source file, sort by the order the code path appears in the file (top-to-bottom, i.e., by line number of the triggering method or branch)
+
+This ordering is deterministic: same code → same file order → same method order → same scenario order → same NNN assignment.
+
+### Self-Comparison Gate
+
+After generating new/updated scenarios for changed files, and **before writing** the output JSON:
+
+1. Load the existing JSON file.
+2. For each scenario in the new output, find the matching scenario in the existing JSON (match by scenario ID).
+3. If a match exists and the scenario's `sourceHash` has **NOT** changed, but the content differs → **this is a determinism violation**. Revert the scenario to the existing version.
+4. If a match exists and the scenario's `sourceHash` **HAS** changed → accept the new version (regenerated).
+5. If no match exists in the existing JSON → it is a new scenario, accept it.
+6. If an existing scenario has no match in the new output:
+   - If its source files still exist unchanged in the codebase → **preserve it** (do NOT remove).
+   - If its source files have been deleted or its code path demonstrably no longer exists → remove it.
+
+---
+
+## Scenario Writing Standards — Business-Readable Language
+
+All scenarios MUST be written from a **business perspective** so that non-technical stakeholders (product owners, QA testers, business analysts, executives) can read, understand, and validate them without any programming knowledge.
+
+Follow the **Given–When–Then** pattern (BDD / Gherkin style) as the mental model for every scenario:
+- **Preconditions** = Given (the starting state)
+- **User Action** = When (what the user does)
+- **Expected Outcome** = Then (what the user observes)
+
+### Scenario Title Rules
+
+- Write titles as a **plain-English statement of what the user experiences or achieves**.
+- Use the user's goal or the business rule being validated — not component names, signal names, or code constructs.
+- Start with the actor ("User", or the role name if roles exist) followed by a verb describing the experience.
+
+| BAD (technical) | GOOD (business) |
+|---|---|
+| `ProfileComponent renders computed signal` | `User sees their profile information on the page` |
+| `filteredProjects recalculates on category change` | `User filters the project list by category` |
+| `canDeactivate guard fires on dirty form` | `User is warned about unsaved changes when leaving the page` |
+| `@cardHover animation trigger activates` | `User hovers over a card and it highlights` |
+
+### User Action Rules
+
+The **User Action** field describes **what the user physically does** — the action a person performs while looking at the screen. It must satisfy these rules:
+
+1. **Use plain, everyday language.** Write as if instructing someone who has never seen code.
+2. **Reference UI elements by their visible label or description**, not by code selectors, CSS classes, or component names.
+   - GOOD: `User clicks the "View Certificate" button`
+   - BAD: `User triggers viewCertificate(cert)` or `User clicks the p-button with icon pi-eye`
+3. **Describe the physical action** — clicks, taps, types, scrolls, drags, hovers, resizes the window.
+4. **Avoid URLs, route paths, query parameters, and hash fragments** in the primary description. If a specific URL is relevant, mention it as a parenthetical clarification.
+   - GOOD: `User opens the website` or `User opens the home page`
+   - BAD: `User navigates to /home`
+   - ACCEPTABLE: `User opens the home page (via /home)`
+5. **Avoid technical jargon**: no signal names, no function names, no service names, no CSS selectors, no template syntax.
+6. **Use the feature or section name**, not the component class name.
+   - GOOD: `User views the Skills section`
+   - BAD: `User views SkillsComponent`
+7. **Full interaction path for nested scenarios.** When a scenario belongs to a Sub-Component or Modal section (i.e., the action occurs inside a child component, modal, or any deeper nesting), the `userAction` MUST describe the **complete step-by-step path the user takes from the page level down to the final action**. Do NOT describe only the last action in isolation — include every navigation step, click, or interaction the user performs to reach that point.
+   - The path starts at "User opens the page" (or the appropriate page-level entry) and chains each intermediate interaction with commas or "and" until the final action.
+   - Each step should reference the **visible UI element** the user interacts with (button label, card title, section name, menu item), not component selectors.
+   - For Page Entry and Page Interactions scenarios (top-level actions), this rule does not apply — those actions are already at the page level.
+   - GOOD: `User opens the Projects page, clicks on a project card to view its details, selects a task from the task list, clicks 'Edit' to open the task editing form, updates the task title, and clicks the 'Save' button`
+   - BAD: `User updates the task title and clicks the 'Save' button`
+
+### Expected Outcome Rules
+
+The **Expected Outcome** field describes **what the user sees or experiences** after performing the action — the observable result on screen. It must satisfy these rules:
+
+1. **Describe only what is visible or perceivable** by the user — screen content, messages, animations, navigation, sounds, downloads.
+   - GOOD: `The page displays the user's name, job title, photo, and social media links`
+   - BAD: `profileData signal is set, computed signal recalculates, template @if branch renders`
+2. **Use outcome-oriented phrases**: "the page shows…", "a success message appears…", "the user is taken to…", "the list updates to show…", "the button becomes disabled…", "a confirmation dialog appears…"
+3. **Never reference code internals**: no signal names, function calls, CSS property values, template syntax, animation trigger names, or error handler logic.
+   - GOOD: `The card expands with a smooth animation to reveal additional details`
+   - BAD: `Card animates to translateY(-12px) scale(1.02) via @cardHover animation trigger`
+4. **Never reference console logs or internal error handlers** as the outcome. Describe what the user sees (e.g., "an empty section is shown" or "an error message appears"), not what happens in the console.
+   - GOOD: `The profile section appears empty with no content displayed`
+   - BAD: `profileData signal remains null, @if (profile()) is falsy, error logged to console`
+5. **Be verifiable by a non-technical person** looking at the screen. Ask: "Could a business analyst confirm this outcome by looking at the app?" If not, rewrite it.
+6. **Quantify when it helps**: "the grid shows up to 6 projects per page", "a green 'Ongoing' badge appears next to the date".
+
+### Logic Involved — Where Technical Detail Goes
+
+All **technical implementation details** (code paths, service calls, signal chains, CSS classes, template branches, guard logic) belong exclusively in the **Logic Involved** field. This field is for developers and is explicitly allowed to be technical.
+
+### Scenario Type Definitions and Detection Strategies
+
+Every scenario MUST be classified as exactly one of the six types below. Use the detection strategies to systematically identify scenarios of each type from the code.
+
+#### 1. Positive (happy path)
+
+**Definition:** The user performs an intended action under normal conditions, and the system responds with the expected successful result.
+
+**Detection strategy:**
+- Trace every user-triggered method to its success branch
+- Identify the default/expected outcome for every form submission, button click, navigation, and data load
+- Every feature's primary use case = at least one Positive scenario
+
+**Common patterns:**
+- User submits a valid form and sees a success message
+- User loads a page and sees the expected content
+- User clicks a button and the intended action completes
+- User searches and matching results appear
+
+#### 2. Negative (failure / error path)
+
+**Definition:** The user performs an action that the system cannot fulfill — due to invalid input, missing data, denied permissions, server errors, or failed preconditions — and the system communicates the failure.
+
+**Detection strategy:**
+- Trace every user-triggered method to its `catch`, `error`, `else`, or validation-failure branch
+- Check every form for validation rules (required, minlength, maxlength, pattern) — each validation failure = one Negative scenario
+- Look for HTTP error handlers, error interceptors, and fallback UI states
+- Check guard rejections (canActivate returning false, redirect on unauthorized)
+- Look for empty-state handling when data is absent
+
+**Common patterns:**
+- User submits a form with missing required fields and sees validation errors
+- User tries to access a page they don't have permission for and is redirected
+- Server returns an error and the user sees an error message or fallback UI
+- User's session expires and they are prompted to log in again
+
+#### 3. Race (same-action re-entry conflict)
+
+**Definition:** The user triggers the **same async action** multiple times before the first invocation completes, creating a potential conflict between identical in-flight operations.
+
+**Detection strategy:**
+- For every async method (Promise, Observable, HTTP call), check: "What happens if the user triggers this exact action again before the first one finishes?"
+- Look for missing re-entry guards: no `loading` flag, no button disable during processing, no subscription cancellation (`switchMap`, `takeUntilDestroyed`)
+- Check debounce/throttle usage on rapid-fire triggers (search inputs, scroll handlers, resize handlers)
+- Look for optimistic UI updates that could conflict with late-arriving responses
+
+**Common patterns:**
+- User double-clicks a "Save" button and two save requests are sent simultaneously
+- User types rapidly in a search field and stale results overwrite newer ones
+- User clicks "Delete" multiple times and duplicate delete requests are sent
+
+#### 4. Concurrent (cross-action interference)
+
+**Definition:** The user performs **two or more different actions** that overlap in time, and the system must handle both without data corruption, UI glitches, or lost work. Unlike Race (same action repeated), Concurrent involves distinct operations sharing state or resources.
+
+**Detection strategy:**
+- Identify actions that modify **shared state** (same service property, same form, same data store) and check what happens if both run at the same time
+- Look for **background processes** (auto-save, polling, real-time updates, timers) that can fire while the user is actively interacting
+- Check for **multi-tab scenarios**: does the app use localStorage, sessionStorage, or cookies that could be written by another tab?
+- Look for **navigation during async work**: what happens if the user navigates away while a save/upload/download is in progress?
+- Check for **notification/toast interruptions**: can an incoming notification or toast interact with an active modal or form?
+- Look for **file upload + form edit overlap**: can the user modify form fields while a file is still uploading?
+
+**Common patterns:**
+- User edits a form while auto-save triggers in the background — both modify the same record
+- User navigates to another page while a file upload is still in progress
+- User opens the same page in two browser tabs and makes changes in both
+- A real-time notification arrives while the user is in the middle of a confirmation dialog
+- User switches between tabs/sections while background data refresh is running
+- User starts a new action while a previous action's success/error toast is still visible
+
+| BAD (too narrow) | GOOD (business-readable) |
+|---|---|
+| `Auto-save interval fires during manual save` | `User clicks "Save" at the same moment the system auto-saves, and only one save is applied` |
+| `WebSocket push during form edit` | `User receives a real-time update while editing a form, and the form preserves unsaved changes` |
+
+#### 5. Edge (uncommon but valid user behavior)
+
+**Definition:** The user encounters an uncommon but valid situation — an unusual interaction pattern, an unexpected system state, or a rare-but-possible sequence of actions that the system must still handle gracefully.
+
+**Detection strategy:**
+- **Browser mechanics**: Check behavior for browser back/forward, page refresh (F5), bookmark direct access, deep-link sharing, and print
+- **Connectivity**: What happens when the network drops mid-action? When a slow connection causes timeouts? When connectivity is restored after offline period?
+- **Session lifecycle**: Check session/token expiry during long idle periods, during active form editing, during multi-step workflows
+- **Interrupted workflows**: What if the user closes a modal by pressing Escape instead of the close button? What if they close the browser tab during an upload?
+- **Empty and missing states**: What does the user see when a list has zero items? When a profile has no photo? When optional data is absent?
+- **Copy/paste and autofill**: What happens when the user pastes content into a field? When browser autofill populates a form?
+- **Accessibility inputs**: Keyboard-only navigation, screen reader interaction, high-contrast mode
+- **Device/viewport**: Behavior on mobile viewport, landscape vs. portrait, extreme zoom levels (200%+)
+- **Locale and i18n**: Long translated strings breaking layouts, right-to-left text direction, non-Latin characters in inputs
+
+**Common patterns:**
+- User refreshes the page in the middle of a multi-step form and returns to the correct step (or is reset)
+- User presses the browser back button after submitting a form and the form is not resubmitted
+- User's network drops while data is loading and a meaningful offline/error state is shown
+- User's session expires while they are filling out a long form and they are prompted to re-authenticate without losing data
+- A list section has zero items and shows a meaningful empty state instead of a blank area
+- User accesses the page via a shared deep link that includes stale or invalid parameters
+- User pastes a multi-line string into a single-line input field
+
+| BAD (too technical) | GOOD (business-readable) |
+|---|---|
+| `ngOnDestroy cleans up subscriptions on mid-nav` | `User navigates away from the page while data is still loading, and no errors appear on the next page` |
+| `@if (items().length === 0) renders empty template` | `User opens the project list when there are no projects and sees a helpful empty-state message` |
+
+#### 6. Boundary (input/state limits)
+
+**Definition:** The user's input or the system's state is at or near the exact minimum/maximum limit that the system defines. Boundary scenarios validate that the system enforces its limits correctly and communicates them clearly.
+
+**Detection strategy:**
+- **Form validation limits**: For every input with `minlength`, `maxlength`, `min`, `max`, `pattern`, `required` — test the exact boundary value (at the limit, one below, one above)
+- **Pagination limits**: First page, last page, single-page result set, page size at exactly the maximum
+- **Collection size limits**: Maximum number of items that can be added to a list, cart, selection, or batch
+- **File upload limits**: File at exactly the max size, file type at the edge of allowed types, zero-byte file
+- **Date/time limits**: Earliest and latest allowed dates, date ranges that span midnight, timezone boundaries
+- **Numeric limits**: Zero, negative values (if the field allows), maximum integer, decimal precision limits
+- **Text/content limits**: Maximum allowed characters in a text area, title at max length, description exceeding display area
+- **API/rate limits**: What the user sees when they hit a rate limit or throttle threshold
+- **Permission boundaries**: User with the minimum required permission level, user with overlapping role assignments
+
+**Common patterns:**
+- User types exactly the maximum number of characters in a text field and sees a character counter at 0 remaining
+- User tries to type beyond the maximum character limit and additional input is prevented or a warning appears
+- User uploads a file that is exactly the maximum allowed size and the upload succeeds
+- User uploads a file that is 1 byte over the maximum size and sees a clear file-size error
+- User navigates to the last page of a paginated list and the "Next" button is disabled
+- User tries to add an item beyond the maximum allowed count and sees a limit-reached message
+- User enters a date at the earliest allowed boundary and the system accepts it
+- User enters a date one day before the earliest allowed date and sees a validation error
+- User with the minimum permission level can still perform the core action their role allows
+
+| BAD (too technical) | GOOD (business-readable) |
+|---|---|
+| `Validators.maxLength(255) rejects 256 chars` | `User types more than 255 characters in the name field and sees a "maximum length exceeded" warning` |
+| `paginator.isLastPage() disables next button` | `User reaches the last page of the results list and the "Next" button is disabled` |
+
+### Scenario Output Format
+
+Scenarios are stored as **two files per page**:
+
+1. **`docs/scenarios/{page-name}.scenarios.json`** — Structured data source of truth. This is what reviewers diff in PRs. Clean, line-by-line changes.
+2. **`docs/scenarios/{page-name}.scenarios.html`** — Auto-generated HTML report for viewing in a browser. Marked as `linguist-generated` in `.gitattributes` so GitHub auto-collapses its diffs.
+
+**Workflow:** Always write the JSON first, then generate the HTML from it. Both files are committed together.
+
+#### JSON Schema
+
+```json
+{
+  "page": "Page Name",
+  "route": "/route-path",
+  "component": "ComponentName",
+  "guards": "None",
+  "permissions": "None",
+  "lastUpdated": "YYYY-MM-DD",
+  "summary": {
+    "total": 0,
+    "positive": 0,
+    "negative": 0,
+    "race": 0,
+    "concurrent": 0,
+    "edge": 0,
+    "boundary": 0,
+    "covered": 0,
+    "missing": 0
+  },
+  "sections": [
+    {
+      "name": "Page Entry",
+      "scenarios": [
+        {
+          "id": "PE-POS-001",
+          "title": "Business-friendly title",
+          "type": "Positive",
+          "role": "Any visitor",
+          "preconditions": "Starting state in plain language",
+          "userAction": "Physical action — plain language, no code",
+          "expectedOutcome": "Observable result — no code",
+          "logicInvolved": "Technical: code paths, services, signals",
+          "sourceFiles": ["file1.ts", "file2.ts"],
+          "sourceHash": "a1b2c3d:e4f5g6h",
+          "unitTestCovered": false,
+          "testReference": null
+        }
+      ]
+    }
+  ]
+}
+```
+
+**JSON rules:**
+- One object per scenario, grouped under its section
+- `id` uses the stable ID format `{SECTION_CODE}-{TYPE_CODE}-{NNN}` (see Stable Scenario IDs in Determinism Enforcement)
+- `type` must be one of: `"Positive"`, `"Negative"`, `"Race"`, `"Concurrent"`, `"Edge"`, `"Boundary"`
+- `unitTestCovered` is a boolean; when `true`, `testReference` contains the `it('...')` string
+- `sourceFiles` is an array of file paths (relative to `src/`)
+- `sourceHash` is a colon-separated string of `git hash-object` SHA-1 values for each file in `sourceFiles` (see Source File Hashing in Determinism Enforcement). This field is REQUIRED for every scenario.
+- `summary` counts must match the actual scenario data
+- Sections and scenarios within sections MUST follow canonical ordering (see Canonical Ordering in Determinism Enforcement)
+- Format the JSON with 2-space indentation for readable diffs
+- `guards` and `permissions` are strings (e.g., `"None"`), NOT arrays
+- Top-level array key for sections is `"sections"`, NOT `"scenarioSections"`
+- Each section object uses `"name"` for its title, NOT `"section"`
+
+**Strict format rules — common mistakes to avoid:**
+
+The following format violations MUST be caught and corrected in ALL modes (Branch, Full Project, Deep Page Scan). Before writing any JSON, verify every scenario against these rules:
+
+1. **`sourceFiles` MUST be a flat array of strings** — each entry is a file path string (e.g., `"src/app/home.component.ts"`). NEVER use objects like `{"path": "...", "hash": "..."}` inside `sourceFiles`. The hash belongs in the separate `sourceHash` field.
+   - CORRECT: `"sourceFiles": ["src/app/home.component.ts", "src/app/home.component.html"]`
+   - WRONG: `"sourceFiles": [{"path": "src/app/home.component.ts", "hash": "abc123"}]`
+
+2. **The hash field is named exactly `sourceHash`** (two words: "source" + "Hash", capital H). NEVER use misspellings such as `sourceHas`, `sourcehash`, `source_hash`, `sourceHashes`, or any other variation. Every scenario object MUST contain a field with the exact key `"sourceHash"`.
+
+3. **`sourceHash` is always a string, never an array or object.** Multiple hashes are joined with `:` separators in `sourceFiles` order.
+   - CORRECT: `"sourceHash": "abc123:def456"`
+   - WRONG: `"sourceHash": ["abc123", "def456"]`
+
+4. **Top-level structure uses exact key names:**
+   - `"sections"` (not `"scenarioSections"`, not `"scenario_sections"`)
+   - Each section uses `"name"` (not `"section"`, not `"sectionName"`)
+   - `"guards"` and `"permissions"` are strings (not arrays)
+
+5. **Pre-write validation gate:** Before writing any JSON file, scan every scenario object in memory and verify:
+   - `sourceFiles` is `Array<string>` (not `Array<object>`)
+   - `sourceHash` key exists (exact spelling) and its value is a non-empty string
+   - No field named `sourceHas`, `sourcehash`, or any other misspelling exists
+   - If any violation is found, fix it before writing
+
+#### HTML Generation Rules
+
+After writing the JSON, generate a **self-contained HTML file** from the data. The HTML MUST:
+
+1. **Fully self-contained** — all CSS and JS inline, zero external dependencies
+2. **Header** — page name, route, component, guards, permissions, last-updated date
+3. **Summary stats bar** — total, positive, negative, race, concurrent, edge, boundary, covered, missing counts as colored cards
+4. **Search bar** — text input that live-filters scenarios across all visible fields
+5. **Type filter buttons** — All / Positive / Negative / Race / Concurrent / Edge / Boundary toggle buttons
+6. **Collapsible sections** — each section (Page Entry, Sub-Component: Profile, etc.) is collapsible with scenario count badge
+7. **Tables per section** — columns: SCN, Title, Type, Role, Preconditions, User Action, Expected Outcome, Logic Involved, Source Files, Unit Test
+8. **Color-coded type badges** — green for Positive, red for Negative, amber for Race, blue for Concurrent, purple for Edge, teal for Boundary
+9. **Clean modern light theme** — system font stack, alternating row colors, subtle borders, good spacing
+10. **Responsive** — horizontal scroll on tables for small viewports
+11. **Print-friendly** — expand all sections and remove interactive controls when printing
+
+### Before/After Examples
+
+**BEFORE (too technical, sequential ID, no hash):**
+
+```json
+{
+  "id": "SCN-004",
+  "title": "User arrives at /home with hash fragment and page scrolls to section",
+  "userAction": "User navigates to /home#skills",
+  "expectedOutcome": "After 500ms delay, ScrollSpyService.scrollToSection(section) is called and the page smoothly scrolls to the matching section"
+}
+```
+
+**AFTER (business-readable, stable ID, source hash):**
+
+```json
+{
+  "id": "PE-POS-003",
+  "title": "User opens a direct link to a specific section and the page scrolls there automatically",
+  "type": "Positive",
+  "role": "Any visitor",
+  "preconditions": "The link points to a valid section of the home page",
+  "userAction": "User opens a link that points to a specific section of the home page (e.g., a shared link to the Skills section)",
+  "expectedOutcome": "The page loads and automatically scrolls down to the referenced section with a smooth animation",
+  "logicInvolved": "HomeComponent.ngAfterViewInit checks window.location.hash, calls ScrollSpyService.scrollToSection(section) after 500ms delay",
+  "sourceFiles": ["home.component.ts", "scroll-spy.service.ts"],
+  "sourceHash": "3f2a1bc:9d4e5f7",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+### Before/After Examples — Concurrent
+
+**BEFORE (too technical, sequential ID, no hash):**
+
+```json
+{
+  "id": "SCN-012",
+  "title": "Auto-save interval fires during manual save triggering duplicate PUT",
+  "userAction": "User clicks Save while setInterval auto-save callback executes",
+  "expectedOutcome": "saveDraft() debounce merges calls, only one PUT /api/drafts is sent"
+}
+```
+
+**AFTER (business-readable, stable ID, source hash):**
+
+```json
+{
+  "id": "PI-CON-001",
+  "title": "User clicks Save at the same moment the system auto-saves, and only one save is applied",
+  "type": "Concurrent",
+  "role": "Authenticated user",
+  "preconditions": "The user has unsaved changes and the auto-save feature is active",
+  "userAction": "User clicks the 'Save' button at the same moment the system's automatic save triggers in the background",
+  "expectedOutcome": "The system saves the changes exactly once, the user sees a single 'Saved successfully' confirmation, and no data is duplicated or lost",
+  "logicInvolved": "saveDraft() uses debounce to merge overlapping manual and auto-save calls into a single PUT /api/drafts request; isSaving flag prevents re-entry",
+  "sourceFiles": ["editor.component.ts", "draft.service.ts"],
+  "sourceHash": "b7c8d9e:f0a1b2c",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+### Before/After Examples — Edge
+
+**BEFORE (too technical, sequential ID, no hash):**
+
+```json
+{
+  "id": "SCN-018",
+  "title": "Browser back after form POST triggers popstate, canDeactivate guard fires",
+  "userAction": "User triggers popstate event after successful form submission",
+  "expectedOutcome": "canDeactivate returns true since dirty flag is false, router navigates to previous route"
+}
+```
+
+**AFTER (business-readable, stable ID, source hash):**
+
+```json
+{
+  "id": "PX-EDG-001",
+  "title": "User presses the browser back button after submitting a form and is not asked to resubmit",
+  "type": "Edge",
+  "role": "Authenticated user",
+  "preconditions": "The user has just successfully submitted a form and is viewing the success confirmation",
+  "userAction": "User presses the browser back button",
+  "expectedOutcome": "The user is taken back to the previous page without being asked to resubmit the form and without any duplicate submission occurring",
+  "logicInvolved": "canDeactivate guard checks dirty flag (false after successful save), allows navigation; form reset on successful submit prevents re-POST on popstate",
+  "sourceFiles": ["edit-form.component.ts", "unsaved-changes.guard.ts"],
+  "sourceHash": "c3d4e5f:a6b7c8d",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+### Before/After Examples — Boundary
+
+**BEFORE (too technical, sequential ID, no hash):**
+
+```json
+{
+  "id": "SCN-025",
+  "title": "Input value exceeds Validators.maxLength(100) on project name field",
+  "userAction": "User types 101 chars into FormControl with maxLength validator",
+  "expectedOutcome": "AbstractControl.errors.maxlength is set, mat-error displays via *ngIf=\"name.errors?.maxlength\""
+}
+```
+
+**AFTER (business-readable, stable ID, source hash):**
+
+```json
+{
+  "id": "PI-BND-001",
+  "title": "User exceeds the maximum character limit for the project name and sees a validation warning",
+  "type": "Boundary",
+  "role": "Authenticated user",
+  "preconditions": "The user is creating or editing a project and the project name field allows up to 100 characters",
+  "userAction": "User types more than 100 characters into the project name field",
+  "expectedOutcome": "A validation message appears below the field stating the maximum character limit has been exceeded, and the 'Save' button remains disabled until the input is corrected",
+  "logicInvolved": "FormControl 'name' has Validators.maxLength(100); template shows mat-error when name.errors?.maxlength is truthy; submit button [disabled] binds to form.invalid",
+  "sourceFiles": ["project-form.component.ts", "project-form.component.html"],
+  "sourceHash": "d5e6f7a:b8c9d0e",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+### Before/After Examples — Full Interaction Path (Nested Sub-Component)
+
+**BEFORE (only the last action — missing the path to get there):**
+
+```json
+{
+  "id": "MO-task-edit-form-POS-001",
+  "title": "User saves changes to a task and sees a success confirmation",
+  "type": "Positive",
+  "role": "Authenticated user",
+  "preconditions": "The user has a task open for editing with valid changes",
+  "userAction": "User fills in the updated task details and clicks the 'Save' button",
+  "expectedOutcome": "A success message appears confirming the task has been saved, and the task list reflects the updated information",
+  "logicInvolved": "TaskEditFormComponent.save() calls TaskService.update(), on success emits saved event, parent modal closes, task-list refreshes via Observable",
+  "sourceFiles": ["task-edit-form.component.ts", "task-edit-form.component.html", "task.service.ts"],
+  "sourceHash": "a1b2c3d:e4f5g6h:i7j8k9l",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+**AFTER (full interaction path from page entry to deepest child action):**
+
+```json
+{
+  "id": "MO-task-edit-form-POS-001",
+  "title": "User saves changes to a task and sees a success confirmation",
+  "type": "Positive",
+  "role": "Authenticated user",
+  "preconditions": "The user has at least one project with tasks, and is on the Projects page",
+  "userAction": "User opens the Projects page, clicks on a project card to open its details, selects a task from the task list inside the project details panel, clicks 'Edit' on the selected task to open the task editing form, updates the task details, and clicks the 'Save' button",
+  "expectedOutcome": "A success message appears confirming the task has been saved, and the task list reflects the updated information",
+  "logicInvolved": "TaskEditFormComponent.save() calls TaskService.update(), on success emits saved event, parent modal closes, task-list refreshes via Observable",
+  "sourceFiles": ["task-edit-form.component.ts", "task-edit-form.component.html", "task.service.ts"],
+  "sourceHash": "a1b2c3d:e4f5g6h:i7j8k9l",
+  "unitTestCovered": false,
+  "testReference": null
+}
+```
+
+---
+
+## Branch Mode Behavior
+
+1. Read and follow `.cursor/skills/scenario-changes/SKILL.md` → Branch Workflow
+2. Compare the current branch against `origin/develop`
+3. **Map changed files to pages** using routing files (each changed file belongs to a routed page)
+4. **Execute Diff-First Workflow** (see Determinism Enforcement):
+   a. Load each affected page's existing `docs/scenarios/{page-name}.scenarios.json`
+   b. Run `git diff --name-only origin/develop...HEAD` to identify changed source files
+   c. Compute current `git hash-object` for each source file referenced in existing scenarios
+   d. Classify every existing scenario as `unchanged` (all sourceHash values match) or `affected` (any sourceHash differs or file is in git diff)
+   e. Preserve all `unchanged` scenarios verbatim — do not re-read, re-analyze, or re-word them
+5. **Regenerate only affected scenarios** — apply Angular analysis strategy to changed files only:
+   - Route-first discovery (guards, permissions from route config)
+   - Component tree analysis (routed component + child components + templates)
+   - Service dependency tracing (injected services, API calls, state)
+   - Guard analysis (canActivate / canDeactivate)
+   - Cross-page navigation (router.navigate, routerLink)
+   - State and form flow (dirty flags, save/publish states)
+6. Enumerate code paths as scenarios (positive, negative, race, concurrent, edge, boundary)
+7. **Assign stable IDs** to new/regenerated scenarios using the `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format (see Stable Scenario IDs). Reuse existing IDs for scenarios that map to the same code path.
+8. **Compute sourceHash** for every new/regenerated scenario using `git hash-object` on each source file
+9. **Run Self-Comparison Gate** before writing (see Determinism Enforcement) — revert any unchanged-hash scenario that was accidentally re-worded
+10. **Apply Canonical Ordering** to the merged result (preserved + regenerated scenarios)
+11. **Write all scenarios using the Scenario Writing Standards above** — business-readable titles, plain-language User Actions, observable Expected Outcomes
+12. Output the structured summary in chat
+13. **Does NOT create new documents** — only updates existing page-level JSON + HTML created by Full Project mode
+14. Lists the specific document files that will be updated and asks for confirmation
+15. If confirmed, merges changes into existing `docs/scenarios/{page-name}.scenarios.json` and regenerates the corresponding `.scenarios.html`
+
+## Full Project Mode Behavior
+
+1. Read and follow `.cursor/skills/scenario-changes/SKILL.md` → Full Project Workflow
+2. Read **routing files** to discover all pages (each route with a component = one page)
+3. Present the page-level batch plan to the user
+4. **For each page, execute Diff-First Workflow** (see Determinism Enforcement):
+   a. Check if `docs/scenarios/{page-name}.scenarios.json` already exists
+   b. If it exists (re-run), compute current `git hash-object` for each source file in existing scenarios. Classify scenarios as `unchanged` or `affected`. Preserve `unchanged` scenarios verbatim.
+   c. If it does not exist (first run), treat all files as "changed" — generate everything fresh.
+5. Process each **page** as a batch using deep Angular analysis (only for changed/new files):
+   - **Page Entry**: Route guards, permissions, redirects, initial data loading
+   - **Page Interactions**: Top-level component actions (toolbar, forms, buttons)
+   - **Sub-Component Flows**: Recursive traversal — for every child component, read its `.ts` + `.html`, analyze all internal user flows (forms, buttons, tabs, inline editors, context menus), then recurse into its own children and modals
+   - **Modal & Popup Flows**: Every `ModalWindowService.open()` and `ConfirmPopupService.openPopup()` — read the modal component, analyze all internal flows, recurse into the modal's own children and nested modals, enumerate confirm/cancel outcomes
+   - **Page Exit**: canDeactivate guards, navigation targets, post-action redirects
+   - **Cross-Page**: router.navigate, routerLink, shared services, route params
+   - **Sub-Component Completeness Check**: Before presenting any page, verify ALL custom components in the tree have scenario sections. Use batching (3–5 components per batch) for pages with >5 sub-components.
+   - Enumerate all code paths as scenarios (positive, negative, race, concurrent, edge, boundary)
+   - **Assign stable IDs** using `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format (see Stable Scenario IDs)
+   - **Compute sourceHash** for every scenario using `git hash-object` on each source file
+   - **Run Self-Comparison Gate** on re-runs before writing (see Determinism Enforcement)
+   - **Apply Canonical Ordering** to the final merged result
+   - **Write all scenarios using the Scenario Writing Standards above** — business-readable titles, plain-language User Actions, observable Expected Outcomes
+   - Present scenarios in chat organized by Entry / Interactions / Sub-Components / Modals / Exit / Cross-Page
+   - Write to `docs/scenarios/{page-name}.scenarios.json` and generate `docs/scenarios/{page-name}.scenarios.html` (one pair per page)
+   - Ask user confirmation before continuing to the next page
+6. Show brief summary in chat
+
+## Deep Page Scan Mode Behavior
+
+1. Read and follow `.cursor/skills/scenario-changes/SKILL.md` → Deep Page Scan Workflow
+2. Identify the target page from the user's message
+3. **Execute Diff-First Workflow** (see Determinism Enforcement):
+   a. Load the existing `docs/scenarios/{page-name}.scenarios.json` if it exists
+   b. Compute current `git hash-object` for each source file referenced in existing scenarios
+   c. Classify existing scenarios as `unchanged` (all sourceHash values match) or `affected` (any sourceHash differs)
+   d. Preserve `unchanged` scenarios verbatim
+4. Build the full component tree by recursively reading `.html` templates
+5. Process sub-components in **batches of 3–5** (depth-first order), focusing on changed/new files:
+   - Read each component's `.ts` + `.html`
+   - Apply full Recursive Component Analysis (internal flows, child components, modals, cross-component communication)
+   - Enumerate scenarios for each component in the batch
+6. **Assign stable IDs** using `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format (see Stable Scenario IDs). Reuse existing IDs for scenarios mapping to the same code path.
+7. **Compute sourceHash** for every new/regenerated scenario using `git hash-object`
+8. **Write all scenarios using the Scenario Writing Standards above** — business-readable titles, plain-language User Actions, observable Expected Outcomes
+9. **Run Self-Comparison Gate** before writing (see Determinism Enforcement)
+10. **Apply Canonical Ordering** to the merged result (preserved + new scenarios)
+11. Run the Sub-Component Completeness Check — verify all discovered components have scenarios
+12. Merge into the existing `docs/scenarios/{page-name}.scenarios.json` and regenerate the corresponding `.scenarios.html`
+
+## Key Constraints (All Modes)
+
+### Determinism Constraints
+
+- **Deterministic output**: Same code state → same scenarios, same IDs, same wording, same ordering. This is enforced by the six mechanisms in the Determinism Enforcement section: Diff-First Workflow, Source File Hashing, Preserve Unchanged Rule, Stable Scenario IDs, Canonical Ordering, and Self-Comparison Gate.
+- **Diff-first always**: NEVER generate scenarios without first loading existing JSON and checking source hashes. Skipping the diff-first workflow is a determinism violation.
+- **Preserve unchanged**: If a scenario's `sourceHash` matches, its content MUST NOT change — not even whitespace, punctuation, or rewording. Copy it verbatim.
+- **Stable IDs**: All scenario IDs use the `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format. Sequential `SCN-NNN` IDs are forbidden. Once assigned, an ID is never renumbered — only retired when the code path is deleted.
+- **Canonical ordering**: Sections and scenarios within sections follow the fixed sort order defined in Canonical Ordering. Deviation is a determinism violation.
+- **Source hash required**: Every scenario MUST include a `sourceHash` field computed via `git hash-object`. Scenarios without `sourceHash` are invalid.
+- **Self-comparison gate**: Before writing any JSON file, run the Self-Comparison Gate. Any unchanged-hash scenario that was accidentally re-worded must be reverted to the existing version.
+
+### Content Constraints
+
+- **Business-readable language**: Every scenario title, User Action, and Expected Outcome MUST be understandable by a non-technical stakeholder. Technical details go exclusively in Logic Involved.
+- **No hallucination**: Every scenario must trace back to an actual code path that was read. If the code path was not read, the scenario must not exist.
+- **Active only**: Scenarios documents contain no deprecated/old entries. Missing code paths = removed scenarios (but only if the source files were in the change set — see Preserve Unchanged Rule).
+- **Race cases are mandatory**: For every async method (Promise, Observable), analyze repeated-call behavior. Missing re-entry guards = Race scenario.
+- **Concurrent cases are mandatory**: For every pair of actions that can overlap in time (user action + background process, user action + auto-save, multi-tab usage), analyze shared-state interference. Missing isolation = Concurrent scenario.
+- **Edge cases are mandatory**: For every page and feature, analyze uncommon-but-valid user behaviors — browser back/forward, page refresh mid-workflow, network loss, session expiry, empty data states, deep-link access with stale params, paste/autofill input. Missing graceful handling = Edge scenario.
+- **Boundary cases are mandatory**: For every input with validation constraints (minlength, maxlength, min, max, pattern, file size limits, pagination bounds, collection size caps), analyze behavior at exactly the limit and one beyond. Missing clear feedback at limits = Boundary scenario.
+- **No invented roles/permissions**: Only include roles and permissions that exist in the code.
+- **End-user perspective**: Describe what the user experiences, not internal code behavior.
+- **Full interaction path**: For any scenario in a Sub-Component or Modal section, the `userAction` MUST trace the complete user journey from the page level through every intermediate interaction down to the final action. A `userAction` that only describes the last step in a nested component is incomplete and must be rewritten.
+- **Self-review gate**: Before writing any scenario JSON, re-read every `userAction` and `expectedOutcome` in the batch. If any contains a function name, signal name, CSS value, template syntax, or code reference, rewrite it in plain language before proceeding. Additionally, for Sub-Component and Modal scenarios, verify that the `userAction` includes the full navigation path from the page — if it only describes the final action, expand it to include every step to reach that point.
+
+### Structural Constraints
+
+- **Page-level documents**: Each page (route) = one `.scenarios.json` (source of truth) + one `.scenarios.html` (generated report). Scenarios are grouped by Entry, Interactions, Sub-Components, Modals, Exit, and Cross-Page.
+- **Recursive deep traversal**: Every component (child, modal, nested modal, component-inside-modal) gets the SAME full analysis as the page itself — read `.ts` + `.html`, find its children and modals, analyze their internal flows, and recurse. Stop only at UI primitives (`cad-button`, `cad-dropdown`, etc.) and standard HTML elements.
+- **Unit Test Covered**: Each scenario includes `unitTestCovered` (boolean) and `testReference` (the `it('...')` string or null).
+- **Branch mode updates only**: Branch mode never creates new JSON/HTML pairs; it updates existing ones and names the files in the confirmation prompt.
+- **Mandatory sub-component traversal**: Every custom component selector in a template MUST have a dedicated scenario section. Skipping a sub-component is a determinism violation.
+- **Batching discipline**: For pages with >5 sub-components, batch in groups of 3–5. Read source files for the batch, enumerate scenarios, then move on. Never read all sub-components at once.
+- **HTML always regenerated**: Every time a JSON file is written or updated, the corresponding HTML file MUST be regenerated from the full JSON. Never hand-edit the HTML.

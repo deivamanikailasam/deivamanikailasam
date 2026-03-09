@@ -1,0 +1,157 @@
+---
+description: Fix code issues identified by a scenario ID, then update affected scenarios following scenario-changes.mdc rules
+alwaysApply: true
+---
+
+# Scenario Fix Command
+
+When the user asks to fix a scenario, follow this workflow end-to-end.
+
+## Trigger Phrases
+
+- "fix scenario {ID} on {page}"
+- "fix scenario {ID} in {page}"
+- "fix {ID} on {page}"
+- "fix {ID} in {page}"
+- "scenario fix {ID} {page}"
+
+Where `{ID}` is a scenario ID (e.g., `PE-POS-001`, `SC-profile-card-NEG-002`) and `{page}` is the page name matching a file in `docs/scenarios/{page}.scenarios.json`.
+
+### Missing Input Handling
+
+If the user's message does NOT contain both a recognizable **scenario ID** and a **page name**, respond with:
+
+> I need both a **scenario ID** and a **page name** to proceed.
+>
+> Please use one of these formats:
+> - `fix scenario PE-POS-001 on home`
+> - `fix SC-profile-card-NEG-002 in skill-details`
+> - `scenario fix PI-RAC-001 skill-details-edit`
+>
+> The page name should match a file in `docs/scenarios/` (e.g., `home`, `skill-details`, `skill-details-edit`).
+
+Do NOT proceed with the workflow until both values are provided.
+
+---
+
+## Workflow
+
+### Step 1 — Parse Input
+
+1. Extract the **scenario ID** (pattern: `{SECTION_CODE}-{TYPE_CODE}-{NNN}` or `{SECTION_CODE}-{name}-{TYPE_CODE}-{NNN}`)
+2. Extract the **page name** (the slug matching `docs/scenarios/{page}.scenarios.json`)
+3. Check if the user included a **specific fix instruction** (e.g., "fix scenario X on Y by adding a null check" or "fix scenario X on Y — use switchMap instead of subscribe"). Capture this as the fix hint.
+
+### Step 2 — Load & Analyze the Scenario
+
+1. Read `docs/scenarios/{page}.scenarios.json`
+2. Find the scenario object matching the given ID
+3. If no match is found, report the error and list available IDs for that page
+4. Extract from the matched scenario:
+   - `title`, `type`, `preconditions`, `userAction`, `expectedOutcome`
+   - `logicInvolved` — this describes the technical code path
+   - `sourceFiles` — the files to read and fix
+   - `sourceHash` — for later comparison
+
+### Step 3 — Read Source Code & Diagnose
+
+1. Read every file listed in `sourceFiles`
+2. Trace the code path described in `logicInvolved`
+3. Identify the gap: what does the code currently do vs. what the scenario's `expectedOutcome` says should happen?
+4. If the user provided a specific fix hint (Step 1), use that as the approach
+5. If no fix hint was given, determine the best-practice fix based on the diagnosed gap
+
+### Step 4 — Apply the Fix
+
+1. Implement the code fix following project best practices
+2. If an `eslint.config.mjs` exists, follow its formatting rules
+3. Do NOT add narration comments explaining the change — only add comments for non-obvious logic
+4. Run linter checks on modified files and fix any introduced errors
+5. Summarize the fix to the user in plain language
+
+### Step 5 — Impact Analysis
+
+After the code fix is applied, determine the ripple effect on scenarios:
+
+1. **Identify all changed source files** — list every file you modified in Step 4
+2. **Scan all scenario files** — read every `docs/scenarios/*.scenarios.json` to find scenarios whose `sourceFiles` overlap with the changed files
+3. **Compute new hashes** — run `git hash-object` on each changed file to get updated hashes
+4. **Classify each overlapping scenario:**
+   - **Affected** — its `sourceHash` no longer matches (a source file was modified). These need regeneration.
+   - **Unchanged** — all source file hashes still match. These are preserved verbatim.
+5. **Analyze for new scenarios** — read the changed source files and identify any NEW code paths introduced by the fix (new branches, new error handlers, new guards, new UI states). Each new code path = a potential new scenario.
+6. **Analyze for removed scenarios** — check if the fix deleted any code paths that existing scenarios reference. If a code path no longer exists, that scenario should be removed.
+7. **Follow `scenario-changes.mdc` rules** for scenario type detection:
+   - Check all six types: Positive, Negative, Race, Concurrent, Edge, Boundary
+   - For async methods: check re-entry behavior (Race)
+   - For overlapping actions: check shared-state interference (Concurrent)
+   - For user flows: check uncommon-but-valid behaviors (Edge)
+   - For validated inputs: check limit behavior (Boundary)
+
+### Step 6 — Present Changes for Confirmation
+
+Present a structured summary to the user and **wait for confirmation**:
+
+```
+### Scenario Impact Summary
+
+**Fixed scenario:** {ID} — {title}
+**Code changes:** {list of modified files}
+
+#### Affected Existing Scenarios (need update)
+| File | ID | Title | Reason |
+|------|-----|-------|--------|
+| {page}.scenarios.json | {id} | {title} | Source file modified |
+
+#### New Scenarios (to be added)
+| File | Proposed ID | Title | Type | Reason |
+|------|-------------|-------|------|--------|
+| {page}.scenarios.json | {id} | {title} | {type} | New code path from fix |
+
+#### Removed Scenarios (code path deleted)
+| File | ID | Title | Reason |
+|------|-----|-------|--------|
+| {page}.scenarios.json | {id} | {title} | Code path no longer exists |
+
+#### Unchanged Scenarios (preserved verbatim)
+{count} scenarios unchanged across {n} files
+
+Shall I proceed with updating the scenario files?
+```
+
+Do NOT proceed until the user confirms.
+
+### Step 7 — Update Scenario Files
+
+Once confirmed, update each affected `docs/scenarios/{page}.scenarios.json` and regenerate its `.scenarios.html`:
+
+1. **Follow ALL rules from `scenario-changes.mdc`** — this is mandatory. Specifically:
+   - **Diff-First Workflow** — preserve unchanged scenarios verbatim
+   - **Source File Hashing** — compute `git hash-object` for every scenario's source files, store as colon-separated `sourceHash`
+   - **Stable Scenario IDs** — use `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format; reuse existing IDs for same code paths; never renumber
+   - **Canonical Ordering** — sections in fixed order (Page Entry → Page Interactions → Sub-Components → Modals → Page Exit → Cross-Page); scenarios sorted by type then file then line
+   - **Business-Readable Language** — titles, userAction, expectedOutcome in plain English; technical details only in logicInvolved
+   - **Full Interaction Path** — Sub-Component/Modal scenarios include the complete user journey from page entry
+   - **Self-Comparison Gate** — before writing, verify no unchanged-hash scenario was accidentally re-worded
+   - **JSON format rules** — `sourceFiles` as flat string array, `sourceHash` as string (exact spelling), `sections` and `name` keys, 2-space indent
+   - **Summary counts** — update `summary` object to match actual scenario counts
+   - **HTML regeneration** — regenerate the full `.scenarios.html` from the updated JSON (self-contained, all CSS/JS inline, search bar, type filters, collapsible sections, color-coded badges)
+
+2. **Pre-write validation gate** — before writing any JSON, verify every scenario:
+   - `sourceFiles` is `Array<string>`
+   - `sourceHash` exists (exact spelling, capital H) and is a non-empty string
+   - No misspelled hash fields exist
+   - All IDs follow the stable format
+
+3. Write the updated JSON, then generate the HTML
+
+---
+
+## Key Rules
+
+- **Never skip the confirmation step** — always present the impact summary and wait
+- **Never modify unchanged scenarios** — if `sourceHash` matches, copy verbatim
+- **Never invent scenarios** — every scenario must trace to an actual code path that was read
+- **Always regenerate HTML** — after any JSON update, the HTML must be regenerated
+- **Always compute hashes** — every scenario must have a valid `sourceHash` from `git hash-object`
+- **Reference `scenario-changes.mdc`** — for any scenario writing standard not covered here, defer to the full rules in `.cursor/rules/scenario-changes.mdc`

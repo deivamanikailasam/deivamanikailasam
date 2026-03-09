@@ -1,0 +1,237 @@
+---
+description: Check branch changes for scenario impact, list affected/new/stale scenarios, and wait for user command before acting
+alwaysApply: true
+---
+
+# Scenario Check Command
+
+Analyze the current branch's code changes, determine which existing scenarios in `docs/scenarios/` are affected, identify new or stale scenarios, and present findings — then wait for the user's command before making any changes.
+
+## Trigger Phrases
+
+- "scenario check"
+- "check scenarios"
+- "check scenario impact"
+- "are scenarios affected"
+- "scenario status"
+- "did my changes break scenarios"
+
+---
+
+## Workflow
+
+### Step 1 — Detect Changed Files
+
+1. Run `git diff --name-only origin/main...HEAD` (or `origin/develop...HEAD` based on the repo's base branch) to get the list of changed source files on this branch.
+2. Filter to only source files under `src/` (ignore config, docs, test-only files that are not referenced in any scenario's `sourceFiles`).
+
+### Step 2 — Map Changed Files to Scenario Pages
+
+1. List all existing scenario files: `docs/scenarios/*.scenarios.json`.
+2. For each scenario JSON, scan every scenario's `sourceFiles` array.
+3. Build a map: `changedFile → [page, scenarioId]` — which scenario pages reference any of the changed files.
+4. If **no** scenario page references any changed file, report: "No existing scenario pages are affected by the current branch changes." and stop.
+5. Only proceed with the pages that have at least one overlapping file — skip all other pages entirely.
+
+### Step 3 — Code-Path Impact Check (per affected page)
+
+A file-level hash change does NOT mean every scenario referencing that file is affected. A file may have 20 scenarios, but only 1 method was changed. Only scenarios whose **actual code path was touched by the diff** are truly stale.
+
+For each affected page's `docs/scenarios/{page}.scenarios.json`:
+
+#### Phase 1 — Hash Candidates
+
+1. Load the JSON.
+2. For each scenario whose `sourceFiles` overlap with a changed file:
+   - Compute `git hash-object` for every file in that scenario's `sourceFiles`.
+   - Build the current hash string (colon-separated, in `sourceFiles` order).
+   - Compare against the stored `sourceHash`.
+   - If hashes match → **Unchanged**. Skip entirely — do not re-read, re-analyze, or recompute. Copy verbatim.
+   - If hashes differ → mark as **Hash-Changed Candidate** (not yet confirmed stale).
+3. For scenarios on this page whose `sourceFiles` do NOT overlap with any changed file, skip them entirely — no hash computation, no reading, no modifications of any kind. Copy verbatim.
+
+#### Phase 2 — Diff Relevance Filter
+
+For each Hash-Changed Candidate, determine whether the diff actually impacts the scenario's code path:
+
+1. Run `git diff origin/main...HEAD -- {changed_source_file}` (or use already-fetched diff) to get the actual lines changed.
+2. Read the scenario's `logicInvolved` field — this describes the methods, branches, services, and code paths the scenario covers.
+3. Check whether the diff touches **any** of the following for that scenario:
+   - Methods/functions named in `logicInvolved`
+   - Error handlers, guards, or branches referenced in `logicInvolved`
+   - Service calls, subscriptions, or signal chains mentioned in `logicInvolved`
+   - Template bindings or UI elements that the scenario's `userAction` or `expectedOutcome` depend on (if an HTML file changed)
+4. Classify:
+   - **Stale (truly impacted)** — the diff touches code paths referenced by the scenario. Record the specific reason (e.g., "method `loadSkill()` modified: added error handler", "validation changed from `maxLength(50)` to `maxLength(100)`").
+   - **Hash-Changed but Not Impacted** — the diff is in the same file but touches unrelated methods/sections. Treat as **Unchanged for reporting purposes** — do NOT list as stale. However, when the user later commands an update, the `sourceHash` for these scenarios will be refreshed as a side effect of writing the JSON (since the file content did change). Until then, preserve them verbatim and do not surface them as stale.
+
+**Hash update rules:**
+- **Unchanged scenarios** (hash matches OR hash-changed-but-not-impacted) → never touch the `sourceHash` during the check phase. Copy the stored value as-is.
+- **Stale/regenerated scenarios** → update `sourceHash` to the newly computed hash only when the user commands an update and the scenario is regenerated.
+- **Hash-Changed but Not Impacted scenarios** → update `sourceHash` silently (no content change, just hash refresh) only when the user commands an update for that page. This keeps the hash current without falsely flagging the scenario as modified.
+- **New scenarios** → compute and store a fresh `sourceHash`.
+
+### Step 4 — Detect Potential New Scenarios
+
+For each changed source file that belongs to an affected page:
+
+1. Read the changed file.
+2. Identify any **new code paths** not covered by existing scenarios on that page:
+   - New methods/handlers (user-triggered actions without a matching scenario)
+   - New error branches (catch/else/validation without a Negative scenario)
+   - New async methods without re-entry guards (potential Race scenario)
+   - New shared-state modifications (potential Concurrent scenario)
+   - New empty-state or edge-case handling (potential Edge scenario)
+   - New validation constraints (potential Boundary scenario)
+3. Follow the **Scenario Type Detection Strategies** from `scenario-changes.mdc` — check all six types.
+4. Do NOT generate full scenario objects yet — only note the code path and proposed type.
+
+### Step 5 — Detect Removed Code Paths
+
+For each **truly stale** scenario (not hash-changed-but-not-impacted):
+
+1. Check if the code path described in `logicInvolved` still exists in the current source files.
+2. If the method/branch/handler was deleted or fundamentally restructured, mark the scenario as **Removed**.
+
+### Step 6 — Present Findings
+
+Present a structured report and **stop — wait for the user's command**:
+
+```
+### Scenario Impact Report
+
+**Branch changes:** {n} source files changed
+**Affected scenario pages:** {list of page names}
+
+#### Stale Scenarios (code changed, scenario outdated)
+| Page | ID | Title | Changed File(s) | Why Stale |
+|------|----|-------|-----------------|-----------|
+| {page} | {id} | {title} | {files that changed} | {brief reason: e.g., "new error handler added in loadSkill()", "validation rule changed from maxLength(50) to maxLength(100)", "method renamed from save() to submitForm()"} |
+
+#### Potentially New Scenarios (unmatched code paths)
+| Page | Proposed Type | Code Path Summary | Source File |
+|------|---------------|-------------------|-------------|
+| {page} | {type} | {brief description} | {file} |
+
+#### Possibly Removed Scenarios (code path deleted)
+| Page | ID | Title | Reason |
+|------|----|-------|--------|
+| {page} | {id} | {title} | {method/branch deleted} |
+
+#### Hash Changed but Not Impacted (unrelated code in same file changed)
+{count} scenarios have a stale hash but the diff does not touch their code path — preserved verbatim, hash will be silently refreshed on update.
+
+#### Unchanged Scenarios (not affected)
+{count} scenarios unchanged across {n} pages — preserved verbatim.
+
+What would you like me to do?
+- "update all" — regenerate stale scenarios, add new ones, remove deleted ones
+- "update {page}" — update only a specific page
+- "update stale only" — regenerate stale scenarios without adding new ones
+- "fix {ID} on {page}" — fix a specific scenario (uses scenario-fix workflow)
+- "ignore" — take no action
+```
+
+Do **NOT** make any file changes until the user gives a command.
+
+---
+
+## Step 7 — Execute User Command
+
+Based on the user's response:
+
+### "update all" / "update stale only" / "update {page}"
+
+1. Follow **ALL rules from `scenario-changes.mdc`** strictly — no deviations:
+   - **Diff-First Workflow** — preserve unchanged scenarios verbatim
+   - **Source File Hashing** — compute `git hash-object`, store as colon-separated `sourceHash`
+   - **Stable Scenario IDs** — `{SECTION_CODE}-{TYPE_CODE}-{NNN}` format; reuse existing IDs; never renumber
+   - **Canonical Ordering** — fixed section and scenario sort order
+   - **Business-Readable Language** — plain English titles, userAction, expectedOutcome; technical detail only in logicInvolved
+   - **Full Interaction Path** — Sub-Component/Modal scenarios include complete user journey from page entry
+   - **Self-Comparison Gate** — before writing, verify no unchanged-hash scenario was re-worded
+   - **Pre-write validation** — `sourceFiles` is `Array<string>`, `sourceHash` exists (exact spelling, capital H), no misspelled fields
+   - **Summary counts** — update `summary` to match actual scenario data
+2. Write updated JSON with 2-space indent.
+3. Regenerate the corresponding `.scenarios.html` (self-contained, inline CSS/JS, search bar, type filters, collapsible sections, color-coded badges).
+4. If "update stale only", skip adding new scenarios — only regenerate stale ones and remove deleted ones.
+5. If "update {page}", scope work to that single page.
+
+### "fix {ID} on {page}"
+
+Delegate to the **scenario-fix** workflow in `.cursor/rules/scenario-fix.mdc`.
+
+### "ignore"
+
+Take no action. Acknowledge and stop.
+
+---
+
+## Step 8 — Unit Test Sync
+
+After Step 7 writes the updated scenario JSON and HTML, automatically sync unit tests for every scenario that was **changed or added**. Follow **ALL rules from `scenario-unit-tests.mdc`** — no deviations.
+
+### Scope
+
+Only generate/update tests for scenarios that were touched in Step 7:
+- **Regenerated stale scenarios** → update the existing `it()` block (or create one if missing).
+- **New scenarios** → add a new `it()` block.
+- **Removed scenarios** → remove the corresponding `it()` block from the spec file. If the entire `describe` block becomes empty, remove it.
+- **Unchanged scenarios** → do NOT touch their tests.
+- **Hash-Changed but Not Impacted scenarios** → do NOT touch their tests.
+
+### Process
+
+1. **Group by spec file** — scenarios sharing the same primary source file map to the same `.spec.ts` (e.g., `skill-details.component.spec.ts`).
+2. **Read existing spec** — if the `.spec.ts` exists, read it. Identify existing `it()` blocks by their `[SCENARIO_ID]` tag.
+3. **For each regenerated/stale scenario:**
+   - Find the existing `it()` block matching the scenario ID.
+   - Update the test name to reflect the updated scenario title: `it('should {title in lowercase} [SCENARIO_ID]')`.
+   - Update the Arrange/Act/Assert to match the updated `preconditions`, `userAction`, `expectedOutcome`, and `logicInvolved`.
+   - Preserve any custom test helpers or mock data that are still valid.
+4. **For each new scenario:**
+   - Add a new `it()` block inside the appropriate `describe` section (matching the scenario's section name).
+   - Follow the type-specific test patterns from `scenario-unit-tests.mdc` (Positive → happy path, Negative → error mock, Race → `fakeAsync` + rapid triggers, etc.).
+5. **For each removed scenario:**
+   - Delete the `it()` block with the matching `[SCENARIO_ID]`.
+6. **Run linter** on every modified `.spec.ts` and fix introduced errors.
+
+### Verify Tests Pass
+
+After writing tests, run them and ensure 100% pass rate:
+
+1. Run `npx jest --testPathPattern="{spec_file}"` for each modified `.spec.ts` file.
+2. If **any test fails**:
+   - Read the failure output (assertion error, mock mismatch, missing provider, etc.).
+   - Diagnose the root cause — wrong mock return value, missing TestBed provider, incorrect selector, stale fixture state, or wrong assertion.
+   - Fix the test code. Do NOT weaken assertions or skip tests to make them pass — fix the actual issue.
+   - Re-run the failing spec file to confirm the fix.
+   - Repeat until all tests in the file pass.
+3. If a test fails due to a **source code bug** (the code genuinely does not implement what the scenario describes), do NOT fix the source code here — report it to the user as a scenario that needs a code fix (`fix {ID} on {page}`).
+4. Only proceed to "Update Scenario JSON" after every new/updated test passes.
+
+### Update Scenario JSON
+
+After tests are written:
+
+1. For every scenario that now has a corresponding `it()` block, set:
+   - `"unitTestCovered": true`
+   - `"testReference": "should {title in lowercase} [SCENARIO_ID]"` (the exact `it()` string)
+2. For removed scenarios (already deleted from JSON in Step 7), no action needed.
+3. Do NOT change `unitTestCovered` or `testReference` for unchanged scenarios.
+4. Write the updated JSON (preserving all other fields verbatim).
+5. Regenerate the `.scenarios.html` from the updated JSON.
+
+---
+
+## Key Rules
+
+- **Selective, not exhaustive** — only check scenarios on pages whose `sourceFiles` overlap with changed files. Do not scan unrelated pages.
+- **Batch only when needed** — if >5 stale scenarios exist on a single page, process them in batches of 3–5. Otherwise process them together.
+- **Never modify without command** — always present findings first, then wait for explicit instruction.
+- **Never modify unchanged scenarios** — if `sourceHash` matches, copy verbatim. No re-reading, no re-wording.
+- **Never invent scenarios** — every scenario must trace to an actual code path that was read.
+- **Always follow `scenario-changes.mdc`** — for all scenario writing, ID assignment, ordering, hashing, and format rules, defer to `scenario-changes.mdc`. No deviations.
+- **Always regenerate HTML** — after any JSON update, regenerate the matching `.scenarios.html`.
+- **Hash discipline** — unchanged scenarios keep their existing `sourceHash` untouched. Only stale/regenerated and new scenarios get a freshly computed `sourceHash` via `git hash-object`. Never recompute a hash that already matches.
+- **Unit tests follow scenarios** — after scenario JSON is updated, automatically sync unit tests (Step 8). Only touch tests for changed/new/removed scenarios. Follow `scenario-unit-tests.mdc` for all test generation rules. Update `unitTestCovered` and `testReference` in the JSON after tests are written.

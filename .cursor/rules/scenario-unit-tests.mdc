@@ -1,0 +1,238 @@
+---
+description: Generate Angular Jest unit tests from scenario JSON files in docs/scenarios/
+alwaysApply: true
+---
+
+# Generate Unit Tests Command
+
+Generate Angular Jest unit tests driven by scenario definitions in `docs/scenarios/*.scenarios.json`.
+
+## Trigger Phrases
+
+- "generate tests"
+- "generate unit tests"
+- "create tests"
+- "create unit tests"
+- "write tests"
+- "write unit tests"
+- "implement tests"
+- "implement unit tests"
+- "unit test"
+- "test scenarios"
+
+## Input Parsing
+
+1. If the user specifies a **scenario ID** and **page** (e.g., `generate tests for PE-POS-001 on skill-details`), generate tests only for that scenario.
+2. If the user specifies only a **page** (e.g., `generate tests for skill-details`), generate tests for all scenarios in `docs/scenarios/{page}.scenarios.json`.
+3. If **neither** is specified, generate tests for all scenario files in `docs/scenarios/*.scenarios.json`, processing one page at a time in batches.
+
+---
+
+## Workflow
+
+### Step 1 — Load Scenarios
+
+1. Read the target `docs/scenarios/{page}.scenarios.json` (or all JSON files if unscoped).
+2. For each scenario, extract: `id`, `title`, `type`, `preconditions`, `userAction`, `expectedOutcome`, `logicInvolved`, `sourceFiles`.
+3. Group scenarios by `sourceFiles` — tests for the same component/service go in the same `.spec.ts` file.
+
+### Step 2 — Read Source Code
+
+1. Read every file listed in `sourceFiles` across the target scenarios.
+2. Identify: component class, injected services, signals, computed signals, lifecycle hooks, template bindings, forms, route params, and all public methods.
+3. Map each scenario's `logicInvolved` to the actual code paths in the source files.
+
+### Step 3 — Generate Test Files
+
+For each component/service that has scenarios, create or update a `.spec.ts` file colocated with the source file (e.g., `skill-details.component.spec.ts` next to `skill-details.component.ts`).
+
+#### Test File Structure
+
+```typescript
+import { ComponentFixture, TestBed, fakeAsync, tick, flush, waitForAsync } from '@angular/core/testing';
+import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { RouterTestingModule } from '@angular/router/testing';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { DebugElement } from '@angular/core';
+import { By } from '@angular/platform-browser';
+import { of, throwError, EMPTY, Subject } from 'rxjs';
+// ... additional imports based on component dependencies
+
+describe('ComponentName', () => {
+  // fixture, component, mock declarations
+  // beforeEach with TestBed configuration
+  // afterEach with cleanup
+
+  describe('Scenario Group (section name)', () => {
+    // One it() block per scenario
+    it('should ... (from scenario title) [SCENARIO_ID]', () => {
+      // Arrange: set up preconditions
+      // Act: perform userAction
+      // Assert: verify expectedOutcome
+    });
+  });
+});
+```
+
+#### Scenario-to-Test Mapping Rules
+
+For each scenario, generate test(s) following these rules by **type**:
+
+**Positive scenarios** — Test the happy path described in `expectedOutcome`. Verify DOM rendering, service calls, signal values, and navigation.
+
+**Negative scenarios** — Test error/failure paths. Mock services to return errors (`throwError`), provide invalid inputs, and verify error UI states, validation messages, and fallback rendering.
+
+**Race scenarios** — Use `fakeAsync` + `tick`. Trigger the same async action multiple times rapidly. Verify only one request is processed or that a loading guard prevents re-entry.
+
+**Concurrent scenarios** — Trigger two different async actions that share state. Verify no data corruption, no UI glitches, and correct final state.
+
+**Edge scenarios** — Test uncommon-but-valid paths: empty data, null values, browser back, destroyed component, missing route params.
+
+**Boundary scenarios** — Test at exact limits: max characters, empty strings, zero items, boundary values from validation rules.
+
+### Step 4 — TestBed Configuration
+
+Configure TestBed based on the component's actual imports and dependencies:
+
+- Import the component's module dependencies (standalone imports, FormsModule, etc.)
+- Mock all injected services with `jest.fn()` spies returning sensible defaults
+- Mock `ActivatedRoute` with params/queryParams from the scenario's `preconditions`
+- Mock `Router` for navigation tests
+- Use `HttpClientTestingModule` for service tests with HTTP calls
+- Use `CUSTOM_ELEMENTS_SCHEMA` or `NO_ERRORS_SCHEMA` only if third-party component selectors cause errors
+
+### Step 5 — Apply Best Practices
+
+**Naming**: `it('should {scenario title in lowercase} [SCENARIO_ID]')` — include the scenario ID in brackets at the end for traceability.
+
+**AAA Pattern**: Every test uses Arrange-Act-Assert with clear separation.
+
+**Mocking**:
+- Services: `{ provide: ServiceName, useValue: { method: jest.fn().mockReturnValue(of(data)) } }`
+- Router: `{ provide: Router, useValue: { navigate: jest.fn() } }`
+- ActivatedRoute: `{ provide: ActivatedRoute, useValue: { params: of({ key: 'value' }), snapshot: { params: { key: 'value' } } } }`
+- Observables: `jest.spyOn(service, 'method').mockReturnValue(of(mockData))` for success, `throwError(() => new Error('...'))` for failure
+
+**Async**:
+- Use `fakeAsync` + `tick` for timer/debounce scenarios
+- Use `waitForAsync` for Observable-based init
+- Use `done` callback for subscription assertions
+- Always `flush()` at end of `fakeAsync` to clear pending timers
+
+**Change Detection**: Call `fixture.detectChanges()` after setup when testing template rendering. Skip it when testing `ngOnInit` behavior before detection.
+
+**Cleanup**: `afterEach(() => { fixture.destroy(); jest.clearAllMocks(); })`
+
+**DOM Assertions**: Use `fixture.debugElement.query(By.css(...))` for element queries. Verify `textContent`, `nativeElement.value`, `classes`, `attributes`.
+
+**Signal Testing**: For Angular signals, set signal values directly, then call `fixture.detectChanges()` and verify DOM or computed signal outputs.
+
+### Step 6 — Coverage Distribution
+
+Target 90-100% code coverage per component, distributed as:
+- **60% happy path** (Positive scenarios)
+- **25% edge cases** (Edge + Boundary scenarios)
+- **15% error handling** (Negative + Race + Concurrent scenarios)
+
+If a scenario type is underrepresented in the JSON, add supplementary tests to fill gaps (e.g., null input handling, subscription cleanup in `ngOnDestroy`).
+
+### Step 7 — Write Test File
+
+1. Write the `.spec.ts` file colocated with the source file.
+2. Run linter checks on the generated test file and fix any introduced errors.
+
+### Step 8 — Run Tests & Fix Until 100% Pass
+
+After writing the `.spec.ts` file, run it and iterate until every test passes:
+
+1. **Run tests** for the specific file:
+   ```bash
+   npx ng test --include='**/path-to-file.spec.ts' --watch=false --browsers=ChromeHeadless
+   ```
+   Use the `--include` glob that matches only the generated spec file.
+
+2. **Read the output** and check the results summary (e.g., `X specs, Y failures`).
+
+3. **If any tests fail**, for each failure:
+   a. Read the failure message and stack trace from the test output.
+   b. Diagnose the root cause — common failures:
+      - **Missing mock**: a service method or signal was called that wasn't mocked. Add the missing mock to the `beforeEach` providers or mock object.
+      - **Wrong mock return value**: the mock returns the wrong shape. Fix the mock data to match the real type.
+      - **Missing import**: a module (e.g., `FormsModule`, a PrimeNG module) wasn't included in TestBed imports. Add it.
+      - **Template error**: a third-party component selector is unknown. Add `CUSTOM_ELEMENTS_SCHEMA` to TestBed schemas or import the module.
+      - **Signal/computed timing**: `fixture.detectChanges()` was missing or called at the wrong time. Adjust placement.
+      - **Async timing**: an async operation wasn't flushed. Add `tick()`, `flush()`, or wrap in `fakeAsync`.
+      - **DOM element not found**: the CSS selector doesn't match the actual template. Read the template HTML and fix the selector.
+      - **Wrong assertion**: the expected value doesn't match reality. Re-read the source code, fix the expectation.
+   c. Apply the fix to the `.spec.ts` file.
+
+4. **Re-run the tests** after fixing. Repeat steps 2–3 until the output shows **0 failures**.
+
+5. **Maximum iterations**: attempt up to **5 fix-and-rerun cycles**. If tests still fail after 5 attempts:
+   - Report the remaining failures to the user with full error details.
+   - Set `unitTestCovered: false` and `testReference: null` for the scenarios whose tests could not be fixed.
+   - Ask the user how to proceed before continuing.
+
+6. **Only proceed to Step 9** once the test run shows 0 failures.
+
+### Step 9 — Update Scenario JSON with Test References
+
+After the `.spec.ts` file is written, update the corresponding `docs/scenarios/{page}.scenarios.json`:
+
+1. **Read** the current scenario JSON file.
+2. **For each scenario that has a matching `it()` block** in the generated test file:
+   - Set `"unitTestCovered": true`
+   - Set `"testReference"` to the **exact `it()` description string** including the scenario ID suffix.
+     Example: if the test is `it('should navigate to skill details page and see the skill name, icon, and list of skills [PE-POS-001]')`, then `testReference` = `"should navigate to skill details page and see the skill name, icon, and list of skills [PE-POS-001]"`
+3. **Do NOT modify any other fields** in the scenario object — preserve `id`, `title`, `type`, `preconditions`, `userAction`, `expectedOutcome`, `logicInvolved`, `sourceFiles`, `sourceHash` verbatim.
+4. **Write** the updated JSON with 2-space indentation.
+5. **Regenerate** the matching `docs/scenarios/{page}.scenarios.html` from the updated JSON (self-contained, all CSS/JS inline, search bar, type filters, collapsible sections, color-coded badges) — follow the HTML generation rules in `scenario-changes.mdc`.
+
+#### testReference Format Rules
+
+- The value is the **full `it()` description string** without the `it('` prefix and `')` suffix — just the inner text.
+- Always includes the `[SCENARIO_ID]` suffix to link back to the scenario.
+- If a single scenario maps to **multiple `it()` blocks** (e.g., a Positive scenario with separate DOM and service-call assertions), use a semicolon-separated string: `"test desc one [ID]; test desc two [ID]"`.
+- If a scenario was **not covered** by any test (e.g., it requires infrastructure not yet available), leave `"unitTestCovered": false` and `"testReference": null`.
+
+### Step 10 — Report Summary
+
+Report to the user:
+- Number of scenarios covered vs. total
+- Test file(s) created or updated (with paths)
+- Scenario JSON file(s) updated (with paths)
+- Test run result (all passing, with pass count)
+- Any scenarios that could not be covered and why
+
+### Step 11 — Batching (All Scenarios Mode)
+
+When generating tests for all scenarios:
+1. Process one page at a time.
+2. Within each page, group scenarios by source file and generate one `.spec.ts` per component/service.
+3. Present a summary after each page and ask for confirmation before continuing to the next page.
+
+---
+
+## Anti-Patterns to Avoid
+
+- Never test private methods directly — test through the public API
+- Never use `any` type in mocks — define proper mock types or use `Partial<ServiceName>`
+- Never leave subscriptions open — test `ngOnDestroy` cleanup
+- Never skip `detectChanges()` when asserting DOM state
+- Never use real HTTP calls — always use `HttpClientTestingModule`
+- Never write `test.skip()` or `test.todo()` — all tests must be runnable
+- Never add narration comments — only explain non-obvious test logic
+
+## Output Checklist
+
+- [ ] All necessary imports present
+- [ ] Complete TestBed configuration with all dependencies mocked
+- [ ] Mock data fixtures defined at the top of the file
+- [ ] Proper `describe`/`it` hierarchy grouped by scenario section
+- [ ] `beforeEach`/`afterEach` with setup and teardown
+- [ ] AAA pattern in every test
+- [ ] Scenario ID in test name for traceability
+- [ ] No `test.skip()` or `test.todo()`
+- [ ] **All tests pass with 0 failures** (verified by running `ng test`)
+- [ ] Scenario JSON updated with `unitTestCovered` and `testReference`
+- [ ] Scenario HTML regenerated from updated JSON
