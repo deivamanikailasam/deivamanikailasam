@@ -281,7 +281,7 @@
             "key": "openapi-swagger",
             "name": "OpenAPI/Swagger",
             "icon": "pi pi-file",
-            "image": "assets/images/skills/openapi.png"
+            "image": "assets/images/skills/openapi.svg"
           }
         ]
       },
@@ -298,7 +298,7 @@
           {
             "key": "sqlserver",
             "name": "SQL Server",
-            "image": "assets/images/skills/sql-server.png",
+            "image": "assets/images/skills/sql-server.svg",
             "icon": "pi pi-database"
           },
           {
@@ -382,25 +382,25 @@
           {
             "key": "pytest",
             "name": "Pytest",
-            "image": "assets/images/skills/pytest.png",
+            "image": "assets/images/skills/pytest.svg",
             "icon": "pi pi-check-circle"
           },
           {
             "key": "testng",
             "name": "TestNG",
-            "image": "assets/images/skills/testng.png",
+            "image": "assets/images/skills/testng.svg",
             "icon": "pi pi-check-circle"
           },
           {
             "key": "selenium",
             "name": "Selenium",
-            "image": "assets/images/skills/selenium.png",
+            "image": "assets/images/skills/selenium.svg",
             "icon": "pi pi-check-circle"
           },
           {
             "key": "vitest",
             "name": "Vitest",
-            "image": "assets/images/skills/vitest.png",
+            "image": "assets/images/skills/vitest.svg",
             "icon": "pi pi-check-circle"
           }
         ]
@@ -436,7 +436,7 @@
           {
             "key": "caffeine",
             "name": "Caffeine",
-            "image": "assets/images/skills/caffeine.png",
+            "image": "assets/images/skills/caffeine.svg",
             "icon": "pi pi-bolt"
           },
           {
@@ -664,7 +664,7 @@
           {
             "key": "github-actions",
             "name": "GitHub Actions",
-            "image": "assets/images/skills/github-actions.png",
+            "image": "assets/images/skills/github-actions.svg",
             "icon": "pi pi-github"
           },
           {
@@ -700,7 +700,7 @@
           {
             "key": "terraform",
             "name": "Terraform",
-            "image": "assets/images/skills/terraform.png",
+            "image": "assets/images/skills/terraform.svg",
             "icon": "pi pi-wrench"
           },
           {
@@ -754,7 +754,7 @@
           {
             "key": "datadog",
             "name": "Datadog",
-            "image": "assets/images/skills/datadog.png",
+            "image": "assets/images/skills/datadog.svg",
             "icon": "pi pi-chart-bar"
           },
           {
