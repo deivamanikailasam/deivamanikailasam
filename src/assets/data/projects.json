@@ -1,5 +1,76 @@
 [
   {
+    "id": "feature-rich-ui-component-library",
+    "title": "Feature-Rich UI Component Library",
+    "description": "Multi-framework design system (React, Angular, Next.js) with 40+ reusable components distributed via private npm, enabling consistent UX across 6 internal products with framework-agnostic design tokens, white-label theming, and 150+ Storybook stories.",
+    "technologies": ["React", "Angular", "Next.js", "TypeScript", "Storybook", "Tailwind CSS", "SCSS", "MDX", "Compodoc", "AG Grid"],
+    "category": "Frontend & Design Systems",
+    "subcategory": "Component Library",
+    "highlights": [
+      "40+ reusable UI components across React, Angular, and Next.js frameworks",
+      "Distributed via private Nexus npm registry with framework-agnostic design tokens",
+      "White-label theming supporting 5+ brand variants with dynamic stylesheet injection",
+      "150+ Storybook component stories with a11y tests and GenAI component suggestions",
+      "Advanced AG Grid Enterprise tables with filtering, sorting, CSV/Excel export via ExcelJS",
+      "Used across 6 internal products with consistent UX and component discoverability increased by 85%"
+    ],
+    "status": "Active",
+    "icon": "pi pi-desktop",
+    "featured": true
+  },
+  {
+    "id": "ai-agent-for-code-generation",
+    "title": "AI Agent for Code Generation",
+    "description": "LLM-powered tool using GPT-4 and LangChain that generates boilerplate and integration code from natural language prompts, accelerating development workflows for internal engineering teams.",
+    "technologies": ["Python", "GPT-4", "LangChain", "OpenAI API"],
+    "category": "AI & Machine Learning",
+    "subcategory": "Code Generation",
+    "highlights": [
+      "GPT-4 powered code generation for boilerplate and integration code",
+      "LangChain orchestration for multi-step code generation workflows",
+      "Accelerates development velocity for internal engineering teams",
+      "Supports multiple languages and integration patterns"
+    ],
+    "status": "Active",
+    "icon": "pi pi-code",
+    "featured": false
+  },
+  {
+    "id": "edge-water-management-platform",
+    "title": "Edge Water Management Platform",
+    "description": "Full-stack web application for smart water monitoring and optimisation with a modern Angular frontend and cloud backend, providing real-time insights and operational dashboards.",
+    "technologies": ["Angular", "TypeScript", "Node.js", "PostgreSQL", "Azure", "Docker"],
+    "category": "Full Stack",
+    "subcategory": "IoT & Monitoring",
+    "highlights": [
+      "Smart water monitoring and optimisation with real-time data ingestion",
+      "Modern Angular frontend with responsive dashboards and operational insights",
+      "Cloud backend for scalable data processing and storage",
+      "Full-stack architecture with end-to-end observability"
+    ],
+    "status": "Active",
+    "icon": "pi pi-chart-bar",
+    "featured": false
+  },
+  {
+    "id": "snowflake-agent",
+    "title": "Snowflake Agent",
+    "description": "Python-based agentic AI system using LangGraph and LangChain to create a unified knowledge gateway, combining vector embeddings with knowledge graphs for querying Snowflake data and powering analytics dashboards with 85% accuracy in ad performance predictions.",
+    "technologies": ["Python", "LangGraph", "LangChain", "Snowflake", "Vector Embeddings", "Knowledge Graphs", "OpenAI API"],
+    "category": "AI & Machine Learning",
+    "subcategory": "Agent Systems",
+    "highlights": [
+      "LangGraph multi-agent orchestration for complex Snowflake data queries",
+      "Unified knowledge gateway combining vector embeddings with knowledge graphs",
+      "85% accuracy in ad performance predictions powering analytics dashboards",
+      "LangChain RAG integration for document querying and contextual retrieval",
+      "Supports natural language queries over structured Snowflake data"
+    ],
+    "status": "Active",
+    "icon": "pi pi-database",
+    "featured": true
+  },
+  {
     "id": "ats-resume-optimizer",
     "title": "ATS Resume Optimizer",
     "description": "An AI-powered resume optimization tool that intelligently adapts resumes to specific job descriptions for maximum ATS compatibility. Uses OpenAI GPT-4o-mini with 14 distinct ATS strategies, programmatic keyword verification, iterative refinement, and 40 premium themes with live preview and PDF export.",

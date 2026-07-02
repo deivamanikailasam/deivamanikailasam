@@ -207,7 +207,7 @@
           },
           {
             "key": "nodejs",
-            "name": "Node.js",
+            "name": "Node.js/Express",
             "image": "assets/images/skills/nodejs.png",
             "icon": "pi pi-code"
           },
@@ -276,6 +276,12 @@
             "name": "GraphQL",
             "icon": "pi pi-link",
             "image": "assets/images/skills/graphql.png"
+          },
+          {
+            "key": "openapi-swagger",
+            "name": "OpenAPI/Swagger",
+            "icon": "pi pi-file",
+            "image": "assets/images/skills/openapi.png"
           }
         ]
       },
@@ -290,6 +296,12 @@
             "icon": "pi pi-database"
           },
           {
+            "key": "sqlserver",
+            "name": "SQL Server",
+            "image": "assets/images/skills/sql-server.png",
+            "icon": "pi pi-database"
+          },
+          {
             "key": "postgresql",
             "name": "PostgreSQL",
             "image": "assets/images/skills/postgre-sql.png",
@@ -298,6 +310,12 @@
           {
             "key": "mongodb",
             "name": "MongoDB",
+            "image": "assets/images/skills/mongodb.png",
+            "icon": "pi pi-database"
+          },
+          {
+            "key": "mongodb-atlas-search",
+            "name": "MongoDB Atlas Search",
             "image": "assets/images/skills/mongodb.png",
             "icon": "pi pi-database"
           },
@@ -360,6 +378,30 @@
             "name": "Mockito",
             "image": "assets/images/skills/mockito.png",
             "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "pytest",
+            "name": "Pytest",
+            "image": "assets/images/skills/pytest.png",
+            "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "testng",
+            "name": "TestNG",
+            "image": "assets/images/skills/testng.png",
+            "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "selenium",
+            "name": "Selenium",
+            "image": "assets/images/skills/selenium.png",
+            "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "vitest",
+            "name": "Vitest",
+            "image": "assets/images/skills/vitest.png",
+            "icon": "pi pi-check-circle"
           }
         ]
       },
@@ -389,6 +431,12 @@
             "key": "redis",
             "name": "Redis",
             "image": "assets/images/skills/redis.png",
+            "icon": "pi pi-bolt"
+          },
+          {
+            "key": "caffeine",
+            "name": "Caffeine",
+            "image": "assets/images/skills/caffeine.png",
             "icon": "pi pi-bolt"
           },
           {
@@ -515,9 +563,21 @@
             "icon": "pi pi-link"
           },
           {
+            "key": "langgraph",
+            "name": "LangGraph",
+            "image": "assets/images/skills/langchain.png",
+            "icon": "pi pi-link"
+          },
+          {
             "key": "rag",
             "name": "RAG",
             "image": "assets/images/skills/rag.svg",
+            "icon": "pi pi-sparkles"
+          },
+          {
+            "key": "embeddings",
+            "name": "Embeddings",
+            "image": "assets/images/skills/llm.png",
             "icon": "pi pi-sparkles"
           },
           {
@@ -542,6 +602,12 @@
             "key": "cursorai-ai",
             "name": "Cursor AI",
             "image": "assets/images/skills/cursorai.png",
+            "icon": "pi pi-sparkles"
+          },
+          {
+            "key": "claude-ai",
+            "name": "Claude",
+            "image": "assets/images/skills/copilot.png",
             "icon": "pi pi-sparkles"
           }
         ]
@@ -596,6 +662,12 @@
             "icon": "pi pi-cog"
           },
           {
+            "key": "github-actions",
+            "name": "GitHub Actions",
+            "image": "assets/images/skills/github-actions.png",
+            "icon": "pi pi-github"
+          },
+          {
             "key": "gitlabci",
             "name": "GitLab CI",
             "image": "assets/images/skills/gitlab.png",
@@ -624,6 +696,18 @@
             "name": "Kubernetes",
             "image": "assets/images/skills/kubernetes.png",
             "icon": "pi pi-server"
+          },
+          {
+            "key": "terraform",
+            "name": "Terraform",
+            "image": "assets/images/skills/terraform.png",
+            "icon": "pi pi-wrench"
+          },
+          {
+            "key": "arm-bicep",
+            "name": "ARM/Bicep",
+            "image": "assets/images/skills/azure.png",
+            "icon": "pi pi-wrench"
           }
         ]
       },
@@ -639,7 +723,7 @@
           },
           {
             "key": "azure",
-            "name": "Azure (App Service, Functions, Kubernetes, DevOps)",
+            "name": "Azure (App Service, Functions, SQL, PostgreSQL, Cosmos DB, DevOps)",
             "image": "assets/images/skills/azure.png",
             "icon": "pi pi-cloud"
           }
@@ -660,6 +744,24 @@
             "name": "CoPilot",
             "image": "assets/images/skills/copilot.png",
             "icon": "pi pi-sparkles"
+          }
+        ]
+      },
+      {
+        "title": "Observability",
+        "key": "observability",
+        "items": [
+          {
+            "key": "datadog",
+            "name": "Datadog",
+            "image": "assets/images/skills/datadog.png",
+            "icon": "pi pi-chart-bar"
+          },
+          {
+            "key": "application-insights",
+            "name": "Application Insights",
+            "image": "assets/images/skills/azure.png",
+            "icon": "pi pi-chart-bar"
           }
         ]
       }
@@ -684,8 +786,14 @@
           },
           {
             "key": "microservices",
-            "name": "Microservices Architecture",
+            "name": "Microservices and Distributed Systems",
             "image": "assets/images/skills/microservices.svg",
+            "icon": "pi pi-sitemap"
+          },
+          {
+            "key": "multi-tenant-saas",
+            "name": "Multi-tenant SaaS",
+            "image": "assets/images/skills/system-design.svg",
             "icon": "pi pi-sitemap"
           }
         ]
@@ -735,6 +843,18 @@
             "name": "Database Design (SQL & NoSQL)",
             "image": "assets/images/skills/database-design.svg",
             "icon": "pi pi-database"
+          },
+          {
+            "key": "event-driven",
+            "name": "Event-driven Architectures (CQRS, Saga)",
+            "image": "assets/images/skills/microservices.svg",
+            "icon": "pi pi-bolt"
+          },
+          {
+            "key": "tdd",
+            "name": "Test Driven Development Architecture",
+            "image": "assets/images/skills/system-design.svg",
+            "icon": "pi pi-check-circle"
           }
         ]
       }
@@ -756,6 +876,12 @@
             "name": "Agile methodology",
             "image": "assets/images/skills/agile.png",
             "icon": "pi pi-calendar"
+          },
+          {
+            "key": "load-performance-testing",
+            "name": "Load & Performance Testing",
+            "image": "assets/images/skills/system-design.svg",
+            "icon": "pi pi-chart-bar"
           }
         ]
       },
