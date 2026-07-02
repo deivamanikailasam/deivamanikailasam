@@ -1,7 +1,7 @@
 [
   {
     "id": "1",
-    "company": "Kinesso – IPG",
+    "company": "Kinesso – Omnicom Media Group (formerly IPG)",
     "position": "Senior Software Engineer",
     "startDate": "2021-08-01",
     "endDate": null,
@@ -53,6 +53,8 @@
           "Designed Kubernetes infrastructure with Deployment manifests for Spring Boot + Python FastAPI + Next.js, Service discovery, ConfigMaps, Vault + Git credentials, MongoDB StatefulSets, reducing config burden by 80%",
           "Built multi-stage Docker builds for Java backend (OpenJDK 21 + Elastic APM), Python services, Angular/React.js/Next.js (Node 22 + Nginx), MongoDB backup sidecars, 45% image size reduction",
           "Developed Terraform IaC for AWS ECS/Fargate + MongoDB Atlas, GitOps with ArgoCD, infrastructure versioning, one-command deployments, 100% manual change elimination",
+          "Migrated CI/CD pipelines from Jenkins/GitHub Actions to hybrid AWS environments using Terraform and ArgoCD, automating Docker/K8s deployments of Python AI services with Helm charts, policy-as-code (Kyverno), and reusable GenAI library modules for prompt engineering and evaluation",
+          "Established LLMOps workflows for production deployment of fine-tuned LLMs (GPT-4 variants) using Docker containerization and Kubernetes on AWS EKS",
           "Automated Docker publishing to Nexus (npm + Docker + PyPI), Jenkins, GitHub Actions, Git tags, blue-green + canary deployments for zero-downtime across Java/Python/JS stacks",
           "Configured K8s probes (liveness/readiness/startup) + MongoDB health checks, Python service readiness, reducing MTTR by 65%"
         ]
