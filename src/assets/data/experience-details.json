@@ -9085,5 +9085,200 @@
         {"text": "Built <strong>UX design handoff</strong> workflows with annotated specs, design tokens, and developer collaboration in Figma", "level": "Intermediate"},
         {"text": "Developed <strong>UX design sprint</strong> facilitation for rapid prototyping and validation of new feature concepts", "level": "Advanced"},
         {"text": "Created <strong>UX ROI measurement</strong> framework linking design improvements to business metrics and user satisfaction", "level": "Advanced"}
+    ],
+    "openapi-swagger": [
+        {"text": "Designed and maintained <strong>OpenAPI 3.x contracts</strong> for 75+ Spring Boot REST endpoints and 50+ Python FastAPI endpoints with 100% coverage across multi-tenant microservices", "level": "Advanced"},
+        {"text": "Implemented <strong>contract-first API design</strong> with OpenAPI specs driving both backend stub generation and frontend client SDK generation across Angular, React, and Next.js consumers", "level": "Advanced"},
+        {"text": "Integrated <strong>Swagger annotations</strong> (<code>@Operation</code>, <code>@Schema</code>, <code>@ApiResponse</code>) in Spring Boot 3.x for auto-generated interactive API documentation", "level": "Advanced"},
+        {"text": "Configured <strong>springdoc-openapi</strong> with custom Swagger UI theming, JWT Bearer auth scheme, and multi-tenant tenant-id header documentation", "level": "Advanced"},
+        {"text": "Used <strong>FastAPI's built-in OpenAPI</strong> generation for Python microservices, adding custom response models and dependency documentation", "level": "Advanced"},
+        {"text": "Published <strong>interactive API portals</strong> with Swagger UI for internal teams, enabling self-service API exploration and reducing onboarding time for new services", "level": "Advanced"},
+        {"text": "Enforced <strong>OpenAPI schema validation</strong> in CI pipelines to catch breaking changes before merge, protecting downstream consumers", "level": "Advanced"},
+        {"text": "Used <strong>OpenAPI specs as source of truth</strong> for gRPC+REST hybrid service definitions alongside protobuf contracts", "level": "Advanced"},
+        {"text": "Generated <strong>TypeScript client types</strong> from OpenAPI specs for type-safe Angular HTTP client calls, eliminating manual interface duplication", "level": "Advanced"},
+        {"text": "Used <strong>Prism mock servers</strong> from OpenAPI specs to enable parallel frontend and backend development across distributed teams", "level": "Intermediate"}
+    ],
+    "sqlserver": [
+        {"text": "Designed <strong>multi-tenant SQL Server schemas</strong> with database-per-tenant isolation supporting 12 concurrent tenant environments with zero cross-tenant data leakage", "level": "Advanced"},
+        {"text": "Implemented <strong>scalable hybrid data access layers</strong> supporting SQL Server alongside PostgreSQL, Snowflake, and MongoDB for cross-database query routing in a single platform", "level": "Advanced"},
+        {"text": "Built <strong>Liquibase-managed SQL Server migrations</strong> in CI/CD pipelines ensuring zero-downtime schema changes across all tenant databases", "level": "Advanced"},
+        {"text": "Optimised <strong>complex analytical queries</strong> over SQL Server with composite indexes, covering indexes, and query plan analysis, reducing p99 query latency significantly", "level": "Advanced"},
+        {"text": "Integrated <strong>SQL Server with Spring Boot</strong> using Spring Data JPA with multi-datasource configuration and HikariCP connection pooling per tenant", "level": "Advanced"},
+        {"text": "Implemented <strong>row-level security</strong> patterns in SQL Server for shared-schema multi-tenant data access controlled by JWT claims", "level": "Advanced"},
+        {"text": "Built <strong>data backfill pipelines</strong> from SQL Server into MongoDB and Snowflake using Python data connectors for GenAI analytics integration", "level": "Advanced"},
+        {"text": "Designed <strong>SQL Server table schemas</strong> for advertising performance data integrated with Google Ads, Meta, and Bing Ads connectors via OAuth2", "level": "Advanced"},
+        {"text": "Configured <strong>SQL Server connection failover</strong> with Spring Boot multi-DataSource beans and read-replica routing for query load distribution", "level": "Intermediate"}
+    ],
+    "mongodb-atlas-search": [
+        {"text": "Stored and queried <strong>tenant-specific vector embeddings</strong> in MongoDB Atlas Vector Search for GenAI RAG pipelines handling 10K+ daily inference requests at sub-200ms latency", "level": "Advanced"},
+        {"text": "Implemented <strong>Atlas Search indexes</strong> with custom field mappings for full-text search over advertising performance documents across multi-tenant collections", "level": "Advanced"},
+        {"text": "Built <strong>hybrid search pipelines</strong> combining Atlas Vector Search for semantic retrieval and Atlas Search for keyword filtering in a single aggregation pipeline", "level": "Advanced"},
+        {"text": "Integrated <strong>MongoDB Atlas Search</strong> with Python FastAPI data connectors alongside Google Ads, Meta/Facebook, Bing Ads, and Adverity for near real-time advertising analytics", "level": "Advanced"},
+        {"text": "Designed <strong>per-tenant embedding storage</strong> using Atlas Vector Search with collection-per-tenant isolation and HNSW index configuration", "level": "Advanced"},
+        {"text": "Used <strong>$search aggregation stages</strong> with autocomplete, phrase, and wildcard operators for user-facing search features across the analytics platform", "level": "Advanced"},
+        {"text": "Implemented <strong>LLM-based anomaly detection</strong> pipelines querying Atlas Vector Search to find similar historical patterns for comparison against current data quality scores", "level": "Advanced"},
+        {"text": "Used <strong>MongoDB Atlas Search facets</strong> for dynamic filter panels on analytics dashboards, enabling non-technical users to slice advertising data by dimensions", "level": "Advanced"}
+    ],
+    "caffeine": [
+        {"text": "Designed and implemented a <strong>hybrid caching layer</strong> combining Caffeine (L1 in-process), Redis (L2 distributed), and MongoDB for large-payload API response caching, improving 99th percentile latency by 55%", "level": "Advanced"},
+        {"text": "Integrated <strong>Caffeine with Spring Cache</strong> (<code>@Cacheable</code>, <code>@CacheEvict</code>) for transparent caching of expensive multi-tenant database queries across PostgreSQL, SQL Server, and MongoDB", "level": "Advanced"},
+        {"text": "Configured <strong>Caffeine cache policies</strong> with expireAfterWrite, maximumSize, and recordStats per cache region based on data access frequency analysis", "level": "Advanced"},
+        {"text": "Used <strong>Caffeine's AsyncLoadingCache</strong> with CompletableFuture for non-blocking cache population of GenAI embedding lookups during high-concurrency inference requests", "level": "Advanced"},
+        {"text": "Implemented <strong>Caffeine cache warming</strong> on application startup to preload frequently accessed tenant configuration and schema metadata, eliminating cold-start latency spikes", "level": "Advanced"},
+        {"text": "Monitored <strong>Caffeine hit rates and eviction counts</strong> via Micrometer metrics exported to Datadog for real-time cache effectiveness dashboards", "level": "Advanced"},
+        {"text": "Tuned <strong>Caffeine W-TinyLFU eviction</strong> parameters to optimise hit rates for mixed read/write workloads across API request patterns serving 50K+ daily requests", "level": "Advanced"},
+        {"text": "Reduced <strong>database load by caching computed aggregation results</strong> in Caffeine for Snowflake analytics queries that took 3–5 seconds to execute", "level": "Advanced"}
+    ],
+    "pytest": [
+        {"text": "Built <strong>comprehensive Python test suites</strong> with pytest across FastAPI microservices, achieving 80%+ coverage as part of 1000+ total unit tests across Java/Python/UI", "level": "Advanced"},
+        {"text": "Wrote <strong>FastAPI integration tests</strong> using TestClient with dependency override for mocking external services and database connections", "level": "Advanced"},
+        {"text": "Implemented <strong>pytest fixtures</strong> for test database setup, mock LLM responses, and tenant context injection across all Python microservice test suites", "level": "Advanced"},
+        {"text": "Used <strong>pytest-asyncio</strong> for testing async FastAPI endpoints and Python asyncio-based data pipelines handling large payload processing", "level": "Advanced"},
+        {"text": "Configured <strong>pytest-cov coverage gates</strong> in Jenkins and GitHub Actions CI pipelines, blocking merges below 80% threshold", "level": "Advanced"},
+        {"text": "Implemented <strong>controller-level tests</strong> for Python FastAPI services using pytest with Testcontainers for MongoDB and PostgreSQL", "level": "Advanced"},
+        {"text": "Used <strong>pytest-mock</strong> and <code>unittest.mock.patch</code> for mocking OpenAI API calls, external data connectors, and cloud service clients in unit tests", "level": "Advanced"},
+        {"text": "Built <strong>parameterised test cases</strong> with <code>@pytest.mark.parametrize</code> for data quality scoring engine edge cases across 50+ input scenarios", "level": "Advanced"},
+        {"text": "Integrated pytest test results with <strong>Allure reporting</strong> for structured test visibility in CI, enabling teams to quickly identify failure patterns", "level": "Intermediate"}
+    ],
+    "testng": [
+        {"text": "Applied <strong>test-first development with TestNG and JUnit</strong> across Spring Boot services, achieving 85% unit test coverage that caught 25+ regressions during large-scale migration", "level": "Advanced"},
+        {"text": "Used <strong>TestNG with Spring Boot Test</strong> context loading for integration tests covering service layer, repository layer, and REST controller validation", "level": "Advanced"},
+        {"text": "Implemented <strong>TestNG @DataProvider</strong> for parameterised testing of business rules across employee timesheet validation, contract milestones, and payroll calculations", "level": "Advanced"},
+        {"text": "Configured <strong>TestNG parallel execution</strong> at method level to reduce CI test run time across a 300+ test suite for a Spring Boot microservices platform", "level": "Advanced"},
+        {"text": "Integrated <strong>TestNG with Maven Surefire Plugin</strong> and SonarQube for automated test reporting and quality gate enforcement in CI/CD", "level": "Advanced"},
+        {"text": "Used <strong>TestNG groups</strong> to separate smoke, regression, and integration test suites, enabling selective test execution during pre-deploy verification", "level": "Intermediate"}
+    ],
+    "selenium": [
+        {"text": "Developed <strong>Selenium WebDriver E2E test suites</strong> for Angular applications covering critical user journeys, achieving 100% automation for key workflows and catching 25+ regressions", "level": "Advanced"},
+        {"text": "Implemented <strong>Page Object Model (POM)</strong> with Selenium for maintainable test code across employee management, contract tracking, and attendance modules", "level": "Advanced"},
+        {"text": "Ran <strong>Selenium tests in headless Chrome</strong> on Jenkins CI pipelines, integrating results with Allure reports for structured test visibility", "level": "Advanced"},
+        {"text": "Used <strong>explicit WebDriverWait conditions</strong> to handle dynamic Angular content, async API responses, and PrimeNG component loading states reliably", "level": "Advanced"},
+        {"text": "Built <strong>cross-browser Selenium tests</strong> verifying Angular Material and PrimeNG component behaviour across Chrome, Firefox, and Edge", "level": "Intermediate"},
+        {"text": "Integrated <strong>Selenium test runs into Maven build lifecycle</strong> as part of the verify phase, blocking deployment on any critical E2E failures", "level": "Advanced"}
+    ],
+    "vitest": [
+        {"text": "Ran <strong>Vitest unit test suites</strong> for React and Next.js components as part of 1000+ total cross-framework tests achieving 80%+ coverage across the multi-framework design system", "level": "Advanced"},
+        {"text": "Used <strong>vi.mock() and vi.fn()</strong> to mock API clients, OpenAI integrations, and external data connectors in React component unit tests", "level": "Advanced"},
+        {"text": "Configured <strong>Vitest with jsdom</strong> environment for testing React Hook Form validators, AG Grid callbacks, and custom hook logic in isolation", "level": "Advanced"},
+        {"text": "Generated <strong>Vitest coverage reports</strong> with <code>@vitest/coverage-v8</code> integrated into GitHub Actions, enforcing minimum thresholds as a CI merge gate", "level": "Advanced"},
+        {"text": "Migrated <strong>Jest tests to Vitest</strong> for Next.js services, leveraging native ESM support and faster HMR during development cycles", "level": "Advanced"},
+        {"text": "Used <strong>Vitest alongside Storybook</strong> for validating component behaviour in isolation before integration into the shared design system", "level": "Intermediate"}
+    ],
+    "github-actions": [
+        {"text": "Configured <strong>GitHub Actions workflows</strong> for React/Next.js multi-stage Docker builds with SonarQube quality gates and PR validation, cutting merge-to-deploy time by 40%", "level": "Advanced"},
+        {"text": "Built <strong>GitHub Actions pipelines</strong> for publishing npm packages, Docker images, and PyPI packages to Nexus and ECR with GitOps tagging strategy", "level": "Advanced"},
+        {"text": "Implemented <strong>hybrid CI/CD</strong> migrating from Jenkins to GitHub Actions for Python AI service deployments, supporting Helm chart deployments and policy-as-code validation with Kyverno", "level": "Advanced"},
+        {"text": "Configured <strong>GitHub Actions matrix builds</strong> running parallel tests across Node.js versions and environments for the multi-framework component library", "level": "Advanced"},
+        {"text": "Used <strong>GitHub Actions environment protection rules</strong> and manual approval gates for production deployments of Spring Boot and Python microservices", "level": "Advanced"},
+        {"text": "Integrated <strong>SonarQube quality gates</strong> into GitHub Actions PR checks, blocking merges on code coverage drops or new critical issues", "level": "Advanced"},
+        {"text": "Built <strong>reusable composite actions</strong> for Docker build-tag-push, Terraform plan, and SonarQube scan steps shared across multiple service repositories", "level": "Advanced"},
+        {"text": "Configured <strong>GitHub Actions secrets and OIDC</strong> for keyless AWS authentication during ECS/Fargate and MongoDB Atlas Terraform deployments", "level": "Advanced"}
+    ],
+    "terraform": [
+        {"text": "Developed <strong>Terraform IaC for AWS ECS/Fargate and MongoDB Atlas</strong> with GitOps via ArgoCD, enabling one-command deployments and eliminating all manual infrastructure changes", "level": "Advanced"},
+        {"text": "Migrated <strong>CI/CD infrastructure from Jenkins to hybrid AWS environments</strong> using Terraform and ArgoCD, automating Docker/K8s deployments of Python AI services with Helm charts", "level": "Advanced"},
+        {"text": "Used <strong>Terraform modules</strong> for reusable ECS task definitions, Fargate service configurations, VPC networking, and MongoDB Atlas cluster provisioning", "level": "Advanced"},
+        {"text": "Implemented <strong>Terraform workspace-based environment separation</strong> (dev/staging/prod) for isolated infrastructure lifecycles across multiple tenant environments", "level": "Advanced"},
+        {"text": "Configured <strong>Terraform remote state in S3</strong> with DynamoDB state locking for safe concurrent infrastructure changes across distributed engineering teams", "level": "Advanced"},
+        {"text": "Applied <strong>policy-as-code with Kyverno</strong> alongside Terraform provisioning to enforce security and compliance rules on Kubernetes workloads at deployment time", "level": "Advanced"},
+        {"text": "Integrated <strong>Terraform plans into GitHub Actions CI</strong> with automated plan previews on PRs and apply gates requiring manual approval for production changes", "level": "Advanced"},
+        {"text": "Provisioned <strong>reusable GenAI library infrastructure</strong> via Terraform — EKS clusters for LLMOps workflows, ECR repositories, and IAM roles for fine-tuned LLM service deployments", "level": "Advanced"}
+    ],
+    "arm-bicep": [
+        {"text": "Built a <strong>complete Azure infrastructure with ARM templates and Bicep</strong> for a PWA construction platform — App Service, PostgreSQL Flexible Server, Functions, Blob Storage, and AD B2C — achieving 99.9% uptime", "level": "Advanced"},
+        {"text": "Delivered <strong>CI/CD with Azure DevOps YAML pipelines and ARM/Bicep IaC</strong>, reducing deployment time from 2 hours to 12 minutes (94% reduction) across multi-environment releases", "level": "Advanced"},
+        {"text": "Created <strong>parameterised Bicep modules</strong> for App Service plan, container registry, and PostgreSQL Flexible Server, enabling consistent multi-environment deployments (dev/staging/prod)", "level": "Advanced"},
+        {"text": "Integrated <strong>Bicep templates into Azure DevOps pipelines</strong> with what-if deployment previews and approval gates before production infrastructure changes", "level": "Advanced"},
+        {"text": "Provisioned <strong>Azure Container Registry and multi-stage Docker deployments</strong> via ARM templates linked to Azure DevOps release pipelines for zero-downtime blue-green deployments", "level": "Advanced"},
+        {"text": "Used <strong>ARM template outputs</strong> to feed connection strings, storage account keys, and function app URLs into subsequent pipeline stages, eliminating hardcoded configuration", "level": "Advanced"},
+        {"text": "Implemented <strong>Azure AD B2C custom policies</strong> provisioned via ARM templates for employee authentication across 200+ daily active users across 10+ construction sites", "level": "Advanced"}
+    ],
+    "datadog": [
+        {"text": "Configured <strong>Datadog APM distributed tracing</strong> across Spring Boot (Java), Python FastAPI, and Next.js services, enabling end-to-end correlation-based debugging across microservices", "level": "Advanced"},
+        {"text": "Built <strong>Kubernetes infrastructure monitoring dashboards</strong> in Datadog tracking pod health, StatefulSet status, MongoDB metrics, and liveness/readiness probe failures, reducing MTTR by 65%", "level": "Advanced"},
+        {"text": "Implemented <strong>structured log aggregation</strong> with Logback (Java) and structlog (Python) shipping JSON logs to Datadog for pipeline-parsed, indexed log search", "level": "Advanced"},
+        {"text": "Designed <strong>Datadog monitors and alerts</strong> for p99 latency, error rate, Kubernetes pod restarts, and MongoDB connection pool exhaustion with PagerDuty escalation policies", "level": "Advanced"},
+        {"text": "Used <strong>Datadog correlation IDs</strong> to trace single requests across Python AI services, Spring Boot REST APIs, and Next.js SSR layers for fast root-cause analysis", "level": "Advanced"},
+        {"text": "Created <strong>Datadog SLO dashboards</strong> tracking availability and latency targets for each tenant-facing API surface, enabling proactive incident response before user impact", "level": "Advanced"},
+        {"text": "Monitored <strong>MongoDB Atlas performance</strong> via Datadog integration — slow query analysis, index utilisation, and connection pool metrics surfaced in unified operations dashboards", "level": "Advanced"},
+        {"text": "Used <strong>Datadog Synthetics</strong> for scheduled API endpoint and browser flow health checks, catching regressions in production before on-call alerts fired", "level": "Advanced"},
+        {"text": "Integrated <strong>Datadog metrics with CI/CD deploy markers</strong>, enabling instant correlation between deployments and performance regressions across 40% faster merge-to-deploy cycles", "level": "Advanced"}
+    ],
+    "application-insights": [
+        {"text": "Deployed <strong>Application Insights monitoring</strong> across Azure App Service, Functions, and Node.js/Express backend for a PWA construction platform serving 200+ daily active users", "level": "Advanced"},
+        {"text": "Tracked <strong>API performance, database query latency, PWA cache hit rates, and user session analytics</strong> with Application Insights custom events, enabling proactive issue resolution", "level": "Advanced"},
+        {"text": "Wrote <strong>KQL queries in Log Analytics</strong> to investigate performance regressions, filter API error patterns, and build custom alert rules for the construction platform", "level": "Advanced"},
+        {"text": "Configured <strong>Azure Monitor alerts</strong> triggered by Application Insights metrics for p95 API response times and exception rates, with automated notifications to engineering", "level": "Advanced"},
+        {"text": "Used <strong>Application Insights Live Metrics Stream</strong> during production deployments to validate zero regression in real-time before marking deploys complete", "level": "Advanced"},
+        {"text": "Tracked <strong>PWA-specific metrics</strong> — Service Worker cache hit rate, offline session counts, and background sync success rates — as custom Application Insights telemetry", "level": "Advanced"},
+        {"text": "Built <strong>Application Insights dashboards</strong> shared with the company owner to demonstrate platform ROI through API call volume, error reduction, and system uptime reporting", "level": "Intermediate"}
+    ],
+    "langgraph": [
+        {"text": "Developed <strong>agentic AI prototypes using LangGraph</strong> for multi-agent orchestration on the Kinesso GenAI platform, coordinating specialist agents for data quality analysis and analytics insights", "level": "Advanced"},
+        {"text": "Built a <strong>hierarchical supervisor-worker architecture with LangGraph</strong> (Helio Supervisor) supporting multiple LLM providers (OpenAI, Ollama, Gemini, Perplexity) with human-in-the-loop approval", "level": "Advanced"},
+        {"text": "Implemented a <strong>Snowflake Agent using LangGraph and LangChain</strong> creating a unified knowledge gateway combining vector embeddings and knowledge graphs, achieving 85% accuracy in ad performance predictions", "level": "Advanced"},
+        {"text": "Used <strong>LangGraph StateGraph with MemorySaver checkpointing</strong> for persistent conversation state and session memory in production Streamlit-based AI applications", "level": "Advanced"},
+        {"text": "Implemented <strong>LangGraph conditional edges</strong> for dynamic routing between specialist agents based on query type classification, task complexity, and tool availability", "level": "Advanced"},
+        {"text": "Integrated <strong>LangGraph with FAISS and MongoDB Atlas Vector Search</strong> for RAG-enabled agents querying local documents and tenant-specific knowledge bases", "level": "Advanced"},
+        {"text": "Added <strong>human-in-the-loop interrupt checkpoints</strong> in LangGraph for code execution, web fetch, and note-writing steps, enabling supervised agentic workflows in production", "level": "Advanced"},
+        {"text": "Built <strong>multi-tool agent pipelines with LangGraph</strong> integrating plan_tasks, web_fetch, code_exec, summarize_text, and rag_search tools with graceful error handling between nodes", "level": "Advanced"}
+    ],
+    "embeddings": [
+        {"text": "Designed and deployed <strong>per-tenant RAG pipelines</strong> storing tenant-specific vector embeddings in MongoDB Atlas Vector Search, handling 10K+ daily GenAI inference requests at sub-200ms latency", "level": "Advanced"},
+        {"text": "Integrated <strong>OpenAI Embeddings API</strong> for generating document and query embeddings used in semantic search, anomaly detection, and LLM-powered analytics across multi-tenant advertising data", "level": "Advanced"},
+        {"text": "Built a <strong>Snowflake Agent combining vector embeddings with knowledge graphs</strong> using LangGraph and LangChain, powering analytics dashboards with 85% accuracy in ad performance predictions", "level": "Advanced"},
+        {"text": "Used <strong>BGE embeddings from HuggingFace sentence-transformers</strong> for offline embedding generation in the Helio Supervisor agent with FAISS vector search over local documents", "level": "Advanced"},
+        {"text": "Implemented <strong>chunking and indexing strategies</strong> for large advertising reports before embedding, optimising retrieval precision in RAG pipelines serving non-technical analytics users", "level": "Advanced"},
+        {"text": "Designed <strong>LLM-based anomaly detection</strong> using embeddings to find semantically similar historical data quality patterns, reducing undetected data quality issues by 75%", "level": "Advanced"},
+        {"text": "Built <strong>embedding-based data quality scoring</strong> that combined cosine similarity comparisons with Python ML models to flag real-time ingestion anomalies across multi-source advertising feeds", "level": "Advanced"},
+        {"text": "Implemented <strong>multi-tenant embedding isolation</strong> ensuring embeddings from one tenant's data are never retrievable in another tenant's RAG queries", "level": "Advanced"}
+    ],
+    "claude-ai": [
+        {"text": "Used <strong>Claude Code CLI</strong> for agentic coding workflows — file editing, multi-step refactoring, and data migration — accelerating full-stack development across Angular, Spring Boot, and Python services", "level": "Advanced"},
+        {"text": "Leveraged <strong>Claude's extended context window</strong> for architecture reviews, reviewing large cross-service diffs, and reasoning over 50K+ line codebases for refactoring decisions", "level": "Advanced"},
+        {"text": "Applied <strong>Claude alongside Copilot and Cursor AI</strong> as complementary AI coding assistants — Claude for reasoning and architecture, Cursor for inline completion, Copilot for quick snippets", "level": "Advanced"},
+        {"text": "Used <strong>Claude for GenAI prompt engineering</strong> iteration — drafting, testing, and refining prompts for LLM-powered analytics, anomaly detection, and data quality scoring in production pipelines", "level": "Advanced"},
+        {"text": "Leveraged <strong>Claude for technical documentation</strong> — drafting ADRs, API design docs, Storybook MDX stories, and onboarding guides for multi-framework design system components", "level": "Intermediate"},
+        {"text": "Used <strong>Claude for code review assistance</strong> on complex multi-language PRs (Java, Python, TypeScript), identifying edge cases and suggesting improvements across heterogeneous stacks", "level": "Advanced"}
+    ],
+    "multi-tenant-saas": [
+        {"text": "Architected and delivered a <strong>multi-tenant SaaS platform for digital advertising analytics</strong> at Kinesso–Omnicom, serving 12+ concurrent tenant environments with zero cross-tenant data leakage", "level": "Advanced"},
+        {"text": "Designed <strong>multi-tenant data access patterns</strong> — database-per-tenant (PostgreSQL/SQL Server) with MongoDB collection-per-tenant — supporting hybrid SQL/NoSQL stores across 10K+ daily API requests", "level": "Advanced"},
+        {"text": "Implemented <strong>per-tenant GenAI embeddings and RAG pipelines</strong> in MongoDB Atlas Vector Search, ensuring tenant-isolated semantic search across advertising documents and performance data", "level": "Advanced"},
+        {"text": "Built a <strong>white-label theming system</strong> for multi-tenant SaaS supporting 5+ brand variants with dynamic stylesheet injection across Angular SCSS and React/Next.js Tailwind configurations", "level": "Advanced"},
+        {"text": "Implemented <strong>multi-tenant JWT/OAuth2 authentication</strong> in Spring Boot 3.x with tenant context propagated through security filter chain into data access layers", "level": "Advanced"},
+        {"text": "Designed <strong>multi-framework design system</strong> distributed via private npm registry enabling consistent UX across 6 internal product tenants with shared component library and design tokens", "level": "Advanced"},
+        {"text": "Managed <strong>tenant-specific configuration and feature flags</strong> via ConfigMaps and Vault secrets in Kubernetes, enabling per-tenant feature rollouts without redeployment", "level": "Advanced"},
+        {"text": "Built <strong>multi-tenant CI/CD pipelines</strong> with environment-specific Terraform workspaces and ArgoCD application sets managing per-tenant Kubernetes namespace deployments", "level": "Advanced"}
+    ],
+    "event-driven": [
+        {"text": "Established <strong>CQRS and saga patterns</strong> as architectural standards in the multi-module Spring Boot platform at Kinesso, coordinating distributed transactions across 12+ feature modules", "level": "Advanced"},
+        {"text": "Implemented <strong>Kafka-based event-driven communication</strong> between Spring Boot and Python FastAPI microservices for asynchronous advertising data ingestion and processing pipelines", "level": "Advanced"},
+        {"text": "Used <strong>choreography-based sagas with Kafka</strong> for coordinating multi-step data quality workflows across ingestion, scoring, anomaly detection, and notification services", "level": "Advanced"},
+        {"text": "Applied <strong>CQRS in Spring Boot</strong> — separate command handlers for write operations and query projections for read-optimised analytics views over PostgreSQL and MongoDB", "level": "Advanced"},
+        {"text": "Designed <strong>idempotent Kafka consumers</strong> with consumer groups and offset management ensuring exactly-once semantic processing for critical advertising data pipeline events", "level": "Advanced"},
+        {"text": "Used <strong>event-driven architecture</strong> to decouple gRPC microservices from Python AI inference services, allowing independent scaling of data ingestion and GenAI processing workloads", "level": "Advanced"},
+        {"text": "Implemented <strong>stream processing with Node.js/Express and gRPC</strong> for real-time timesheet validation and contract update events, achieving sub-100ms p95 response times", "level": "Advanced"},
+        {"text": "Designed <strong>event schemas with versioning</strong> for backward-compatible Kafka topic evolution, protecting downstream consumers during rolling microservice upgrades", "level": "Advanced"}
+    ],
+    "tdd": [
+        {"text": "Applied <strong>test-first development across Spring Boot, Python FastAPI, and Angular/React</strong> services, contributing to 1000+ unit tests and 100+ integration/E2E tests with 80%+ coverage across all layers", "level": "Advanced"},
+        {"text": "Implemented <strong>TDD with JUnit, Mockito, and TestNG</strong> in Spring Boot microservices at TCS, achieving 85% unit test coverage and catching 25+ regressions during Java EE to Spring Boot migration", "level": "Advanced"},
+        {"text": "Used <strong>test-first development with Jest, Vitest, and Pytest</strong> across Angular/React/Python services at Kinesso, enforcing 80%+ coverage thresholds as CI merge gates in Jenkins and GitHub Actions", "level": "Advanced"},
+        {"text": "Implemented <strong>TDD for data quality scoring engine</strong> — writing Python pytest cases for edge cases before implementing ML-based anomaly detection rules, reducing production defects in data pipeline", "level": "Advanced"},
+        {"text": "Applied <strong>controller-level TDD with MockMvc</strong> for Spring Boot REST endpoints, verifying request validation, error responses, and auth enforcement before connecting service layer implementations", "level": "Advanced"},
+        {"text": "Established <strong>TDD as a team standard</strong> through code review enforcement, mentoring 5+ engineers on test-first practices, and conducting brown-bag sessions on testing strategies", "level": "Advanced"},
+        {"text": "Used <strong>TDD with Cypress</strong> for defining acceptance criteria as E2E test scripts before Angular/React feature implementation, ensuring feature completeness from the user's perspective", "level": "Advanced"},
+        {"text": "Implemented <strong>test-first approach for gRPC services</strong> at ACE Contractors with Jest and Postman API collections, achieving 95% unit test coverage across Node.js microservices", "level": "Advanced"}
+    ],
+    "load-performance-testing": [
+        {"text": "Validated <strong>sub-100ms p95 response times</strong> for Node.js/Express gRPC microservices at ACE Contractors through load testing with Azure Load Testing across 200+ daily active construction site users", "level": "Advanced"},
+        {"text": "Achieved a <strong>55% reduction in p99 latency</strong> through targeted performance testing that identified large-payload bottlenecks in Spring WebClient, Python asyncio, and MongoDB GridFS retrieval paths", "level": "Advanced"},
+        {"text": "Designed <strong>load test scenarios for 10K+ daily API requests</strong> across multi-tenant Spring Boot and Python FastAPI microservices at Kinesso, identifying and resolving connection pool saturation under peak load", "level": "Advanced"},
+        {"text": "Used <strong>Azure Load Testing</strong> for PWA construction platform to validate 99.9% uptime SLA under concurrent payroll processing peaks with 200+ simultaneous API sessions", "level": "Advanced"},
+        {"text": "Integrated <strong>Datadog APM traces with load test runs</strong> to correlate performance bottlenecks with specific service calls and database queries during Kubernetes load scenarios", "level": "Advanced"},
+        {"text": "Profiled <strong>MongoDB aggregation pipeline performance</strong> under synthetic load to identify missing indexes, optimise query plans, and reduce p95 query times before production traffic increases", "level": "Advanced"},
+        {"text": "Used <strong>Playwright for load-assisted browser testing</strong> verifying Angular/React UI performance and Core Web Vitals under concurrent user load scenarios in CI", "level": "Advanced"},
+        {"text": "Established <strong>performance regression gates in CI/CD</strong> — load tests run on every release candidate with Jenkins, failing the pipeline if p99 latency exceeds defined thresholds", "level": "Advanced"}
     ]
 }
