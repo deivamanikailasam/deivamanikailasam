@@ -5106,5 +5106,24 @@
     {"text": "Integrating ArgoCD with <strong>Helm charts</strong> for templated releases", "level": "Intermediate"},
     {"text": "Migrating CI/CD to <strong>hybrid AWS environments using Terraform and ArgoCD</strong>, automating Docker/K8s deployments", "level": "Advanced"},
     {"text": "Enabling <strong>one-command GitOps deployments</strong> that eliminated manual infrastructure changes", "level": "Advanced"}
+  ],
+  "mcp": [
+    {"text": "Understanding <strong>Model Context Protocol (MCP)</strong> as an open standard connecting LLMs to tools, data, and services", "level": "Beginner"},
+    {"text": "Using existing <strong>MCP servers</strong> from AI clients like Cursor and Claude", "level": "Beginner"},
+    {"text": "Configuring MCP <strong>tools, resources, and prompts</strong> in client settings", "level": "Intermediate"},
+    {"text": "Building a <strong>custom MCP server</strong> that exposes internal APIs and data as callable tools", "level": "Intermediate"},
+    {"text": "Handling <strong>authentication and scoping</strong> so MCP tools only access permitted resources", "level": "Intermediate"},
+    {"text": "Integrating <strong>MCP tools into agentic workflows</strong> with LangChain/LangGraph orchestration", "level": "Advanced"},
+    {"text": "Wiring <strong>MCP tools & integrations</strong> into production GenAI applications for grounded, tool-augmented responses", "level": "Advanced"},
+    {"text": "Standardising <strong>AI-assisted developer workflows</strong> across the team using shared MCP servers", "level": "Advanced"}
+  ],
+  "bedrock": [
+    {"text": "Understanding <strong>Amazon Bedrock</strong> as a managed service for foundation models on AWS", "level": "Beginner"},
+    {"text": "Invoking models via the <strong>Bedrock API/SDK</strong> (boto3) with prompts and parameters", "level": "Beginner"},
+    {"text": "Selecting models — <strong>Anthropic Claude, Amazon Titan, Llama</strong> — for cost/quality tradeoffs", "level": "Intermediate"},
+    {"text": "Generating <strong>embeddings with Bedrock</strong> for semantic search and RAG", "level": "Intermediate"},
+    {"text": "Using <strong>Bedrock Knowledge Bases</strong> for managed retrieval-augmented generation", "level": "Intermediate"},
+    {"text": "Building tool-using agents with <strong>Bedrock Agents</strong> and applying <strong>Guardrails</strong> for safety", "level": "Advanced"},
+    {"text": "Deploying <strong>GenAI workloads on AWS</strong> combining Bedrock with Kubernetes (EKS) and Docker", "level": "Advanced"}
   ]
 }

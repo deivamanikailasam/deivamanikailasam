@@ -91,16 +91,17 @@ import { CardModule } from 'primeng/card';
                 </div>
               }
 
-              <!-- Download Resume -->
+              <!-- View / Download Resume -->
               <div class="resume-download">
                 <a
                   class="download-resume-btn"
                   [href]="resumeUrl"
-                  [attr.download]="resumeFileName"
-                  aria-label="Download resume PDF"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label="Preview resume PDF in a new tab"
                 >
-                  <i class="pi pi-download"></i>
-                  <span>Download Resume</span>
+                  <i class="pi pi-file-pdf"></i>
+                  <span>View Resume</span>
                 </a>
               </div>
               
@@ -823,8 +824,7 @@ import { CardModule } from 'primeng/card';
   `]
 })
 export class ProfileComponent implements OnInit {
-  readonly resumeUrl = 'assets/DeivaMani.pdf';
-  readonly resumeFileName = 'Deiva_Mani_Kailasam_Resume.pdf';
+  readonly resumeUrl = 'assets/Deiva_mani_CV.pdf';
 
   profile = computed(() => {
     return this.contentService.profileData() || null;

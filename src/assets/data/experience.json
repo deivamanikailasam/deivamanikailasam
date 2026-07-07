@@ -12,7 +12,7 @@
         "points": [
           "Designed and implemented scalable Python FastAPI services and data pipelines for multi-tenant GenAI applications, integrating RAG pipelines with tenant-specific embeddings stored in MongoDB Atlas Vector Search and handling 10K+ daily inference requests with sub-200ms latency",
           "Designed GenAI pipelines for tenant-aware embeddings, LLM-based anomaly detection, and a Python-based data quality scoring engine, reducing undetected data quality issues by around 75%",
-          "Developed agentic AI prototypes using LangChain and LangGraph for multi-agent orchestration and document-querying workflows integrated with production data systems",
+          "Developed agentic AI prototypes using LangChain and LangGraph for multi-agent orchestration and document-querying workflows integrated with production data systems, partnering with marketing and analytics stakeholders to validate outputs against business KPIs",
           "Built a Snowflake analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation, enabling business users to explore data and surface analytics insights through interactive dashboards",
           "Established LLMOps workflows for production deployment of fine-tuned GPT-4 variants using Docker containerization and Kubernetes on AWS EKS"
         ]
@@ -80,7 +80,7 @@
         ]
       }
     ],
-    "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "Snowflake", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL", "LangChain", "LangGraph", "Snowflake Cortex", "RAG"]
+    "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "Snowflake", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL", "LangChain", "LangGraph", "Snowflake Cortex", "RAG", "MCP", "Amazon Bedrock"]
   },
   {
     "id": "2",

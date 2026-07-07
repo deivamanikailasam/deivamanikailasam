@@ -9364,5 +9364,17 @@
         {"text": "Enabled <strong>one-command GitOps deployments</strong> via ArgoCD that eliminated manual infrastructure changes", "level": "Advanced"},
         {"text": "Integrated ArgoCD with <strong>Helm charts and Kyverno policy-as-code</strong> for governed continuous delivery", "level": "Advanced"},
         {"text": "Configured <strong>automated sync, self-heal, and pruning</strong> across multiple deployment environments", "level": "Intermediate"}
+    ],
+    "mcp": [
+        {"text": "Integrated <strong>MCP tools & integrations</strong> into agentic AI workflows, exposing internal data systems as callable tools for LLM agents at Kinesso", "level": "Advanced"},
+        {"text": "Built <strong>custom MCP servers</strong> connecting LangGraph/LangChain agents to production APIs and databases", "level": "Advanced"},
+        {"text": "Standardised <strong>AI-assisted developer workflows</strong> using shared MCP servers across Cursor and Claude", "level": "Advanced"},
+        {"text": "Applied <strong>scoped authentication</strong> so MCP-exposed tools respected multi-tenant access boundaries", "level": "Intermediate"}
+    ],
+    "bedrock": [
+        {"text": "Deployed <strong>GenAI workloads on AWS</strong> leveraging Amazon Bedrock foundation models alongside EKS and Docker", "level": "Advanced"},
+        {"text": "Used <strong>Bedrock model inference</strong> within RAG pipelines for tenant-scoped GenAI applications", "level": "Advanced"},
+        {"text": "Evaluated <strong>Bedrock models (Claude, Titan)</strong> for cost/latency tradeoffs in production analytics agents", "level": "Advanced"},
+        {"text": "Applied <strong>Bedrock Guardrails</strong> to enforce safety and compliance on LLM outputs", "level": "Intermediate"}
     ]
 }

@@ -647,6 +647,12 @@
             "icon": "pi pi-database"
           },
           {
+            "key": "mcp",
+            "name": "MCP Tools & Integrations",
+            "image": "assets/images/skills/agents.png",
+            "icon": "pi pi-link"
+          },
+          {
             "key": "fine-tuning",
             "name": "Fine Tuning",
             "image": "assets/images/skills/finetuning.svg",
@@ -686,6 +692,12 @@
             "key": "openai",
             "name": "OpenAI API",
             "image": "assets/images/skills/openai.png",
+            "icon": "pi pi-globe"
+          },
+          {
+            "key": "bedrock",
+            "name": "Amazon Bedrock",
+            "image": "assets/images/skills/aws.png",
             "icon": "pi pi-globe"
           }
         ]
@@ -795,7 +807,7 @@
         "items": [
           {
             "key": "aws",
-            "name": "AWS (ECS, Fargate, EC2, Lambda, EKS)",
+            "name": "AWS (ECS, Fargate, EC2, Lambda, EKS, Bedrock)",
             "image": "assets/images/skills/aws.png",
             "icon": "pi pi-cloud"
           },
