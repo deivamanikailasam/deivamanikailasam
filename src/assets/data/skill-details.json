@@ -4984,5 +4984,127 @@
     {"text": "Reducing <strong>99th percentile latency by 55%</strong> through targeted performance testing and caching improvements", "level": "Advanced"},
     {"text": "Establishing <strong>performance regression gates</strong> in CI/CD pipelines to catch latency regressions before deploy", "level": "Advanced"},
     {"text": "Designing load test scenarios for <strong>10K+ daily API requests</strong> across multi-tenant microservices platforms", "level": "Advanced"}
+  ],
+  "scss": [
+    {"text": "Using <strong>variables</strong>, <strong>nesting</strong>, and <strong>partials</strong> to organise stylesheets", "level": "Beginner"},
+    {"text": "Importing files with <strong>@use</strong> / <strong>@forward</strong> and structuring shared styles", "level": "Beginner"},
+    {"text": "Building reusable <strong>mixins</strong> and <strong>functions</strong> with arguments and defaults", "level": "Intermediate"},
+    {"text": "Using <strong>maps</strong>, <strong>@each</strong>, and <strong>@if</strong> control flow to generate utility classes", "level": "Intermediate"},
+    {"text": "Applying <strong>@extend</strong>, placeholders, and the <strong>7-1 architecture</strong> for scalable stylesheets", "level": "Intermediate"},
+    {"text": "Designing <strong>design tokens</strong> and theme maps shared across Angular components", "level": "Advanced"},
+    {"text": "Delivering a <strong>white-label theming system</strong> in Angular SCSS supporting 5+ brand variants with dynamic stylesheet injection", "level": "Advanced"},
+    {"text": "Architecting a <strong>mobile-first responsive SCSS system</strong> for a construction PWA across tablets, phones, and desktop dashboards", "level": "Advanced"},
+    {"text": "Owning <strong>SCSS lint rules</strong> (Stylelint) and cross-framework design consistency across React Tailwind and Angular SCSS", "level": "Advanced"}
+  ],
+  "angular-material": [
+    {"text": "Using core components — <strong>MatButton</strong>, <strong>MatInput</strong>, <strong>MatCard</strong>, and <strong>MatIcon</strong>", "level": "Beginner"},
+    {"text": "Building forms with <strong>MatFormField</strong>, <strong>MatSelect</strong>, and <strong>MatDatepicker</strong>", "level": "Beginner"},
+    {"text": "Implementing navigation with <strong>MatToolbar</strong>, <strong>MatSidenav</strong>, and <strong>MatMenu</strong>", "level": "Intermediate"},
+    {"text": "Working with <strong>MatDialog</strong>, <strong>MatSnackBar</strong>, and overlay-based components", "level": "Intermediate"},
+    {"text": "Using <strong>MatTable</strong> with sorting, pagination, and expandable rows", "level": "Intermediate"},
+    {"text": "Customising the <strong>Material theme</strong> with SCSS palettes, typography, and density", "level": "Advanced"},
+    {"text": "Integrating Angular Material into a <strong>multi-framework design system</strong> with 40+ reusable components", "level": "Advanced"},
+    {"text": "Applying <strong>CDK</strong> primitives (drag-drop, virtual scroll, a11y) for advanced UX patterns", "level": "Advanced"}
+  ],
+  "ag-grid": [
+    {"text": "Rendering data with <strong>column definitions</strong> and basic grid options", "level": "Beginner"},
+    {"text": "Enabling <strong>sorting</strong>, <strong>filtering</strong>, and <strong>pagination</strong> out of the box", "level": "Beginner"},
+    {"text": "Building <strong>custom cell renderers</strong> and cell editors for rich data display", "level": "Intermediate"},
+    {"text": "Implementing <strong>row selection</strong>, <strong>row expansion</strong>, and master/detail views", "level": "Intermediate"},
+    {"text": "Using <strong>AG Grid Enterprise</strong> features — grouping, aggregation, and pivoting", "level": "Advanced"},
+    {"text": "Delivering <strong>CSV/Excel export</strong> via ExcelJS enabling non-technical users to self-serve analytics", "level": "Advanced"},
+    {"text": "Integrating advanced AG Grid tables across <strong>Angular, React, and Next.js</strong> in a shared design system", "level": "Advanced"},
+    {"text": "Optimising grid performance for <strong>large datasets</strong> with server-side row model and virtualisation", "level": "Advanced"}
+  ],
+  "playwright": [
+    {"text": "Writing basic <strong>end-to-end tests</strong> with page navigation and assertions", "level": "Beginner"},
+    {"text": "Using <strong>locators</strong>, auto-waiting, and web-first assertions for stable tests", "level": "Beginner"},
+    {"text": "Handling <strong>fixtures</strong>, authentication state, and test isolation", "level": "Intermediate"},
+    {"text": "Running tests across <strong>Chromium, Firefox, and WebKit</strong> in parallel", "level": "Intermediate"},
+    {"text": "Capturing <strong>traces, screenshots, and videos</strong> for debugging failing runs", "level": "Intermediate"},
+    {"text": "Building <strong>100+ integration/E2E tests</strong> with Playwright and Cypress across UI layers", "level": "Advanced"},
+    {"text": "Integrating Playwright into <strong>CI/CD pipelines</strong> (Jenkins, GitHub Actions) with sharded runs", "level": "Advanced"},
+    {"text": "Using Playwright for <strong>load-assisted browser testing</strong> and Core Web Vitals under concurrent users", "level": "Advanced"}
+  ],
+  "compodoc": [
+    {"text": "Generating <strong>Angular documentation</strong> from source with a single Compodoc command", "level": "Beginner"},
+    {"text": "Documenting <strong>components, services, and modules</strong> via JSDoc-style comments", "level": "Beginner"},
+    {"text": "Exploring the <strong>dependency graph</strong> and module relationships in generated docs", "level": "Intermediate"},
+    {"text": "Configuring <strong>coverage thresholds</strong> for documentation completeness", "level": "Intermediate"},
+    {"text": "Publishing Compodoc alongside <strong>Storybook</strong> as part of a design-system docs site", "level": "Advanced"},
+    {"text": "Automating Compodoc generation in <strong>CI</strong> to keep API docs current across releases", "level": "Advanced"}
+  ],
+  "mdx": [
+    {"text": "Writing docs that mix <strong>Markdown</strong> with embedded components", "level": "Beginner"},
+    {"text": "Importing and rendering <strong>live components</strong> inside documentation pages", "level": "Beginner"},
+    {"text": "Using MDX in <strong>Storybook Docs</strong> to combine narrative and interactive examples", "level": "Intermediate"},
+    {"text": "Creating reusable <strong>doc blocks</strong> and props tables for component APIs", "level": "Intermediate"},
+    {"text": "Authoring <strong>150+ Storybook stories</strong> with MDX narrative docs and a11y notes, improving discoverability by 85%", "level": "Advanced"},
+    {"text": "Standardising MDX documentation patterns across a <strong>multi-framework design system</strong>", "level": "Advanced"}
+  ],
+  "fastapi": [
+    {"text": "Building <strong>REST endpoints</strong> with path/query parameters and Pydantic models", "level": "Beginner"},
+    {"text": "Using <strong>automatic OpenAPI/Swagger</strong> docs generated by FastAPI", "level": "Beginner"},
+    {"text": "Implementing <strong>dependency injection</strong> with <code>Depends</code> for shared services", "level": "Intermediate"},
+    {"text": "Writing <strong>async endpoints</strong> with asyncio for high-concurrency I/O", "level": "Intermediate"},
+    {"text": "Adding <strong>OAuth2/JWT authentication</strong> and request validation middleware", "level": "Intermediate"},
+    {"text": "Designing <strong>Python FastAPI services and data pipelines</strong> for multi-tenant GenAI applications", "level": "Advanced"},
+    {"text": "Serving <strong>RAG inference APIs</strong> handling 10K+ daily requests at sub-200ms latency", "level": "Advanced"},
+    {"text": "Containerising FastAPI with <strong>Docker and Kubernetes (AWS EKS)</strong> with health probes and observability", "level": "Advanced"}
+  ],
+  "liquibase": [
+    {"text": "Writing <strong>changesets</strong> in XML/YAML/SQL to version database schema", "level": "Beginner"},
+    {"text": "Running <strong>update</strong> and <strong>rollback</strong> commands against a target database", "level": "Beginner"},
+    {"text": "Using <strong>contexts and labels</strong> to control environment-specific migrations", "level": "Intermediate"},
+    {"text": "Managing <strong>preconditions</strong> and checksums to keep migrations safe and idempotent", "level": "Intermediate"},
+    {"text": "Integrating Liquibase into <strong>Spring Boot startup</strong> and CI/CD pipelines", "level": "Advanced"},
+    {"text": "Managing <strong>Liquibase migrations across PostgreSQL and SQL Server</strong> in a hybrid data access layer", "level": "Advanced"},
+    {"text": "Coordinating <strong>schema versioning across 12+ multi-tenant environments</strong> with zero drift", "level": "Advanced"}
+  ],
+  "llamaindex": [
+    {"text": "Loading documents with <strong>data connectors</strong> and building a basic index", "level": "Beginner"},
+    {"text": "Creating a <strong>VectorStoreIndex</strong> and running natural-language queries", "level": "Beginner"},
+    {"text": "Configuring <strong>node parsers</strong> and chunking strategies for ingestion", "level": "Intermediate"},
+    {"text": "Using <strong>query engines</strong> and retrievers with metadata filtering", "level": "Intermediate"},
+    {"text": "Integrating LlamaIndex with <strong>vector databases</strong> (MongoDB Atlas, FAISS)", "level": "Intermediate"},
+    {"text": "Building <strong>RAG pipelines</strong> over tenant-specific document stores for GenAI applications", "level": "Advanced"},
+    {"text": "Combining LlamaIndex retrieval with <strong>LangChain/LangGraph</strong> agents for document-querying workflows", "level": "Advanced"}
+  ],
+  "snowflake-cortex": [
+    {"text": "Understanding <strong>Snowflake Cortex</strong> LLM and analytics functions within the Snowflake platform", "level": "Beginner"},
+    {"text": "Using <strong>Cortex functions</strong> (COMPLETE, SUMMARIZE, SENTIMENT) directly in SQL", "level": "Beginner"},
+    {"text": "Running <strong>text-to-SQL</strong> and semantic search over structured Snowflake data", "level": "Intermediate"},
+    {"text": "Building <strong>natural-language querying</strong> experiences over warehouse tables", "level": "Intermediate"},
+    {"text": "Developing a <strong>Snowflake analytics agent</strong> with LangGraph and Snowflake Cortex for dynamic dashboard generation", "level": "Advanced"},
+    {"text": "Enabling business users to <strong>self-serve analytics insights</strong> with 85% prediction accuracy", "level": "Advanced"},
+    {"text": "Integrating Cortex-powered analytics into <strong>production data systems</strong> for near real-time insights", "level": "Advanced"}
+  ],
+  "vector-databases": [
+    {"text": "Understanding <strong>vector embeddings</strong> and approximate nearest-neighbour (ANN) search", "level": "Beginner"},
+    {"text": "Storing and querying vectors with <strong>FAISS</strong> for local similarity search", "level": "Beginner"},
+    {"text": "Choosing <strong>distance metrics</strong> (cosine, dot product, L2) for retrieval quality", "level": "Intermediate"},
+    {"text": "Using <strong>MongoDB Atlas Vector Search</strong> for hybrid keyword + semantic retrieval", "level": "Intermediate"},
+    {"text": "Designing <strong>chunking and indexing strategies</strong> for RAG document stores", "level": "Intermediate"},
+    {"text": "Storing <strong>tenant-specific embeddings</strong> in MongoDB Atlas Vector Search for multi-tenant GenAI apps", "level": "Advanced"},
+    {"text": "Serving vector retrieval at <strong>sub-200ms latency for 10K+ daily inference requests</strong>", "level": "Advanced"},
+    {"text": "Combining <strong>vector embeddings with knowledge graphs</strong> for hybrid retrieval in analytics agents", "level": "Advanced"}
+  ],
+  "helm": [
+    {"text": "Installing and upgrading applications with <strong>Helm charts</strong>", "level": "Beginner"},
+    {"text": "Understanding <strong>chart structure</strong> — templates, values, and Chart.yaml", "level": "Beginner"},
+    {"text": "Parameterising deployments with <strong>values files</strong> per environment", "level": "Intermediate"},
+    {"text": "Using <strong>template helpers</strong>, conditionals, and named templates", "level": "Intermediate"},
+    {"text": "Managing <strong>chart dependencies</strong> and releases with rollback support", "level": "Intermediate"},
+    {"text": "Packaging <strong>Spring Boot, Python FastAPI, and Next.js workloads</strong> as reusable Helm charts", "level": "Advanced"},
+    {"text": "Deploying <strong>Python AI services with Helm charts</strong> to hybrid AWS Kubernetes environments via ArgoCD", "level": "Advanced"}
+  ],
+  "argocd": [
+    {"text": "Understanding <strong>GitOps</strong> principles and declarative continuous delivery", "level": "Beginner"},
+    {"text": "Creating <strong>ArgoCD applications</strong> that sync from a Git repository", "level": "Beginner"},
+    {"text": "Configuring <strong>automated sync</strong>, self-heal, and pruning policies", "level": "Intermediate"},
+    {"text": "Managing <strong>multi-environment deployments</strong> with app-of-apps patterns", "level": "Intermediate"},
+    {"text": "Integrating ArgoCD with <strong>Helm charts</strong> for templated releases", "level": "Intermediate"},
+    {"text": "Migrating CI/CD to <strong>hybrid AWS environments using Terraform and ArgoCD</strong>, automating Docker/K8s deployments", "level": "Advanced"},
+    {"text": "Enabling <strong>one-command GitOps deployments</strong> that eliminated manual infrastructure changes", "level": "Advanced"}
   ]
 }

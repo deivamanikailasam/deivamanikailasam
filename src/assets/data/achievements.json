@@ -50,14 +50,45 @@
     "highlight": true
   },
   {
+    "id": "cert-1",
+    "title": "Google Cloud Certification on GenAI",
+    "description": "Earned Google Cloud certification in Generative AI, validating hands-on expertise in building and deploying GenAI solutions on cloud-native infrastructure.",
+    "date": "2025-03-01",
+    "icon": "pi pi-cloud",
+    "category": "award",
+    "organization": "Google Cloud",
+    "highlight": true
+  },
+  {
+    "id": "cert-2",
+    "title": "IBM Certification on Prompt Engineering",
+    "description": "Completed IBM certification in Prompt Engineering, demonstrating proficiency in designing effective prompts and LLM-driven workflows for production GenAI applications.",
+    "date": "2025-05-01",
+    "icon": "pi pi-verified",
+    "category": "award",
+    "organization": "IBM",
+    "highlight": false
+  },
+  {
     "id": "milestone-1",
-    "title": "50,000+ Daily API Requests",
-    "description": "Architected and led delivery of a multi-module Spring Boot microservices platform serving 50,000+ daily API requests across hybrid SQL/NoSQL architectures at Kinesso – IPG.",
+    "title": "10K+ Daily API Requests",
+    "description": "Architected and led delivery of a multi-module Spring Boot 3.x microservices platform serving 10K+ daily API requests across PostgreSQL, SQL Server, Snowflake, and MongoDB at Kinesso – Omnicom Media Group.",
     "date": "2023-06-01",
     "icon": "pi pi-server",
     "category": "milestone",
-    "organization": "Kinesso – IPG",
-    "metric": "50K+",
+    "organization": "Kinesso – Omnicom Media Group",
+    "metric": "10K+",
+    "highlight": true
+  },
+  {
+    "id": "milestone-4",
+    "title": "Sub-200ms GenAI Inference at Scale",
+    "description": "Built multi-tenant GenAI services with RAG pipelines and tenant-specific embeddings in MongoDB Atlas Vector Search, handling 10K+ daily inference requests at sub-200ms latency in production.",
+    "date": "2024-09-01",
+    "icon": "pi pi-sparkles",
+    "category": "milestone",
+    "organization": "Kinesso – Omnicom Media Group",
+    "metric": "200ms",
     "highlight": true
   },
   {

@@ -1,7 +1,7 @@
 {
   "name": "Deiva Mani Kailasam",
-  "title": "Senior Full Stack Software Engineer",
-  "bio": "Senior Full Stack Software Engineer with 8+ years building cloud-native, multi-tenant platforms and data-intensive web applications on AWS/Azure using Python, React, Java, Spring Boot, TypeScript, and modern frontend frameworks. Led design and delivery of distributed microservices handling 10K+ daily API requests and platforms serving 100K+ users with strong observability, reliability, and CI/CD automation. Strong experience in GenAI (RAG, embeddings, LLM-powered analytics) and integration of AI into production features and developer workflows. Proven technical leadership: architecture ownership, cross-team collaboration, and mentoring engineers while driving coding standards and best practices.",
+  "title": "Senior Software Engineer (Full Stack, GenAI)",
+  "bio": "Senior Software Engineer (Full Stack, GenAI) with 8+ years of experience building GenAI-enabled, cloud-native, multi-tenant SaaS platforms on AWS and Azure using Python, TypeScript, Node.js, Java/Spring Boot, React, Angular, and Next.js. Delivered production systems combining intelligent backend services, interactive data-rich frontends, and strong platform engineering foundations, including distributed APIs handling 10K+ daily requests and products serving 100K+ users. Specialized in GenAI and agentic applications using RAG, tenant-scoped embeddings, LLM-powered analytics, LangChain, LangGraph, LlamaIndex, and Snowflake Cortex, deployed to production via Docker and Kubernetes (AWS EKS). Brings end-to-end ownership across architecture, implementation, testing, CI/CD, observability, and mentoring with a focus on reliability, performance, and business impact.",
   "email": "deivamanikailasam@gmail.com",
   "phone": "+61-411-181-052",
   "location": "Melbourne, Australia",

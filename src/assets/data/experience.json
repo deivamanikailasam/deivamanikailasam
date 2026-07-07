@@ -2,19 +2,29 @@
   {
     "id": "1",
     "company": "Kinesso – Omnicom Media Group (formerly IPG)",
-    "position": "Senior Software Engineer",
+    "position": "Senior Software Engineer (Full Stack)",
     "startDate": "2021-08-01",
     "endDate": null,
     "current": true,
     "sections": [
       {
+        "header": "GenAI & Agentic Platforms",
+        "points": [
+          "Designed and implemented scalable Python FastAPI services and data pipelines for multi-tenant GenAI applications, integrating RAG pipelines with tenant-specific embeddings stored in MongoDB Atlas Vector Search and handling 10K+ daily inference requests with sub-200ms latency",
+          "Designed GenAI pipelines for tenant-aware embeddings, LLM-based anomaly detection, and a Python-based data quality scoring engine, reducing undetected data quality issues by around 75%",
+          "Developed agentic AI prototypes using LangChain and LangGraph for multi-agent orchestration and document-querying workflows integrated with production data systems",
+          "Built a Snowflake analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation, enabling business users to explore data and surface analytics insights through interactive dashboards",
+          "Established LLMOps workflows for production deployment of fine-tuned GPT-4 variants using Docker containerization and Kubernetes on AWS EKS"
+        ]
+      },
+      {
         "header": "Architecture & System Design",
         "points": [
-          "Architected and led delivery of a multi-module Spring Boot 3.x microservices platform with JWT/OAuth2 security, multi-tenant data access, and OpenAPI/Swagger documentation. Integrated Angular, React.js, Next.js frontends with Python data pipelines and MongoDB analytics stores. Platform served 50,000+ daily API requests across hybrid SQL/NoSQL architectures",
-          "Designed scalable hybrid data access layer supporting PostgreSQL, SQL Server, Snowflake, MongoDB with Liquibase-managed SQL migrations and MongoDB schema versioning, enabling seamless cross-database support, real-time Gen AI embeddings, and query complexity reduction",
-          "Owned full-stack system architecture from database design (SQL + MongoDB) through REST/gRPC API specification to Angular/React.js/Next.js frontend implementation with GitOps workflows, ensuring architectural consistency across 12+ feature modules and multi-framework frontend ecosystem",
-          "Implemented gRPC-based plugin architecture for client module integration with Python microservices and customizable React dashboard plugins, improving system extensibility and enabling faster service onboarding",
-          "API performance optimization and reduced database load by designing a hybrid caching layer with Caffeine, Redis, and MongoDB"
+          "Architected and led delivery of a multi-module Spring Boot 3.x microservices platform with JWT/OAuth2 security, multi-tenant data access, and OpenAPI/Swagger contracts, serving 10K+ daily API requests across PostgreSQL, SQL Server, Snowflake, and MongoDB",
+          "Designed scalable hybrid data access layer spanning PostgreSQL, SQL Server, Snowflake, MongoDB with Liquibase-managed SQL migrations and MongoDB schema versioning, simplifying cross-database querying and enabling real-time Gen AI embeddings",
+          "Owned full-stack system architecture from database design (SQL + MongoDB) through REST/gRPC API specification to Angular/React.js/Next.js frontend implementation with GitOps workflows, ensuring architectural consistency across 12+ feature modules and a multi-framework frontend ecosystem",
+          "Implemented a gRPC-based plugin architecture for integrating Python microservices and client-specific React dashboard plugins, improving system extensibility and onboarding speed for new services",
+          "Optimized API performance and reduced database load by designing a hybrid caching layer with Caffeine, Redis, and MongoDB"
         ]
       },
       {
@@ -70,7 +80,7 @@
         ]
       }
     ],
-    "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL"]
+    "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "Snowflake", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL", "LangChain", "LangGraph", "Snowflake Cortex", "RAG"]
   },
   {
     "id": "2",
@@ -134,16 +144,16 @@
   {
     "id": "3",
     "company": "Tata Consultancy Services",
-    "position": "Developer",
+    "position": "Software Developer (Full Stack) / Systems Engineer",
     "startDate": "2016-01-01",
     "endDate": "2019-05-31",
     "current": false,
     "sections": [
       {
-        "header": "Legacy System Modernization (Spring \u2192 Spring Boot)",
+        "header": "Legacy System Modernization (Java EE \u2192 Spring Boot)",
         "points": [
-          "Led migration of legacy Spring MVC monolith to Spring MVC + Spring Boot architecture, reducing technical debt by 70% and eliminating 15+ critical security vulnerabilities from unsupported Spring",
-          "Refactored 50K+ lines of legacy Spring code into Spring Boot layered architecture (Repository \u2192 Service \u2192 REST Controller) using Spring Data JPA, Hibernate, and Thymeleaf templates, improving maintainability and reducing bug fix time",
+          "Led migration of a legacy Java EE monolith to Spring MVC and Spring Boot layered architecture, reducing technical debt by 70% and removing 15+ critical security vulnerabilities",
+          "Refactored 50K+ lines of legacy code into a Spring Boot layered architecture (Repository \u2192 Service \u2192 REST Controller) using Spring Data JPA, Hibernate, and Thymeleaf templates, improving maintainability and reducing bug fix time",
           "Implemented Spring design patterns including @Service, @Repository, @RestController, and DTO patterns, establishing maintainable RESTful foundation that supported 3x faster feature development for subsequent team members"
         ]
       },

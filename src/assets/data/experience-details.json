@@ -9280,5 +9280,89 @@
         {"text": "Profiled <strong>MongoDB aggregation pipeline performance</strong> under synthetic load to identify missing indexes, optimise query plans, and reduce p95 query times before production traffic increases", "level": "Advanced"},
         {"text": "Used <strong>Playwright for load-assisted browser testing</strong> verifying Angular/React UI performance and Core Web Vitals under concurrent user load scenarios in CI", "level": "Advanced"},
         {"text": "Established <strong>performance regression gates in CI/CD</strong> — load tests run on every release candidate with Jenkins, failing the pipeline if p99 latency exceeds defined thresholds", "level": "Advanced"}
+    ],
+    "scss": [
+        {"text": "Delivered a <strong>white-label theming system in Angular SCSS</strong> supporting 5+ brand variants with dynamic stylesheet injection at Kinesso", "level": "Advanced"},
+        {"text": "Built <strong>design tokens and shared SCSS mixins</strong> powering 40+ reusable components across the multi-framework design system", "level": "Advanced"},
+        {"text": "Architected a <strong>mobile-first SCSS system</strong> for the ACE construction PWA covering tablets, phones, and desktop dashboards", "level": "Advanced"},
+        {"text": "Standardised styling with <strong>Stylelint rules</strong> keeping Angular SCSS and React/Next.js Tailwind visually consistent", "level": "Intermediate"},
+        {"text": "Used <strong>SCSS maps and loops</strong> to generate theme-aware utility classes reducing duplicated style code", "level": "Intermediate"}
+    ],
+    "angular-material": [
+        {"text": "Built <strong>Angular Material components</strong> (tables, dialogs, forms, navigation) into the shared design system used across 6 internal products", "level": "Advanced"},
+        {"text": "Customised the <strong>Material theme</strong> with SCSS palettes and typography to support white-label branding", "level": "Advanced"},
+        {"text": "Used <strong>MatTable and CDK virtual scroll</strong> for performant data-heavy dashboards at Kinesso", "level": "Advanced"},
+        {"text": "Implemented <strong>Material-based responsive layouts</strong> for the ACE construction PWA on tablets and phones", "level": "Intermediate"},
+        {"text": "Applied <strong>Angular Material a11y (CDK)</strong> primitives to meet accessibility requirements in Storybook a11y testing", "level": "Intermediate"}
+    ],
+    "ag-grid": [
+        {"text": "Implemented advanced <strong>AG Grid Enterprise tables</strong> with filtering, sorting, row expansion, and custom cell rendering at Kinesso", "level": "Advanced"},
+        {"text": "Delivered <strong>CSV/Excel export via ExcelJS</strong> enabling non-technical users to self-serve analytics from data grids", "level": "Advanced"},
+        {"text": "Integrated AG Grid consistently across <strong>Angular, React, and Next.js</strong> within the multi-framework design system", "level": "Advanced"},
+        {"text": "Added <strong>Gen AI-powered data insights</strong> on top of AG Grid tables for advertising analytics", "level": "Advanced"},
+        {"text": "Tuned AG Grid for <strong>large datasets</strong> using server-side row model and virtualisation to keep dashboards responsive", "level": "Advanced"}
+    ],
+    "playwright": [
+        {"text": "Built part of a <strong>100+ integration/E2E test suite</strong> using Playwright and Cypress across React/Next.js and Angular UIs", "level": "Advanced"},
+        {"text": "Integrated <strong>Playwright into CI/CD</strong> (Jenkins, GitHub Actions) with parallel sharded runs and trace capture", "level": "Advanced"},
+        {"text": "Used <strong>Playwright for load-assisted browser testing</strong> verifying Core Web Vitals under concurrent user load", "level": "Advanced"},
+        {"text": "Stabilised flaky flows with <strong>Playwright auto-waiting and web-first assertions</strong>, contributing to 80%+ coverage", "level": "Intermediate"},
+        {"text": "Captured <strong>traces, screenshots, and videos</strong> to speed up debugging of failing pipeline runs", "level": "Intermediate"}
+    ],
+    "compodoc": [
+        {"text": "Authored <strong>Angular API documentation with Compodoc</strong> alongside Storybook for the shared design system", "level": "Advanced"},
+        {"text": "Automated <strong>Compodoc generation in CI</strong> keeping component and service docs current across releases", "level": "Advanced"},
+        {"text": "Enforced <strong>documentation coverage thresholds</strong> to maintain high-quality API docs", "level": "Intermediate"},
+        {"text": "Used the Compodoc <strong>dependency graph</strong> to communicate module structure during design reviews", "level": "Intermediate"}
+    ],
+    "mdx": [
+        {"text": "Authored <strong>150+ Storybook stories with MDX</strong> narrative docs, improving component discoverability by 85%", "level": "Advanced"},
+        {"text": "Combined <strong>live component demos with Markdown</strong> in MDX for interactive design-system documentation", "level": "Advanced"},
+        {"text": "Standardised <strong>MDX doc blocks and props tables</strong> across Angular, React, and Next.js components", "level": "Intermediate"},
+        {"text": "Added <strong>a11y notes and usage guidelines</strong> in MDX to guide product teams adopting the library", "level": "Intermediate"}
+    ],
+    "fastapi": [
+        {"text": "Designed and implemented <strong>scalable Python FastAPI services and data pipelines</strong> for multi-tenant GenAI applications at Kinesso", "level": "Advanced"},
+        {"text": "Served <strong>RAG inference endpoints handling 10K+ daily requests</strong> at sub-200ms latency", "level": "Advanced"},
+        {"text": "Built <strong>50+ FastAPI endpoints</strong> for onboarding, data backfill, quality monitoring, and GenAI analytics", "level": "Advanced"},
+        {"text": "Used <strong>FastAPI async endpoints with asyncio</strong> and parallel query execution to improve p99 latency by 55%", "level": "Advanced"},
+        {"text": "Containerised FastAPI services with <strong>Docker and Kubernetes on AWS EKS</strong> with health probes and Datadog observability", "level": "Advanced"}
+    ],
+    "liquibase": [
+        {"text": "Managed <strong>Liquibase migrations across PostgreSQL and SQL Server</strong> in the hybrid data access layer at Kinesso", "level": "Advanced"},
+        {"text": "Versioned schema changes for <strong>12+ multi-tenant environments</strong> keeping databases in sync with zero drift", "level": "Advanced"},
+        {"text": "Integrated <strong>Liquibase into Spring Boot startup and CI/CD</strong> for automated, repeatable migrations", "level": "Advanced"},
+        {"text": "Used <strong>contexts, labels, and preconditions</strong> to safely control environment-specific changesets", "level": "Intermediate"}
+    ],
+    "llamaindex": [
+        {"text": "Built <strong>RAG pipelines with LlamaIndex</strong> over tenant-specific document stores for GenAI features", "level": "Advanced"},
+        {"text": "Integrated LlamaIndex retrieval with <strong>MongoDB Atlas Vector Search and FAISS</strong> for semantic querying", "level": "Advanced"},
+        {"text": "Combined LlamaIndex with <strong>LangChain and LangGraph agents</strong> for document-querying workflows", "level": "Advanced"},
+        {"text": "Tuned <strong>chunking and node parsing</strong> strategies to improve retrieval relevance in production", "level": "Intermediate"}
+    ],
+    "snowflake-cortex": [
+        {"text": "Built a <strong>Snowflake analytics agent using LangGraph and Snowflake Cortex</strong> for natural-language querying at Kinesso", "level": "Advanced"},
+        {"text": "Enabled <strong>dynamic dashboard generation</strong> letting business users self-serve analytics insights", "level": "Advanced"},
+        {"text": "Achieved <strong>85% prediction accuracy</strong> in ad performance analytics powered by Cortex", "level": "Advanced"},
+        {"text": "Integrated Cortex-driven analytics into <strong>production data systems</strong> for near real-time insights", "level": "Advanced"}
+    ],
+    "vector-databases": [
+        {"text": "Stored <strong>tenant-specific embeddings in MongoDB Atlas Vector Search</strong> for multi-tenant GenAI applications", "level": "Advanced"},
+        {"text": "Served <strong>vector retrieval at sub-200ms latency</strong> for 10K+ daily inference requests", "level": "Advanced"},
+        {"text": "Used <strong>FAISS for local similarity search</strong> in RAG-enabled document-querying agents", "level": "Advanced"},
+        {"text": "Combined <strong>vector embeddings with knowledge graphs</strong> for hybrid retrieval in the Snowflake Agent", "level": "Advanced"},
+        {"text": "Designed <strong>chunking and indexing strategies</strong> balancing retrieval quality and cost", "level": "Intermediate"}
+    ],
+    "helm": [
+        {"text": "Packaged <strong>Spring Boot, Python FastAPI, and Next.js workloads</strong> as reusable Helm charts at Kinesso", "level": "Advanced"},
+        {"text": "Deployed <strong>Python AI services with Helm charts</strong> to hybrid AWS Kubernetes environments via ArgoCD", "level": "Advanced"},
+        {"text": "Parameterised Helm <strong>values files per environment</strong> to standardise multi-tenant deployments", "level": "Advanced"},
+        {"text": "Managed <strong>Helm releases with rollback support</strong> enabling safe, repeatable production updates", "level": "Intermediate"}
+    ],
+    "argocd": [
+        {"text": "Migrated CI/CD to <strong>hybrid AWS environments using Terraform and ArgoCD</strong>, automating Docker/K8s deployments", "level": "Advanced"},
+        {"text": "Enabled <strong>one-command GitOps deployments</strong> via ArgoCD that eliminated manual infrastructure changes", "level": "Advanced"},
+        {"text": "Integrated ArgoCD with <strong>Helm charts and Kyverno policy-as-code</strong> for governed continuous delivery", "level": "Advanced"},
+        {"text": "Configured <strong>automated sync, self-heal, and pruning</strong> across multiple deployment environments", "level": "Intermediate"}
     ]
 }

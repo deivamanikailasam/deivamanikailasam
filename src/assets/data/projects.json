@@ -55,16 +55,16 @@
   {
     "id": "snowflake-agent",
     "title": "Snowflake Agent",
-    "description": "Python-based agentic AI system using LangGraph and LangChain to create a unified knowledge gateway, combining vector embeddings with knowledge graphs for querying Snowflake data and powering analytics dashboards with 85% accuracy in ad performance predictions.",
-    "technologies": ["Python", "LangGraph", "LangChain", "Snowflake", "Vector Embeddings", "Knowledge Graphs", "OpenAI API"],
+    "description": "Python-based analytics agent built with LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation over Snowflake data, enabling business users to explore data and surface analytics insights through interactive dashboards with 85% prediction accuracy.",
+    "technologies": ["Python", "LangGraph", "Snowflake Cortex", "Snowflake", "Vector Embeddings", "Knowledge Graphs", "OpenAI API"],
     "category": "AI & Machine Learning",
     "subcategory": "Agent Systems",
     "highlights": [
-      "LangGraph multi-agent orchestration for complex Snowflake data queries",
+      "LangGraph orchestration with Snowflake Cortex for natural-language querying over structured Snowflake data",
+      "Dynamic dashboard generation letting business users self-serve analytics insights",
+      "85% prediction accuracy powering ad performance analytics workflows",
       "Unified knowledge gateway combining vector embeddings with knowledge graphs",
-      "85% accuracy in ad performance predictions powering analytics dashboards",
-      "LangChain RAG integration for document querying and contextual retrieval",
-      "Supports natural language queries over structured Snowflake data"
+      "Integrated with production data systems for near real-time analytics"
     ],
     "status": "Active",
     "icon": "pi pi-database",

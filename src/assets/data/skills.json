@@ -33,6 +33,12 @@
             "name": "TypeScript",
             "image": "assets/images/skills/typescript.png",
             "icon": "pi pi-code"
+          },
+          {
+            "key": "scss",
+            "name": "SCSS",
+            "image": "assets/images/skills/css3.png",
+            "icon": "pi pi-palette"
           }
         ]
       },
@@ -95,6 +101,18 @@
             "icon": "pi pi-prime"
           },
           {
+            "key": "angular-material",
+            "name": "Angular Material",
+            "image": "assets/images/skills/material-ui.png",
+            "icon": "pi pi-palette"
+          },
+          {
+            "key": "ag-grid",
+            "name": "AG Grid Enterprise",
+            "image": "assets/images/skills/highcharts.png",
+            "icon": "pi pi-table"
+          },
+          {
             "key": "highcharts",
             "name": "HighCharts",
             "image": "assets/images/skills/highcharts.png",
@@ -128,6 +146,12 @@
             "key": "cypress",
             "name": "Cypress",
             "image": "assets/images/skills/cypress.png",
+            "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "playwright",
+            "name": "Playwright",
+            "image": "assets/images/skills/selenium.svg",
             "icon": "pi pi-check-circle"
           },
           {
@@ -177,6 +201,18 @@
             "name": "Storybook",
             "image": "assets/images/skills/storybook.png",
             "icon": "pi pi-book"
+          },
+          {
+            "key": "compodoc",
+            "name": "Compodoc",
+            "image": "assets/images/skills/storybook.png",
+            "icon": "pi pi-book"
+          },
+          {
+            "key": "mdx",
+            "name": "MDX",
+            "image": "assets/images/skills/storybook.png",
+            "icon": "pi pi-file-edit"
           }
         ]
       }
@@ -233,6 +269,12 @@
             "key": "springboot",
             "name": "Spring Boot",
             "image": "assets/images/skills/springboot.png",
+            "icon": "pi pi-cog"
+          },
+          {
+            "key": "fastapi",
+            "name": "FastAPI",
+            "image": "assets/images/skills/python.png",
             "icon": "pi pi-cog"
           },
           {
@@ -335,6 +377,12 @@
             "key": "nosql-systems",
             "name": "NoSQL & Distributed Systems",
             "image": "assets/images/skills/nosql.svg",
+            "icon": "pi pi-database"
+          },
+          {
+            "key": "liquibase",
+            "name": "Liquibase",
+            "image": "assets/images/skills/database-design.svg",
             "icon": "pi pi-database"
           }
         ]
@@ -569,6 +617,18 @@
             "icon": "pi pi-link"
           },
           {
+            "key": "llamaindex",
+            "name": "LlamaIndex",
+            "image": "assets/images/skills/langchain.png",
+            "icon": "pi pi-link"
+          },
+          {
+            "key": "snowflake-cortex",
+            "name": "Snowflake Cortex",
+            "image": "assets/images/skills/snowflake.png",
+            "icon": "pi pi-sparkles"
+          },
+          {
             "key": "rag",
             "name": "RAG",
             "image": "assets/images/skills/rag.svg",
@@ -579,6 +639,12 @@
             "name": "Embeddings",
             "image": "assets/images/skills/llm.png",
             "icon": "pi pi-sparkles"
+          },
+          {
+            "key": "vector-databases",
+            "name": "Vector Databases",
+            "image": "assets/images/skills/nosql.svg",
+            "icon": "pi pi-database"
           },
           {
             "key": "fine-tuning",
@@ -704,6 +770,18 @@
             "icon": "pi pi-wrench"
           },
           {
+            "key": "helm",
+            "name": "Helm",
+            "image": "assets/images/skills/kubernetes.png",
+            "icon": "pi pi-box"
+          },
+          {
+            "key": "argocd",
+            "name": "ArgoCD",
+            "image": "assets/images/skills/kubernetes.png",
+            "icon": "pi pi-sync"
+          },
+          {
             "key": "arm-bicep",
             "name": "ARM/Bicep",
             "image": "assets/images/skills/azure.png",
@@ -717,13 +795,13 @@
         "items": [
           {
             "key": "aws",
-            "name": "AWS (ECS, Fargate, EC2, Lambda)",
+            "name": "AWS (ECS, Fargate, EC2, Lambda, EKS)",
             "image": "assets/images/skills/aws.png",
             "icon": "pi pi-cloud"
           },
           {
             "key": "azure",
-            "name": "Azure (App Service, Functions, SQL, PostgreSQL, Cosmos DB, DevOps)",
+            "name": "Azure (App Service, Functions, SQL, PostgreSQL, Cosmos DB, Blob Storage, AD B2C, DevOps)",
             "image": "assets/images/skills/azure.png",
             "icon": "pi pi-cloud"
           }

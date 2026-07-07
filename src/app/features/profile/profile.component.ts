@@ -90,6 +90,19 @@ import { CardModule } from 'primeng/card';
                   }
                 </div>
               }
+
+              <!-- Download Resume -->
+              <div class="resume-download">
+                <a
+                  class="download-resume-btn"
+                  [href]="resumeUrl"
+                  [attr.download]="resumeFileName"
+                  aria-label="Download resume PDF"
+                >
+                  <i class="pi pi-download"></i>
+                  <span>Download Resume</span>
+                </a>
+              </div>
               
               <!-- CTA Buttons -->
               <!-- <div class="cta-buttons">
@@ -232,6 +245,8 @@ import { CardModule } from 'primeng/card';
       height: 100%;
       border-radius: 50%;
       object-fit: cover;
+      object-position: center 20%;
+      background-color: #0d1b2a;
       position: relative;
       z-index: 2;
       border: 6px solid transparent;
@@ -468,6 +483,47 @@ import { CardModule } from 'primeng/card';
       }
     }
     
+    .resume-download {
+      display: flex;
+      justify-content: flex-end;
+      margin-right: 2.5rem;
+      margin-bottom: 1rem;
+    }
+
+    .download-resume-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.75rem;
+      padding: 0.9rem 1.75rem;
+      border-radius: 50px;
+      font-size: 1.05rem;
+      font-weight: 600;
+      color: #fff;
+      text-decoration: none;
+      background: linear-gradient(135deg, #667eea, #764ba2);
+      box-shadow: 0 10px 30px rgba(102, 126, 234, 0.4);
+      border: 2px solid transparent;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+      i {
+        font-size: 1.15rem;
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 16px 40px rgba(102, 126, 234, 0.6);
+
+        i {
+          transform: translateY(3px);
+        }
+      }
+
+      &:active {
+        transform: translateY(-1px);
+      }
+    }
+
     .cta-buttons {
       display: flex;
       gap: 1.5rem;
@@ -623,6 +679,11 @@ import { CardModule } from 'primeng/card';
         justify-content: center;
         margin-right: 0;
       }
+
+      .resume-download {
+        justify-content: center;
+        margin-right: 0;
+      }
       
       .profile-meta {
         justify-content: center;
@@ -762,6 +823,9 @@ import { CardModule } from 'primeng/card';
   `]
 })
 export class ProfileComponent implements OnInit {
+  readonly resumeUrl = 'assets/DeivaMani.pdf';
+  readonly resumeFileName = 'Deiva_Mani_Kailasam_Resume.pdf';
+
   profile = computed(() => {
     return this.contentService.profileData() || null;
   });
