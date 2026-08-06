@@ -2,10 +2,10 @@
   {
     "id": "1",
     "company": "Kinesso – Omnicom Media Group (formerly IPG)",
-    "position": "Senior Software Engineer (Full Stack)",
+    "position": "Senior Software Engineer (Full Stack, AI)",
     "startDate": "2021-08-01",
-    "endDate": null,
-    "current": true,
+    "endDate": "2026-07-31",
+    "current": false,
     "sections": [
       {
         "header": "GenAI & Agentic Platforms",
@@ -14,6 +14,10 @@
           "Designed GenAI pipelines for tenant-aware embeddings, LLM-based anomaly detection, and a Python-based data quality scoring engine, reducing undetected data quality issues by around 75%",
           "Developed agentic AI prototypes using LangChain and LangGraph for multi-agent orchestration and document-querying workflows integrated with production data systems, partnering with marketing and analytics stakeholders to validate outputs against business KPIs",
           "Built a Snowflake analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation, enabling business users to explore data and surface analytics insights through interactive dashboards",
+          "Extended GenAI platform to support Llama 3 on Amazon Bedrock alongside GPT-4 and Claude, enabling model-agnostic inference with unified prompt routing and cost-based model selection",
+          "Integrated Amazon Bedrock Guardrails and a SageMaker-hosted content classifier for PII detection, toxicity filtering, and hallucination mitigation across multi-tenant inference pipelines",
+          "Built automated LLM evaluation suites (RAGAS, custom scorers) for faithfulness, relevance, and groundedness, running on every PR and gating production deployments",
+          "Implemented shadow and canary rollout strategies for LLM model upgrades, enabling zero-downtime transitions with traffic splitting and automated rollback on quality regression",
           "Established LLMOps workflows for production deployment of fine-tuned GPT-4 variants using Docker containerization and Kubernetes on AWS EKS"
         ]
       },
@@ -85,7 +89,7 @@
   {
     "id": "2",
     "company": "ACE Contractors Pvt Ltd",
-    "position": "Software Developer",
+    "position": "Software Developer (Full Stack)",
     "startDate": "2020-12-01",
     "endDate": "2021-07-31",
     "current": false,
