@@ -824,7 +824,7 @@ import { CardModule } from 'primeng/card';
   `]
 })
 export class ProfileComponent implements OnInit {
-  readonly resumeUrl = 'assets/Deiva_mani_CV.pdf';
+  readonly resumeUrl = 'assets/Deiva_CV_082026.pdf';
 
   profile = computed(() => {
     return this.contentService.profileData() || null;
