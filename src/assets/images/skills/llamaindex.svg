@@ -1,0 +1,6 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" role="img">
+  <title>LlamaIndex</title>
+  <rect width="24" height="24" fill="#6c48c5" rx="3"/>
+  <text x="12" y="16" font-family="Arial,sans-serif" font-size="8" font-weight="bold" fill="white" text-anchor="middle">Llama</text>
+  <text x="12" y="22" font-family="Arial,sans-serif" font-size="5" fill="#d4b8ff" text-anchor="middle">Index</text>
+</svg>

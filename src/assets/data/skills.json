@@ -109,7 +109,7 @@
           {
             "key": "ag-grid",
             "name": "AG Grid Enterprise",
-            "image": "assets/images/skills/highcharts.png",
+            "image": "assets/images/skills/ag-grid.svg",
             "icon": "pi pi-table"
           },
           {
@@ -151,7 +151,7 @@
           {
             "key": "playwright",
             "name": "Playwright",
-            "image": "assets/images/skills/selenium.svg",
+            "image": "assets/images/skills/playwright.svg",
             "icon": "pi pi-check-circle"
           },
           {
@@ -274,7 +274,7 @@
           {
             "key": "fastapi",
             "name": "FastAPI",
-            "image": "assets/images/skills/python.png",
+            "image": "assets/images/skills/fastapi.svg",
             "icon": "pi pi-cog"
           },
           {
@@ -619,7 +619,7 @@
           {
             "key": "llamaindex",
             "name": "LlamaIndex",
-            "image": "assets/images/skills/langchain.png",
+            "image": "assets/images/skills/llamaindex.svg",
             "icon": "pi pi-link"
           },
           {
@@ -697,6 +697,12 @@
           {
             "key": "bedrock",
             "name": "Amazon Bedrock",
+            "image": "assets/images/skills/bedrock.svg",
+            "icon": "pi pi-globe"
+          },
+          {
+            "key": "sagemaker",
+            "name": "Amazon SageMaker",
             "image": "assets/images/skills/aws.png",
             "icon": "pi pi-globe"
           }
@@ -784,13 +790,13 @@
           {
             "key": "helm",
             "name": "Helm",
-            "image": "assets/images/skills/kubernetes.png",
+            "image": "assets/images/skills/helm.svg",
             "icon": "pi pi-box"
           },
           {
             "key": "argocd",
             "name": "ArgoCD",
-            "image": "assets/images/skills/kubernetes.png",
+            "image": "assets/images/skills/argocd.svg",
             "icon": "pi pi-sync"
           },
           {
