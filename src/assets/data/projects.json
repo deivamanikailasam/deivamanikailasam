@@ -2,7 +2,7 @@
   {
     "id": "feature-rich-ui-component-library",
     "title": "Feature-Rich UI Component Library",
-    "description": "Multi-framework design system (React, Angular, Next.js) with 40+ reusable components distributed via private npm, enabling consistent UX across 6 internal products with framework-agnostic design tokens, white-label theming, and 150+ Storybook stories.",
+    "description": "Built a multi-framework design system across Angular, React, and Next.js with 40+ reusable components used across multiple internal products.",
     "technologies": ["React", "Angular", "Next.js", "TypeScript", "Storybook", "Tailwind CSS", "SCSS", "MDX", "Compodoc", "AG Grid"],
     "category": "Frontend & Design Systems",
     "subcategory": "Component Library",
@@ -21,7 +21,7 @@
   {
     "id": "ai-agent-for-code-generation",
     "title": "AI Agent for Code Generation",
-    "description": "LLM-powered tool using GPT-4 and LangChain that generates boilerplate and integration code from natural language prompts, accelerating development workflows for internal engineering teams.",
+    "description": "Built an LLM-powered internal engineering tool using GPT-4 and LangChain to generate boilerplate and integration code, accelerating delivery for internal teams.",
     "technologies": ["Python", "GPT-4", "LangChain", "OpenAI API"],
     "category": "AI & Machine Learning",
     "subcategory": "Code Generation",
@@ -38,7 +38,7 @@
   {
     "id": "edge-water-management-platform",
     "title": "Edge Water Management Platform",
-    "description": "Full-stack web application for smart water monitoring and optimisation with a modern Angular frontend and cloud backend, providing real-time insights and operational dashboards.",
+    "description": "Delivered a full-stack web application for smart water monitoring and optimization using Angular and cloud backend services.",
     "technologies": ["Angular", "TypeScript", "Node.js", "PostgreSQL", "Azure", "Docker"],
     "category": "Full Stack",
     "subcategory": "IoT & Monitoring",
@@ -55,7 +55,7 @@
   {
     "id": "snowflake-agent",
     "title": "Snowflake Agent",
-    "description": "Python-based analytics agent built with LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation over Snowflake data, enabling business users to explore data and surface analytics insights through interactive dashboards with 85% prediction accuracy.",
+    "description": "Built a Python-based analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation over Snowflake data.",
     "technologies": ["Python", "LangGraph", "Snowflake Cortex", "Snowflake", "Vector Embeddings", "Knowledge Graphs", "OpenAI API"],
     "category": "AI & Machine Learning",
     "subcategory": "Agent Systems",
