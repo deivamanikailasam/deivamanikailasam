@@ -8,57 +8,86 @@
     "current": false,
     "sections": [
       {
-        "header": "GenAI & Agentic Platforms",
+        "header": "GenAI & Agentic Platforms (2023–2026)",
         "points": [
-          "Worked with business and product stakeholders to qualify GenAI use cases, define success metrics and automation levels, and build ROI cases before committing to build. Ran feasibility spikes on real data to de-risk GenAI projects and support go/no-go decisions.",
-          "Designed and implemented scalable Python FastAPI services and data pipelines for multi-tenant GenAI applications, integrating RAG pipelines with tenant-specific embeddings stored in MongoDB Atlas vector search and handling 10K+ daily inference requests with sub-200ms latency.",
-          "Designed GenAI pipelines for tenant-aware embeddings, LLM-based anomaly detection, and a Python-based data quality scoring engine, reducing undetected data quality issues around 75%.",
-          "Developed agentic AI prototypes using LangChain and LangGraph for multi-agent orchestration and document-querying workflows integrated with production data systems, partnering with marketing and analytics stakeholders to validate outputs against business KPIs.",
-          "Built a Snowflake analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation, enabling business users to explore data and surface analytics insights through interactive dashboards.",
-          "Deployed small open-weight models (Llama 3) on Amazon Bedrock as intent routers for multi-agent workflows, with orchestration handled in LangGraph.",
-          "Applied frontier models (GPT, Claude Sonnet/Opus) on Amazon Bedrock for reasoning, planning, and advanced tool use with prompt caching to balance quality, latency, and inference cost.",
-          "Secured RAG and agent workflows with input/output guardrails — Bedrock Guardrails for PII/DLP and a fine-tuned small Llama classifier (via SageMaker) for prompt-injection and topical filtering — plus entitlement-aware retrieval to enforce tenant isolation.",
-          "Built automated evaluation suites with versioned golden datasets and LLM-as-judge grading to measure GenAI quality and catch regressions before release.",
-          "Shipped agent features through shadow and canary rollouts with human-in-the-loop approvals, kill switches, and trace-based observability feeding a continuous feedback loop."
+          "Led the pillar's GenAI initiative as technical lead of a 5-person team, owning the roadmap, architecture and delivery from use-case discovery to production.",
+          "Partnered with business, product and analytics stakeholders to qualify GenAI use cases, define success metrics and build ROI cases; ran feasibility spikes on real data to drive go/no-go decisions before committing to build.",
+          "Built a Snowflake analytics agent (LangGraph, Cortex Analyst) that replaced manual custom-dashboard builds in a legacy reporting system due for decommissioning, cutting creation time from ~15 min to under 1 min (p95).",
+          "Raised text-to-SQL accuracy from ~60% to ~80% by building the semantic layer first: ran metric-definition workshops with data owners to settle conflicting KPIs (e.g. ROAS) as governed metrics in per-client semantic views; 90%+ before launch, improving further via golden-set growth and user feedback.",
+          "Made agent output verifiable: generated SQL passes a sqlglot read-only guard and runs as the signed-in user; code-based critics check each chart spec against real columns and each narrative number against the result.",
+          "Built shared sign-in and tenancy for agents and web apps used by multiple clients and internal agencies: Entra ID SSO, OAuth 2.0 On-Behalf-Of token exchange into Snowflake External OAuth, SCIM provisioning and per-client roles, so row-access and masking policies apply per user; data exposed to agents as tenant-scoped MCP tools.",
+          "Designed multi-agent workflows in LangGraph and PydanticAI: Claude Sonnet on Bedrock for planning, reasoning and tool use, GPT via the OpenAI API, and intent routing that moved from Llama 3 on Bedrock to a fine-tuned Llama 3.2 1B classifier on SageMaker, behind a LiteLLM model gateway.",
+          "Built multi-tenant RAG services (Python/FastAPI) serving 1K+ daily queries: self-hosted BGE embeddings (bge-large-en-v1.5) on SageMaker, tokenizer-sized chunks, BM25 + HNSW hybrid search fused with RRF (sub-200 ms p95 retrieval) and cross-encoder reranking over Qdrant and MongoDB Atlas, streaming cited answers over SSE.",
+          "Cut LLM inference spend by ~40% through semantic caching on ElastiCache (Redis), prompt caching, cost-aware model routing and per-tenant token budgets in DynamoDB.",
+          "Built event-driven RAG ingestion in which MSK and EventBridge events carrying S3 references trigger Step Functions and Lambda pipelines for chunking, embedding and tenant-scoped upserts, keeping answers current without batch re-indexing.",
+          "Hardened RAG and agent workflows against OWASP LLM Top 10 risks with Bedrock Guardrails for PII/DLP, the fine-tuned Llama 3.2 1B classifier (Hugging Face, PyTorch) for prompt-injection and topic filtering, and entitlement-aware retrieval for tenant isolation.",
+          "Established evaluation and observability: DeepEval suites on versioned golden datasets (LLM-as-judge, faithfulness and hallucination metrics) as CI release gates, Langfuse and OpenTelemetry tracing per agent step, and shadow/canary rollouts with human-in-the-loop approvals, kill switches, audit trails, AI risk assessments and model/system cards.",
+          "Built LLM-based anomaly detection and a data-quality scoring engine, reducing undetected data-quality issues by ~75%."
         ]
       },
       {
-        "header": "Backend, APIs & Data Platforms",
+        "header": "Backend, Data & Streaming (2021–2026)",
         "points": [
-          "Architected and led a multi-module Spring Boot 3.x microservices platform with JWT/OAuth2, multi-tenant data access, and OpenAPI contracts, serving 10K+ daily API requests across PostgreSQL, SQL Server, Snowflake, and MongoDB.",
-          "Designed multi-tenant isolation patterns using DB-per-tenant, collection-per-tenant, and row-level security, ensuring zero cross-tenant leakage across 12+ environments.",
-          "Implemented a gRPC-based plugin architecture for integrating Python microservices and client-specific React dashboard plugins, improving onboarding speed for new services.",
-          "Built a hybrid data access layer spanning PostgreSQL, SQL Server, Snowflake, and MongoDB with Liquibase migrations and MongoDB schema versioning, simplifying cross-database querying.",
-          "Integrated Google Ads, Meta/Facebook, Bing Ads, Adverity, Snowflake, Power BI, and MongoDB Atlas Search using OAuth2/OIDC and Python data connectors, enabling near real-time advertising analytics.",
-          "Reduced 99th percentile latency by about 55% through Spring WebClient optimization, Python asyncio, MongoDB GridFS, parallel query execution, and hybrid caching using Caffeine, Redis, and MongoDB."
+          "Architected and led a multi-module Spring Boot 3 microservices platform (JWT/OAuth 2.0, OpenAPI) over PostgreSQL, SQL Server, Snowflake and MongoDB, with DB-, collection- and row-level tenant isolation and zero cross-tenant leakage across 12+ environments; tuned tail latency with async I/O, parallel queries and tiered caching (Caffeine, Redis).",
+          "Built MSK (Kafka) pipelines streaming ad performance, spend and conversion events from Google Ads, Meta, Bing Ads and Adverity, with per-campaign ordering, idempotent upserts, jittered retries, replayable dead-letter queues and Kinesis Data Firehose landing raw events in S3."
         ]
       },
       {
-        "header": "Frontend & Product Experience",
+        "header": "Frontend & Product",
         "points": [
-          "Built and maintained a multi-framework design system with 40+ reusable components across React, Angular, and Next.js, distributed through private npm and adopted across 6 internal products.",
-          "Implemented advanced AG Grid Enterprise tables with filtering, sorting, row expansion, and CSV/Excel export through ExcelJS, enabling non-technical users to self-serve analytics.",
-          "Delivered a white-label theming system across React, Next.js, and Angular supporting 5+ brand variants with dynamic stylesheet injection.",
-          "Authored Storybook documentation with 150+ stories, accessibility tests, and AI-assisted component suggestions, reducing duplicate components."
+          "Built a 40+ component design system across React, Angular and Next.js, adopted by 6 internal products, with white-label theming for 5+ brands and AG Grid tables for self-serve analytics."
         ]
       },
       {
         "header": "Platform, Quality & Leadership",
         "points": [
-          "Established automated testing across 1000+ unit tests and 100+ integration/E2E tests using Jest, Vitest, Pytest, Cypress, Playwright, and MockMvc, achieving 80%+ coverage across Java, Python, and UI layers.",
-          "Configured CI/CD with Jenkins and GitHub Actions for React/Next.js using multi-stage Docker builds, SonarQube gates, and pull-request validation, cutting merge-to-deploy time.",
-          "Designed Kubernetes infrastructure for Spring Boot, Python FastAPI, and Next.js workloads using ConfigMaps, Vault secrets, MongoDB StatefulSets, health probes, and Datadog dashboards, reducing MTTR.",
-          "Migrated CI/CD pipelines to hybrid AWS environments using Terraform and ArgoCD, automating Docker and Kubernetes deployments of Python AI services with Helm charts, Kyverno policy-as-code, and reusable GenAI library modules.",
-          "Developed Terraform infrastructure for AWS ECS/Fargate and MongoDB Atlas with GitOps via ArgoCD, enabling one-command deployments and eliminating manual infrastructure changes.",
-          "Mentored 5+ engineers, with 3 promoted to mid-level roles, and drove coding standards across Python, TypeScript, Java, and multi-service codebases."
+          "Owned CI/CD and infrastructure as code (Terraform, ArgoCD, Helm; EKS with KEDA and Karpenter autoscaling, ECS; Kyverno policies and Cosign-signed images; Jenkins and GitHub Actions with SonarQube gates), cutting merge-to-deploy time from hours to under 20 minutes.",
+          "Cut MTTR by ~50% with CloudWatch, X-Ray, Datadog and Grafana dashboards and tracing; maintained 1,000+ unit and 100+ E2E tests at 80%+ coverage across Java, Python and UI layers.",
+          "Mentored 5 engineers (3 promoted to mid-level), set coding and code-review standards across Python, TypeScript and Java, and introduced architecture decision records and incident runbooks so the team could operate and roll back systems independently."
+        ]
+      },
+      {
+        "header": "Other Notable Projects",
+        "points": [
+          "RAG Core Platform (PoC): Config-driven RAG framework with 159 swappable components and 20+ reference pipelines, gated by CI evals; hybrid search outperformed dense-only retrieval on Recall@5 across a 120-query golden set. Secure by default: document-level ACLs, PII redaction, guardrails, a tamper-evident audit log and signed builds.",
+          "Agentic AI Core Platform (PoC): Spec-driven agent framework with 60+ swappable components and 8 orchestration patterns, gated by trajectory evals on a 150-task suite. Secure by default: MCP tool permissions, human-in-the-loop approvals, budget caps, sandboxed execution, prompt-injection guardrails and a tamper-evident audit log.",
+          "AI-Assisted E2E Test Automation: Built reusable Cursor skills that generate test scenarios, map them to Zephyr test cases and auto-create Playwright end-to-end tests, run on every pull request to block regression bugs before merge."
         ]
       }
     ],
-    "technologies": ["Angular", "React.js", "Next.js", "TypeScript", "Java", "Spring Boot", "Python", "FastAPI", "PostgreSQL", "MongoDB", "Snowflake", "AWS", "Docker", "Kubernetes", "gRPC", "GraphQL", "LangChain", "LangGraph", "Snowflake Cortex", "RAG", "MCP", "Amazon Bedrock"]
+    "technologies": [
+      "Python",
+      "TypeScript",
+      "Java",
+      "Spring Boot",
+      "FastAPI",
+      "React",
+      "Angular",
+      "Next.js",
+      "LangGraph",
+      "PydanticAI",
+      "Snowflake Cortex Analyst",
+      "Amazon Bedrock",
+      "Amazon SageMaker",
+      "LiteLLM",
+      "Qdrant",
+      "MongoDB Atlas",
+      "DeepEval",
+      "Langfuse",
+      "OpenTelemetry",
+      "MCP",
+      "Kafka (MSK)",
+      "Snowflake",
+      "PostgreSQL",
+      "AWS",
+      "Kubernetes",
+      "Terraform",
+      "ArgoCD"
+    ]
   },
   {
     "id": "2",
-    "company": "ACE Contractors Pvt Ltd",
+    "company": "ACE Contractors Pty Ltd",
     "position": "Software Developer (Full Stack)",
     "startDate": "2020-12-01",
     "endDate": "2021-07-31",
@@ -67,21 +96,29 @@
       {
         "header": "Key Contributions",
         "points": [
-          "Architected and owned a Progressive Web App platform for construction operations on Azure App Service, Azure PostgreSQL Flexible Server, Azure Functions, Blob Storage, and AD B2C, serving 200+ daily active users across 10+ sites.",
-          "Built a mobile-first Angular frontend with PWA capabilities including Service Workers, App Manifest, and Cache API, enabling offline workflows for field workers and improving daily task completion rates by 40%.",
-          "Implemented Node.js/Express backend services with gRPC microservices and stream processing for real-time timesheet validation and contract updates, achieving sub-100ms response times for 95th percentile requests.",
-          "Designed PostgreSQL schemas for employees, projects, contracts, timesheets, and safety incidents using JSONB and full-text search for efficient retrieval.",
-          "Delivered CI/CD using Azure DevOps YAML pipelines, multi-stage Docker builds, Azure Container Registry, and ARM/Bicep templates, reducing deployment time from 2 hours to 12 minutes.",
-          "Led weekly executive syncs with the company owner, prioritizing high-ROI features that reduced payroll disputes, digitized timesheets, and accelerated management documentation and reporting workflows."
+          "Worked directly with the company owner in weekly syncs to scope and prioritise high-ROI features, digitising timesheets and contracts and reducing payroll disputes.",
+          "Architected and owned a progressive web app for construction operations on Azure (App Service, PostgreSQL Flexible Server, Functions, Blob Storage, AD B2C), serving 200+ daily active users across 10+ sites.",
+          "Built a mobile-first Angular PWA with offline support (Service Workers, Cache API) for field workers, improving daily task completion by 40%, backed by Node.js/Express APIs with sub-100 ms p95 responses.",
+          "Delivered CI/CD with Azure DevOps pipelines, Docker and Bicep, cutting deployment time from 2 hours to 12 minutes."
         ]
       }
     ],
-    "technologies": ["Angular", "Node.js", "TypeScript", "PostgreSQL", "gRPC", "Docker", "Azure", "PWA"]
+    "technologies": [
+      "Angular",
+      "Node.js",
+      "Express",
+      "TypeScript",
+      "PostgreSQL",
+      "Azure",
+      "Docker",
+      "Bicep",
+      "PWA"
+    ]
   },
   {
     "id": "3",
     "company": "Tata Consultancy Services",
-    "position": "Software Developer (Full Stack) / Systems Engineer",
+    "position": "Systems Engineer (Full-Stack Java/Angular)",
     "startDate": "2016-01-01",
     "endDate": "2019-05-31",
     "current": false,
@@ -89,14 +126,27 @@
       {
         "header": "Key Contributions",
         "points": [
-          "Led migration of a legacy Java EE monolith to Spring MVC and Spring Boot layered architecture, reducing technical debt and removing critical security vulnerabilities.",
-          "Gradually migrated AngularJS 1.5 to Angular 5 using RxJS, Angular Router, Angular Material, and lazy loading, achieving 3x faster initial page loads and 65% bundle size reduction.",
-          "Designed PostgreSQL schemas replacing Oracle for projects, employees, timesheets, and billing with stored procedures and indexing, cutting query times by 65% and improving page load performance.",
-          "Implemented test-first development with JUnit, Mockito, TestNG, and Selenium WebDriver E2E testing, achieving 85% unit test coverage and catching regressions early.",
-          "Containerized Spring Boot services using Docker multi-stage builds, enabling 8+ major releases that consolidated multiple legacy systems."
+          "Led migration of a US telecom client's legacy Java EE monolith to a layered Spring Boot architecture, reducing technical debt and remediating critical security vulnerabilities.",
+          "Migrated AngularJS 1.5 to Angular 5 incrementally (RxJS, lazy loading), achieving 3x faster initial page loads and a 65% smaller bundle.",
+          "Re-platformed Oracle schemas to PostgreSQL with optimised indexing and stored procedures, cutting query times by 65%.",
+          "Introduced test-first development (JUnit, Mockito, Selenium) to reach 85% unit-test coverage, and containerised services with Docker to support 8+ major releases consolidating legacy systems."
         ]
       }
     ],
-    "technologies": ["Java", "Spring", "Spring Boot", "Angular", "TypeScript", "PostgreSQL", "Oracle", "REST APIs", "Docker", "JUnit", "Mockito"]
+    "technologies": [
+      "Java",
+      "Spring Boot",
+      "Java EE",
+      "Angular",
+      "AngularJS",
+      "RxJS",
+      "TypeScript",
+      "PostgreSQL",
+      "Oracle",
+      "JUnit",
+      "Mockito",
+      "Selenium",
+      "Docker"
+    ]
   }
 ]

@@ -19420,5 +19420,231 @@
       "level": "Intermediate",
       "text": "Used <strong>SageMaker Pipelines</strong> for automated model evaluation and promotion workflows tied to production GenAI quality gates"
     }
+  ],
+  "pydanticai": [
+    {
+      "level": "Advanced",
+      "text": "Designed <strong>multi-agent workflows in LangGraph and PydanticAI</strong>, with Claude Sonnet on Bedrock for planning, reasoning and tool use"
+    }
+  ],
+  "claude-agent-sdk": [
+    {
+      "level": "Intermediate",
+      "text": "Used agent SDKs with <strong>MCP tool permissions, human-in-the-loop approvals and budget caps</strong> in the Agentic AI Core Platform PoC"
+    }
+  ],
+  "openai-agents-sdk": [
+    {
+      "level": "Intermediate",
+      "text": "Evaluated agent SDKs as <strong>swappable components</strong> across 8 orchestration patterns in the Agentic AI Core Platform PoC"
+    }
+  ],
+  "multi-agent": [
+    {
+      "level": "Advanced",
+      "text": "Built <strong>intent routing</strong> that moved from Llama 3 on Bedrock to a fine-tuned Llama 3.2 1B classifier on SageMaker, behind a LiteLLM model gateway"
+    },
+    {
+      "level": "Advanced",
+      "text": "Built a spec-driven agent framework with <strong>8 orchestration patterns</strong>, gated by trajectory evals on a 150-task suite (PoC)"
+    }
+  ],
+  "sqlglot": [
+    {
+      "level": "Advanced",
+      "text": "Made agent output verifiable: generated SQL passes a <strong>sqlglot read-only guard</strong> and runs as the signed-in user"
+    }
+  ],
+  "huggingface": [
+    {
+      "level": "Advanced",
+      "text": "Fine-tuned a <strong>Llama 3.2 1B classifier</strong> (Hugging Face, PyTorch) for prompt-injection, topic filtering and intent routing"
+    }
+  ],
+  "pytorch": [
+    {
+      "level": "Advanced",
+      "text": "Trained the <strong>fine-tuned Llama 3.2 1B classifier</strong> used for prompt-injection and topic filtering"
+    }
+  ],
+  "hybrid-search": [
+    {
+      "level": "Advanced",
+      "text": "Built BM25 + HNSW <strong>hybrid search fused with RRF</strong> at sub-200 ms p95 retrieval for multi-tenant RAG services serving 1K+ daily queries"
+    },
+    {
+      "level": "Advanced",
+      "text": "Showed hybrid search <strong>outperformed dense-only retrieval on Recall@5</strong> across a 120-query golden set (RAG Core Platform PoC)"
+    }
+  ],
+  "reranking": [
+    {
+      "level": "Advanced",
+      "text": "Added <strong>cross-encoder reranking</strong> over Qdrant and MongoDB Atlas, streaming cited answers over SSE"
+    }
+  ],
+  "qdrant": [
+    {
+      "level": "Advanced",
+      "text": "Ran multi-tenant RAG retrieval over <strong>Qdrant and MongoDB Atlas Vector Search</strong> with tenant-scoped upserts"
+    }
+  ],
+  "chunking": [
+    {
+      "level": "Advanced",
+      "text": "Self-hosted <strong>bge-large-en-v1.5</strong> embeddings on SageMaker with tokenizer-sized chunks"
+    },
+    {
+      "level": "Advanced",
+      "text": "Built <strong>event-driven RAG ingestion</strong> (MSK, EventBridge, Step Functions, Lambda) for chunking, embedding and tenant-scoped upserts"
+    }
+  ],
+  "deepeval": [
+    {
+      "level": "Advanced",
+      "text": "Established <strong>DeepEval suites on versioned golden datasets</strong> (LLM-as-judge, faithfulness and hallucination metrics) as CI release gates"
+    }
+  ],
+  "langfuse": [
+    {
+      "level": "Advanced",
+      "text": "Added <strong>Langfuse and OpenTelemetry tracing per agent step</strong>"
+    }
+  ],
+  "opentelemetry": [
+    {
+      "level": "Advanced",
+      "text": "Instrumented agent workflows with <strong>OpenTelemetry</strong> alongside Langfuse"
+    }
+  ],
+  "litellm": [
+    {
+      "level": "Advanced",
+      "text": "Ran Claude, GPT and Llama models behind a <strong>LiteLLM model gateway</strong> with cost-aware routing"
+    },
+    {
+      "level": "Advanced",
+      "text": "Cut LLM inference spend by <strong>~40%</strong> via semantic caching, prompt caching, cost-aware routing and per-tenant token budgets in DynamoDB"
+    }
+  ],
+  "semantic-caching": [
+    {
+      "level": "Advanced",
+      "text": "Built <strong>semantic caching on ElastiCache (Redis)</strong> plus prompt caching as part of a ~40% inference-cost reduction"
+    }
+  ],
+  "safe-rollouts": [
+    {
+      "level": "Advanced",
+      "text": "Shipped agent features through <strong>shadow/canary rollouts</strong> with human-in-the-loop approvals, kill switches and audit trails"
+    }
+  ],
+  "owasp-llm": [
+    {
+      "level": "Advanced",
+      "text": "Hardened RAG and agent workflows against <strong>OWASP LLM Top 10</strong> risks with Bedrock Guardrails, a fine-tuned classifier and entitlement-aware retrieval"
+    }
+  ],
+  "bedrock-guardrails": [
+    {
+      "level": "Advanced",
+      "text": "Used <strong>Bedrock Guardrails for PII/DLP</strong> across RAG and agent workflows"
+    }
+  ],
+  "responsible-ai": [
+    {
+      "level": "Advanced",
+      "text": "Delivered <strong>audit trails, AI risk assessments and model/system cards</strong> with every agent release"
+    },
+    {
+      "level": "Advanced",
+      "text": "Built <strong>tamper-evident audit logs</strong> into the RAG and Agentic AI Core Platform PoCs"
+    }
+  ],
+  "dynamodb": [
+    {
+      "level": "Advanced",
+      "text": "Stored <strong>per-tenant token budgets in DynamoDB</strong> for LLM cost control"
+    }
+  ],
+  "pandas": [
+    {
+      "level": "Intermediate",
+      "text": "Used <strong>pandas</strong> in the data-quality scoring engine that cut undetected issues by ~75%"
+    }
+  ],
+  "dbt": [
+    {
+      "level": "Intermediate",
+      "text": "Worked with <strong>governed metric definitions</strong> feeding per-client Snowflake semantic views"
+    }
+  ],
+  "sse": [
+    {
+      "level": "Advanced",
+      "text": "Streamed <strong>cited RAG answers over SSE</strong> from FastAPI services"
+    }
+  ],
+  "zephyr": [
+    {
+      "level": "Advanced",
+      "text": "Built Cursor skills that <strong>map generated scenarios to Zephyr test cases</strong> and auto-create Playwright tests on every PR"
+    }
+  ],
+  "supply-chain": [
+    {
+      "level": "Advanced",
+      "text": "Enforced <strong>Kyverno policies and Cosign-signed images</strong> on EKS"
+    }
+  ],
+  "aws-streaming": [
+    {
+      "level": "Advanced",
+      "text": "Built <strong>MSK (Kafka) pipelines</strong> for ad performance, spend and conversion events with idempotent upserts and replayable DLQs"
+    },
+    {
+      "level": "Advanced",
+      "text": "Built <strong>event-driven RAG ingestion</strong> with MSK, EventBridge, Step Functions and Lambda"
+    }
+  ],
+  "cloudwatch-xray": [
+    {
+      "level": "Advanced",
+      "text": "Cut MTTR by <strong>~50%</strong> with CloudWatch, X-Ray, Datadog and Grafana dashboards and tracing"
+    }
+  ],
+  "grafana": [
+    {
+      "level": "Advanced",
+      "text": "Used <strong>Grafana dashboards</strong> as part of a ~50% MTTR reduction"
+    }
+  ],
+  "identity": [
+    {
+      "level": "Advanced",
+      "text": "Built shared sign-in and tenancy: <strong>Entra ID SSO, OAuth 2.0 On-Behalf-Of into Snowflake External OAuth, SCIM</strong> and per-client roles, so row-access and masking policies apply per user"
+    }
+  ],
+  "stakeholder-discovery": [
+    {
+      "level": "Advanced",
+      "text": "Partnered with business, product and analytics stakeholders to <strong>qualify GenAI use cases, define success metrics and build ROI cases</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Ran <strong>metric-definition workshops</strong> with data owners to settle conflicting KPIs as governed metrics"
+    }
+  ],
+  "poc-to-prod": [
+    {
+      "level": "Advanced",
+      "text": "Led the GenAI initiative as <strong>technical lead of a 5-person team</strong>, from use-case discovery to production"
+    }
+  ],
+  "mentoring": [
+    {
+      "level": "Advanced",
+      "text": "Mentored <strong>5 engineers (3 promoted to mid-level)</strong>; introduced ADRs and incident runbooks"
+    }
   ]
 }

@@ -1,18 +1,102 @@
 [
   {
+    "id": "rag-core-platform",
+    "title": "RAG Core Platform (PoC)",
+    "description": "Config-driven RAG framework with 159 swappable components and 20+ reference pipelines, gated by CI evals; hybrid search outperformed dense-only retrieval on Recall@5 across a 120-query golden set.",
+    "technologies": [
+      "Python",
+      "RAG",
+      "Hybrid Search",
+      "Embeddings",
+      "Rerankers",
+      "DeepEval",
+      "Guardrails"
+    ],
+    "category": "AI & Machine Learning",
+    "subcategory": "RAG Systems",
+    "highlights": [
+      "159 swappable components and 20+ reference pipelines, all config-driven",
+      "Every pipeline gated by CI evals",
+      "Hybrid search beat dense-only retrieval on Recall@5 across a 120-query golden set",
+      "Secure by default: document-level ACLs, PII redaction and guardrails",
+      "Tamper-evident audit log and signed builds"
+    ],
+    "status": "Completed",
+    "icon": "pi pi-search",
+    "featured": true
+  },
+  {
+    "id": "agentic-ai-core-platform",
+    "title": "Agentic AI Core Platform (PoC)",
+    "description": "Spec-driven agent framework with 60+ swappable components and 8 orchestration patterns, gated by trajectory evals on a 150-task suite.",
+    "technologies": [
+      "Python",
+      "Agentic AI",
+      "Multi-agent Orchestration",
+      "MCP",
+      "Guardrails",
+      "Evals"
+    ],
+    "category": "AI & Machine Learning",
+    "subcategory": "Agent Systems",
+    "highlights": [
+      "60+ swappable components and 8 orchestration patterns, defined by spec",
+      "Trajectory evals on a 150-task suite as release gates",
+      "MCP tool permissions and human-in-the-loop approvals",
+      "Budget caps and sandboxed execution",
+      "Prompt-injection guardrails and a tamper-evident audit log"
+    ],
+    "status": "Completed",
+    "icon": "pi pi-sitemap",
+    "featured": true
+  },
+  {
+    "id": "ai-assisted-e2e-test-automation",
+    "title": "AI-Assisted E2E Test Automation",
+    "description": "Built reusable Cursor skills that generate test scenarios, map them to Zephyr test cases and auto-create Playwright end-to-end tests, run on every pull request to block regression bugs before merge.",
+    "technologies": [
+      "Cursor AI",
+      "Playwright",
+      "Zephyr",
+      "TypeScript",
+      "CI/CD"
+    ],
+    "category": "AI & Machine Learning",
+    "subcategory": "AI Developer Tooling",
+    "highlights": [
+      "Reusable Cursor skills generate test scenarios from requirements",
+      "Scenarios mapped to Zephyr test cases",
+      "Playwright end-to-end tests auto-created from the scenarios",
+      "Runs on every pull request to block regression bugs before merge"
+    ],
+    "status": "Active",
+    "icon": "pi pi-check-square",
+    "featured": false
+  },
+  {
     "id": "feature-rich-ui-component-library",
     "title": "Feature-Rich UI Component Library",
-    "description": "Built a multi-framework design system across Angular, React, and Next.js with 40+ reusable components used across multiple internal products.",
-    "technologies": ["React", "Angular", "Next.js", "TypeScript", "Storybook", "Tailwind CSS", "SCSS", "MDX", "Compodoc", "AG Grid"],
+    "description": "Built a 40+ component design system across React, Angular and Next.js, adopted by 6 internal products, with white-label theming for 5+ brands and AG Grid tables for self-serve analytics.",
+    "technologies": [
+      "React",
+      "Angular",
+      "Next.js",
+      "TypeScript",
+      "Storybook",
+      "Tailwind CSS",
+      "SCSS",
+      "MDX",
+      "Compodoc",
+      "AG Grid"
+    ],
     "category": "Frontend & Design Systems",
     "subcategory": "Component Library",
     "highlights": [
-      "40+ reusable UI components across React, Angular, and Next.js frameworks",
-      "Distributed via private Nexus npm registry with framework-agnostic design tokens",
-      "White-label theming supporting 5+ brand variants with dynamic stylesheet injection",
-      "150+ Storybook component stories with a11y tests and GenAI component suggestions",
-      "Advanced AG Grid Enterprise tables with filtering, sorting, CSV/Excel export via ExcelJS",
-      "Used across 6 internal products with consistent UX and component discoverability increased by 85%"
+      "40+ reusable UI components across React, Angular and Next.js",
+      "Adopted by 6 internal products",
+      "White-label theming for 5+ brands with dynamic stylesheet injection",
+      "Storybook documentation with accessibility tests",
+      "AG Grid Enterprise tables for self-serve analytics with CSV/Excel export"
     ],
     "status": "Active",
     "icon": "pi pi-desktop",
@@ -22,7 +106,12 @@
     "id": "ai-agent-for-code-generation",
     "title": "AI Agent for Code Generation",
     "description": "Built an LLM-powered internal engineering tool using GPT-4 and LangChain to generate boilerplate and integration code, accelerating delivery for internal teams.",
-    "technologies": ["Python", "GPT-4", "LangChain", "OpenAI API"],
+    "technologies": [
+      "Python",
+      "GPT-4",
+      "LangChain",
+      "OpenAI API"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Code Generation",
     "highlights": [
@@ -39,7 +128,14 @@
     "id": "edge-water-management-platform",
     "title": "Edge Water Management Platform",
     "description": "Delivered a full-stack web application for smart water monitoring and optimization using Angular and cloud backend services.",
-    "technologies": ["Angular", "TypeScript", "Node.js", "PostgreSQL", "Azure", "Docker"],
+    "technologies": [
+      "Angular",
+      "TypeScript",
+      "Node.js",
+      "PostgreSQL",
+      "Azure",
+      "Docker"
+    ],
     "category": "Full Stack",
     "subcategory": "IoT & Monitoring",
     "highlights": [
@@ -54,17 +150,29 @@
   },
   {
     "id": "snowflake-agent",
-    "title": "Snowflake Agent",
-    "description": "Built a Python-based analytics agent using LangGraph and Snowflake Cortex for natural-language querying and dynamic dashboard generation over Snowflake data.",
-    "technologies": ["Python", "LangGraph", "Snowflake Cortex", "Snowflake", "Vector Embeddings", "Knowledge Graphs", "OpenAI API"],
+    "title": "Snowflake Analytics Agent",
+    "description": "Built a Snowflake analytics agent (LangGraph, Cortex Analyst) that replaced manual custom-dashboard builds in a legacy reporting system due for decommissioning, cutting creation time from ~15 min to under 1 min (p95).",
+    "technologies": [
+      "Python",
+      "LangGraph",
+      "Snowflake Cortex Analyst",
+      "Snowflake Semantic Views",
+      "sqlglot",
+      "Amazon Bedrock",
+      "Claude",
+      "MCP",
+      "Entra ID",
+      "OAuth 2.0"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Agent Systems",
     "highlights": [
-      "LangGraph orchestration with Snowflake Cortex for natural-language querying over structured Snowflake data",
-      "Dynamic dashboard generation letting business users self-serve analytics insights",
-      "85% prediction accuracy powering ad performance analytics workflows",
-      "Unified knowledge gateway combining vector embeddings with knowledge graphs",
-      "Integrated with production data systems for near real-time analytics"
+      "Dashboard creation time cut from ~15 min to under 1 min (p95), replacing a legacy reporting system",
+      "Text-to-SQL accuracy raised from ~60% to ~80% by building the semantic layer first; 90%+ before launch",
+      "Governed metrics (e.g. ROAS) in per-client semantic views, agreed in metric-definition workshops with data owners",
+      "Generated SQL passes a sqlglot read-only guard and runs as the signed-in user",
+      "Code-based critics check each chart spec against real columns and each narrative number against the result",
+      "Entra ID SSO with OAuth 2.0 On-Behalf-Of into Snowflake External OAuth, so row-access and masking policies apply per user"
     ],
     "status": "Active",
     "icon": "pi pi-database",
@@ -74,7 +182,16 @@
     "id": "ats-resume-optimizer",
     "title": "ATS Resume Optimizer",
     "description": "An AI-powered resume optimization tool that intelligently adapts resumes to specific job descriptions for maximum ATS compatibility. Uses OpenAI GPT-4o-mini with 14 distinct ATS strategies, programmatic keyword verification, iterative refinement, and 40 premium themes with live preview and PDF export.",
-    "technologies": ["Python", "OpenAI API", "GPT-4o-mini", "Streamlit", "Playwright", "BeautifulSoup4", "pypdf", "requests"],
+    "technologies": [
+      "Python",
+      "OpenAI API",
+      "GPT-4o-mini",
+      "Streamlit",
+      "Playwright",
+      "BeautifulSoup4",
+      "pypdf",
+      "requests"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "LLM Applications",
     "highlights": [
@@ -96,7 +213,11 @@
     "id": "dynamic-task-scheduler",
     "title": "Dynamic Task Scheduler",
     "description": "An AI task-scheduling agent that accepts natural-language task descriptions with deadlines, durations, meetings, and energy constraints, then uses OpenAI GPT-4o to produce prioritized, time-blocked schedules with markdown table exports.",
-    "technologies": ["Python", "OpenAI API", "GPT-4o"],
+    "technologies": [
+      "Python",
+      "OpenAI API",
+      "GPT-4o"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Task Automation",
     "highlights": [
@@ -114,7 +235,21 @@
     "id": "helio-supervisor",
     "title": "Helio Supervisor",
     "description": "A hierarchical supervisor agent for goal-oriented workflows supporting multiple LLM providers, RAG over local documents, and six built-in tools. Features both a Streamlit web UI and a Rich CLI with optional human-in-the-loop approval and persistent conversation memory.",
-    "technologies": ["Python", "LangChain", "LangGraph", "OpenAI API", "FAISS", "Streamlit", "Ollama", "Google Gemini", "Perplexity", "HuggingFace", "Pydantic", "Rich", "pypdf"],
+    "technologies": [
+      "Python",
+      "LangChain",
+      "LangGraph",
+      "OpenAI API",
+      "FAISS",
+      "Streamlit",
+      "Ollama",
+      "Google Gemini",
+      "Perplexity",
+      "HuggingFace",
+      "Pydantic",
+      "Rich",
+      "pypdf"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Agent Systems",
     "highlights": [
@@ -135,7 +270,12 @@
     "id": "legal-researcher-pro",
     "title": "Legal Researcher Pro",
     "description": "A Streamlit-based legal research and summarization tool where users paste clauses or legal questions, choose a jurisdiction (Australia, USA, or India), and receive structured analysis with confidence scoring and recommended next steps powered by GPT-4o.",
-    "technologies": ["Python", "OpenAI API", "GPT-4o", "Streamlit"],
+    "technologies": [
+      "Python",
+      "OpenAI API",
+      "GPT-4o",
+      "Streamlit"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Legal Tech",
     "highlights": [
@@ -155,7 +295,12 @@
     "id": "self-critiquing-planner",
     "title": "Self-Critiquing Planner",
     "description": "A Streamlit app that converts high-level goals into structured plans using GPT-4o, runs a second GPT-4o pass to critique them, and supports human review and simulated execution through a Planner-Critic-Human-Executor pipeline with adaptive session memory.",
-    "technologies": ["Python", "OpenAI API", "GPT-4o", "Streamlit"],
+    "technologies": [
+      "Python",
+      "OpenAI API",
+      "GPT-4o",
+      "Streamlit"
+    ],
     "category": "AI & Machine Learning",
     "subcategory": "Planning & Reasoning",
     "highlights": [
