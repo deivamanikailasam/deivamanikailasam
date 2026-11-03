@@ -19776,5 +19776,467 @@
       "level": "Advanced",
       "text": "Combining <strong>SageMaker with Bedrock</strong> for hybrid inference routing and quality-gated canary rollouts"
     }
+  ],
+  "pydanticai": [
+    {
+      "level": "Beginner",
+      "text": "Defining <strong>typed agents</strong> with Pydantic models for structured, validated LLM output"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Registering <strong>tools and dependencies</strong> with dependency injection for testable agents"
+    },
+    {
+      "level": "Advanced",
+      "text": "Composing <strong>multi-agent workflows</strong> with typed hand-offs and result validation"
+    }
+  ],
+  "claude-agent-sdk": [
+    {
+      "level": "Beginner",
+      "text": "Building agents on the <strong>Claude Agent SDK</strong> agent loop with built-in tools"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Exposing custom capabilities as <strong>MCP tools</strong> with scoped permissions"
+    },
+    {
+      "level": "Advanced",
+      "text": "Adding <strong>hooks, permission gates and budget caps</strong> for safe autonomous execution"
+    }
+  ],
+  "openai-agents-sdk": [
+    {
+      "level": "Beginner",
+      "text": "Defining <strong>agents, tools and hand-offs</strong> with the OpenAI Agents SDK"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Using <strong>guardrails and tracing</strong> to constrain and inspect agent runs"
+    },
+    {
+      "level": "Advanced",
+      "text": "Comparing <strong>orchestration patterns</strong> across agent SDKs behind a common interface"
+    }
+  ],
+  "multi-agent": [
+    {
+      "level": "Beginner",
+      "text": "Understanding <strong>supervisor, router and planner\u2013executor</strong> agent patterns"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Implementing <strong>intent routing</strong> to specialised agents with shared state"
+    },
+    {
+      "level": "Advanced",
+      "text": "Gating agent changes with <strong>trajectory evals</strong> and human-in-the-loop approvals"
+    }
+  ],
+  "sqlglot": [
+    {
+      "level": "Beginner",
+      "text": "Parsing and transpiling SQL across dialects with <strong>sqlglot</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Walking the <strong>SQL AST</strong> to detect statement types and referenced tables"
+    },
+    {
+      "level": "Advanced",
+      "text": "Building <strong>read-only guards</strong> for LLM-generated SQL"
+    }
+  ],
+  "huggingface": [
+    {
+      "level": "Beginner",
+      "text": "Loading models and tokenizers from the <strong>Hugging Face Hub</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Fine-tuning with <strong>Transformers and PEFT</strong> on labelled datasets"
+    },
+    {
+      "level": "Advanced",
+      "text": "Packaging fine-tuned models for <strong>SageMaker endpoints</strong>"
+    }
+  ],
+  "pytorch": [
+    {
+      "level": "Beginner",
+      "text": "Working with <strong>tensors, autograd and modules</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Writing <strong>training loops</strong> for classification fine-tuning"
+    },
+    {
+      "level": "Advanced",
+      "text": "Optimising small models for <strong>low-latency inference</strong>"
+    }
+  ],
+  "hybrid-search": [
+    {
+      "level": "Beginner",
+      "text": "Combining <strong>lexical (BM25)</strong> and <strong>dense (HNSW)</strong> retrieval"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Fusing ranked lists with <strong>Reciprocal Rank Fusion</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Measuring retrieval quality with <strong>Recall@k</strong> on golden query sets"
+    }
+  ],
+  "reranking": [
+    {
+      "level": "Beginner",
+      "text": "Understanding <strong>bi-encoders vs cross-encoders</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Reranking top-k candidates with a <strong>cross-encoder</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Balancing <strong>rerank depth</strong> against latency budgets"
+    }
+  ],
+  "qdrant": [
+    {
+      "level": "Beginner",
+      "text": "Creating <strong>collections</strong> and upserting vectors with payloads"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Using <strong>payload filters</strong> for tenant-scoped search"
+    },
+    {
+      "level": "Advanced",
+      "text": "Tuning <strong>HNSW parameters</strong> for recall and latency"
+    }
+  ],
+  "chunking": [
+    {
+      "level": "Beginner",
+      "text": "Splitting documents into <strong>token-sized chunks</strong> with overlap"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Self-hosting <strong>BGE embedding models</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Running <strong>event-driven ingestion</strong> without batch re-indexing"
+    }
+  ],
+  "deepeval": [
+    {
+      "level": "Beginner",
+      "text": "Writing <strong>LLM test cases</strong> and metrics"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Using <strong>LLM-as-judge, faithfulness and hallucination</strong> metrics"
+    },
+    {
+      "level": "Advanced",
+      "text": "Running eval suites as <strong>CI release gates</strong> on versioned golden datasets"
+    }
+  ],
+  "langfuse": [
+    {
+      "level": "Beginner",
+      "text": "Capturing <strong>LLM traces</strong>, prompts and costs"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Tracing <strong>each agent step</strong> with nested spans"
+    },
+    {
+      "level": "Advanced",
+      "text": "Feeding traces into <strong>datasets and evals</strong>"
+    }
+  ],
+  "opentelemetry": [
+    {
+      "level": "Beginner",
+      "text": "Understanding <strong>traces, spans and context propagation</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Instrumenting <strong>Python and Java services</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Correlating <strong>agent traces with service telemetry</strong>"
+    }
+  ],
+  "litellm": [
+    {
+      "level": "Beginner",
+      "text": "Calling many providers through <strong>one LiteLLM interface</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Configuring <strong>fallbacks and retries</strong> in a model gateway"
+    },
+    {
+      "level": "Advanced",
+      "text": "Implementing <strong>cost-aware model routing</strong> and per-tenant budgets"
+    }
+  ],
+  "semantic-caching": [
+    {
+      "level": "Beginner",
+      "text": "Understanding <strong>prompt caching</strong> for repeated prefixes"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Building a <strong>semantic cache</strong> keyed on embedding similarity"
+    },
+    {
+      "level": "Advanced",
+      "text": "Tuning <strong>similarity thresholds</strong> for cost vs correctness"
+    }
+  ],
+  "safe-rollouts": [
+    {
+      "level": "Beginner",
+      "text": "Running a <strong>shadow</strong> model alongside production"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Shifting traffic gradually with <strong>canary releases</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Adding <strong>kill switches and human-in-the-loop approvals</strong> for agent features"
+    }
+  ],
+  "owasp-llm": [
+    {
+      "level": "Beginner",
+      "text": "Knowing the <strong>OWASP LLM Top 10</strong> risk categories"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Layering <strong>input/output guardrails</strong> and classifiers"
+    },
+    {
+      "level": "Advanced",
+      "text": "Applying <strong>entitlement-aware retrieval</strong> for tenant isolation"
+    }
+  ],
+  "bedrock-guardrails": [
+    {
+      "level": "Beginner",
+      "text": "Configuring <strong>content and denied-topic filters</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Redacting <strong>PII</strong> on input and output"
+    },
+    {
+      "level": "Advanced",
+      "text": "Combining managed guardrails with <strong>custom classifiers</strong>"
+    }
+  ],
+  "responsible-ai": [
+    {
+      "level": "Beginner",
+      "text": "Writing <strong>model and system cards</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Running <strong>AI risk assessments</strong> before release"
+    },
+    {
+      "level": "Advanced",
+      "text": "Keeping <strong>tamper-evident audit logs</strong> and citation-grounded answers"
+    }
+  ],
+  "dynamodb": [
+    {
+      "level": "Beginner",
+      "text": "Modelling <strong>partition and sort keys</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Using <strong>conditional writes and atomic counters</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Enforcing <strong>per-tenant quotas</strong> at low latency"
+    }
+  ],
+  "pandas": [
+    {
+      "level": "Beginner",
+      "text": "Loading and cleaning data with <strong>DataFrames</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Grouping, joining and <strong>reshaping</strong> data"
+    },
+    {
+      "level": "Advanced",
+      "text": "Building <strong>data-quality checks</strong> in Python"
+    }
+  ],
+  "dbt": [
+    {
+      "level": "Beginner",
+      "text": "Writing <strong>SQL models</strong> with refs and sources"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Adding <strong>tests and documentation</strong> to models"
+    },
+    {
+      "level": "Advanced",
+      "text": "Defining <strong>governed metrics</strong> for downstream consumers"
+    }
+  ],
+  "sse": [
+    {
+      "level": "Beginner",
+      "text": "Streaming events over <strong>HTTP with SSE</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Streaming <strong>LLM tokens</strong> to web clients"
+    },
+    {
+      "level": "Advanced",
+      "text": "Handling <strong>reconnects and back-pressure</strong>"
+    }
+  ],
+  "zephyr": [
+    {
+      "level": "Beginner",
+      "text": "Managing <strong>test cases and cycles</strong> in Jira"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Linking automated runs to <strong>Zephyr test cases</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Generating cases from requirements with <strong>AI tooling</strong>"
+    }
+  ],
+  "supply-chain": [
+    {
+      "level": "Beginner",
+      "text": "Signing container images with <strong>Cosign</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Writing <strong>Kyverno</strong> admission policies"
+    },
+    {
+      "level": "Advanced",
+      "text": "Enforcing <strong>signed-image-only</strong> deployments"
+    }
+  ],
+  "aws-streaming": [
+    {
+      "level": "Beginner",
+      "text": "Routing events with <strong>EventBridge</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Orchestrating pipelines with <strong>Step Functions and Lambda</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Landing raw streams in S3 with <strong>Kinesis Data Firehose</strong>"
+    }
+  ],
+  "cloudwatch-xray": [
+    {
+      "level": "Beginner",
+      "text": "Creating <strong>CloudWatch metrics, logs and alarms</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Tracing requests with <strong>X-Ray</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Building dashboards that <strong>cut MTTR</strong>"
+    }
+  ],
+  "grafana": [
+    {
+      "level": "Beginner",
+      "text": "Building <strong>dashboards</strong> from metrics sources"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Configuring <strong>alerts</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Correlating <strong>metrics, logs and traces</strong>"
+    }
+  ],
+  "identity": [
+    {
+      "level": "Beginner",
+      "text": "Understanding <strong>OAuth 2.0 / OIDC</strong> flows"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Using <strong>On-Behalf-Of token exchange</strong> to call downstream APIs as the user"
+    },
+    {
+      "level": "Advanced",
+      "text": "Provisioning users and roles with <strong>SCIM</strong> per client"
+    }
+  ],
+  "stakeholder-discovery": [
+    {
+      "level": "Beginner",
+      "text": "Qualifying use cases with <strong>success metrics</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Building <strong>ROI cases</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Running <strong>feasibility spikes</strong> for go/no-go decisions"
+    }
+  ],
+  "poc-to-prod": [
+    {
+      "level": "Beginner",
+      "text": "Scoping a <strong>PoC</strong> against clear exit criteria"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Hardening for <strong>security, evals and observability</strong>"
+    },
+    {
+      "level": "Advanced",
+      "text": "Owning delivery from <strong>architecture to CI/CD</strong>"
+    }
+  ],
+  "mentoring": [
+    {
+      "level": "Beginner",
+      "text": "Giving <strong>actionable code review</strong>"
+    },
+    {
+      "level": "Intermediate",
+      "text": "Writing <strong>architecture decision records</strong> and runbooks"
+    },
+    {
+      "level": "Advanced",
+      "text": "Growing engineers toward <strong>promotion</strong>"
+    }
   ]
 }

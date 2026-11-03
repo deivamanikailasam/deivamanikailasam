@@ -2,7 +2,7 @@
   {
     "id": "1",
     "company": "La Trobe University",
-    "position": "Masters in Information Technology",
+    "position": "Master of Information Technology",
     "startDate": "2019-07-01",
     "endDate": "2021-05-31",
     "current": false,
@@ -12,7 +12,7 @@
   {
     "id": "2",
     "company": "Valliammai Engineering College",
-    "position": "Bachelors in Information Technology",
+    "position": "Bachelor of Technology in Information Technology",
     "startDate": "2011-08-01",
     "endDate": "2015-05-31",
     "current": false,

@@ -324,6 +324,11 @@
             "name": "OpenAPI/Swagger",
             "icon": "pi pi-file",
             "image": "assets/images/skills/openapi.svg"
+          },
+          {
+            "key": "sse",
+            "name": "SSE (Server-Sent Events)",
+            "icon": "pi pi-arrow-right-arrow-left"
           }
         ]
       },
@@ -383,6 +388,11 @@
             "key": "liquibase",
             "name": "Liquibase",
             "image": "assets/images/skills/database-design.svg",
+            "icon": "pi pi-database"
+          },
+          {
+            "key": "dynamodb",
+            "name": "DynamoDB",
             "icon": "pi pi-database"
           }
         ]
@@ -450,6 +460,11 @@
             "name": "Vitest",
             "image": "assets/images/skills/vitest.svg",
             "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "zephyr",
+            "name": "Zephyr",
+            "icon": "pi pi-list-check"
           }
         ]
       },
@@ -477,7 +492,7 @@
         "items": [
           {
             "key": "redis",
-            "name": "Redis",
+            "name": "Redis (ElastiCache)",
             "image": "assets/images/skills/redis.png",
             "icon": "pi pi-bolt"
           },
@@ -525,7 +540,7 @@
         "items": [
           {
             "key": "kafka",
-            "name": "Kafka",
+            "name": "Kafka (Amazon MSK)",
             "image": "assets/images/skills/kafka.png",
             "icon": "pi pi-send"
           }
@@ -546,6 +561,22 @@
             "name": "Eclipse",
             "image": "assets/images/skills/eclipse.png",
             "icon": "pi pi-code"
+          }
+        ]
+      },
+      {
+        "title": "Data",
+        "key": "data",
+        "items": [
+          {
+            "key": "pandas",
+            "name": "pandas",
+            "icon": "pi pi-table"
+          },
+          {
+            "key": "dbt",
+            "name": "dbt",
+            "icon": "pi pi-sitemap"
           }
         ]
       }
@@ -594,7 +625,7 @@
           },
           {
             "key": "llm",
-            "name": "LLM",
+            "name": "LLMs (Claude, GPT, Llama 3/3.2)",
             "image": "assets/images/skills/llm.png",
             "icon": "pi pi-sparkles"
           },
@@ -624,7 +655,7 @@
           },
           {
             "key": "snowflake-cortex",
-            "name": "Snowflake Cortex",
+            "name": "Snowflake Cortex Analyst & Semantic Views",
             "image": "assets/images/skills/snowflake.png",
             "icon": "pi pi-sparkles"
           },
@@ -657,6 +688,41 @@
             "name": "Fine Tuning",
             "image": "assets/images/skills/finetuning.svg",
             "icon": "pi pi-sparkles"
+          },
+          {
+            "key": "pydanticai",
+            "name": "PydanticAI",
+            "icon": "pi pi-sitemap"
+          },
+          {
+            "key": "claude-agent-sdk",
+            "name": "Claude Agent SDK",
+            "icon": "pi pi-microchip-ai"
+          },
+          {
+            "key": "openai-agents-sdk",
+            "name": "OpenAI Agents SDK",
+            "icon": "pi pi-microchip-ai"
+          },
+          {
+            "key": "multi-agent",
+            "name": "Multi-agent Orchestration",
+            "icon": "pi pi-share-alt"
+          },
+          {
+            "key": "sqlglot",
+            "name": "sqlglot",
+            "icon": "pi pi-code"
+          },
+          {
+            "key": "huggingface",
+            "name": "Hugging Face",
+            "icon": "pi pi-face-smile"
+          },
+          {
+            "key": "pytorch",
+            "name": "PyTorch",
+            "icon": "pi pi-bolt"
           }
         ]
       },
@@ -705,6 +771,89 @@
             "name": "Amazon SageMaker",
             "image": "assets/images/skills/aws.png",
             "icon": "pi pi-globe"
+          }
+        ]
+      },
+      {
+        "title": "RAG & Retrieval",
+        "key": "rag-retrieval",
+        "items": [
+          {
+            "key": "hybrid-search",
+            "name": "Hybrid Search (BM25 + HNSW, RRF)",
+            "icon": "pi pi-search"
+          },
+          {
+            "key": "reranking",
+            "name": "Cross-encoder Reranking",
+            "icon": "pi pi-sort-amount-down"
+          },
+          {
+            "key": "qdrant",
+            "name": "Qdrant",
+            "icon": "pi pi-database"
+          },
+          {
+            "key": "chunking",
+            "name": "Tokenizer-aware Chunking & BGE Embeddings",
+            "icon": "pi pi-th-large"
+          }
+        ]
+      },
+      {
+        "title": "LLMOps, AgentOps & Evals",
+        "key": "llmops-agentops-evals",
+        "items": [
+          {
+            "key": "deepeval",
+            "name": "DeepEval",
+            "icon": "pi pi-check-circle"
+          },
+          {
+            "key": "langfuse",
+            "name": "Langfuse",
+            "icon": "pi pi-eye"
+          },
+          {
+            "key": "opentelemetry",
+            "name": "OpenTelemetry",
+            "icon": "pi pi-wave-pulse"
+          },
+          {
+            "key": "litellm",
+            "name": "LiteLLM & Model Routing",
+            "icon": "pi pi-directions"
+          },
+          {
+            "key": "semantic-caching",
+            "name": "Semantic & Prompt Caching",
+            "icon": "pi pi-bolt"
+          },
+          {
+            "key": "safe-rollouts",
+            "name": "Shadow/Canary Rollouts & Kill Switches",
+            "icon": "pi pi-flag"
+          }
+        ]
+      },
+      {
+        "title": "AI Security & Governance",
+        "key": "ai-security-governance",
+        "items": [
+          {
+            "key": "owasp-llm",
+            "name": "OWASP LLM Top 10 & Prompt-injection Defence",
+            "icon": "pi pi-shield"
+          },
+          {
+            "key": "bedrock-guardrails",
+            "name": "Bedrock Guardrails & PII/DLP Redaction",
+            "icon": "pi pi-lock"
+          },
+          {
+            "key": "responsible-ai",
+            "name": "Responsible AI (Audit Trails, Risk Assessments, Model Cards)",
+            "icon": "pi pi-verified"
           }
         ]
       }
@@ -777,7 +926,7 @@
           },
           {
             "key": "kubernetes",
-            "name": "Kubernetes",
+            "name": "Kubernetes (KEDA, Karpenter)",
             "image": "assets/images/skills/kubernetes.png",
             "icon": "pi pi-server"
           },
@@ -804,6 +953,11 @@
             "name": "ARM/Bicep",
             "image": "assets/images/skills/azure.png",
             "icon": "pi pi-wrench"
+          },
+          {
+            "key": "supply-chain",
+            "name": "Kyverno & Cosign (Policy and Signed Images)",
+            "icon": "pi pi-shield"
           }
         ]
       },
@@ -813,7 +967,7 @@
         "items": [
           {
             "key": "aws",
-            "name": "AWS (ECS, Fargate, EC2, Lambda, EKS, Bedrock)",
+            "name": "AWS (Bedrock, SageMaker, ECS/Fargate, EKS, Lambda, Step Functions, EventBridge, SQS/SNS, Kinesis, S3, RDS)",
             "image": "assets/images/skills/aws.png",
             "icon": "pi pi-cloud"
           },
@@ -822,6 +976,11 @@
             "name": "Azure (App Service, Functions, SQL, PostgreSQL, Cosmos DB, Blob Storage, AD B2C, DevOps)",
             "image": "assets/images/skills/azure.png",
             "icon": "pi pi-cloud"
+          },
+          {
+            "key": "aws-streaming",
+            "name": "AWS Event & Streaming (MSK, EventBridge, Step Functions, Kinesis)",
+            "icon": "pi pi-amazon"
           }
         ]
       },
@@ -858,6 +1017,16 @@
             "name": "Application Insights",
             "image": "assets/images/skills/azure.png",
             "icon": "pi pi-chart-bar"
+          },
+          {
+            "key": "cloudwatch-xray",
+            "name": "CloudWatch & X-Ray",
+            "icon": "pi pi-chart-line"
+          },
+          {
+            "key": "grafana",
+            "name": "Grafana",
+            "icon": "pi pi-chart-bar"
           }
         ]
       }
@@ -891,6 +1060,11 @@
             "name": "Multi-tenant SaaS",
             "image": "assets/images/skills/system-design.svg",
             "icon": "pi pi-sitemap"
+          },
+          {
+            "key": "identity",
+            "name": "Multi-tenant Identity (Entra ID SSO, OAuth 2.0 OBO, Snowflake External OAuth, SCIM)",
+            "icon": "pi pi-id-card"
           }
         ]
       },
@@ -951,6 +1125,27 @@
             "name": "Test Driven Development Architecture",
             "image": "assets/images/skills/system-design.svg",
             "icon": "pi pi-check-circle"
+          }
+        ]
+      },
+      {
+        "title": "Delivery",
+        "key": "delivery",
+        "items": [
+          {
+            "key": "stakeholder-discovery",
+            "name": "Stakeholder Discovery & Solution Scoping",
+            "icon": "pi pi-users"
+          },
+          {
+            "key": "poc-to-prod",
+            "name": "PoC-to-Production Delivery",
+            "icon": "pi pi-send"
+          },
+          {
+            "key": "mentoring",
+            "name": "Mentoring, Code Review & ADRs",
+            "icon": "pi pi-user-plus"
           }
         ]
       }
